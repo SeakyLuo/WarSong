@@ -52,7 +52,7 @@ public class BoardInfo : MonoBehaviour {
 
     public void SetAttributes(string boardName, Dictionary<Vector2, Collection> newLocations)
     {
-        SetAttributes(Resources.Load<BoardAttributes>("Board/Info/" + boardName), newLocations);
+        SetAttributes(Resources.Load<BoardAttributes>("Board/Info/" + boardName + "/Attributes"), newLocations);
     }
 
     public void SetAttributes(BoardAttributes board, Dictionary<Vector2, Collection> newLocations = null)

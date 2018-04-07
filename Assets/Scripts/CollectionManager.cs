@@ -229,7 +229,8 @@ public class CollectionManager : MonoBehaviour {
 
         int page = currentPage.Value - 1;
         TitleText.text = type;
-        RaiseButton(tabs[Array.IndexOf(types,type)]);     
+        RaiseButton(tabs[Array.IndexOf(types,type)]);
+        SortCollections();        
 
         GameObject card;
         Collection collection;
@@ -295,7 +296,12 @@ public class CollectionManager : MonoBehaviour {
         ShowCurrentPage();
     }
 
-    // 不行咯
+    private void SortCollections()
+    {
+
+    }
+
+    // Doesn't work for now
     private void RaiseButton(GameObject obj)
     {
         foreach (GameObject tab in GameObject.FindGameObjectsWithTag("Tab"))

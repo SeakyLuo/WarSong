@@ -184,6 +184,11 @@ public class LineupBuilder : MonoBehaviour {
 
     public void DeleteLineup()
     {
+        // return cards
+        foreach (KeyValuePair<Vector2, Collection> pair in lineup.cardLocations)
+            collectionManager.AddCollection(pair.Value);
+        foreach (string tactic in lineup.tactics)
+            collectionManager.AddCollection(new Collection(tactic));
         ResetLineup();
         // delete from mylineups
         createLineupPanel.SetActive(false);

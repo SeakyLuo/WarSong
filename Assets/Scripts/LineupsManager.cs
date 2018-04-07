@@ -56,19 +56,20 @@ public class LineupsManager : MonoBehaviour {
 
     public void DeleteLineup()
     {
-        createLineupButton.SetActive(true);
-        if (modifyLineup == -1) modifyLineup = lineupsCount - 1;
-        lineupObjects[--lineupsCount].SetActive(false);
-        user.lineups.RemoveAt(modifyLineup);
-        for (int i = modifyLineup; i < lineupsCount; i++)
-            lineupObjects[i].GetComponentInChildren<Text>().text = user.lineups[i].lineupName;
-        myLineups.text = "My Lineups\n" + lineupsCount.ToString() + "/9";
-        modifyLineup = -1;        
+        if (modifyLineup != -1)
+        {
+            --lineupsCount;
+            user.lineups.RemoveAt(modifyLineup);
+            lineupObjects[modifyLineup].SetActive(false);
+            for (int i = modifyLineup; i < lineupsCount; i++)
+                lineupObjects[i].GetComponentInChildren<Text>().text = user.lineups[i].lineupName;
+            myLineups.text = "My Lineups\n" + lineupsCount.ToString() + "/9";
+            modifyLineup = -1;
+        }       
     }
 
     public void CreateLineup()
     {
-        createLineupButton.SetActive(false);
         selectBoardPanel.SetActive(true);
     }
 
@@ -76,7 +77,7 @@ public class LineupsManager : MonoBehaviour {
     {
         modifyLineup = number;
         createLineupPanel.SetActive(true);
-        boardManager.LoadBoard(user.lineups[number]);        
+        boardManager.LoadBoard(user.lineups[number]);
         lineupBuilder.SetLineup(user.lineups[number]);
     }
 
