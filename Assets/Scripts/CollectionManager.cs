@@ -109,7 +109,6 @@ public class CollectionManager : MonoBehaviour {
 
     public void RemoveStandardCards()
     {
-        // 还要补回来的
         List<Collection> noStandardCollections = new List<Collection>();
         foreach (Collection collection in user.collections)
             if (!collection.name.StartsWith("Standard "))

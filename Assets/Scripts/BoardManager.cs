@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class BoardManager : MonoBehaviour {
 
-    public GameObject nextBoardButton, previousBoardButton, confirmButton, createLineupButton,
+    public GameObject nextBoardButton, previousBoardButton, confirmButton, preferButton, createLineupButton,
         selectBoardPanel, createLineupPanel, collectionPanel, board;
     public Text boardName;
     public Image boardImage;
@@ -25,14 +25,16 @@ public class BoardManager : MonoBehaviour {
 
     public void NextBoard()
     {
-        if (++currentBoard == boardAttributes.Count - 1) nextBoardButton.SetActive(false);
+        if (++currentBoard == boardAttributes.Count - 1)
+            nextBoardButton.SetActive(false);
         previousBoardButton.SetActive(true);
         DisplayBoardSelectionInterface();
     }
 
     public void PreviousBoard()
     {
-        if (--currentBoard == 0) previousBoardButton.SetActive(false);
+        if (--currentBoard == 0)
+            previousBoardButton.SetActive(false);
         nextBoardButton.SetActive(true);
         DisplayBoardSelectionInterface();
     }
@@ -41,10 +43,16 @@ public class BoardManager : MonoBehaviour {
     {
         boardName.text = boardAttributes[currentBoard].boardName;
         boardImage.sprite = boardAttributes[currentBoard].completeImage;
-        // can have better way
-        if (boardAttributes[currentBoard].available) confirmButton.SetActive(true);
-        else confirmButton.SetActive(false);
-        // 可以顺便load
+        if (boardAttributes[currentBoard].available)
+        {
+            preferButton.SetActive(true);
+            confirmButton.SetActive(true);
+        }
+        else
+        {
+            preferButton.SetActive(false);
+            confirmButton.SetActive(false);
+        }            
     }
 
     public void ConfirmBoardSelection()
@@ -78,5 +86,8 @@ public class BoardManager : MonoBehaviour {
         createLineupButton.SetActive(true);
     }
 
-    public void DestroyBoard() { Destroy(loadedBoard); }
+    public void DestroyBoard()
+    {
+        Destroy(loadedBoard);
+    }
 }

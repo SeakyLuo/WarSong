@@ -172,6 +172,8 @@ public class LineupBuilder : MonoBehaviour {
 
     private void SetTexts()
     {
+        //if (totalOreCost > 30) totalOreCostText.color = Color.red;
+        //else totalOreCostText.color = Color.white;
         totalOreCostText.text = totalOreCost.ToString();
         totalGoldCostText.text = totalGoldCost.ToString();
         tacticsCountText.text = "Tactics\n" + lineup.tactics.Count.ToString() + "/10";

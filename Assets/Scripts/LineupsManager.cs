@@ -11,8 +11,9 @@ public class LineupsManager : MonoBehaviour {
     public UserInfo user;
     public GameObject[] lineupObjects = new GameObject[lineupsLimit];
 
-    private int lineupsCount = 0;
-    private int modifyLineup = -1;
+    private int lineupsCount = 0,
+        modifyLineup = -1;
+    private static string CUSTOMLINEUP = "Custom Lineup";
     private BoardManager boardManager;
     private LineupBuilder lineupBuilder;
 
@@ -37,6 +38,19 @@ public class LineupsManager : MonoBehaviour {
 
     public void AddLineup(Lineup lineup)
     {
+        // Avoid duplicate Custom Lineups
+        if (lineup.lineupName == CUSTOMLINEUP)
+        {
+            int customLineupCount = 1;
+            foreach (Lineup lu in user.lineups)
+                if (lu.lineupName.StartsWith(CUSTOMLINEUP))
+                {                    
+                    if (lu.lineupName != CUSTOMLINEUP && lu.lineupName != CUSTOMLINEUP + customLineupCount.ToString())                     
+                        break;
+                    customLineupCount++;
+                    lineup.lineupName = CUSTOMLINEUP + customLineupCount.ToString();
+                }
+        }
         if (modifyLineup == -1)
         {
             user.lineups.Add(lineup);
@@ -56,11 +70,11 @@ public class LineupsManager : MonoBehaviour {
 
     public void DeleteLineup()
     {
+        // bug
         if (modifyLineup != -1)
-        {
-            --lineupsCount;
+        {            
             user.lineups.RemoveAt(modifyLineup);
-            lineupObjects[modifyLineup].SetActive(false);
+            lineupObjects[--lineupsCount].SetActive(false);
             for (int i = modifyLineup; i < lineupsCount; i++)
                 lineupObjects[i].GetComponentInChildren<Text>().text = user.lineups[i].lineupName;
             myLineups.text = "My Lineups\n" + lineupsCount.ToString() + "/9";
