@@ -66,5 +66,10 @@ public class Lineup
         lineupName = LineupName;
     }
 
+    public bool IsEmpty()
+    {
+        return this == new Lineup();
+    }
+
 
 }

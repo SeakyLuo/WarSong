@@ -37,22 +37,22 @@ public class LineupsManager : MonoBehaviour {
     }
 
     public void AddLineup(Lineup lineup)
-    {
-        // Avoid duplicate Custom Lineups
-        if (lineup.lineupName == CUSTOMLINEUP)
-        {
-            int customLineupCount = 1;
-            foreach (Lineup lu in user.lineups)
-                if (lu.lineupName.StartsWith(CUSTOMLINEUP))
-                {                    
-                    if (lu.lineupName != CUSTOMLINEUP && lu.lineupName != CUSTOMLINEUP + customLineupCount.ToString())                     
-                        break;
-                    customLineupCount++;
-                    lineup.lineupName = CUSTOMLINEUP + customLineupCount.ToString();
-                }
-        }
+    {        
         if (modifyLineup == -1)
         {
+            // Avoid duplicate Custom Lineups
+            if (lineup.lineupName == CUSTOMLINEUP)
+            {
+                int customLineupCount = 1;
+                foreach (Lineup lu in user.lineups)
+                    if (lu.lineupName.StartsWith(CUSTOMLINEUP) && lu.boardName == lineup.boardName)
+                    {
+                        if (lu.lineupName != CUSTOMLINEUP && lu.lineupName != CUSTOMLINEUP + customLineupCount.ToString())
+                            break;
+                        customLineupCount++;
+                        lineup.lineupName = CUSTOMLINEUP + customLineupCount.ToString();
+                    }
+            }
             user.lineups.Add(lineup);
             lineupObjects[lineupsCount].SetActive(true);
             lineupObjects[lineupsCount++].GetComponentInChildren<Text>().text = lineup.lineupName;

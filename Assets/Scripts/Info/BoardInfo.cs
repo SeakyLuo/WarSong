@@ -81,6 +81,7 @@ public class BoardInfo : MonoBehaviour {
         locations[location] = collection.name;
         cardLocations[location] = collection;
         attributesDict[Vector2ToString(location)] = LoadPieceAttributes(collection.name);
+        attributesDict[Vector2ToString(location)].health = collection.health;
     }
 
     public void SetCard(PieceAttributes attributes ,Vector2 location)

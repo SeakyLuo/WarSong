@@ -2,10 +2,10 @@
 
 public class Collection
 {
-    public string name;
-    public string type;
-    public int count;
-    public int health;
+    public string name = "";
+    public string type = "";
+    public int count = 1;
+    public int health = 0;
 
     public Collection() { }
 
@@ -42,5 +42,10 @@ public class Collection
         health = Health;
         if (Type == "Tactic") health = Resources.Load<TacticAttributes>("Tactics/Info/" + Name + "/Attributes").goldCost;
         else if (Health == 0) health = Resources.Load<PieceAttributes>("Pieces/Info/" + Name + "/Attributes").health;
+    }
+
+    public bool IsEmpty()
+    {
+        return name == "" && type == "" && count == 1 && health == 0;
     }
 }

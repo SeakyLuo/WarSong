@@ -30,7 +30,13 @@ public class CardInfo : MonoBehaviour {
     {
         if (cardInfo == null) return;
         if (cardInfo.tactic != null) SetAttributes(cardInfo.tactic);
-        else if (cardInfo.piece != null) SetAttributes(cardInfo.piece);
+        else if (cardInfo.piece != null)
+        {
+            SetAttributes(cardInfo.piece);
+            health = cardInfo.GetHealth();
+            if (health == 0) healthText.text = "∞";
+            else healthText.text = health.ToString();
+        }
     }
 
     public void SetAttributes(Collection collection)
@@ -48,6 +54,8 @@ public class CardInfo : MonoBehaviour {
             }            
         }
     }
+
+    // Need to highlight keywords
 
     public void SetAttributes(PieceAttributes attributes)
     {

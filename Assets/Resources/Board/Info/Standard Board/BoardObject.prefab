@@ -979,7 +979,6 @@ GameObject:
   - component: {fileID: 224365287300260172}
   - component: {fileID: 222168386662461098}
   - component: {fileID: 114938704789865834}
-  - component: {fileID: 114033907587212674}
   m_Layer: 5
   m_Name: 01
   m_TagString: Untagged
@@ -2461,18 +2460,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114033907587212674
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1385743680910852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85c70199409ef314b8837c146278d102, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  card: {fileID: 1812990188759276, guid: f8f777b2e4dad66418c2b9605225ecff, type: 2}
 --- !u!114 &114038189697951092
 MonoBehaviour:
   m_ObjectHideFlags: 1

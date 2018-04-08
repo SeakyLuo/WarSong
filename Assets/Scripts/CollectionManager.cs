@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using System;
 using System.Linq;
 
-
 public class CollectionManager : MonoBehaviour {
  
     public static string[] types = new string[] { "General", "Advisor", "Elephant", "Horse", "Chariot", "Cannon", "Soldier", "Tactic" };
@@ -19,7 +18,7 @@ public class CollectionManager : MonoBehaviour {
     public Dropdown searchByGold, searchByOre, searchByHealth;
     public UserInfo user;
 
-    private List<Collection> collections, searchedCollections;
+    private List<Collection> displayCollections, searchedCollections;
     private Dictionary<string, List<Collection>> collectionDict = new Dictionary<string, List<Collection>>();
     private Dictionary<string, List<Collection>> originalDict = new Dictionary<string, List<Collection>>();
     private int coins,        
@@ -30,7 +29,7 @@ public class CollectionManager : MonoBehaviour {
     private static GameObject[] tabs = new GameObject[types.Length];
     private GameObject[] cards, counters;
     private Vector3 mousePosition;
-    private string[] exitOneTypeMode = { "",""};
+    private KeyValuePair<string,string> exitOneTypeMode = new KeyValuePair<string, string>("", ""); //type, loc    
     private string oneTypeMode = "", searchByKeyword = "";
 
     // Use this for initialization
@@ -58,7 +57,7 @@ public class CollectionManager : MonoBehaviour {
         }
         GameObject.Find("CoinNumber").GetComponent<Text>().text = coins.ToString();
         LoadUserCollections();
-        foreach (Collection collection in collections)
+        foreach (Collection collection in displayCollections)
             originalDict[collection.type].Add(collection);
         SetPageLimits();
         ShowCurrentPage();
@@ -79,32 +78,33 @@ public class CollectionManager : MonoBehaviour {
         if (!found)
         {
             user.collections.Add(collection);
-            collections.Add(collection);
+            //displayCollections.Add(collection);
             collectionDict[collection.type].Add(collection);
             SetPageLimits();
         }        
         ShowCurrentPage();
     }
 
-    public void RemoveCollection(Collection collection)
+    public bool RemoveCollection(Collection collection)
     {
-       // foreach (Collection c in user.collections) Debug.Log(c.name);
-        Collection target = new Collection();
+        Collection found = new Collection();
         foreach(Collection c in user.collections)
             if(c.name == collection.name && c.health == collection.health)
             {                
-                target = c;
-                target.count--;
+                found = c;
+                found.count--;
                 break;
             }
-        if (target.count == 0)
+        if (found.IsEmpty()) return false;
+        if (found.count == 0)
         {
-            user.collections.Remove(target);
-            collections.Remove(target);
-            collectionDict[target.type].Remove(target);
+            user.collections.Remove(found);
+            displayCollections.Remove(found);
+            collectionDict[found.type].Remove(found);
             SetPageLimits();
-        }        
+        }
         ShowCurrentPage();
+        return true;
     }
 
     public void RemoveStandardCards()
@@ -121,7 +121,7 @@ public class CollectionManager : MonoBehaviour {
 
     private void LoadUserCollections()
     {
-        collections = user.collections;
+        displayCollections = user.collections;
         LoadCollections();
     }
 
@@ -130,7 +130,7 @@ public class CollectionManager : MonoBehaviour {
         foreach (KeyValuePair<string, List<Collection>> pair in collectionDict)
             pair.Value.Clear();
         // Sort?
-        foreach (Collection collection in collections)
+        foreach (Collection collection in displayCollections)
             collectionDict[collection.type].Add(collection);
     }
 
@@ -144,10 +144,10 @@ public class CollectionManager : MonoBehaviour {
             else if (0 < count && count <= 4) count = 1;
             else if (count != 0)
             {
-                count = (int)Mathf.Floor(count / cardsPerPage);
-                if (count % 4 != 0) count++;
+                if (count % 4 != 0) count = (int)Mathf.Floor(count / cardsPerPage) + 1;
+                else count = (int)Mathf.Floor(count / cardsPerPage);                
             }
-            pageLimits[item.Key] = count;
+            pageLimits[item.Key] = count;            
         }
     }
 
@@ -161,13 +161,13 @@ public class CollectionManager : MonoBehaviour {
     {
         cardsPerPage = number;
         SetPageLimits();
-        SetCurrentPage("General", 1);
+        //SetCurrentPage("General", 1);
         ShowCurrentPage();
     }
 
     private void ShowSearchedCollection()
     {
-        collections = new List<Collection>(searchedCollections); 
+        displayCollections = new List<Collection>(searchedCollections); 
         LoadCollections();
         SetPageLimits();
         for (int i = types.Length - 1; i >= 0; i--)
@@ -205,7 +205,7 @@ public class CollectionManager : MonoBehaviour {
         else right.SetActive(true);
         for (int i = 0; i < cardsPerPage; i++)
         {
-            if (!cards[i].activeSelf) break;
+            cards[i].GetComponent<CardInfo>().Clear();
             cards[i].SetActive(false);
             counters[i].GetComponent<Text>().text = "";
         }
@@ -220,7 +220,7 @@ public class CollectionManager : MonoBehaviour {
         }
         pageText.text = "Page " + pageNumber.ToString();
 
-        if (currentPage.Equals(notFound))
+        if (currentPage.Equals(notFound) || collectionDict[type].Count == 0)
         {
             TitleText.text = "Not Found";
             return;
@@ -329,22 +329,22 @@ public class CollectionManager : MonoBehaviour {
         ShowCurrentPage();
     }
 
-    public void EnterOneTypeMode(string type,string loc)
+    public void EnterOneTypeMode(string type, string loc)
     {
         if (type == "") return;
         ExitOneTypeMode();
         // click on the same obj to cancel this mode
-        string[] lastEnterOneTypeMode = new string[2] { type, loc };
-        if (lastEnterOneTypeMode.SequenceEqual(exitOneTypeMode))
+        KeyValuePair<string, string> lastEnterOneTypeMode = new KeyValuePair<string, string>(type, loc);
+        if (lastEnterOneTypeMode.Equals(exitOneTypeMode))
         {
-            exitOneTypeMode =new string[] { "","" };
+            exitOneTypeMode = new KeyValuePair<string, string>("", "");
             return;
         }
         exitOneTypeMode = lastEnterOneTypeMode;
         OneTypeMode(type);
     }
 
-    public string[] GetLastEnterOneTypeMode() { return exitOneTypeMode; }
+    //public KeyValuePair<string, string> GetLastEnterOneTypeMode() { return exitOneTypeMode; }
 
     public void ExitOneTypeMode()
     {
@@ -352,6 +352,8 @@ public class CollectionManager : MonoBehaviour {
         LoadUserCollections();
         SetPageLimits();
         searchByOre.value = searchByHealth.value = searchByGold.value = 0;
+        SetCurrentPage(currentPage.Key, 1);
+        exitOneTypeMode = new KeyValuePair<string, string>("", "");       
         ShowCurrentPage();
     }
 
@@ -370,6 +372,7 @@ public class CollectionManager : MonoBehaviour {
                     newSearched.Add(collection);
             }
             searchedCollections = newSearched;
+            newSearched = new List<Collection>();
         }
         if (gold != -1 && searchedCollections != null)
         {
@@ -385,6 +388,7 @@ public class CollectionManager : MonoBehaviour {
                 // search description
             }
             searchedCollections = newSearched;
+            newSearched = new List<Collection>();
         }
         if (ore != -1 && searchedCollections != null)
         {
@@ -398,6 +402,7 @@ public class CollectionManager : MonoBehaviour {
                     newSearched.Add(collection);
             }
             searchedCollections = newSearched;
+            newSearched = new List<Collection>();
         }
         if (health != -1 && searchedCollections != null)
         {
@@ -405,7 +410,7 @@ public class CollectionManager : MonoBehaviour {
             {
                 if (collection.type != "Tactic")
                 {
-                    // ∞不知道该不该算5+
+                    // IDK whether ∞ is 5+ or not
                     int Health = Resources.Load<PieceAttributes>("Pieces/Info/" + collection.name + "/Attributes").health;
                     if ((health == 0 && Health == health) ||
                         (health == 5 && Health >= health) ||
@@ -414,8 +419,17 @@ public class CollectionManager : MonoBehaviour {
                 }
             }
             searchedCollections = newSearched;
+            newSearched = new List<Collection>();
         }
         ShowSearchedCollection();
+    }
+
+    public bool InCollection(string name)
+    {
+        foreach (Collection collection in user.collections)
+            if (collection.name == name)
+                return true;
+        return false;
     }
 
     public void InputFieldSearch()

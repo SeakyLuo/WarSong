@@ -55,10 +55,14 @@ public class TacticGestureHandler : MonoBehaviour,IBeginDragHandler, IDragHandle
         if (selectedObject.name == TACTICSLOTPANEL)
         {
              tactic = selectedObject.transform.parent.Find("Tactic").gameObject;
-             if (!tactic.activeSelf) collectionManager.EnterOneTypeMode("Tactic", "0");
+             if (!tactic.activeSelf)
+             {
+                collectionManager.SetCurrentPage("Tactic",1);
+                collectionManager.ShowCurrentPage();
+                //collectionManager.EnterOneTypeMode("Tactic", "0");
+             }
              else lineupBuilder.RemoveTactic(tactic.GetComponent<TacticInfo>().tactic);
-        }
-            
+        }            
     }
 
     private bool InTacticRegion(Vector2 pos) { return createLineupPanel.activeSelf && 0.75 * Screen.width <= pos.x && pos.x <= Screen.width && 100 * yscale <= pos.y && pos.y <= 1000 * yscale; }
