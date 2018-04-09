@@ -70,30 +70,16 @@ public class CollectionGestureHandler : MonoBehaviour, IPointerClickHandler, IBe
                 string cardName = cardInfo.GetCardName();
                 foreach (Vector2 loc in boardInfo.typeLocations[cardInfo.GetCardType()])
                 {
-                    string oldLocPieceName = boardInfo.cardLocations[loc].name;
-                    if ((cardInfo.IsStandard() && !oldLocPieceName.StartsWith("Standard ")) ||
-                        (!cardInfo.IsStandard() && oldLocPieceName.StartsWith("Standard ")) ||
-                        (cardInfo.GetCardType() == "General" && cardName != oldLocPieceName)) // need to compare with count
+                    Collection oldCollection = boardInfo.cardLocations[loc];
+                    //if((cardInfo.IsStandard() && !oldLocPieceName.StartsWith("Standard ")) ||
+                    //    (!cardInfo.IsStandard() && oldLocPieceName.StartsWith("Standard ")) ||
+                    //    (cardInfo.GetCardType() == "General" && cardName != oldLocPieceName))
+                    if ((cardName != oldCollection.name || cardInfo.GetHealth() != oldCollection.count))
                     {
                         lineupBuilder.AddPiece(cardInfo, loc);
                         break;
                     }
                 }
-                //GameObject clickCard = Instantiate(selectedObject.transform.parent.Find("Card").gameObject, parentCanvas.transform);
-                //string cardName = cardInfo.GetCardName();
-                //foreach (Vector2 loc in boardInfo.typeLocations[cardInfo.GetCardType()])
-                //{
-                //    string oldLocPieceName = boardInfo.cardLocations[loc].name;
-                //    if ((cardInfo.IsStandard() && !oldLocPieceName.StartsWith("Standard ")) ||
-                //        (!cardInfo.IsStandard() && oldLocPieceName.StartsWith("Standard ")) ||
-                //        (cardInfo.GetCardType() == "General" && cardName != oldLocPieceName)) // need to compare with count
-                //    {
-                //        clickCard.GetComponent<CardInfo>().SetAttributes(cardInfo);
-                //        lineupBuilder.AddPiece(clickCard.GetComponent<CardInfo>(), loc);
-                //        break;
-                //    }
-                //}
-                //Destroy(clickCard);
             }            
         }
     }
