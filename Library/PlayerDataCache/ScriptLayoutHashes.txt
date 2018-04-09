@@ -121,8 +121,7 @@ a586508af6261a5e98fdcf2a8366443f Assembly-CSharp.dll:.CollectionGestureHandler
 0de5c4e9bb8bbf8cc90302c47b95d610 Assembly-CSharp.dll:.AutoCreate
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
-a94dfc09106eec84069ac1e932bff2ac Assembly-CSharp.dll:.BoardManager
-3a6ec598c868320c5da03401d8514330 Assembly-CSharp.dll:.LineupManager
+7b9d928e31df387de57d35358b940fb8 Assembly-CSharp.dll:.BoardManager
 3a8ae517724b1f4a57b9994d9faefda5 Assembly-CSharp.dll:.LineupBoardGestureHandler
 24fe8de9c49d66a45ef33e65a5a92ad8 Assembly-CSharp.dll:.Setup
 c25f89f498b7e2340b0ce0881be2a6cf Assembly-CSharp.dll:.InfoLoader
@@ -148,7 +147,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 c5c4c5d36927ce72b3ea1ddc983a6a1e Assembly-CSharp.dll:.TacticAttributes
-eb26e81f277caeeaf39379ceea237eb4 Assembly-CSharp.dll:.BoardInfo
+008f642310487621c1d46070b9d1555a Assembly-CSharp.dll:.BoardInfo
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule

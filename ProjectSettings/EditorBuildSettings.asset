@@ -6,14 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/_Scenes/LineupBuilder1.unity
-    guid: 206d44adeb7d9ec48a67864ff1315b21
-  - enabled: 0
     path: Assets/_Scenes/GameMode.unity
     guid: 42fc84ea2378d004ca6c0a635f96c0ad
-  - enabled: 0
-    path: Assets/_Scenes/slots.unity
-    guid: e47c7b176cbae294f8fe480f2b71a444
   - enabled: 1
     path: Assets/_Scenes/LineupBuilder.unity
     guid: 04ca0f02ed2e4f8459437dbbdfe8bd40
+  - enabled: 0
+    path: Assets/_Scenes/Main.unity
+    guid: 9667a9bcad717184eb07771813a3c10f

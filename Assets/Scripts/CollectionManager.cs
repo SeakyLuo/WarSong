@@ -203,7 +203,7 @@ public class CollectionManager : MonoBehaviour {
 
         int page = currentPage.Value - 1;
         TitleText.text = type;
-        tabs[Array.IndexOf(types, type)].GetComponent<Button>().Select();
+        tabs[Array.IndexOf(types, type)].GetComponent<Button>().Select(); // Doesn't always work
         SortCollections();        
 
         GameObject card;
