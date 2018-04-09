@@ -13,7 +13,7 @@ public class InfoLoader : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         user = new CheatAccount();
-        foreach(string path in Directory.GetDirectories("Assets/Resources/Board/Info"))
+        foreach (string path in Directory.GetDirectories("Assets/Resources/Board/Info"))
             boards.Add(Resources.Load<BoardAttributes>("Board/Info/" + path.Substring(path.IndexOf("Info") + 5) + "/Attributes"));
         boards = Sorted(boards);
     }

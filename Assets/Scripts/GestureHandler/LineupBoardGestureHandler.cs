@@ -23,7 +23,6 @@ public class LineupBoardGestureHandler : MonoBehaviour, IPointerClickHandler, IB
     private void Start()
     {
         collectionManager = collectionPanel.GetComponent<CollectionManager>();
-        boardInfo = gameObject.GetComponent<BoardInfo>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -96,8 +95,8 @@ public class LineupBoardGestureHandler : MonoBehaviour, IPointerClickHandler, IB
                 // Drag outside the board.
                 string cardType = newCard.GetCardType();
                 collectionManager.AddCollection(new Collection(newCard.piece));
-                boardInfo.SetStandardCard(newCard.piece.type, StringToVector2(parent.name));
-                collectionManager.RemoveCollection(new Collection("Standard "+ cardType, cardType));
+                boardInfo.SetStandardCard(cardType, StringToVector2(parent.name));
+                collectionManager.RemoveCollection(Collection.standardCollectionDict[cardType]);
                 cardImage.sprite = BoardInfo.standardAttributes["Standard " + cardType].image;
                 // drag to a card to switch?
             }
@@ -116,10 +115,12 @@ public class LineupBoardGestureHandler : MonoBehaviour, IPointerClickHandler, IB
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        selectedObject = eventData.pointerCurrentRaycast.gameObject;
-        string cardType, parentName = selectedObject.transform.parent.name;
-        if (boardInfo.typeDict.TryGetValue(parentName, out cardType) || selectedObject.name != GRIDSLOTPANEL) collectionManager.ExitOneTypeMode();
-        else collectionManager.EnterOneTypeMode(cardType, parentName);
+        GameObject clickedObject = eventData.pointerCurrentRaycast.gameObject;
+        string cardType, parentName = clickedObject.transform.parent.name;
+        if (clickedObject.name == GRIDSLOTPANEL && boardInfo.locationType.TryGetValue(parentName, out cardType))
+        {
+            collectionManager.ClickTab(cardType);
+        }
     }
 
     private string Vector2ToString(Vector2 v) { return v.x.ToString() + v.y.ToString(); }
@@ -131,4 +132,6 @@ public class LineupBoardGestureHandler : MonoBehaviour, IPointerClickHandler, IB
         RectTransformUtility.ScreenPointToLocalPointInRectangle(parentCanvas.transform as RectTransform, Input.mousePosition, parentCanvas.worldCamera, out mousePosition);
         return mousePosition;
     }
+
+    public void SetBoardInfo(BoardInfo info) { boardInfo = info; }
 }

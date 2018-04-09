@@ -108,13 +108,6 @@ public class CardInfo : MonoBehaviour {
         HealthImage.GetComponent<Image>().sprite = heartImage;
     }
 
-    public CardInfo Copy()
-    {
-        CardInfo cardInfo = new CardInfo();
-        cardInfo.SetAttributes(this);        
-        return cardInfo;
-    }
-
     public string GetCardName() { return cardName; }
     public string GetCardType() { return type; }
     public int GetHealth() { return health; }
@@ -125,5 +118,5 @@ public class CardInfo : MonoBehaviour {
     public void SetLocation(Vector2 loc) { location = loc; }
     public bool IsActive() { return active; }
     public void SetActive(bool value) { active = value; }
-
+    public bool IsStandard() { return cardName.StartsWith("Standard "); }
 }

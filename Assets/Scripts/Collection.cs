@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class Collection
 {
@@ -6,6 +7,25 @@ public class Collection
     public string type = "";
     public int count = 1;
     public int health = 0;
+
+    public static string[] types = new string[] { "General", "Advisor", "Elephant", "Horse", "Chariot", "Cannon", "Soldier", "Tactic" };
+    public static Collection General = standardCollection("General");
+    public static Collection Advisor = standardCollection("Advisor");
+    public static Collection Elephant = standardCollection("Elephant");
+    public static Collection Horse = standardCollection("Horse");
+    public static Collection Chariot = standardCollection("Chariot");
+    public static Collection Cannon = standardCollection("Cannon");
+    public static Collection Soldier = standardCollection("Soldier");
+    public static Dictionary<string, Collection> standardCollectionDict = new Dictionary<string, Collection>
+    {
+        {"General", General },
+        {"Advisor", Advisor },
+        {"Elephant", Elephant },
+        {"Horse", Horse },
+        {"Chariot", Chariot },
+        {"Cannon", Cannon },
+        {"Soldier", Soldier }
+    };
 
     public Collection() { }
 
@@ -41,7 +61,12 @@ public class Collection
         count = Count;
         health = Health;
         if (Type == "Tactic") health = Resources.Load<TacticAttributes>("Tactics/Info/" + Name + "/Attributes").goldCost;
-        else if (Health == 0) health = Resources.Load<PieceAttributes>("Pieces/Info/" + Name + "/Attributes").health;
+        else if (Health == 0 && !Name.StartsWith("Standard ")) health = Resources.Load<PieceAttributes>("Pieces/Info/" + Name + "/Attributes").health;
+    }
+
+    public static Collection standardCollection(string type)
+    {
+        return new Collection("Standard " + type, type);
     }
 
     public bool IsEmpty()

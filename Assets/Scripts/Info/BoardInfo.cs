@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BoardInfo : MonoBehaviour {
-
+public class BoardInfo : MonoBehaviour
+{
     public BoardAttributes attributes;
-    public GameObject boardObject;
-    public Dictionary<Vector2, string> locations;
     public Dictionary<Vector2, Collection> cardLocations;
-    public Dictionary<string, PieceAttributes> attributesDict;    
+    public Dictionary<string, PieceAttributes> attributesDict;
     public Dictionary<string, List<Vector2>> typeLocations;
-    public Dictionary<string, string> typeDict;
+    public Dictionary<string, string> locationType;
     public Dictionary<Vector2, Collection> standardLocations;
     public static Dictionary<string, PieceAttributes> standardAttributes;
 
@@ -21,15 +19,15 @@ public class BoardInfo : MonoBehaviour {
     {
         standardLocations = new Dictionary<Vector2, Collection>
         {
-            {attributes.agloc,new Collection("Standard General", "General") },
-            {attributes.aaloc1,new Collection("Standard Advisor", "Advisor") },{attributes.aaloc2,new Collection("Standard Advisor", "Advisor") },
-            {attributes.aeloc1,new Collection("Standard Elephant", "Elephant") },{attributes.aeloc2,new Collection("Standard Elephant", "Elephant") },
-            {attributes.ahloc1,new Collection("Standard Horse", "Horse") },{attributes.ahloc2,new Collection("Standard Horse", "Horse") },
-            {attributes.arloc1,new Collection("Standard Chariot", "Chariot") },{attributes.arloc2,new Collection("Standard Chariot", "Chariot") },
-            {attributes.acloc1,new Collection("Standard Cannon", "Cannon") },{attributes.acloc2,new Collection("Standard Cannon", "Cannon") },
-            {attributes.asloc1,new Collection("Standard Soldier", "Soldier") },{attributes.asloc2,new Collection("Standard Soldier", "Soldier") },
-            {attributes.asloc3,new Collection("Standard Soldier", "Soldier") },{attributes.asloc4,new Collection("Standard Soldier", "Soldier") },
-            {attributes.asloc5,new Collection("Standard Soldier", "Soldier") }
+            {attributes.agloc, Collection.General },
+            {attributes.aaloc1, Collection.Advisor },{attributes.aaloc2, Collection.Advisor },
+            {attributes.aeloc1, Collection.Elephant },{attributes.aeloc2, Collection.Elephant },
+            {attributes.ahloc1, Collection.Horse },{attributes.ahloc2, Collection.Horse },
+            {attributes.arloc1, Collection.Chariot },{attributes.arloc2, Collection.Chariot },
+            {attributes.acloc1, Collection.Cannon },{attributes.acloc2, Collection.Cannon },
+            {attributes.asloc1, Collection.Soldier },{attributes.asloc2, Collection.Soldier },
+            {attributes.asloc3, Collection.Soldier },{attributes.asloc4, Collection.Soldier },
+            {attributes.asloc5, Collection.Soldier }
         };
         standardAttributes = new Dictionary<string, PieceAttributes>
         {
@@ -41,8 +39,10 @@ public class BoardInfo : MonoBehaviour {
             {"Standard Cannon", standardCannon },
             {"Standard Soldier", standardSoldier }
         };
-        boardObject = GameObject.Find("BoardObject(Clone)");
         DataSetup();
+        GameObject.Find("Collections").GetComponent<CollectionGestureHandler>().SetBoardInfo(this);
+        gameObject.transform.parent.parent.parent.GetComponent<LineupBuilder>().SetBoardInfo(this);
+        gameObject.transform.parent.GetComponent<LineupBoardGestureHandler>().SetBoardInfo(this);
     }
 
     public void Reset()
@@ -59,11 +59,10 @@ public class BoardInfo : MonoBehaviour {
     {
         attributes = board;
         DataSetup(newLocations);
-        if(boardObject == null) boardObject = GameObject.Find("BoardObject(Clone)");
         Color tmpColor;
-        foreach(KeyValuePair<string, PieceAttributes> pair in attributesDict)
+        foreach (KeyValuePair<string, PieceAttributes> pair in attributesDict)
         {
-            Image image = boardObject.transform.Find(pair.Key).Find("CardImage").GetComponent<Image>();
+            Image image = gameObject.transform.Find(pair.Key).Find("CardImage").GetComponent<Image>();
             image.sprite = pair.Value.image;
             tmpColor = image.color;
             tmpColor.a = 255;
@@ -73,38 +72,27 @@ public class BoardInfo : MonoBehaviour {
 
     public void SetStandardCard(string type, Vector2 location)
     {
-        SetCard(new Collection("Standard " + type, type), location);
+        SetCard(Collection.standardCollectionDict[type], location);
     }
 
     public void SetCard(Collection collection, Vector2 location)
     {
-        locations[location] = collection.name;
+        collection.count = 1;
         cardLocations[location] = collection;
-        attributesDict[Vector2ToString(location)] = LoadPieceAttributes(collection.name);
-        attributesDict[Vector2ToString(location)].health = collection.health;
+        string locName = Vector2ToString(location);
+        attributesDict[locName] = LoadPieceAttributes(collection.name);
+        attributesDict[locName].health = collection.health;
     }
 
-    public void SetCard(PieceAttributes attributes ,Vector2 location)
+    public void SetCard(PieceAttributes attributes, Vector2 location)
     {
-        locations[location] = attributes.Name;
-        cardLocations[location] = new Collection(attributes.Name, attributes.type);
+        cardLocations[location] = new Collection(attributes.Name, attributes.type, 1, attributes.health);
         attributesDict[Vector2ToString(location)] = attributes;
     }
 
     private void DataSetup(Dictionary<Vector2, Collection> newLocations = null)
     {
         if (newLocations == null) newLocations = standardLocations;
-        locations = new Dictionary<Vector2, string>
-        {
-            { attributes.agloc, newLocations[attributes.agloc].name },
-            { attributes.aaloc1,newLocations[attributes.aaloc1].name },{ attributes.aaloc2,newLocations[attributes.aaloc2].name },
-            { attributes.aeloc1,newLocations[attributes.aeloc1].name },{ attributes.aeloc2,newLocations[attributes.aeloc2].name },
-            { attributes.ahloc1,newLocations[attributes.ahloc1].name },{ attributes.ahloc2,newLocations[attributes.ahloc2].name },
-            { attributes.arloc1,newLocations[attributes.arloc1].name },{ attributes.arloc2,newLocations[attributes.arloc2].name },
-            { attributes.acloc1,newLocations[attributes.acloc1].name },{ attributes.acloc2,newLocations[attributes.acloc2].name },
-            { attributes.asloc1,newLocations[attributes.asloc1].name },{ attributes.asloc2,newLocations[attributes.asloc2].name },
-            { attributes.asloc3,newLocations[attributes.asloc3].name },{ attributes.asloc4,newLocations[attributes.asloc4].name },{ attributes.asloc5,newLocations[attributes.asloc5].name },
-        };
         cardLocations = new Dictionary<Vector2, Collection>
         {
             { attributes.agloc, newLocations[attributes.agloc] },
@@ -114,7 +102,7 @@ public class BoardInfo : MonoBehaviour {
             { attributes.arloc1,newLocations[attributes.arloc1] },{ attributes.arloc2,newLocations[attributes.arloc2] },
             { attributes.acloc1,newLocations[attributes.acloc1] },{ attributes.acloc2,newLocations[attributes.acloc2] },
             { attributes.asloc1,newLocations[attributes.asloc1] },{ attributes.asloc2,newLocations[attributes.asloc2] },
-            { attributes.asloc3,newLocations[attributes.asloc3] },{ attributes.asloc4,newLocations[attributes.asloc4] },{ attributes.asloc5,newLocations[attributes.asloc5] },            
+            { attributes.asloc3,newLocations[attributes.asloc3] },{ attributes.asloc4,newLocations[attributes.asloc4] },{ attributes.asloc5,newLocations[attributes.asloc5] },
         };
         attributesDict = new Dictionary<string, PieceAttributes>
         {
@@ -145,7 +133,7 @@ public class BoardInfo : MonoBehaviour {
             { "Cannon", new List<Vector2> { attributes.acloc1, attributes.acloc2 } },
             { "Soldier", new List<Vector2> { attributes.asloc1, attributes.asloc2, attributes.asloc3, attributes.asloc4, attributes.asloc5 } }
         };
-        typeDict = new Dictionary<string, string>
+        locationType = new Dictionary<string, string>
         {
             { Vector2ToString(attributes.agloc), "General" },
             { Vector2ToString(attributes.aaloc1), "Advisor" },{ Vector2ToString(attributes.aaloc2), "Advisor" },
@@ -159,10 +147,18 @@ public class BoardInfo : MonoBehaviour {
     }
 
     private string Vector2ToString(Vector2 v) { return v.x.ToString() + v.y.ToString(); }
-    private PieceAttributes LoadPieceAttributes(string pieceName)
+
+    private static PieceAttributes LoadPieceAttributes(string pieceName)
     {
         if (pieceName.StartsWith("Standard ")) return standardAttributes[pieceName];
-        return Resources.Load<PieceAttributes>("Pieces/Info/" + pieceName+"/Attributes");
+        return Instantiate<PieceAttributes>(Resources.Load<PieceAttributes>("Pieces/Info/" + pieceName + "/Attributes"));
     }
+
+    //private void OnDestroy()
+    //{
+    //    GameObject.Find("Collections").GetComponent<CollectionGestureHandler>().SetBoardInfo(null);
+    //    gameObject.transform.parent.parent.parent.GetComponent<LineupBuilder>().SetBoardInfo(null);
+    //    gameObject.transform.parent.GetComponent<LineupBoardGestureHandler>().SetBoardInfo(null);
+    //}
 
 }

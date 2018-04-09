@@ -29,7 +29,7 @@ public class LineupBuilder : MonoBehaviour {
         lineupsManager = myLineup.GetComponent<LineupsManager>();
         board = gameObject.transform.Find("BoardPanel/Board");
         boardObject = board.Find("BoardObject(Clone)/");
-        boardInfo = board.GetComponent<BoardInfo>();
+        boardInfo = boardObject.GetComponent<BoardInfo>();
         tacticObjs = GameObject.FindGameObjectsWithTag("Tactic");
         foreach (GameObject obj in tacticObjs) obj.SetActive(false);
         lineup.lineupName = "Custom Lineup";        
@@ -46,7 +46,7 @@ public class LineupBuilder : MonoBehaviour {
         int y = (int)Mathf.Floor((loc.y - 10) / 100);
         string cardType,
                locName = x.ToString() + y.ToString();
-        if (boardInfo.typeDict.TryGetValue(locName, out cardType) && cardType == cardInfo.GetCardType())
+        if (boardInfo.locationType.TryGetValue(locName, out cardType) && cardType == cardInfo.GetCardType())
         {
             PieceAdder(cardInfo, new Vector2(x, y), x, y);
         }
@@ -60,6 +60,7 @@ public class LineupBuilder : MonoBehaviour {
         lineup.cardLocations[loc] = newCollection;
         boardObject.Find(locName).Find("CardImage").GetComponent<Image>().sprite = cardInfo.image.sprite;
         collectionManager.RemoveCollection(newCollection);
+        // Bug with next line, count is not 1
         collectionManager.AddCollection(boardInfo.cardLocations[loc]);
         boardInfo.SetCard(newCollection, loc);        
     }
@@ -90,12 +91,16 @@ public class LineupBuilder : MonoBehaviour {
         if (current_tactics == 0 || LessThan(attributes, tacticAttributes[0])) index = 0;
         else if (GreaterThan(attributes, tacticAttributes[current_tactics - 1])) index = current_tactics;
         else
+        {
             for (int i = 1; i < current_tactics; i++)
+            {
                 if (GreaterThan(attributes, tacticAttributes[i]) && LessThan(attributes, tacticAttributes[i + 1]))
                 {
                     index = i;
                     break;
                 }
+            }
+        }
         for (int i = index; i < current_tactics; i++)
             tacticObjs[i + 1].GetComponent<TacticInfo>().SetAttributes(tacticAttributes[i]);
         tacticObjs[index].GetComponent<TacticInfo>().SetAttributes(attributes);
@@ -168,16 +173,20 @@ public class LineupBuilder : MonoBehaviour {
         lineup.lineupName = inputField.text;
     }
 
+    private void ResumeCollections()
+    {
+        collectionManager.RemoveStandardCards();
+        collectionManager.SetCardsPerPage(8);
+        createLineupPanel.SetActive(false);
+        selectBoardPanel.GetComponent<BoardManager>().DestroyBoard();
+    }
+
     public void DeleteLineup()
     {
         lineupsManager.DeleteLineup();
         // upload to the server
         ResetLineup(true);
-        collectionManager.SetCardsPerPage(8);
-        collectionManager.ExitOneTypeMode();
-        collectionManager.RemoveStandardCards();
-        createLineupPanel.SetActive(false);        
-        selectBoardPanel.GetComponent<BoardManager>().DestroyBoard();
+        ResumeCollections();
     }
 
     public void SaveLineup()
@@ -187,11 +196,7 @@ public class LineupBuilder : MonoBehaviour {
         lineupsManager.AddLineup(lineup);
         // upload to the server
         ResetLineup();
-        collectionManager.SetCardsPerPage(8);
-        collectionManager.ExitOneTypeMode();
-        collectionManager.RemoveStandardCards();
-        createLineupPanel.SetActive(false);
-        selectBoardPanel.GetComponent<BoardManager>().DestroyBoard();
+        ResumeCollections();
     }
 
     public void ResetLineup(bool returnCards = false)
@@ -211,7 +216,7 @@ public class LineupBuilder : MonoBehaviour {
         tacticAttributes.Clear();
         foreach (GameObject obj in tacticObjs) obj.SetActive(false);
         SetTexts();
-        boardInfo.Reset();
+        //boardInfo.Reset();
     }
 
     public void CopyLineup()
@@ -279,6 +284,8 @@ public class LineupBuilder : MonoBehaviour {
         selectBoardPanel.SetActive(true);
         createLineupPanel.SetActive(false);
     }
+
+    public void SetBoardInfo(BoardInfo info) { boardInfo = info; }
 
     private string Vector2ToString(Vector2 v) { return v.x.ToString() + v.y.ToString(); }
 }

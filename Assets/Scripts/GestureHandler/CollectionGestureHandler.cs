@@ -11,15 +11,15 @@ public class CollectionGestureHandler : MonoBehaviour, IPointerClickHandler, IBe
     public Canvas parentCanvas;
     public static string CARDSLOTPANEL = "CardSlotPanel";
     public static float xscale = Screen.width / 1920, yscale = Screen.width / 1080;
+
+    private BoardInfo boardInfo;
     private GameObject dragCard;
     private bool dragBegins = false;
     private LineupBuilder lineupBuilder;
-    private BoardInfo boardInfo;
 
     private void Start()
     {
         lineupBuilder = createLineupPanel.GetComponent<LineupBuilder>();
-        boardInfo = createLineupPanel.transform.Find("BoardPanel/Board").GetComponent<BoardInfo>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -29,7 +29,7 @@ public class CollectionGestureHandler : MonoBehaviour, IPointerClickHandler, IBe
         if (selectedObject.name == CARDSLOTPANEL)
         {
             dragBegins = true;
-            dragCard = Instantiate(selectedObject.transform.parent.Find("Card").gameObject, parentCanvas.transform);            
+            dragCard = Instantiate(selectedObject.transform.parent.Find("Card").gameObject, parentCanvas.transform);
             dragCard.transform.position = AdjustedMousePosition();
             dragCard.GetComponent<CardInfo>().SetAttributes(selectedObject.transform.parent.Find("Card").GetComponent<CardInfo>());
         }
@@ -67,21 +67,33 @@ public class CollectionGestureHandler : MonoBehaviour, IPointerClickHandler, IBe
             }            
             else
             {
-                dragCard = Instantiate(selectedObject.transform.parent.Find("Card").gameObject, parentCanvas.transform);
                 string cardName = cardInfo.GetCardName();
                 foreach (Vector2 loc in boardInfo.typeLocations[cardInfo.GetCardType()])
                 {
-                    string oldLocPieceName = boardInfo.locations[loc];
-                    if ((cardName.StartsWith("Standard ") && !oldLocPieceName.StartsWith("Standard ")) ||
-                        (!cardName.StartsWith("Standard ") && oldLocPieceName.StartsWith("Standard ")) ||
-                        (cardInfo.GetCardType() == "General" && cardName != oldLocPieceName))
+                    string oldLocPieceName = boardInfo.cardLocations[loc].name;
+                    if ((cardInfo.IsStandard() && !oldLocPieceName.StartsWith("Standard ")) ||
+                        (!cardInfo.IsStandard() && oldLocPieceName.StartsWith("Standard ")) ||
+                        (cardInfo.GetCardType() == "General" && cardName != oldLocPieceName)) // need to compare with count
                     {
-                        dragCard.GetComponent<CardInfo>().SetAttributes(cardInfo);
-                        lineupBuilder.AddPiece(dragCard.GetComponent<CardInfo>(), loc);
+                        lineupBuilder.AddPiece(cardInfo, loc);
                         break;
                     }
                 }
-                Destroy(dragCard);
+                //GameObject clickCard = Instantiate(selectedObject.transform.parent.Find("Card").gameObject, parentCanvas.transform);
+                //string cardName = cardInfo.GetCardName();
+                //foreach (Vector2 loc in boardInfo.typeLocations[cardInfo.GetCardType()])
+                //{
+                //    string oldLocPieceName = boardInfo.cardLocations[loc].name;
+                //    if ((cardInfo.IsStandard() && !oldLocPieceName.StartsWith("Standard ")) ||
+                //        (!cardInfo.IsStandard() && oldLocPieceName.StartsWith("Standard ")) ||
+                //        (cardInfo.GetCardType() == "General" && cardName != oldLocPieceName)) // need to compare with count
+                //    {
+                //        clickCard.GetComponent<CardInfo>().SetAttributes(cardInfo);
+                //        lineupBuilder.AddPiece(clickCard.GetComponent<CardInfo>(), loc);
+                //        break;
+                //    }
+                //}
+                //Destroy(clickCard);
             }            
         }
     }
@@ -99,7 +111,7 @@ public class CollectionGestureHandler : MonoBehaviour, IPointerClickHandler, IBe
 
     private bool InBoardRegion(Vector2 pos) { return 200 * xscale <= pos.x && pos.x <= 1440 * xscale && 10 * yscale <= pos.y && pos.y <= 510 * yscale; }
 
-    private Vector2 StringToVector2(string loc) { return new Vector2((int)Char.GetNumericValue(loc[0]), (int)Char.GetNumericValue(loc[1])); }
+    public void SetBoardInfo(BoardInfo info) { boardInfo = info; }
 
     private Vector3 AdjustedMousePosition()
     {

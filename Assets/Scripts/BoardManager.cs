@@ -69,19 +69,18 @@ public class BoardManager : MonoBehaviour {
     public void LoadBoard(BoardAttributes attributes, Dictionary<Vector2, Collection> newLocations = null)
     {
         collectionManager.SetCardsPerPage(4);
-        //Vector2 agloc = boardAttributes[currentBoard].agloc;
-        //collectionManager.EnterOneTypeMode("General",agloc.x.ToString()+agloc.y.ToString());
+        collectionManager.ShowCurrentPage();
         createLineupPanel.SetActive(true);
         loadedBoard = Instantiate(Resources.Load<GameObject>("Board/Info/" + attributes.boardName + "/BoardObject"), board.transform);
         loadedBoard.transform.localPosition = new Vector3(0, 0, 0);
         loadedBoard.SetActive(true);
-        board.GetComponent<BoardInfo>().SetAttributes(attributes, newLocations);
+        loadedBoard.GetComponent<BoardInfo>().SetAttributes(attributes, newLocations);
     }
 
     public void ReturnToCollection()
     {
         collectionManager.SetCardsPerPage(8);
-        collectionManager.ExitOneTypeMode();
+        collectionManager.ShowCurrentPage();
         selectBoardPanel.SetActive(false);
         createLineupButton.SetActive(true);
     }

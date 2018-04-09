@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -85,6 +86,7 @@ public class LineupsManager : MonoBehaviour {
     public void CreateLineup()
     {
         selectBoardPanel.SetActive(true);
+        //if(EditorUtility.DisplayDialog("You have a lineup copied.","Do you want to paste it?", "Sure", "No"))
     }
 
     public void OpenLineup(int number)

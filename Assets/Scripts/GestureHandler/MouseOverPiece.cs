@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class MouseOverPiece : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler//, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class MouseOverPiece : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {    
     public GameObject card;
     public static float xscale = Screen.width / 1920, yscale = Screen.width / 1080;
@@ -19,8 +19,7 @@ public class MouseOverPiece : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private void Start()
     {
         parentCanvas = GameObject.Find("Canvas");
-        //parentCanvas = gameObject.transform.parent.parent.parent.parent.parent;
-        boardInfo = gameObject.transform.parent.parent.GetComponent<BoardInfo>();
+        boardInfo = gameObject.transform.parent.GetComponent<BoardInfo>();
         nameLoc = StringToVector2(gameObject.name);
     }
 
