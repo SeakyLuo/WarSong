@@ -68,16 +68,28 @@ public class CollectionGestureHandler : MonoBehaviour, IPointerClickHandler, IBe
             else
             {
                 string cardName = cardInfo.GetCardName();
+                bool findStandard = false;
                 foreach (Vector2 loc in boardInfo.typeLocations[cardInfo.GetCardType()])
                 {
                     Collection oldCollection = boardInfo.cardLocations[loc];
-                    //if((cardInfo.IsStandard() && !oldLocPieceName.StartsWith("Standard ")) ||
-                    //    (!cardInfo.IsStandard() && oldLocPieceName.StartsWith("Standard ")) ||
-                    //    (cardInfo.GetCardType() == "General" && cardName != oldLocPieceName))
-                    if ((cardName != oldCollection.name || cardInfo.GetHealth() != oldCollection.count))
+                    if ((cardInfo.IsStandard() && !oldCollection.name.StartsWith("Standard ")) ||
+                        (!cardInfo.IsStandard() && oldCollection.name.StartsWith("Standard ")))
                     {
+                        findStandard = true;
                         lineupBuilder.AddPiece(cardInfo, loc);
                         break;
+                    }
+                }
+                if (!findStandard)
+                {
+                    foreach (Vector2 loc in boardInfo.typeLocations[cardInfo.GetCardType()])
+                    {
+                        Collection oldCollection = boardInfo.cardLocations[loc];
+                        if (cardName != oldCollection.name || cardInfo.GetHealth() != oldCollection.health)
+                        {
+                            lineupBuilder.AddPiece(cardInfo, loc);
+                            break;
+                        }
                     }
                 }
             }            
