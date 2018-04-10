@@ -8,7 +8,6 @@ public class InfoLoader : MonoBehaviour {
 
     public static UserInfo user;
     public static List<BoardAttributes> boards = new List<BoardAttributes>();
-    public GameObject selectedBoardPanel, createLineupPanel;
 
 	// Use this for initialization
 	void Start () {
@@ -24,25 +23,16 @@ public class InfoLoader : MonoBehaviour {
         List<BoardAttributes> newList = boardAttributes;
         BoardAttributes standardBoard = boardAttributes[0];
         foreach (BoardAttributes attribute in boardAttributes)
-            if(attribute.boardName == "Standard Board")
+        {
+            if (attribute.boardName == "Standard Board")
             {
                 standardBoard = attribute;
                 newList.Remove(attribute);
                 break;
             }
+        }
         newList.OrderBy(BoardAttributes => BoardAttributes.boardName);
         newList.Insert(0, standardBoard);
         return newList;
-    }
-
-    public void Back()
-    {
-        if (createLineupPanel.activeSelf)
-        {
-            Destroy(createLineupPanel.transform.Find("BoardPanel/Board/BoardObject(Clone)").gameObject);
-            createLineupPanel.SetActive(false);
-            selectedBoardPanel.SetActive(true);
-        }
-        else SceneManager.LoadScene("Main");
     }
 }

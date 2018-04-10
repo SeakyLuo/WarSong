@@ -29,7 +29,7 @@ public class CheatAccount:UserInfo
         Collection[] cheat = { new Collection("Greeeeeat Elephant", "Elephant", 3, 5), new Collection("Zhuge Liang", "General"), new Collection("A Secret Plan", 3),
             new Collection("No Way", 100), new Collection("Qin Shihuang", "General"), new Collection("Xiao He", "General"),
              new Collection("Link Soldier","Soldier",11), new Collection("Buy 1 Get 1 Free",15), new Collection("Build A Cannon","Tactic"),
-            new Collection("Build A Rook"),new Collection("Winner Trophy",5)
+            new Collection("Build A Rook"),new Collection("Winner Trophy",5),new Collection("Horse Rider","Horse",4)
         };
         foreach (Collection c in cheat) collections.Add(c);
         //lineups = null;

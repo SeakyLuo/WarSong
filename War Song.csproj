@@ -286,6 +286,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\ActivateStore.cs" />
     <Compile Include="Assets\Scripts\Attributes\BoardAttributes.cs" />
     <Compile Include="Assets\Scripts\Attributes\PieceAttributes.cs" />
     <Compile Include="Assets\Scripts\Attributes\TacticAttributes.cs" />
@@ -308,6 +309,8 @@
     <Compile Include="Assets\Scripts\LineupBuilder.cs" />
     <Compile Include="Assets\Scripts\LineupsManager.cs" />
     <Compile Include="Assets\Scripts\MovementController.cs" />
+    <Compile Include="Assets\Scripts\OnEnterScenes\OnEnterCollections.cs" />
+    <Compile Include="Assets\Scripts\OnEnterScenes\OnEnterRecruitment.cs" />
     <Compile Include="Assets\Scripts\Play.cs" />
     <Compile Include="Assets\Scripts\Setup.cs" />
     <Compile Include="Assets\Scripts\SwitchScenes.cs" />

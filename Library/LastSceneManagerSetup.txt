@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/_Scenes/LineupBuilder.unity
+- path: Assets/_Scenes/Recruitment.unity
   isLoaded: 1
   isActive: 1
