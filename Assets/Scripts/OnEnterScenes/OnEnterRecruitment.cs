@@ -7,12 +7,14 @@ using UnityEngine.EventSystems;
 public class OnEnterRecruitment : MonoBehaviour, IPointerClickHandler {
 
     public GameObject store, popupInputAmountWindow;
-
+    private Camera canvasCamera;
+    private RectTransform rectTransform;
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+        canvasCamera = gameObject.GetComponent<Canvas>().worldCamera;
+        rectTransform = gameObject.GetComponent<RectTransform>();
+    }
 	
     public void BackToMain()
     {
@@ -28,10 +30,19 @@ public class OnEnterRecruitment : MonoBehaviour, IPointerClickHandler {
     {
         if (store.activeSelf)
         {
-            //if (popupInputAmountWindow.activeSelf && eventData.pointerCurrentRaycast.gameObject != popupInputAmountWindow)
-            //    popupInputAmountWindow.SetActive(false);
-            //else if(eventData.pointerCurrentRaycast.gameObject != store)
-            //    store.SetActive(false);
+            Vector3 mouseposition = AdjustedMousePosition();
+            Rect rect = store.GetComponent<RectTransform>().rect;
+            if (-rect.width / 2 > mouseposition.x || mouseposition.x > rect.width / 2 || -rect.height / 2 > mouseposition.y || mouseposition.y > rect.height / 2)
+            {
+                store.SetActive(false);
+            }
         }            
+    }
+
+    private Vector3 AdjustedMousePosition()
+    {
+        Vector2 mousePosition;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, Input.mousePosition, canvasCamera, out mousePosition);
+        return mousePosition;
     }
 }

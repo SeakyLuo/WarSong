@@ -24,6 +24,7 @@ public class ActivateStore : MonoBehaviour {
             clicked = false;
             if (Time.time - firstClick < clickInterval)
             {
+                firstClick = Time.time;
                 popupInputAmountWindow.SetActive(true);
             }
         }
@@ -51,15 +52,22 @@ public class ActivateStore : MonoBehaviour {
 
     public void ConfirmInput()
     {
-        string contractCount = (int.Parse(inputField.text)*10).ToString();
-        purchaseWithCoinsText.text = contractCount;
-        choiceCoinsAmount.text = inputField.text;
-        choiceContractsAmount.text = contractCount;
+        int contract = int.Parse(inputField.text);
+        string coins = (contract * 10).ToString();
+        purchaseWithCoinsText.text = coins;
+        choiceCoinsAmount.text = coins;
+        choiceContractsAmount.text = inputField.text + " Contract";
+        if (contract > 1) choiceContractsAmount.text += "s";
         popupInputAmountWindow.SetActive(false);
     }
 
     public void CancelInput()
     {
         popupInputAmountWindow.SetActive(false);
+    }
+
+    public void Purchase()
+    {
+
     }
 }
