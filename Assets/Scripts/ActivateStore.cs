@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ActivateStore : MonoBehaviour {
 
     public GameObject purchaseWithCoins, purchaseWithMoney, popupInputAmountWindow;
-    public Text choiceContractsAmount, choiceCoinsAmount, purchaseWithCoinsText;
+    public Text choiceContractsAmount, choiceCoinsAmount, purchaseWithCoinsText, playerCoinsAmount;
     public InputField inputField;
 
     private bool clicked = false;
@@ -19,14 +19,11 @@ public class ActivateStore : MonoBehaviour {
 	
 	public void ClickCoinChoice()
     {
+        if (Time.time - firstClick > clickInterval) clicked = false;
         if (clicked)
         {
-            clicked = false;
-            if (Time.time - firstClick < clickInterval)
-            {
-                firstClick = Time.time;
-                popupInputAmountWindow.SetActive(true);
-            }
+            firstClick = Time.time;
+            popupInputAmountWindow.SetActive(true);
         }
         else
         {
@@ -47,17 +44,25 @@ public class ActivateStore : MonoBehaviour {
 
     public void KeepIntOnly()
     {
-
+        int amount = int.Parse(inputField.text);
+        if (amount > 99)
+            inputField.text = Mathf.Floor(amount/10).ToString();
+        else
+            inputField.text = amount.ToString();
+        
     }
 
     public void ConfirmInput()
     {
-        int contract = int.Parse(inputField.text);
-        string coins = (contract * 10).ToString();
-        purchaseWithCoinsText.text = coins;
-        choiceCoinsAmount.text = coins;
-        choiceContractsAmount.text = inputField.text + " Contract";
-        if (contract > 1) choiceContractsAmount.text += "s";
+        if (inputField.text != "")
+        {
+            int contract = int.Parse(inputField.text);
+            string coins = (contract * 10).ToString();
+            purchaseWithCoinsText.text = coins;
+            choiceCoinsAmount.text = coins;
+            choiceContractsAmount.text = inputField.text + " Contract";
+            if (contract > 1) choiceContractsAmount.text += "s";
+        }
         popupInputAmountWindow.SetActive(false);
     }
 
@@ -68,6 +73,12 @@ public class ActivateStore : MonoBehaviour {
 
     public void Purchase()
     {
-
+        if (purchaseWithCoins.activeSelf)
+        {
+            OnEnterRecruitment.user.coins -= int.Parse(purchaseWithCoinsText.text);
+            playerCoinsAmount.text = OnEnterRecruitment.user.coins.ToString();
+            // Add card packs
+            gameObject.SetActive(false);
+        }
     }
 }

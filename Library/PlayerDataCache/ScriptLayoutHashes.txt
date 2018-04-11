@@ -1,6 +1,8 @@
 WindowsStandalone
 SceneListBegin?
-Assets/_Scenes/LineupBuilder.unity
+Assets/_Scenes/Main.unity
+Assets/_Scenes/Collections.unity
+Assets/_Scenes/Recruitment.unity
 SceneListEnd?
 f2fe92ba3a3df2c3770b04ae57dc980d Assembly-CSharp.dll:.CollectionManager
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
@@ -122,9 +124,11 @@ a586508af6261a5e98fdcf2a8366443f Assembly-CSharp.dll:.CollectionGestureHandler
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
 7b9d928e31df387de57d35358b940fb8 Assembly-CSharp.dll:.BoardManager
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SwitchScenes
 3a8ae517724b1f4a57b9994d9faefda5 Assembly-CSharp.dll:.LineupBoardGestureHandler
 24fe8de9c49d66a45ef33e65a5a92ad8 Assembly-CSharp.dll:.Setup
-c25f89f498b7e2340b0ce0881be2a6cf Assembly-CSharp.dll:.InfoLoader
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.InfoLoader
+0ef96b256a5533cb184ce9f0bd2bb799 Assembly-CSharp.dll:.OnEnterRecruitment
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 60b2bb652410a5867a5ab9a01cd38461 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -153,8 +157,10 @@ bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
+537cf54931c5e0e6d3b6af46c2299d12 Assembly-CSharp.dll:.ActivateStore
 efee94674df25df7ddbd310764f2062a Assembly-CSharp.dll:.LineupsManager
 b618a9825774a1442583f337814156a0 Assembly-CSharp.dll:.PieceAttributes
 b79fd752f695ce5ee46f5430c1bedeee Assembly-CSharp.dll:.LineupBuilder
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 aeef4bae2f65504205e91c4da430c6a7 Assembly-CSharp.dll:.CardInfo
+c25f89f498b7e2340b0ce0881be2a6cf Assembly-CSharp.dll:.OnEnterCollections

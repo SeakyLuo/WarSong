@@ -1,19 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
 public class OnEnterRecruitment : MonoBehaviour, IPointerClickHandler {
 
+    public static UserInfo user;
     public GameObject store, popupInputAmountWindow;
+    public Text playerCoinsAmount;
+
     private Camera canvasCamera;
     private RectTransform rectTransform;
 
 	// Use this for initialization
 	void Start () {
+        user = new CheatAccount();
         canvasCamera = gameObject.GetComponent<Canvas>().worldCamera;
         rectTransform = gameObject.GetComponent<RectTransform>();
+        playerCoinsAmount.text = user.coins.ToString();
     }
 	
     public void BackToMain()
