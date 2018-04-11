@@ -12,7 +12,8 @@ public class SwitchScenes : MonoBehaviour {
 
     public void EnterWar()
     {
-        SceneManager.LoadScene("PlayerMatching");
+        SceneManager.LoadScene("GameMode");
+        //SceneManager.LoadScene("PlayerMatching");
     }
 
     public void EnterRecruitment()

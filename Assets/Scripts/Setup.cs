@@ -8,7 +8,7 @@ public class Setup : MonoBehaviour {
     public static float radius;
     public static float scale;
     public static float gridScale;
-
+    public BoardAttributes boardAttributes;
     public GameObject as1, as2, as3, as4, as5, ac1, ac2, ar1, ah1, ae1, aa1, ag, aa2, ae2, ah2, ar2,
                       es1, es2, es3, es4, es5, ec1, ec2, er1, eh1, ee1, ea1, eg, ea2, ee2, eh2, er2; 
 
@@ -25,10 +25,6 @@ public class Setup : MonoBehaviour {
 
     private void Start()
     {
-        // Lineup lineup = DataSaver.loadData<Lineup>("Lineup");
-        // string jsonData = PlayerPrefs.GetString("Lineup");
-        // Dictionary<Vector2, GameObject> loadedData = JsonUtility.FromJson<Dictionary<Vector2, GameObject>>(jsonData);
-        // foreach (KeyValuePair<Vector2, string> item in lineup.location) Debug.Log(item);
         as1 = Instantiate(Resources.Load<GameObject>("Pieces/Thumbnails/rs"));
         as2 = Instantiate(Resources.Load<GameObject>("Pieces/Thumbnails/rs"));
         as3 = Instantiate(Resources.Load<GameObject>("Pieces/Thumbnails/rs"));
@@ -62,38 +58,38 @@ public class Setup : MonoBehaviour {
         eh2 = Instantiate(Resources.Load<GameObject>("Pieces/Thumbnails/bh"));
         er2 = Instantiate(Resources.Load<GameObject>("Pieces/Thumbnails/br"));
 
-        //SetLocation(as1, BoardInfo.Getasloc1());
-        //SetLocation(as2, BoardInfo.Getasloc2());
-        //SetLocation(as3, BoardInfo.Getasloc3());
-        //SetLocation(as4, BoardInfo.Getasloc4());
-        //SetLocation(as5, BoardInfo.Getasloc5());
-        //SetLocation(ac1, BoardInfo.Getacloc1());
-        //SetLocation(ac2, BoardInfo.Getacloc2());
-        //SetLocation(ar1, BoardInfo.Getarloc1());
-        //SetLocation(ah1, BoardInfo.Getahloc1());
-        //SetLocation(ae1, BoardInfo.Getaeloc1());
-        //SetLocation(aa1, BoardInfo.Getaaloc1());
-        //SetLocation(ag, BoardInfo.Getagloc());
-        //SetLocation(aa2, BoardInfo.Getaaloc2());
-        //SetLocation(ae2, BoardInfo.Getaeloc2());
-        //SetLocation(ah2, BoardInfo.Getahloc2());
-        //SetLocation(ar2, BoardInfo.Getarloc2());
-        //SetLocation(es1, BoardInfo.Getesloc1());
-        //SetLocation(es2, BoardInfo.Getesloc2());
-        //SetLocation(es3, BoardInfo.Getesloc3());
-        //SetLocation(es4, BoardInfo.Getesloc4());
-        //SetLocation(es5, BoardInfo.Getesloc5());
-        //SetLocation(ec1, BoardInfo.Getecloc1());
-        //SetLocation(ec2, BoardInfo.Getecloc2());
-        //SetLocation(er1, BoardInfo.Geterloc1());
-        //SetLocation(eh1, BoardInfo.Getehloc1());
-        //SetLocation(ee1, BoardInfo.Geteeloc1());
-        //SetLocation(ea1, BoardInfo.Getealoc1());
-        //SetLocation(eg, BoardInfo.Getegloc());
-        //SetLocation(ea2, BoardInfo.Getealoc2());
-        //SetLocation(ee2, BoardInfo.Geteeloc2());
-        //SetLocation(eh2, BoardInfo.Getehloc2());
-        //SetLocation(er2, BoardInfo.Geterloc2());
+        SetLocation(as1, boardAttributes.asloc1);
+        SetLocation(as2, boardAttributes.asloc2);
+        SetLocation(as3, boardAttributes.asloc3);
+        SetLocation(as4, boardAttributes.asloc4);
+        SetLocation(as5, boardAttributes.asloc5);
+        SetLocation(ac1, boardAttributes.acloc1);
+        SetLocation(ac2, boardAttributes.acloc2);
+        SetLocation(ar1, boardAttributes.arloc1);
+        SetLocation(ah1, boardAttributes.ahloc1);
+        SetLocation(ae1, boardAttributes.aeloc1);
+        SetLocation(aa1, boardAttributes.aaloc1);
+        SetLocation(ag, boardAttributes.agloc);
+        SetLocation(aa2, boardAttributes.aaloc2);
+        SetLocation(ae2, boardAttributes.aeloc2);
+        SetLocation(ah2, boardAttributes.ahloc2);
+        SetLocation(ar2, boardAttributes.arloc2);
+        SetLocation(es1, boardAttributes.esloc1);
+        SetLocation(es2, boardAttributes.esloc2);
+        SetLocation(es3, boardAttributes.esloc3);
+        SetLocation(es4, boardAttributes.esloc4);
+        SetLocation(es5, boardAttributes.esloc5);
+        SetLocation(ec1, boardAttributes.ecloc1);
+        SetLocation(ec2, boardAttributes.ecloc2);
+        SetLocation(er1, boardAttributes.erloc1);
+        SetLocation(eh1, boardAttributes.ehloc1);
+        SetLocation(ee1, boardAttributes.eeloc1);
+        SetLocation(ea1, boardAttributes.ealoc1);
+        SetLocation(eg, boardAttributes.egloc);
+        SetLocation(ea2, boardAttributes.ealoc2);
+        SetLocation(ee2, boardAttributes.eeloc2);
+        SetLocation(eh2, boardAttributes.ehloc2);
+        SetLocation(er2, boardAttributes.erloc2);
         GameObject[] allies = { as1, as2, as3, as4, as5, ac1, ac2, ar1, ah1, ae1, aa1, ag, aa2, ae2, ah2, ar2 };
         foreach (GameObject obj in allies) obj.tag = "Ally";
         GameObject[] enemies = { es1, es2, es3, es4, es5, ec1, ec2, er1, eh1, ee1, ea1, eg, ea2, ee2, eh2, er2 };
@@ -105,7 +101,6 @@ public class Setup : MonoBehaviour {
 
     public void reactivate(GameObject obj)
     {
-        obj.GetComponent<CardInfo>().SetActive(true);
         obj.SetActive(true);
         active.Add(obj);
         inactive.Remove(obj);
@@ -113,7 +108,6 @@ public class Setup : MonoBehaviour {
 
     public void deactivate(GameObject obj)
     {
-        obj.GetComponent<CardInfo>().SetActive(false);
         obj.SetActive(false);
         active.Remove(obj);
         inactive.Add(obj);
@@ -122,8 +116,8 @@ public class Setup : MonoBehaviour {
 
     public void SetLocation(GameObject obj, Vector2 loc)
     {
-        obj.GetComponent<CardInfo>().SetStartLocation(loc);
-        obj.GetComponent<CardInfo>().SetLocation(loc);
+        obj.GetComponent<PieceInfo>().SetStartLocation(loc);
+        obj.GetComponent<PieceInfo>().SetLocation(loc);
         obj.transform.position = new Vector3(loc.x * scale + radius, obj.transform.localScale.y, loc.y * scale + radius);
         active.Add(obj);
     }

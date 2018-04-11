@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33487041226636932}
   - component: {fileID: 136487391190372812}
   - component: {fileID: 23873920230389310}
-  - component: {fileID: 114326667413166608}
+  - component: {fileID: 114053054488085868}
   m_Layer: 0
   m_Name: rh
   m_TagString: Ally
@@ -84,7 +84,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1025776412498614}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114326667413166608
+--- !u!114 &114053054488085868
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -92,18 +92,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1025776412498614}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a26676edf398b543b95cd6fa5e8bb9f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ebfabef0d6ff5145b1fae93f81c1140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  piece: {fileID: 0}
-  tactic: {fileID: 0}
-  nameText: {fileID: 0}
-  descriptionText: {fileID: 0}
-  costText: {fileID: 0}
-  healthText: {fileID: 0}
-  image: {fileID: 0}
-  HealthImage: {fileID: 0}
-  Background: {fileID: 0}
+  pieceAttributes: {fileID: 11400000, guid: ba6a64014763c9243922b81e56030dd0, type: 2}
 --- !u!136 &136487391190372812
 CapsuleCollider:
   m_ObjectHideFlags: 1

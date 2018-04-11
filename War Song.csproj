@@ -303,6 +303,7 @@
     <Compile Include="Assets\Scripts\Info\BoardInfo.cs" />
     <Compile Include="Assets\Scripts\Info\CardInfo.cs" />
     <Compile Include="Assets\Scripts\Info\InfoLoader.cs" />
+    <Compile Include="Assets\Scripts\Info\PieceInfo.cs" />
     <Compile Include="Assets\Scripts\Info\TacticInfo.cs" />
     <Compile Include="Assets\Scripts\Info\UserInfo.cs" />
     <Compile Include="Assets\Scripts\Lineup.cs" />
@@ -314,6 +315,7 @@
     <Compile Include="Assets\Scripts\Play.cs" />
     <Compile Include="Assets\Scripts\Setup.cs" />
     <Compile Include="Assets\Scripts\SwitchScenes.cs" />
+    <Compile Include="Assets\TemporaryScript.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

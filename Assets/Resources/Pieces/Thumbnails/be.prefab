@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33340475116478716}
   - component: {fileID: 136692108596737130}
   - component: {fileID: 23713937669583928}
-  - component: {fileID: 114719130364946346}
+  - component: {fileID: 114437557123812420}
   m_Layer: 0
   m_Name: be
   m_TagString: Enemy
@@ -84,7 +84,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1314309311254462}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114719130364946346
+--- !u!114 &114437557123812420
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -92,18 +92,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1314309311254462}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a26676edf398b543b95cd6fa5e8bb9f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ebfabef0d6ff5145b1fae93f81c1140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  piece: {fileID: 0}
-  tactic: {fileID: 0}
-  nameText: {fileID: 0}
-  descriptionText: {fileID: 0}
-  costText: {fileID: 0}
-  healthText: {fileID: 0}
-  image: {fileID: 0}
-  HealthImage: {fileID: 0}
-  Background: {fileID: 0}
+  pieceAttributes: {fileID: 11400000, guid: 45b74712e9c5ee849bc526909bfe57e5, type: 2}
 --- !u!136 &136692108596737130
 CapsuleCollider:
   m_ObjectHideFlags: 1

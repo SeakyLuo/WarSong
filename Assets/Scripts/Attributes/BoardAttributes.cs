@@ -1,15 +1,14 @@
-﻿using UnityEngine.UI;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "Attributes", menuName = "Board")]
 public class BoardAttributes : ScriptableObject {
 
     public string boardName;
     public bool available = true;
-    public Sprite selfFieldImage, completeImage;
+    public Sprite allyFieldImage, completeImage;
     public float boardWidth = 9f;
-    public float boardheight = 10f;
-    public float SelfField = 4f;
+    public float boardHeight = 10f;
+    public float allyField = 4f;
     public Vector2 palaceDownLeft = new Vector2(3, 0);
     public Vector2 palaceUpperRight = new Vector2(5, 2);
 
