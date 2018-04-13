@@ -11,11 +11,6 @@ public class ActivateStore : MonoBehaviour {
 
     private bool clicked = false;
     private float firstClick = 0f, clickInterval = 1f;
-
-    // Use this for initialization
-    void Start () {
-
-    }
 	
 	public void ClickCoinChoice()
     {
@@ -42,16 +37,6 @@ public class ActivateStore : MonoBehaviour {
         purchaseWithMoney.GetComponent<Text>().text = amount.text;
     }
 
-    public void KeepIntOnly()
-    {
-        int amount = int.Parse(inputField.text);
-        if (amount > 99)
-            inputField.text = Mathf.Floor(amount/10).ToString();
-        else
-            inputField.text = amount.ToString();
-        
-    }
-
     public void ConfirmInput()
     {
         if (inputField.text != "")
@@ -75,10 +60,10 @@ public class ActivateStore : MonoBehaviour {
     {
         if (purchaseWithCoins.activeSelf)
         {
-            OnEnterRecruitment.user.coins -= int.Parse(purchaseWithCoinsText.text);
-            playerCoinsAmount.text = OnEnterRecruitment.user.coins.ToString();
+            InfoLoader.user.coins -= int.Parse(purchaseWithCoinsText.text);
+            playerCoinsAmount.text = InfoLoader.user.coins.ToString();
             // Add card packs
-            gameObject.SetActive(false);
+            // Purchase Successful
         }
     }
 }

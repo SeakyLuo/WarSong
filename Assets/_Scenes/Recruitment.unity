@@ -1513,7 +1513,7 @@ MonoBehaviour:
   m_LineType: 0
   m_HideMobileInput: 0
   m_CharacterValidation: 1
-  m_CharacterLimit: 0
+  m_CharacterLimit: 2
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls: []
@@ -1521,18 +1521,7 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1831672162}
-        m_MethodName: KeepIntOnly
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.InputField+OnChangeEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
@@ -4391,12 +4380,12 @@ Prefab:
     - target: {fileID: 224444948608820696, guid: 2df586e866a19dd45a7e98e98fceeccb,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 836.9
+      value: 835
       objectReference: {fileID: 0}
     - target: {fileID: 224444948608820696, guid: 2df586e866a19dd45a7e98e98fceeccb,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 497.9
+      value: 495
       objectReference: {fileID: 0}
     - target: {fileID: 224444948608820696, guid: 2df586e866a19dd45a7e98e98fceeccb,
         type: 2}

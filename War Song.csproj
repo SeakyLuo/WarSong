@@ -292,9 +292,10 @@
     <Compile Include="Assets\Scripts\Attributes\TacticAttributes.cs" />
     <Compile Include="Assets\Scripts\AutoCreate.cs" />
     <Compile Include="Assets\Scripts\BoardManager.cs" />
-    <Compile Include="Assets\Scripts\Collection.cs" />
     <Compile Include="Assets\Scripts\CollectionManager.cs" />
-    <Compile Include="Assets\Scripts\Database.cs" />
+    <Compile Include="Assets\Scripts\DataType\Collection.cs" />
+    <Compile Include="Assets\Scripts\DataType\Database.cs" />
+    <Compile Include="Assets\Scripts\DataType\Lineup.cs" />
     <Compile Include="Assets\Scripts\GestureHandler\CollectionGestureHandler.cs" />
     <Compile Include="Assets\Scripts\GestureHandler\LineupBoardGestureHandler.cs" />
     <Compile Include="Assets\Scripts\GestureHandler\MouseOverPiece.cs" />
@@ -305,8 +306,8 @@
     <Compile Include="Assets\Scripts\Info\InfoLoader.cs" />
     <Compile Include="Assets\Scripts\Info\PieceInfo.cs" />
     <Compile Include="Assets\Scripts\Info\TacticInfo.cs" />
+    <Compile Include="Assets\Scripts\Info\Trigger.cs" />
     <Compile Include="Assets\Scripts\Info\UserInfo.cs" />
-    <Compile Include="Assets\Scripts\Lineup.cs" />
     <Compile Include="Assets\Scripts\LineupBuilder.cs" />
     <Compile Include="Assets\Scripts\LineupsManager.cs" />
     <Compile Include="Assets\Scripts\MovementController.cs" />
@@ -315,7 +316,7 @@
     <Compile Include="Assets\Scripts\Play.cs" />
     <Compile Include="Assets\Scripts\Setup.cs" />
     <Compile Include="Assets\Scripts\SwitchScenes.cs" />
-    <Compile Include="Assets\TemporaryScript.cs" />
+    <Compile Include="Assets\Scripts\TemporaryScript.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

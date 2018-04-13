@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 222645821332722702}
   - component: {fileID: 114342859537913492}
   m_Layer: 5
-  m_Name: CoinNumber
+  m_Name: CoinsAmount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -202,7 +202,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 280, y: -510}
+  m_AnchoredPosition: {x: 835, y: 495}
   m_SizeDelta: {x: 210, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224645302627756416

@@ -16,7 +16,7 @@ public class OnEnterRecruitment : MonoBehaviour, IPointerClickHandler {
 
 	// Use this for initialization
 	void Start () {
-        user = new CheatAccount();
+        user = InfoLoader.user;
         canvasCamera = gameObject.GetComponent<Canvas>().worldCamera;
         rectTransform = gameObject.GetComponent<RectTransform>();
         playerCoinsAmount.text = user.coins.ToString();
