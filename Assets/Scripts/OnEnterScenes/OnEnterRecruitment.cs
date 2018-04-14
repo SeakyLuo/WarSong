@@ -8,11 +8,12 @@ using UnityEngine.EventSystems;
 public class OnEnterRecruitment : MonoBehaviour, IPointerClickHandler {
 
     public static UserInfo user;
-    public GameObject store, popupInputAmountWindow;
+    public GameObject contractStore, coinStore, popupInputAmountWindow;
     public Text playerCoinsAmount;
 
     private Camera canvasCamera;
     private RectTransform rectTransform;
+    private List<GameObject> stores;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +21,7 @@ public class OnEnterRecruitment : MonoBehaviour, IPointerClickHandler {
         canvasCamera = gameObject.GetComponent<Canvas>().worldCamera;
         rectTransform = gameObject.GetComponent<RectTransform>();
         playerCoinsAmount.text = user.coins.ToString();
+        stores = new List<GameObject>() { contractStore, coinStore };
     }
 	
     public void BackToMain()
@@ -27,22 +29,31 @@ public class OnEnterRecruitment : MonoBehaviour, IPointerClickHandler {
         SceneManager.LoadScene("Main");
     }
 
-    public void OpenStoreWindow()
+    public void OpenContractStoreWindow()
     {
-        store.SetActive(true);
+        contractStore.SetActive(true);
+    }
+
+    public void OpenCoinStoreWindow()
+    {
+        coinStore.SetActive(true);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (store.activeSelf)
+        foreach(GameObject store in stores)
         {
-            Vector3 mouseposition = AdjustedMousePosition();
-            Rect rect = store.GetComponent<RectTransform>().rect;
-            if (-rect.width / 2 > mouseposition.x || mouseposition.x > rect.width / 2 || -rect.height / 2 > mouseposition.y || mouseposition.y > rect.height / 2)
+            if (store.activeSelf)
             {
-                store.SetActive(false);
+                Vector3 mouseposition = AdjustedMousePosition();
+                Rect rect = store.GetComponent<RectTransform>().rect;
+                if (-rect.width / 2 > mouseposition.x || mouseposition.x > rect.width / 2 || -rect.height / 2 > mouseposition.y || mouseposition.y > rect.height / 2)
+                {
+                    store.SetActive(false);
+                }
+                break;
             }
-        }            
+        }
     }
 
     private Vector3 AdjustedMousePosition()

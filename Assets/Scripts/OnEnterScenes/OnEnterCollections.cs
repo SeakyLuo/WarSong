@@ -5,13 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class OnEnterCollections : MonoBehaviour {
 
-    //public static UserInfo user;
     public GameObject selectedBoardPanel, createLineupPanel;
-
-    // Use this for initialization
-    void Start () {
-        //user = new CheatAccount();
-    }
 
     public void Back()
     {

@@ -55,7 +55,6 @@ public class CollectionManager : MonoBehaviour {
             tabs[i] = GameObject.Find("Tabs/" + types[i]);
             tabs[i].SetActive(true);
         }
-        GameObject.Find("CoinNumber").GetComponent<Text>().text = coins.ToString();
         LoadUserCollections();
         foreach (Collection collection in displayCollections)
             originalDict[collection.type].Add(collection);
