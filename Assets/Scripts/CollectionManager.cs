@@ -22,8 +22,7 @@ public class CollectionManager : MonoBehaviour {
     private List<Collection> displayCollections, searchedCollections;
     private Dictionary<string, List<Collection>> collectionDict = new Dictionary<string, List<Collection>>();
     private Dictionary<string, List<Collection>> originalDict = new Dictionary<string, List<Collection>>();
-    private int coins,        
-        pageNumber = 1, 
+    private int pageNumber = 1, 
         searchByGoldValue = -1, 
         searchByOreValue = -1, 
         searchByHealthValue = -1;
@@ -35,7 +34,6 @@ public class CollectionManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         user = InfoLoader.user;
-        coins = user.coins;
         cards = new GameObject[cardsPerPage];
         counters = new GameObject[cardsPerPage];
         foreach (string type in types)
