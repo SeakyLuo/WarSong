@@ -2,7 +2,7 @@
 
 [ExecuteInEditMode]
 public class AutoCreate : MonoBehaviour {
-    public GameObject obj;
+    public GameObject copy;
     public int row;
     public int column;
 
@@ -12,8 +12,9 @@ public class AutoCreate : MonoBehaviour {
         {
             for (int y = 0; y < column; y++)
             {
-                Instantiate(obj).name = y.ToString() + x.ToString();
-                // obj.transform.position = new Vector3(x, 0, y);
+                GameObject obj = Instantiate(copy);
+                obj.name = y.ToString() + x.ToString();
+                obj.transform.position = new Vector3(y, x, 0);
             }
         }
 

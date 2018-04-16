@@ -293,6 +293,7 @@
     <Compile Include="Assets\Scripts\Attributes\TacticAttributes.cs" />
     <Compile Include="Assets\Scripts\AutoCreate.cs" />
     <Compile Include="Assets\Scripts\BoardManager.cs" />
+    <Compile Include="Assets\Scripts\BoardSetup.cs" />
     <Compile Include="Assets\Scripts\CollectionManager.cs" />
     <Compile Include="Assets\Scripts\ContractsManager.cs" />
     <Compile Include="Assets\Scripts\DataType\Collection.cs" />
@@ -306,6 +307,7 @@
     <Compile Include="Assets\Scripts\Info\BoardInfo.cs" />
     <Compile Include="Assets\Scripts\Info\CardInfo.cs" />
     <Compile Include="Assets\Scripts\Info\ContractInfo.cs" />
+    <Compile Include="Assets\Scripts\Info\GameInfo.cs" />
     <Compile Include="Assets\Scripts\Info\InfoLoader.cs" />
     <Compile Include="Assets\Scripts\Info\PieceInfo.cs" />
     <Compile Include="Assets\Scripts\Info\TacticInfo.cs" />
@@ -315,12 +317,11 @@
     <Compile Include="Assets\Scripts\LineupsManager.cs" />
     <Compile Include="Assets\Scripts\MovementController.cs" />
     <Compile Include="Assets\Scripts\OnEnterScenes\OnEnterCollections.cs" />
+    <Compile Include="Assets\Scripts\OnEnterScenes\OnEnterGame.cs" />
     <Compile Include="Assets\Scripts\OnEnterScenes\OnEnterPlayMatching.cs" />
     <Compile Include="Assets\Scripts\OnEnterScenes\OnEnterRecruitment.cs" />
     <Compile Include="Assets\Scripts\OnEnterScenes\SwitchScenes.cs" />
-    <Compile Include="Assets\Scripts\Play.cs" />
     <Compile Include="Assets\Scripts\Setup.cs" />
-    <Compile Include="Assets\Scripts\TemporaryScript.cs" />
     <Compile Include="Assets\Scripts\UserContract.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

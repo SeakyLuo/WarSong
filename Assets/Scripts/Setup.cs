@@ -118,7 +118,7 @@ public class Setup : MonoBehaviour {
     {
         obj.GetComponent<PieceInfo>().SetStartLocation(loc);
         obj.GetComponent<PieceInfo>().SetLocation(loc);
-        obj.transform.position = new Vector3(loc.x * scale + radius, obj.transform.localScale.y, loc.y * scale + radius);
+        obj.transform.position = new Vector3(loc.x * scale + radius, loc.y * scale + radius, obj.transform.localScale.y);
         active.Add(obj);
     }
 

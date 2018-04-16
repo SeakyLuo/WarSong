@@ -49,7 +49,7 @@ public class OnEnterPlayMatching : MonoBehaviour {
 
     public void Match()
     {
-        // Match With 
+        // Upload Lineup Info to the server and match according to the board
         LaunchWar();
     }
 
