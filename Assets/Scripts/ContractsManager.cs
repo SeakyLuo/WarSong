@@ -52,8 +52,6 @@ public class ContractsManager : MonoBehaviour {
 
     public void ContractTakesEffect(GameObject contract)
     {
-        Transform counter = contract.transform.Find("Count");
-        Text countText = counter.Find("Text").GetComponent<Text>();
         int count = --InfoLoader.user.contracts[contract.name];
         SetContract(contract, count);
         // Show Cards

@@ -23,16 +23,20 @@ public class LineupBuilder : MonoBehaviour {
     private int current_tactics = 0, totalOreCost = 0, totalGoldCost = 0;
     private Vector3 mousePosition;
 
-    // Use this for initialization
-    void Start () {
+    private void Awake()
+    {
+        tacticObjs = GameObject.FindGameObjectsWithTag("Tactic");
+        foreach (GameObject obj in tacticObjs) obj.SetActive(false);
+        lineup.lineupName = "Custom Lineup";
+    }
+
+    void Start()
+    {
         collectionManager = collections.GetComponent<CollectionManager>();
         lineupsManager = myLineup.GetComponent<LineupsManager>();
         board = gameObject.transform.Find("BoardPanel/Board");
         boardObject = board.Find("BoardObject(Clone)/");
         boardInfo = boardObject.GetComponent<BoardInfo>();
-        tacticObjs = GameObject.FindGameObjectsWithTag("Tactic");
-        foreach (GameObject obj in tacticObjs) obj.SetActive(false);
-        lineup.lineupName = "Custom Lineup";        
     }
 
     public void AddPiece(CardInfo cardInfo, Vector2 loc)
@@ -85,28 +89,27 @@ public class LineupBuilder : MonoBehaviour {
 
     private void TacticAdder(TacticAttributes attributes)
     {
-        int index = 0;
         totalOreCost += attributes.oreCost;
         totalGoldCost += attributes.goldCost;
+        int index = 0;
         if (current_tactics == 0 || LessThan(attributes, tacticAttributes[0])) index = 0;
         else if (GreaterThan(attributes, tacticAttributes[current_tactics - 1])) index = current_tactics;
         else
         {
-            for (int i = 1; i < current_tactics; i++)
+            for (int i = 0; i < current_tactics - 1; i++)
             {
                 if (GreaterThan(attributes, tacticAttributes[i]) && LessThan(attributes, tacticAttributes[i + 1]))
                 {
-                    index = i;
+                    index = i + 1;
                     break;
                 }
             }
         }
-        for (int i = index; i < current_tactics; i++)
-            tacticObjs[i + 1].GetComponent<TacticInfo>().SetAttributes(tacticAttributes[i]);
-        tacticObjs[index].GetComponent<TacticInfo>().SetAttributes(attributes);
         lineup.tactics.Insert(index, attributes.Name);
         tacticAttributes.Insert(index, attributes);
         tacticObjs[current_tactics++].SetActive(true);
+        for (int i = index; i < current_tactics; i++)
+            tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(tacticAttributes[i]);
         SetTexts();
     }
 
@@ -142,6 +145,7 @@ public class LineupBuilder : MonoBehaviour {
 
     private bool LessThan(TacticAttributes attributes1, TacticAttributes attributes2)
     {
+        // attributes1 less than attributes2
         return attributes1.oreCost < attributes2.oreCost ||
             (attributes1.oreCost == attributes2.oreCost && attributes1.goldCost < attributes2.goldCost) ||
             (attributes1.oreCost == attributes2.oreCost && attributes1.goldCost == attributes2.goldCost && attributes1.Name.CompareTo(attributes2.Name) < 0);
@@ -149,7 +153,7 @@ public class LineupBuilder : MonoBehaviour {
 
     private bool GreaterThan(TacticAttributes attributes1, TacticAttributes attributes2)
     {
-        // Because can't be the same.
+        // Because tactics can't be the same.
         return !LessThan(attributes1, attributes2);
     }
 
@@ -193,6 +197,7 @@ public class LineupBuilder : MonoBehaviour {
     {
         lineup.cardLocations = boardInfo.cardLocations;
         lineup.boardName = boardInfo.attributes.boardName;
+        lineup.complete = (lineup.tactics.Count == Lineup.tacticLimit);
         lineupsManager.AddLineup(lineup);
         // upload to the server
         ResetLineup();

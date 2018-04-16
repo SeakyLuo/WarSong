@@ -16,7 +16,6 @@ public class CollectionManager : MonoBehaviour {
     public Text TitleText, pageText;
     public InputField searchByInput;
     public Dropdown searchByGold, searchByOre, searchByHealth;
-    public UserInfo user;
 
     private static string[] types = Collection.types;
     private List<Collection> displayCollections, searchedCollections;
@@ -33,7 +32,6 @@ public class CollectionManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        user = InfoLoader.user;
         cards = new GameObject[cardsPerPage];
         counters = new GameObject[cardsPerPage];
         foreach (string type in types)
@@ -75,7 +73,7 @@ public class CollectionManager : MonoBehaviour {
         if (!found)
         {
             collection.count = 1;
-            if(!collection.name.StartsWith("Standard ")) user.collections.Add(collection);
+            if(!collection.name.StartsWith("Standard ")) InfoLoader.user.collections.Add(collection);
             collectionDict[collection.type].Add(collection);
             SetPageLimits();
         }
@@ -95,7 +93,7 @@ public class CollectionManager : MonoBehaviour {
         if (found.IsEmpty()) return false;
         if (found.count == 0)
         {
-            user.collections.Remove(found);
+            InfoLoader.user.collections.Remove(found);
             displayCollections.Remove(found);
             collectionDict[found.type].Remove(found);
             SetPageLimits();
@@ -112,7 +110,7 @@ public class CollectionManager : MonoBehaviour {
 
     private void LoadUserCollections()
     {
-        displayCollections = user.collections;
+        displayCollections = InfoLoader.user.collections;
         LoadCollections();
     }
 
@@ -297,7 +295,7 @@ public class CollectionManager : MonoBehaviour {
 
     public void Search(string word = "", int gold = -1, int ore = -1, int health = -1)
     {
-        searchedCollections = user.collections;
+        searchedCollections = InfoLoader.user.collections;
         if (word == "" && gold == -1 && ore == -1 && health == -1)
         {
             word = searchByKeyword;
@@ -370,7 +368,7 @@ public class CollectionManager : MonoBehaviour {
 
     public bool InCollection(string name)
     {
-        foreach (Collection collection in user.collections)
+        foreach (Collection collection in InfoLoader.user.collections)
             if (collection.name == name)
                 return true;
         return false;

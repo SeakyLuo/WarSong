@@ -26,7 +26,4 @@ public class PieceInfo : MonoBehaviour {
     {
         startLocation = loc;
     }
-
-
-
 }

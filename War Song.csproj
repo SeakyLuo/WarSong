@@ -13,14 +13,12 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectGenerator>VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>2017.3.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -317,10 +315,11 @@
     <Compile Include="Assets\Scripts\LineupsManager.cs" />
     <Compile Include="Assets\Scripts\MovementController.cs" />
     <Compile Include="Assets\Scripts\OnEnterScenes\OnEnterCollections.cs" />
+    <Compile Include="Assets\Scripts\OnEnterScenes\OnEnterPlayMatching.cs" />
     <Compile Include="Assets\Scripts\OnEnterScenes\OnEnterRecruitment.cs" />
+    <Compile Include="Assets\Scripts\OnEnterScenes\SwitchScenes.cs" />
     <Compile Include="Assets\Scripts\Play.cs" />
     <Compile Include="Assets\Scripts\Setup.cs" />
-    <Compile Include="Assets\Scripts\SwitchScenes.cs" />
     <Compile Include="Assets\Scripts\TemporaryScript.cs" />
     <Compile Include="Assets\Scripts\UserContract.cs" />
   </ItemGroup>

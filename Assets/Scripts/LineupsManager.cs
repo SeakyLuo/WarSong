@@ -8,7 +8,6 @@ public class LineupsManager : MonoBehaviour {
     public GameObject createLineupButton, selectBoardPanel, collectionPanel, createLineupPanel;
     public Text myLineups;
     public static int lineupsLimit = 9;
-    public UserInfo user;
     public GameObject[] lineupObjects = new GameObject[lineupsLimit];
 
     private int lineupsCount = 0,
@@ -19,14 +18,13 @@ public class LineupsManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        user = InfoLoader.user;
-        lineupsCount = user.lineups.Count;
+        lineupsCount = InfoLoader.user.lineups.Count;
         if (lineupsCount == lineupsLimit) createLineupButton.SetActive(false);
         for (int i = 0; i < lineupsLimit; i++)
         {
             if (i < lineupsCount)
             {                
-                lineupObjects[i].GetComponentInChildren<Text>().text = user.lineups[i].lineupName;
+                lineupObjects[i].GetComponentInChildren<Text>().text = InfoLoader.user.lineups[i].lineupName;
                 // Assign Data
             }
             else lineupObjects[i].SetActive(false);
@@ -44,16 +42,16 @@ public class LineupsManager : MonoBehaviour {
             if (lineup.lineupName == CUSTOMLINEUP)
             {
                 int customLineupCount = 1;
-                foreach (Lineup lu in user.lineups)
-                    if (lu.lineupName.StartsWith(CUSTOMLINEUP) && lu.boardName == lineup.boardName)
+                foreach (Lineup l in InfoLoader.user.lineups)
+                    if (l.lineupName.StartsWith(CUSTOMLINEUP) && l.boardName == lineup.boardName)
                     {
-                        if (lu.lineupName != CUSTOMLINEUP && lu.lineupName != CUSTOMLINEUP + customLineupCount.ToString())
+                        if (l.lineupName != CUSTOMLINEUP && l.lineupName != CUSTOMLINEUP + customLineupCount.ToString())
                             break;
                         customLineupCount++;
                         lineup.lineupName = CUSTOMLINEUP + customLineupCount.ToString();
                     }
             }
-            user.lineups.Add(lineup);
+            InfoLoader.user.lineups.Add(lineup);
             lineupObjects[lineupsCount].SetActive(true);
             lineupObjects[lineupsCount++].GetComponentInChildren<Text>().text = lineup.lineupName;
             myLineups.text = "My Lineups\n" + lineupsCount.ToString() + "/9";
@@ -62,21 +60,22 @@ public class LineupsManager : MonoBehaviour {
         }
         else
         {
-            user.lineups[modifyLineup] = lineup;
+            InfoLoader.user.lineups[modifyLineup] = lineup;
             lineupObjects[modifyLineup].GetComponentInChildren<Text>().text = lineup.lineupName;
             modifyLineup = -1;
-        }          
+        }
     }
 
     public void DeleteLineup()
     {
         // bug
         if (modifyLineup != -1)
-        {            
-            user.lineups.RemoveAt(modifyLineup);
+        {
+            if (InfoLoader.user.lastLineupSelected == modifyLineup) InfoLoader.user.lastLineupSelected = -1;
+            InfoLoader.user.lineups.RemoveAt(modifyLineup);
             lineupObjects[--lineupsCount].SetActive(false);
             for (int i = modifyLineup; i < lineupsCount; i++)
-                lineupObjects[i].GetComponentInChildren<Text>().text = user.lineups[i].lineupName;
+                lineupObjects[i].GetComponentInChildren<Text>().text = InfoLoader.user.lineups[i].lineupName;
             myLineups.text = "My Lineups\n" + lineupsCount.ToString() + "/9";
             modifyLineup = -1;
         }       
@@ -90,10 +89,10 @@ public class LineupsManager : MonoBehaviour {
 
     public void OpenLineup(int number)
     {
-        modifyLineup = number;
+        modifyLineup = number;        
+        boardManager.LoadBoard(InfoLoader.user.lineups[number]);
         createLineupPanel.SetActive(true);
-        boardManager.LoadBoard(user.lineups[number]);
-        lineupBuilder.SetLineup(user.lineups[number]);
+        lineupBuilder.SetLineup(InfoLoader.user.lineups[number]);
     }
 
 }

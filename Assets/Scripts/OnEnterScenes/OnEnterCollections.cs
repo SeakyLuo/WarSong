@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class OnEnterCollections : MonoBehaviour {
 
-    public GameObject selectedBoardPanel, createLineupPanel;
+    public GameObject selectBoardPanel, createLineupPanel;
 
     public void Back()
     {
@@ -13,7 +13,7 @@ public class OnEnterCollections : MonoBehaviour {
         {
             Destroy(createLineupPanel.transform.Find("BoardPanel/Board/BoardObject(Clone)").gameObject);
             createLineupPanel.SetActive(false);
-            selectedBoardPanel.SetActive(true);
+            selectBoardPanel.SetActive(true);
         }
         else SceneManager.LoadScene("Main");
     }

@@ -6,8 +6,9 @@ public class Lineup
 {
     public Dictionary<Vector2, Collection> cardLocations;
     public List<string> tactics;
-    public string boardName;
-    public string lineupName;
+    public string boardName, lineupName;
+    public bool complete;
+    public static int tacticLimit = 10;
 
     public Lineup()
     {

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class BoardManager : MonoBehaviour {
 
     public GameObject nextBoardButton, previousBoardButton, confirmButton, preferButton, createLineupButton,
-        selectBoardPanel, createLineupPanel, collectionPanel, board;
+        createLineupPanel, collectionPanel, board;
     public Text boardName;
     public Image boardImage;
     public BoardAttributes standardBoardAttributes;
@@ -21,6 +21,7 @@ public class BoardManager : MonoBehaviour {
         boardAttributes = InfoLoader.boards;
         collectionManager = collectionPanel.GetComponent<CollectionManager>();
         DisplayBoardSelectionInterface();
+        gameObject.SetActive(false);
     }
 
     public void NextBoard()
@@ -57,7 +58,7 @@ public class BoardManager : MonoBehaviour {
 
     public void ConfirmBoardSelection()
     {
-        selectBoardPanel.SetActive(false);
+        gameObject.SetActive(false);
         LoadBoard(boardAttributes[currentBoard]);
     }
 
@@ -77,11 +78,11 @@ public class BoardManager : MonoBehaviour {
         loadedBoard.GetComponent<BoardInfo>().SetAttributes(attributes, newLocations);
     }
 
-    public void ReturnToCollection()
+    public void BackToCollection()
     {
         collectionManager.SetCardsPerPage(8);
         collectionManager.ShowCurrentPage();
-        selectBoardPanel.SetActive(false);
+        gameObject.SetActive(false);
         createLineupButton.SetActive(true);
     }
 
