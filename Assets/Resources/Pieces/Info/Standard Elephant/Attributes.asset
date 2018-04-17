@@ -16,4 +16,4 @@ MonoBehaviour:
   description: None
   oreCost: 0
   health: 0
-  image: {fileID: 21300000, guid: 430723cbb342b69479b6b8572547daa7, type: 3}
+  image: {fileID: 21300000, guid: 6cf7f4ac31f7d1746850de262acbdbdd, type: 3}

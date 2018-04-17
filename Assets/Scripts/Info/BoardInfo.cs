@@ -6,18 +6,15 @@ using UnityEngine.UI;
 public class BoardInfo : MonoBehaviour
 {
     public BoardAttributes attributes;
-    public Dictionary<Vector2, Collection> cardLocations;
-    public Dictionary<string, PieceAttributes> attributesDict;
-    public Dictionary<string, List<Vector2>> typeLocations;
-    public Dictionary<string, string> locationType;
-    public Dictionary<Vector2, Collection> standardLocations;
-    public static Dictionary<string, PieceAttributes> standardAttributes;
-
-    public PieceAttributes standardGeneral, standardAdvisor, standardElephant, standardHorse, standardChariot, standardCannon, standardSoldier;
+    public Dictionary<Vector2Int, Collection> cardLocations = new Dictionary<Vector2Int, Collection>();
+    public Dictionary<string, PieceAttributes> attributesDict = new Dictionary<string, PieceAttributes>();
+    public Dictionary<string, List<Vector2Int>> typeLocations = new Dictionary<string, List<Vector2Int>>();
+    public Dictionary<string, string> locationType = new Dictionary<string, string>();
+    public Dictionary<Vector2Int, Collection> standardLocations = new Dictionary<Vector2Int, Collection>();
 
     private void Awake()
     {
-        standardLocations = new Dictionary<Vector2, Collection>
+        standardLocations = new Dictionary<Vector2Int, Collection>
         {
             {attributes.agloc, Collection.General },
             {attributes.aaloc1, Collection.Advisor },{attributes.aaloc2, Collection.Advisor },
@@ -28,16 +25,6 @@ public class BoardInfo : MonoBehaviour
             {attributes.asloc1, Collection.Soldier },{attributes.asloc2, Collection.Soldier },
             {attributes.asloc3, Collection.Soldier },{attributes.asloc4, Collection.Soldier },
             {attributes.asloc5, Collection.Soldier }
-        };
-        standardAttributes = new Dictionary<string, PieceAttributes>
-        {
-            {"Standard General", standardGeneral },
-            {"Standard Advisor", standardAdvisor },
-            {"Standard Elephant", standardElephant },
-            {"Standard Horse", standardHorse },
-            {"Standard Chariot", standardChariot },
-            {"Standard Cannon", standardCannon },
-            {"Standard Soldier", standardSoldier }
         };
         DataSetup();
         GameObject.Find("Collections").GetComponent<CollectionGestureHandler>().SetBoardInfo(this);
@@ -50,12 +37,12 @@ public class BoardInfo : MonoBehaviour
         SetAttributes(attributes);
     }
 
-    public void SetAttributes(string boardName, Dictionary<Vector2, Collection> newLocations)
+    public void SetAttributes(string boardName, Dictionary<Vector2Int, Collection> newLocations)
     {
         SetAttributes(Resources.Load<BoardAttributes>("Board/Info/" + boardName + "/Attributes"), newLocations);
     }
 
-    public void SetAttributes(BoardAttributes board, Dictionary<Vector2, Collection> newLocations = null)
+    public void SetAttributes(BoardAttributes board, Dictionary<Vector2Int, Collection> newLocations = null)
     {
         attributes = board;
         DataSetup(newLocations);
@@ -70,30 +57,30 @@ public class BoardInfo : MonoBehaviour
         }
     }
 
-    public void SetStandardCard(string type, Vector2 location)
+    public void SetStandardCard(string type, Vector2Int location)
     {
         SetCard(Collection.standardCollectionDict[type], location);
     }
 
-    public void SetCard(Collection collection, Vector2 location)
+    public void SetCard(Collection collection, Vector2Int location)
     {
         collection.count = 1;
         cardLocations[location] = collection;
-        string locName = Vector2ToString(location);
+        string locName = Vec2ToString(location);
         attributesDict[locName] = LoadPieceAttributes(collection.name);
         attributesDict[locName].health = collection.health;
     }
 
-    public void SetCard(PieceAttributes attributes, Vector2 location)
+    public void SetCard(PieceAttributes attributes, Vector2Int location)
     {
         cardLocations[location] = new Collection(attributes.Name, attributes.type, 1, attributes.health);
-        attributesDict[Vector2ToString(location)] = attributes;
+        attributesDict[Vec2ToString(location)] = attributes;
     }
 
-    private void DataSetup(Dictionary<Vector2, Collection> newLocations = null)
+    private void DataSetup(Dictionary<Vector2Int, Collection> newLocations = null)
     {
         if (newLocations == null) newLocations = standardLocations;
-        cardLocations = new Dictionary<Vector2, Collection>
+        cardLocations = new Dictionary<Vector2Int, Collection>
         {
             { attributes.agloc, newLocations[attributes.agloc] },
             { attributes.aaloc1,newLocations[attributes.aaloc1] },{ attributes.aaloc2,newLocations[attributes.aaloc2] },
@@ -106,51 +93,51 @@ public class BoardInfo : MonoBehaviour
         };
         attributesDict = new Dictionary<string, PieceAttributes>
         {
-            { Vector2ToString(attributes.agloc), LoadPieceAttributes(newLocations[attributes.agloc].name) },
-            { Vector2ToString(attributes.aaloc1), LoadPieceAttributes(newLocations[attributes.aaloc1].name) },
-            { Vector2ToString(attributes.aaloc2), LoadPieceAttributes(newLocations[attributes.aaloc2].name) },
-            { Vector2ToString(attributes.aeloc1), LoadPieceAttributes(newLocations[attributes.aeloc1].name) },
-            { Vector2ToString(attributes.aeloc2), LoadPieceAttributes(newLocations[attributes.aeloc2].name) },
-            { Vector2ToString(attributes.ahloc1), LoadPieceAttributes(newLocations[attributes.ahloc1].name) },
-            { Vector2ToString(attributes.ahloc2), LoadPieceAttributes(newLocations[attributes.ahloc2].name) },
-            { Vector2ToString(attributes.arloc1), LoadPieceAttributes(newLocations[attributes.arloc1].name) },
-            { Vector2ToString(attributes.arloc2), LoadPieceAttributes(newLocations[attributes.arloc2].name) },
-            { Vector2ToString(attributes.acloc1), LoadPieceAttributes(newLocations[attributes.acloc1].name) },
-            { Vector2ToString(attributes.acloc2), LoadPieceAttributes(newLocations[attributes.acloc2].name) },
-            { Vector2ToString(attributes.asloc1), LoadPieceAttributes(newLocations[attributes.asloc1].name) },
-            { Vector2ToString(attributes.asloc2), LoadPieceAttributes(newLocations[attributes.asloc2].name) },
-            { Vector2ToString(attributes.asloc3), LoadPieceAttributes(newLocations[attributes.asloc3].name) },
-            { Vector2ToString(attributes.asloc4), LoadPieceAttributes(newLocations[attributes.asloc4].name) },
-            { Vector2ToString(attributes.asloc5), LoadPieceAttributes(newLocations[attributes.asloc5].name) }
+            { Vec2ToString(attributes.agloc), LoadPieceAttributes(newLocations[attributes.agloc].name) },
+            { Vec2ToString(attributes.aaloc1), LoadPieceAttributes(newLocations[attributes.aaloc1].name) },
+            { Vec2ToString(attributes.aaloc2), LoadPieceAttributes(newLocations[attributes.aaloc2].name) },
+            { Vec2ToString(attributes.aeloc1), LoadPieceAttributes(newLocations[attributes.aeloc1].name) },
+            { Vec2ToString(attributes.aeloc2), LoadPieceAttributes(newLocations[attributes.aeloc2].name) },
+            { Vec2ToString(attributes.ahloc1), LoadPieceAttributes(newLocations[attributes.ahloc1].name) },
+            { Vec2ToString(attributes.ahloc2), LoadPieceAttributes(newLocations[attributes.ahloc2].name) },
+            { Vec2ToString(attributes.arloc1), LoadPieceAttributes(newLocations[attributes.arloc1].name) },
+            { Vec2ToString(attributes.arloc2), LoadPieceAttributes(newLocations[attributes.arloc2].name) },
+            { Vec2ToString(attributes.acloc1), LoadPieceAttributes(newLocations[attributes.acloc1].name) },
+            { Vec2ToString(attributes.acloc2), LoadPieceAttributes(newLocations[attributes.acloc2].name) },
+            { Vec2ToString(attributes.asloc1), LoadPieceAttributes(newLocations[attributes.asloc1].name) },
+            { Vec2ToString(attributes.asloc2), LoadPieceAttributes(newLocations[attributes.asloc2].name) },
+            { Vec2ToString(attributes.asloc3), LoadPieceAttributes(newLocations[attributes.asloc3].name) },
+            { Vec2ToString(attributes.asloc4), LoadPieceAttributes(newLocations[attributes.asloc4].name) },
+            { Vec2ToString(attributes.asloc5), LoadPieceAttributes(newLocations[attributes.asloc5].name) }
         };
-        typeLocations = new Dictionary<string, List<Vector2>>
+        typeLocations = new Dictionary<string, List<Vector2Int>>
         {
-            { "General", new List <Vector2>{ attributes.agloc } },
-            { "Advisor", new List<Vector2>{ attributes.aaloc1, attributes.aaloc2} },
-            { "Elephant", new List<Vector2> { attributes.aeloc1, attributes.aeloc2 } },
-            { "Horse", new List<Vector2> { attributes.ahloc1, attributes.ahloc2 } },
-            { "Chariot", new List<Vector2> { attributes.arloc1, attributes.arloc2 } },
-            { "Cannon", new List<Vector2> { attributes.acloc1, attributes.acloc2 } },
-            { "Soldier", new List<Vector2> { attributes.asloc1, attributes.asloc2, attributes.asloc3, attributes.asloc4, attributes.asloc5 } }
+            { "General", new List <Vector2Int>{ attributes.agloc } },
+            { "Advisor", new List<Vector2Int>{ attributes.aaloc1, attributes.aaloc2} },
+            { "Elephant", new List<Vector2Int> { attributes.aeloc1, attributes.aeloc2 } },
+            { "Horse", new List<Vector2Int> { attributes.ahloc1, attributes.ahloc2 } },
+            { "Chariot", new List<Vector2Int> { attributes.arloc1, attributes.arloc2 } },
+            { "Cannon", new List<Vector2Int> { attributes.acloc1, attributes.acloc2 } },
+            { "Soldier", new List<Vector2Int> { attributes.asloc1, attributes.asloc2, attributes.asloc3, attributes.asloc4, attributes.asloc5 } }
         };
         locationType = new Dictionary<string, string>
         {
-            { Vector2ToString(attributes.agloc), "General" },
-            { Vector2ToString(attributes.aaloc1), "Advisor" },{ Vector2ToString(attributes.aaloc2), "Advisor" },
-            { Vector2ToString(attributes.aeloc1), "Elephant" },{ Vector2ToString(attributes.aeloc2), "Elephant" },
-            { Vector2ToString(attributes.ahloc1), "Horse" },{ Vector2ToString(attributes.ahloc2), "Horse" },
-            { Vector2ToString(attributes.arloc1), "Chariot" },{ Vector2ToString(attributes.arloc2), "Chariot" },
-            { Vector2ToString(attributes.acloc1), "Cannon" },{ Vector2ToString(attributes.acloc2), "Cannon" },
-            { Vector2ToString(attributes.asloc1), "Soldier" },{ Vector2ToString(attributes.asloc2), "Soldier" },
-            { Vector2ToString(attributes.asloc3), "Soldier" },{ Vector2ToString(attributes.asloc4), "Soldier" },{ Vector2ToString(attributes.asloc5), "Soldier" }
+            { Vec2ToString(attributes.agloc), "General" },
+            { Vec2ToString(attributes.aaloc1), "Advisor" },{ Vec2ToString(attributes.aaloc2), "Advisor" },
+            { Vec2ToString(attributes.aeloc1), "Elephant" },{ Vec2ToString(attributes.aeloc2), "Elephant" },
+            { Vec2ToString(attributes.ahloc1), "Horse" },{ Vec2ToString(attributes.ahloc2), "Horse" },
+            { Vec2ToString(attributes.arloc1), "Chariot" },{ Vec2ToString(attributes.arloc2), "Chariot" },
+            { Vec2ToString(attributes.acloc1), "Cannon" },{ Vec2ToString(attributes.acloc2), "Cannon" },
+            { Vec2ToString(attributes.asloc1), "Soldier" },{ Vec2ToString(attributes.asloc2), "Soldier" },
+            { Vec2ToString(attributes.asloc3), "Soldier" },{ Vec2ToString(attributes.asloc4), "Soldier" },{ Vec2ToString(attributes.asloc5), "Soldier" }
         };
     }
 
-    private string Vector2ToString(Vector2 v) { return v.x.ToString() + v.y.ToString(); }
+    private string Vec2ToString(Vector2Int v) { return v.x.ToString() + v.y.ToString(); }
 
     private static PieceAttributes LoadPieceAttributes(string pieceName)
     {
-        if (pieceName.StartsWith("Standard ")) return standardAttributes[pieceName];
+        if (pieceName.StartsWith("Standard ")) return InfoLoader.standardAttributes[pieceName];
         return Instantiate<PieceAttributes>(Resources.Load<PieceAttributes>("Pieces/Info/" + pieceName + "/Attributes"));
     }
 

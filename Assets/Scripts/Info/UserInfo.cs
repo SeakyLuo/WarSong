@@ -32,7 +32,6 @@ public class UserInfo {
         ranking = 0;
         lastLineupSelected = -1;
     }
-
 }
 
 public class CheatAccount:UserInfo
@@ -41,7 +40,7 @@ public class CheatAccount:UserInfo
     {
         username = "WarSong CheatAccount";
         Collection[] cheat = { new Collection("Greeeeeat Elephant", "Elephant", 3, 5), new Collection("Zhuge Liang", "General"), new Collection("A Secret Plan", 3),
-            new Collection("No Way", 100), new Collection("Qin Shihuang", "General"), new Collection("Xiao He", "General"),new Collection("Gunspire","Cannon"),
+            new Collection("No Way", 100), new Collection("Qin Shihuang", "General"), new Collection("Xiao He", "General"),new Collection("Turret","Cannon"),
              new Collection("Link Soldier","Soldier",11), new Collection("Buy 1 Get 1 Free",15), new Collection("Build A Cannon","Tactic"),
             new Collection("Build A Rook"),new Collection("Winner Trophy",5),new Collection("Horse Rider","Horse",4),new Collection("Minesweeper",20)
         };
@@ -49,16 +48,16 @@ public class CheatAccount:UserInfo
         lineups = new List<Lineup>()
         {
             new Lineup(
-                new Dictionary<Vector2, Collection>()
+                new Dictionary<Vector2Int, Collection>()
                 {
-                    {new Vector2(4,0), Collection.General },
-                    {new Vector2(3,0), Collection.Advisor },{new Vector2(5,0), Collection.Advisor },
-                    {new Vector2(2,0), Collection.Elephant },{new Vector2(6,0), Collection.Elephant },
-                    {new Vector2(1,0), Collection.Horse },{new Vector2(7,0), Collection.Horse },
-                    {new Vector2(0,0), Collection.Chariot },{new Vector2(8,0), Collection.Chariot },
-                    {new Vector2(1,2), Collection.Cannon },{new Vector2(7,2), Collection.Cannon },
-                    {new Vector2(0,3), Collection.Soldier },{new Vector2(2,3), Collection.Soldier },
-                    {new Vector2(4,3), Collection.Soldier },{new Vector2(6,3), Collection.Soldier },{new Vector2(8,3), Collection.Soldier }
+                    {new Vector2Int(4,0), Collection.General },
+                    {new Vector2Int(3,0), Collection.Advisor },{new Vector2Int(5,0), Collection.Advisor },
+                    {new Vector2Int(2,0), Collection.Elephant },{new Vector2Int(6,0), Collection.Elephant },
+                    {new Vector2Int(1,0), Collection.Horse },{new Vector2Int(7,0), Collection.Horse },
+                    {new Vector2Int(0,0), Collection.Chariot },{new Vector2Int(8,0), Collection.Chariot },
+                    {new Vector2Int(1,2), Collection.Cannon },{new Vector2Int(7,2), Collection.Cannon },
+                    {new Vector2Int(0,3), Collection.Soldier },{new Vector2Int(2,3), Collection.Soldier },
+                    {new Vector2Int(4,3), Collection.Soldier },{new Vector2Int(6,3), Collection.Soldier },{new Vector2Int(8,3), Collection.Soldier }
                 },
                 new List<string>()
                 {
@@ -69,21 +68,41 @@ public class CheatAccount:UserInfo
                 "CheatLineup"
             ),
             new Lineup(
-                new Dictionary<Vector2, Collection>()
+                new Dictionary<Vector2Int, Collection>()
                 {
-                    {new Vector2(4,0), new Collection("Space Witch", "General") },
-                    {new Vector2(3,0), Collection.Advisor },{new Vector2(5,0), Collection.Advisor },
-                    {new Vector2(2,0), Collection.Elephant },{new Vector2(6,0), Collection.Elephant },
-                    {new Vector2(1,0), Collection.Horse },{new Vector2(7,0), Collection.Horse },
-                    {new Vector2(0,0), Collection.Chariot },{new Vector2(8,0), Collection.Chariot },
-                    {new Vector2(1,2), Collection.Cannon },{new Vector2(7,2), Collection.Cannon },
-                    {new Vector2(0,3), Collection.Soldier },{new Vector2(2,3), Collection.Soldier },
-                    {new Vector2(4,3), Collection.Soldier },{new Vector2(6,3), Collection.Soldier },{new Vector2(8,3), Collection.Soldier }
+                    {new Vector2Int(4,0), new Collection("Space Witch", "General") },
+                    {new Vector2Int(3,0), new Collection("King Guardian","Advisor", 3) },{new Vector2Int(5,0), new Collection("King Guardian","Advisor", 3) },
+                    {new Vector2Int(2,0), new Collection("Greeeeeat Elephant", "Elephant") },{new Vector2Int(6,0), new Collection("Greeeeeat Elephant", "Elephant")},
+                    {new Vector2Int(1,0), new Collection("Horse Rider","Horse",4) },{new Vector2Int(7,0), new Collection("Horse Rider","Horse",4) },
+                    {new Vector2Int(0,0), new Collection("Monster Hunter","Chariot") },{new Vector2Int(8,0), new Collection("Monster Hunter","Chariot") },
+                    {new Vector2Int(1,2), new Collection("Turret","Cannon") },{new Vector2Int(7,2), new Collection("Turret","Cannon") },
+                    {new Vector2Int(0,3), new Collection("Fat Soldier", "Soldier",4) },{new Vector2Int(2,3), new Collection("Link Soldier","Soldier",11) },
+                    {new Vector2Int(4,3), new Collection("Link Soldier","Soldier",11) },{new Vector2Int(6,3), new Collection("Link Soldier","Soldier",11) },{new Vector2Int(8,3), new Collection("Fat Soldier", "Soldier",4) }
                 },
                 new List<string>()
                 {
                     "Tame An Elephant","Purchase An Horse","Advisor Recruitment","Soldier Recruitment","Minesweeper",
                     "A Secret Plan","Buy 1 Get 1 Free","Build A Rook","Winner Trophy","No Way"
+                },
+                "Standard Board",
+                "CheatLineup2"
+            ),
+            new Lineup(
+                new Dictionary<Vector2Int, Collection>()
+                {
+                    {new Vector2Int(4,0), new Collection("Space Witch", "General") },
+                    {new Vector2Int(3,0), Collection.Advisor },{new Vector2Int(5,0), Collection.Advisor },
+                    {new Vector2Int(2,0), Collection.Elephant },{new Vector2Int(6,0), Collection.Elephant },
+                    {new Vector2Int(1,0), Collection.Horse },{new Vector2Int(7,0), Collection.Horse },
+                    {new Vector2Int(0,0), Collection.Chariot },{new Vector2Int(8,0), Collection.Chariot },
+                    {new Vector2Int(1,2), Collection.Cannon },{new Vector2Int(7,2), Collection.Cannon },
+                    {new Vector2Int(0,3), Collection.Soldier },{new Vector2Int(2,3), Collection.Soldier },
+                    {new Vector2Int(4,3), Collection.Soldier },{new Vector2Int(6,3), Collection.Soldier },{new Vector2Int(8,3), Collection.Soldier }
+                },
+                new List<string>()
+                {
+                    "Tame An Elephant","Purchase An Horse","Advisor Recruitment","Soldier Recruitment","Minesweeper",
+                    "A Secret Plan","Buy 1 Get 1 Free","Build A Rook","Winner Trophy"
                 },
                 "Standard Board",
                 "CheatLineup2"
@@ -99,5 +118,6 @@ public class CheatAccount:UserInfo
         };
         coins = 99999;
         ranking = 9999;
+        lastLineupSelected = -1;
     }
 }

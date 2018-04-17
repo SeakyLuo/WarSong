@@ -6,12 +6,11 @@ using UnityEngine.UI;
 public class BoardManager : MonoBehaviour {
 
     public GameObject nextBoardButton, previousBoardButton, confirmButton, preferButton, createLineupButton,
-        createLineupPanel, collectionPanel, board;
+        createLineupPanel, board;
     public Text boardName;
     public Image boardImage;
     public BoardAttributes standardBoardAttributes;
 
-    private CollectionManager collectionManager;
     private List<BoardAttributes> boardAttributes;
     private int currentBoard = 0;
     private GameObject loadedBoard;
@@ -19,7 +18,6 @@ public class BoardManager : MonoBehaviour {
     private void Start()
     {
         boardAttributes = InfoLoader.boards;
-        collectionManager = collectionPanel.GetComponent<CollectionManager>();
         DisplayBoardSelectionInterface();
         gameObject.SetActive(false);
     }
@@ -67,12 +65,9 @@ public class BoardManager : MonoBehaviour {
         LoadBoard(Resources.Load<BoardAttributes>("Board/Info/" + lineup.boardName + "/Attributes"), lineup.cardLocations);
     }
 
-    public void LoadBoard(BoardAttributes attributes, Dictionary<Vector2, Collection> newLocations = null)
+    public void LoadBoard(BoardAttributes attributes, Dictionary<Vector2Int, Collection> newLocations = null)
     {
-        collectionManager.SetCardsPerPage(4);
-        collectionManager.ShowCurrentPage();
-        createLineupPanel.SetActive(true);
-        loadedBoard = Instantiate(Resources.Load<GameObject>("Board/Info/" + attributes.boardName + "/BoardObject"), board.transform);
+        loadedBoard = Instantiate(Resources.Load<GameObject>("Board/Info/" + attributes.boardName + "/LineupBoard"), board.transform);
         loadedBoard.transform.localPosition = new Vector3(0, 0, 0);
         loadedBoard.SetActive(true);
         loadedBoard.GetComponent<BoardInfo>().SetAttributes(attributes, newLocations);
@@ -80,10 +75,7 @@ public class BoardManager : MonoBehaviour {
 
     public void BackToCollection()
     {
-        collectionManager.SetCardsPerPage(8);
-        collectionManager.ShowCurrentPage();
         gameObject.SetActive(false);
-        createLineupButton.SetActive(true);
     }
 
     public void DestroyBoard()

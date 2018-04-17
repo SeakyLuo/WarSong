@@ -68,7 +68,7 @@ public class CollectionGestureHandler : MonoBehaviour, IPointerClickHandler, IBe
             {
                 string cardName = cardInfo.GetCardName();
                 bool findStandard = false;
-                foreach (Vector2 loc in boardInfo.typeLocations[cardInfo.GetCardType()])
+                foreach (Vector2Int loc in boardInfo.typeLocations[cardInfo.GetCardType()])
                 {
                     Collection oldCollection = boardInfo.cardLocations[loc];
                     if ((cardInfo.IsStandard() && !oldCollection.name.StartsWith("Standard ")) ||
@@ -81,7 +81,7 @@ public class CollectionGestureHandler : MonoBehaviour, IPointerClickHandler, IBe
                 }
                 if (!findStandard)
                 {
-                    foreach (Vector2 loc in boardInfo.typeLocations[cardInfo.GetCardType()])
+                    foreach (Vector2Int loc in boardInfo.typeLocations[cardInfo.GetCardType()])
                     {
                         Collection oldCollection = boardInfo.cardLocations[loc];
                         if (cardName != oldCollection.name || cardInfo.GetHealth() != oldCollection.health)

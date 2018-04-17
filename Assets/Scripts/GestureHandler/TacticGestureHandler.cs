@@ -59,7 +59,6 @@ public class TacticGestureHandler : MonoBehaviour,IBeginDragHandler, IDragHandle
              {
                 collectionManager.SetCurrentPage("Tactic",1);
                 collectionManager.ShowCurrentPage();
-                //collectionManager.EnterOneTypeMode("Tactic", "0");
              }
              else lineupBuilder.RemoveTactic(tactic.GetComponent<TacticInfo>().tactic);
         }            

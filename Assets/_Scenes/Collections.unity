@@ -13619,7 +13619,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1588430936
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13694,7 +13694,6 @@ MonoBehaviour:
   preferButton: {fileID: 789741397}
   createLineupButton: {fileID: 2138143829}
   createLineupPanel: {fileID: 669138942}
-  collectionPanel: {fileID: 370393593}
   board: {fileID: 1747433672}
   boardName: {fileID: 279690933}
   boardImage: {fileID: 892533048}

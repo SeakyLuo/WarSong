@@ -21,7 +21,11 @@ public class OnEnterPlayMatching : MonoBehaviour {
             if (i < lineupsCount)
             {
                 lineupObjects[i].GetComponentInChildren<Text>().text = InfoLoader.user.lineups[i].lineupName;
-                // Assign Data
+                Color color = lineupObjects[i].GetComponentInChildren<Image>().color;
+                if (InfoLoader.user.lineups[i].complete) color.a = 0;
+                else color.a = 255;
+                lineupObjects[i].GetComponent<Button>().interactable = InfoLoader.user.lineups[i].complete;
+                lineupObjects[i].transform.Find("Image").GetComponent<Image>().color = color;
             }
             else lineupObjects[i].SetActive(false);
         }
@@ -44,6 +48,7 @@ public class OnEnterPlayMatching : MonoBehaviour {
 
     public void EnterCollection()
     {
+        InfoLoader.switchSceneCaller = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene("Collections");
     }
 
@@ -53,7 +58,7 @@ public class OnEnterPlayMatching : MonoBehaviour {
         LaunchWar();
     }
 
-    public void LaunchWar()
+    private void LaunchWar()
     {
         SceneManager.LoadScene("GameMode");
     }

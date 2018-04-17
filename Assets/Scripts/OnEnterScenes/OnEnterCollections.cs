@@ -11,11 +11,11 @@ public class OnEnterCollections : MonoBehaviour {
     {
         if (createLineupPanel.activeSelf)
         {
-            Destroy(createLineupPanel.transform.Find("BoardPanel/Board/BoardObject(Clone)").gameObject);
+            Destroy(createLineupPanel.transform.Find("BoardPanel/Board/LineupBoard(Clone)").gameObject);
             createLineupPanel.SetActive(false);
-            selectBoardPanel.SetActive(true);
+            selectBoardPanel.SetActive(true); // User should not click back when open a lineup
         }
-        else SceneManager.LoadScene("Main");
+        else SceneManager.LoadScene(InfoLoader.switchSceneCaller);
     }
 
     public void EnterRecruitment()

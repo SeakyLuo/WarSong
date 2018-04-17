@@ -11,7 +11,7 @@ public class MouseOverPiece : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private bool dragBegins;
     private GameObject parentCanvas, showCardInfo, dragCard;
     private BoardInfo boardInfo;
-    private Vector2 nameLoc;
+    private Vector2Int nameLoc;
     private float enterTime;
     private static float timeTnterval = 0.05f;
     private Color tmpColor;
@@ -20,7 +20,7 @@ public class MouseOverPiece : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         parentCanvas = GameObject.Find("Canvas");
         boardInfo = gameObject.transform.parent.GetComponent<BoardInfo>();
-        nameLoc = StringToVector2(gameObject.name);
+        nameLoc = StringToVector2Int(gameObject.name);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -40,7 +40,7 @@ public class MouseOverPiece : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         if (showCardInfo != null) Destroy(showCardInfo);
     }
 
-    private Vector2 StringToVector2(string loc) { return new Vector2((int)Char.GetNumericValue(loc[0]), (int)Char.GetNumericValue(loc[1])); }
+    private Vector2Int StringToVector2Int(string loc) { return new Vector2Int((int)Char.GetNumericValue(loc[0]), (int)Char.GetNumericValue(loc[1])); }
 
     private Vector3 AdjustedMousePosition()
     {

@@ -3,83 +3,89 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
-public class MovementController : MonoBehaviour
+public class MovementController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public static float raiseHeight = 1.5f;
-    public static Vector3 raiseVector = new Vector3(0f, raiseHeight, 0f);
-    public BoardAttributes boardAttributes;
+    public static float raiseHeight = -3f;
+    public static Vector3 raiseVector = new Vector3(0, 0, raiseHeight);
+    public static BoardAttributes boardAttributes;
 
-    public GameObject pathDot;
-    public Material newLocation;
-    public Image gameOverImage;
+    public GameObject pathDot, oldLocation, gameOverObject, cardInfo;
+    public Sprite newLocation;
     public Text roundCounter;
 
-    private Setup setup;
-    private static float radius;
-    private static float scale;
-    private static float gridScale;
-    private GameObject selected;
+    private GameObject InfoCard;
+    private static float scale = 10;
+    private GameObject board, selected;
+    private BoardSetup boardSetup;
     private bool gameOver = false;
-    private List<Vector2> validPath = new List<Vector2>();
+    private List<Vector2Int> validPath = new List<Vector2Int>();
     private List<GameObject> pathDots = new List<GameObject>();
-    private Vector2 previousLocation;
-    private Material previousMaterial;
-    private GameObject locationMark;
+    private Image previousImage;
+    private Sprite previousSprite;
     private int round = 0;
-    private RaycastHit hit;
 
     private void Start()
     {
-        setup = GetComponent<Setup>();
-        radius = Setup.radius;
-        scale = Setup.scale;
-        gridScale = Setup.gridScale;
-        locationMark = Instantiate(Resources.Load<GameObject>("Prefabs/LocationMark"));
-        gameOverImage.gameObject.SetActive(false);
+        Lineup lineup = InfoLoader.user.lineups[InfoLoader.user.lastLineupSelected];
+        board = Instantiate(Resources.Load<GameObject>("Board/Info/" + lineup.boardName + "/Board"));
+        boardSetup = board.GetComponent<BoardSetup>();
+        boardSetup.Setup(lineup, true);  // Set up Player Lineup
+        boardSetup.Setup(new EnemyLineup(), false);  // Set up Enemy Lineup
+        boardAttributes = board.GetComponent<BoardSetup>().boardAttributes;
+        oldLocation = Instantiate(oldLocation);
+        oldLocation.SetActive(false);
     }
 
     private void Update()
     {
         if (gameOver)
         {
-            if (Input.GetKeyUp(KeyCode.R)) restart();
+            if (Input.GetMouseButtonUp(0))
+            {
+                SceneManager.LoadScene("PlayerMatching");
+                GameInfo.Clear();
+            }
             return;
         }
-        // if (gameOver || !respond()) return;
         if (Input.GetMouseButtonUp(0))
-        {
+        {            
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
                 GameObject hitObj = hit.collider.gameObject;
-                if (hitObj == selected) SetLocation();
+                if (hitObj == selected) SetLocation(); // Put down
                 else if (hitObj.tag == "Ally")
                 {
-                    if (selected != null) SetLocation();
+                    if (selected != null) SetLocation(); // switch piece
                     hit.collider.gameObject.transform.position += raiseVector;
                     selected = hit.collider.gameObject;
-                    validPath = ValidPath(hitObj, hitObj.transform.position.x, hitObj.transform.position.z);
+                    validPath = ValidPath(hitObj, hitObj.transform.position);
                     if (validPath.Count == 0) return;
                     // Draw Valid path
-                    foreach (Vector2 path in validPath)
+                    foreach (Vector2Int path in validPath)
                     {
-                        float posX = path.x * scale + gridScale * scale / 2;
-                        float posY = 0f;
-                        if (FindAt(path.x, path.y) == 'E') posY = hitObj.transform.localScale.y * scale;
-                        float posZ = path.y * scale + gridScale * scale / 2;
-                        pathDots.Add(Instantiate(pathDot, new Vector3(posX, posY, posZ), Quaternion.identity));
+                        float posX = path.x * scale + scale / 2;
+                        float posY = path.y * scale + scale / 2;
+                        float posZ = -1;
+                        if (FindAt(path.x, path.y) == 'E') posZ -= hitObj.transform.localScale.z;
+                        GameObject copy = Instantiate(pathDot);
+                        copy.transform.position = new Vector3(posX, posY, posZ);
+                        if (oldLocation.transform.position == copy.transform.position) oldLocation.SetActive(false);
+                        pathDots.Add(copy);
                     }
                 }
                 else if (selected != null)
                 {
-                    Vector2 location = new Vector2(Mathf.Floor(hit.point.x / scale), Mathf.Floor(hit.point.z / scale));
-                    foreach (Vector2 path in validPath)
+                    Vector2Int location = GetGridLocation(hit.point.x, hit.point.y);
+                    foreach (Vector2Int path in validPath)
                     {
                         if (path == location)
                         {
-                            killAt(location);
-                            SetLocation(hit.point.x, hit.point.z);
+                            KillAt(location);
+                            SetLocation(hit.point.x, hit.point.y);
                             break;
                         }
                     }
@@ -89,151 +95,182 @@ public class MovementController : MonoBehaviour
         else if (Input.GetMouseButtonUp(1) && selected != null) SetLocation();
     }
 
-    private void killAt(Vector2 loc)
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        foreach (GameObject obj in setup.GetActive())
+        //Transform pieceTransform = board.transform.Find(Vec2ToString(GetGridLocation(Input.mousePosition.x, Input.mousePosition.y)) + "/Piece");
+        //if (pieceTransform!=null)
+        //{
+        //    GameObject piece = pieceTransform.gameObject;
+        //    if (!piece.activeSelf)
+        //    {
+        //        InfoCard = Instantiate(cardInfo);
+        //        InfoCard.GetComponent<CardInfo>().SetAttributes(piece.GetComponent<PieceInfo>().GetPieceAttributes());
+        //        InfoCard.transform.position = new Vector3(Input.mousePosition.x + 10, Input.mousePosition.y + 10, -2);
+        //    }
+        //}
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        //if (InfoCard != null)
+        //{
+        //    Destroy(InfoCard);
+        //}
+    }
+
+    private void KillAt(Vector2Int loc)
+    {
+        Transform enemy = board.transform.Find(Vec2ToString(loc) + "/Piece");
+        if(enemy != null && enemy.tag[0] == 'E')
         {
-            if (obj.GetComponent<PieceInfo>().GetLocation() == loc)
+            if (enemy.GetComponent<PieceInfo>().GetPieceType() == "General")
             {
-                if (obj.GetComponent<PieceInfo>().GetCardType() == "General")
-                {
-                    gameOver = true;
-                    gameOverImage.gameObject.SetActive(true);
-                }
-                setup.deactivate(obj);
-                break;
+                gameOver = true;
+                gameOverObject.SetActive(true);
             }
+            boardSetup.DeactivateEnemy(enemy.gameObject, loc);
         }
     }
 
-    private Vector2 GetGridLocation(float x, float z) { return new Vector2(Mathf.Floor(x / scale), Mathf.Floor(z / scale)); }
+    private Vector2Int GetGridLocation(float x, float y) { return new Vector2Int((int)Mathf.Floor(x / scale), (int)Mathf.Floor(y / scale)); }
 
-    private void SetLocation(float x = 0, float z = 0)
+    private void SetLocation(float x = -1, float y = -1)
     {
         foreach (GameObject pathDot in pathDots) Destroy(pathDot);
         pathDots.Clear();
         selected.transform.position -= raiseVector;
-        if (x != 0 && z != 0)
-        {
-            locationMark.transform.position = new Vector3(selected.GetComponent<PieceInfo>().GetLocation().x + gridScale / 2, 0f, selected.GetComponent<PieceInfo>().GetLocation().y + gridScale / 2) * scale;
-            if (previousMaterial != null) GameObject.Find(previousLocation.x.ToString() + previousLocation.y.ToString()).GetComponent<Renderer>().material = previousMaterial;
+        if (!oldLocation.activeSelf && previousSprite != null) oldLocation.SetActive(true);
+        if (x != -1 && y != -1)
+        {            
+            oldLocation.transform.position = selected.transform.position;
+            if (previousSprite != null)
+                previousImage.sprite = previousSprite;
 
-            Vector2 location = GetGridLocation(x, z);
-            selected.GetComponent<PieceInfo>().SetLocation(location);
-            selected.transform.position = new Vector3(location.x * scale + radius, selected.transform.position.y, location.y * scale + radius);
+            Vector2Int location = GetGridLocation(x, y);
+            //SetLocationData(selected.transform.position, location);
+            selected.transform.parent = board.transform.Find(Vec2ToString(location));
+            selected.transform.localPosition = new Vector3(0, 0, selected.transform.position.z);
             round++;
             roundCounter.text = "Round: " + round.ToString();
 
-            previousLocation = location;
-            previousMaterial = GameObject.Find(location.x.ToString() + location.y.ToString()).GetComponent<Renderer>().material;
-            GameObject.Find(location.x.ToString() + location.y.ToString()).GetComponent<Renderer>().material = newLocation;
+            previousImage = board.transform.Find(Vec2ToString(location) + "/Canvas").GetComponentInChildren<Image>();
+            previousSprite = previousImage.sprite;
+            previousImage.sprite = newLocation;
         }
         selected = null;
     }
 
-    private List<Vector2> ValidPath(GameObject obj, float x, float z)
+    private void SetLocationData(Vector3 before, Vector2Int after)
     {
-        List<Vector2> validPath = new List<Vector2>();
-        x = Mathf.Floor(x / scale);
-        z = Mathf.Floor(z / scale);
-        switch (obj.GetComponent<PieceInfo>().GetCardType()[0])
+        Vector2Int previous = GetGridLocation(before.x, before.y);
+        Piece piece = GameInfo.board[previous];
+        GameInfo.board.Remove(previous);
+        GameInfo.board.Add(after, piece);
+    }
+
+    private List<Vector2Int> ValidPath(GameObject obj, Vector3 position)
+    {
+        List<Vector2Int> validPath = new List<Vector2Int>();
+        int x = (int)Mathf.Floor(position.x / scale);
+        int y = (int)Mathf.Floor(position.y / scale);
+        switch (obj.GetComponent<PieceInfo>().GetPieceType())
         {
-            case 'G':
+            case "General":
                 for (int i = -1; i <= 1; i += 2)
                 {
-                    if (InPalace(x, z + i) && FindAt(x, z + i) != 'A')
-                        validPath.Add(new Vector2(x, z + i));
-                    if (InPalace(x + i, z) && FindAt(x + i, z) != 'A')
-                        validPath.Add(new Vector2(x + i, z));
+                    if (InPalace(x, y + i) && FindAt(x, y + i) != 'A')
+                        validPath.Add(new Vector2Int(x, y + i));
+                    if (InPalace(x + i, y) && FindAt(x + i, y) != 'A')
+                        validPath.Add(new Vector2Int(x + i, y));
                 }
                 break;
-            case 'A':
-                for (int i = -1; i <= 1; i += 2)
-                {
-                    for (int j = -1; j <= 1; j += 2)
-                        if (InPalace(x + i, z + j) && FindAt(x + i, z + j) != 'A')
-                            validPath.Add(new Vector2(x + i, z + j));
-                }
-                break;
-            case 'E':
+            case "Advisor":
                 for (int i = -1; i <= 1; i += 2)
                 {
                     for (int j = -1; j <= 1; j += 2)
-                        if (InSelfField(x + i * 2, z + j * 2) && FindAt(x + i, z + j) == 'B' && FindAt(x + i * 2, z + j * 2) != 'A')
-                            validPath.Add(new Vector2(x + i * 2, z + j * 2));
+                        if (InPalace(x + i, y + j) && FindAt(x + i, y + j) != 'A')
+                            validPath.Add(new Vector2Int(x + i, y + j));
                 }
                 break;
-            case 'H':
+            case "Elephant":
                 for (int i = -1; i <= 1; i += 2)
                 {
-                    if (InBoard(x, z + i) && FindAt(x, z + i) == 'B')
-                        for (int j = -1; j <= 1; j += 2)
-                            if (InBoard(x + j, z + i * 2) && FindAt(x + j, z + i * 2) != 'A')
-                                validPath.Add(new Vector2(x + j, z + i * 2));
-                    if (InPalace(x + i, z) && FindAt(x + i, z) == 'B')
-                        for (int j = -1; j <= 1; j += 2)
-                            if (InBoard(x + i * 2, z + j) && FindAt(x + i * 2, z + j) != 'A')
-                                validPath.Add(new Vector2(x + i * 2, z + j));
+                    for (int j = -1; j <= 1; j += 2)
+                        if (InSelfField(x + i * 2, y + j * 2) && FindAt(x + i, y + j) == 'B' && FindAt(x + i * 2, y + j * 2) != 'A')
+                            validPath.Add(new Vector2Int(x + i * 2, y + j * 2));
                 }
                 break;
-            case 'R':
-                for (int j = (int)z + 1; j < boardAttributes.boardHeight; j++)
+            case "Horse":
+                for (int i = -1; i <= 1; i += 2)
+                {
+                    if (InBoard(x, y + i) && FindAt(x, y + i) == 'B')
+                        for (int j = -1; j <= 1; j += 2)
+                            if (InBoard(x + j, y + i * 2) && FindAt(x + j, y + i * 2) != 'A')
+                                validPath.Add(new Vector2Int(x + j, y + i * 2));
+                    if (InPalace(x + i, y) && FindAt(x + i, y) == 'B')
+                        for (int j = -1; j <= 1; j += 2)
+                            if (InBoard(x + i * 2, y + j) && FindAt(x + i * 2, y + j) != 'A')
+                                validPath.Add(new Vector2Int(x + i * 2, y + j));
+                }
+                break;
+            case "Chariot":
+                for (int j = y + 1; j < boardAttributes.boardHeight; j++)
                 {
                     switch (FindAt(x, j))
                     {
                         case 'B':
-                            validPath.Add(new Vector2(x, j));
+                            validPath.Add(new Vector2Int(x, j));
                             continue;
                         case 'E':
-                            validPath.Add(new Vector2(x, j));
+                            validPath.Add(new Vector2Int(x, j));
                             break;
                     }
                     break;
                 }
-                for (int j = (int)z - 1; j >= 0; j--)
+                for (int j = y - 1; j >= 0; j--)
                 {
                     switch (FindAt(x, j))
                     {
                         case 'B':
-                            validPath.Add(new Vector2(x, j));
+                            validPath.Add(new Vector2Int(x, j));
                             continue;
                         case 'E':
-                            validPath.Add(new Vector2(x, j));
+                            validPath.Add(new Vector2Int(x, j));
                             break;
                     }
                     break;
                 }
-                for (int i = (int)x - 1; i >= 0; i--)
+                for (int i = x - 1; i >= 0; i--)
                 {
-                    switch (FindAt(i, z))
+                    switch (FindAt(i, y))
                     {
                         case 'B':
-                            validPath.Add(new Vector2(i, z));
+                            validPath.Add(new Vector2Int(i, y));
                             continue;
                         case 'E':
-                            validPath.Add(new Vector2(i, z));
+                            validPath.Add(new Vector2Int(i, y));
                             break;
                     }
                     break;
                 }
-                for (int i = (int)x + 1; i < boardAttributes.boardWidth; i++)
+                for (int i = x + 1; i < boardAttributes.boardWidth; i++)
                 {
-                    switch (FindAt(i, z))
+                    switch (FindAt(i, y))
                     {
                         case 'B':
-                            validPath.Add(new Vector2(i, z));
+                            validPath.Add(new Vector2Int(i, y));
                             continue;
                         case 'E':
-                            validPath.Add(new Vector2(i, z));
+                            validPath.Add(new Vector2Int(i, y));
                             break;
                     }
                     break;
                 }
                 break;
-            case 'C':
-                for (int j = (int)z + 1; j < boardAttributes.boardHeight; j++)
+            case "Cannon":
+                for (int j = y + 1; j < boardAttributes.boardHeight; j++)
                 {
-                    if (FindAt(x, j) == 'B') validPath.Add(new Vector2(x, j));
+                    if (FindAt(x, j) == 'B') validPath.Add(new Vector2Int(x, j));
                     else
                     {
                         for (int jj = j + 1; jj < boardAttributes.boardHeight; jj++)
@@ -243,7 +280,7 @@ public class MovementController : MonoBehaviour
                                 case 'B':
                                     continue;
                                 case 'E':
-                                    validPath.Add(new Vector2(x, jj));
+                                    validPath.Add(new Vector2Int(x, jj));
                                     break;
                             }
                             break;
@@ -251,19 +288,19 @@ public class MovementController : MonoBehaviour
                         break;
                     }
                 }
-                for (int j = (int)z - 1; j >= 0; j--)
+                for (int j = y - 1; j >= 0; j--)
                 {
-                    if (FindAt(x, j) == 'B') validPath.Add(new Vector2(x, j));
+                    if (FindAt(x, j) == 'B') validPath.Add(new Vector2Int(x, j));
                     else
                     {
-                        for (int jj = j - 1; jj > 0; jj--)
+                        for (int jj = j - 1; jj >= 0; jj--)
                         {
                             switch (FindAt(x, jj))
                             {
                                 case 'B':
                                     continue;
                                 case 'E':
-                                    validPath.Add(new Vector2(x, jj));
+                                    validPath.Add(new Vector2Int(x, jj));
                                     break;
                             }
                             break;
@@ -271,19 +308,19 @@ public class MovementController : MonoBehaviour
                         break;
                     }
                 }
-                for (int i = (int)x - 1; i >= 0; i--)
+                for (int i = x - 1; i >= 0; i--)
                 {
-                    if (FindAt(i, z) == 'B') validPath.Add(new Vector2(i, z));
+                    if (FindAt(i, y) == 'B') validPath.Add(new Vector2Int(i, y));
                     else
                     {
                         for (int ii = i - 1; ii >= 0; ii--)
                         {
-                            switch (FindAt(ii, z))
+                            switch (FindAt(ii, y))
                             {
                                 case 'B':
                                     continue;
                                 case 'E':
-                                    validPath.Add(new Vector2(ii, z));
+                                    validPath.Add(new Vector2Int(ii, y));
                                     break;
                             }
                             break;
@@ -291,19 +328,19 @@ public class MovementController : MonoBehaviour
                         break;
                     }
                 }
-                for (int i = (int)x + 1; i < boardAttributes.boardHeight; i++)
+                for (int i = x + 1; i < boardAttributes.boardWidth; i++)
                 {
-                    if (FindAt(i, z) == 'B') validPath.Add(new Vector2(i, z));
+                    if (FindAt(i, y) == 'B') validPath.Add(new Vector2Int(i, y));
                     else
                     {
-                        for (int ii = i + 1; ii < boardAttributes.boardHeight; ii++)
+                        for (int ii = i + 1; ii < boardAttributes.boardWidth; ii++)
                         {
-                            switch (FindAt(ii, z))
+                            switch (FindAt(ii, y))
                             {
                                 case 'B':
                                     continue;
                                 case 'E':
-                                    validPath.Add(new Vector2(ii, z));
+                                    validPath.Add(new Vector2Int(ii, y));
                                     break;
                             }
                             break;
@@ -312,34 +349,32 @@ public class MovementController : MonoBehaviour
                     }
                 }
                 break;
-            case 'S':  //↑←→                
-                if (InBoard(x, z + 1) && FindAt(x, z + 1) != 'A')
-                    validPath.Add(new Vector2(x, z + 1));
-                if (!InSelfField(x, z))
+            case "Soldier":
+                if (InBoard(x, y + 1) && FindAt(x, y + 1) != 'A')
+                    validPath.Add(new Vector2Int(x, y + 1));
+                if (!InSelfField(x, y))
                     for (int i = -1; i <= 1; i += 2)
-                        if (InBoard(x + i, z) && FindAt(x + i, z) != 'A')
-                            validPath.Add(new Vector2(x + i, z));
+                        if (InBoard(x + i, y) && FindAt(x + i, y) != 'A')
+                            validPath.Add(new Vector2Int(x + i, y));
                 break;
         }
         return validPath;
     }
 
-    private char FindAt(float x, float z)
+    private char FindAt(float x, float y) { return FindAt((int) x, (int) y); }
+
+    private char FindAt(int x, int y)
     {
-        Vector2 loc = new Vector2(x, z);
-        foreach (GameObject obj in setup.GetActive())
-        {
-            if (obj.GetComponent<PieceInfo>().GetLocation() == loc)
-                return obj.tag[0];
-        }
+        Transform piece = board.transform.Find(x.ToString() + y.ToString() + "/Piece");
+        if (piece != null && piece.gameObject.activeSelf) return piece.tag[0];
         return 'B';
     }
 
-    private bool InPalace(float x, float z) { return boardAttributes.palaceDownLeft.x <= x && x <= boardAttributes.palaceUpperRight.x && boardAttributes.palaceDownLeft.y <= z && z <= boardAttributes.palaceUpperRight.y; }
+    private string Vec2ToString(Vector2Int vec) { return vec.x.ToString() + vec.y.ToString(); }
 
-    private bool InSelfField(float x, float z) { return 0 <= x && x < boardAttributes.boardWidth && 0 <= z && z <= boardAttributes.allyField; }
+    private bool InPalace(float x, float y) { return boardAttributes.palaceDownLeft.x <= x && x <= boardAttributes.palaceUpperRight.x && boardAttributes.palaceDownLeft.y <= y && y <= boardAttributes.palaceUpperRight.y; }
 
-    private bool InBoard(float x, float z) { return 0 <= x && x < boardAttributes.boardWidth && 0 <= z && z < boardAttributes.boardHeight; }
+    private bool InSelfField(float x, float y) { return 0 <= x && x < boardAttributes.boardWidth && 0 <= y && y <= boardAttributes.allyField; }
 
-    public void restart() { SceneManager.LoadScene(SceneManager.GetActiveScene().name); }
+    private bool InBoard(float x, float y) { return 0 <= x && x < boardAttributes.boardWidth && 0 <= y && y < boardAttributes.boardHeight; }
 }

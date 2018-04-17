@@ -15,7 +15,7 @@ public class LineupBuilder : MonoBehaviour {
     private static Lineup copy = new Lineup();
     private CollectionManager collectionManager;
     private LineupsManager lineupsManager;
-    private Transform board, boardObject;
+    private Transform board, lineupBoard;
     private BoardInfo boardInfo;
     private GameObject[] tacticObjs;
     private List<TacticAttributes> tacticAttributes = new List<TacticAttributes>();
@@ -33,15 +33,18 @@ public class LineupBuilder : MonoBehaviour {
     void Start()
     {
         collectionManager = collections.GetComponent<CollectionManager>();
+        collectionManager.SetCardsPerPage(4);
+        collectionManager.ShowCurrentPage();
+        createLineupPanel.SetActive(true);        
         lineupsManager = myLineup.GetComponent<LineupsManager>();
         board = gameObject.transform.Find("BoardPanel/Board");
-        boardObject = board.Find("BoardObject(Clone)/");
-        boardInfo = boardObject.GetComponent<BoardInfo>();
+        lineupBoard = board.Find("LineupBoard(Clone)/");
+        boardInfo = lineupBoard.GetComponent<BoardInfo>();
     }
 
-    public void AddPiece(CardInfo cardInfo, Vector2 loc)
+    public void AddPiece(CardInfo cardInfo, Vector2Int loc)
     {
-        PieceAdder(cardInfo, loc, (int)loc.x, (int)loc.y);
+        PieceAdder(cardInfo, loc, loc.x, loc.y);
     }
 
     public void AddPiece(CardInfo cardInfo, Vector3 loc)
@@ -52,17 +55,17 @@ public class LineupBuilder : MonoBehaviour {
                locName = x.ToString() + y.ToString();
         if (boardInfo.locationType.TryGetValue(locName, out cardType) && cardType == cardInfo.GetCardType())
         {
-            PieceAdder(cardInfo, new Vector2(x, y), x, y);
+            PieceAdder(cardInfo, new Vector2Int(x, y), x, y);
         }
     }
 
-    private void PieceAdder(CardInfo cardInfo, Vector2 loc, int locx, int locy)
+    private void PieceAdder(CardInfo cardInfo, Vector2Int loc, int locx, int locy)
     {
         string locName = locx.ToString() + locy.ToString();
-        if (boardObject == null) boardObject = board.transform.Find("BoardObject(Clone)/");
+        if (lineupBoard == null) lineupBoard = board.transform.Find("BoardObject(Clone)/");
         Collection newCollection = new Collection(cardInfo.piece, 1, cardInfo.GetHealth());
         lineup.cardLocations[loc] = newCollection;
-        boardObject.Find(locName).Find("CardImage").GetComponent<Image>().sprite = cardInfo.image.sprite;
+        lineupBoard.Find(locName).Find("CardImage").GetComponent<Image>().sprite = cardInfo.image.sprite;
         collectionManager.RemoveCollection(newCollection);
         // Bug with next line, count is not 1
         collectionManager.AddCollection(boardInfo.cardLocations[loc]);
@@ -198,6 +201,7 @@ public class LineupBuilder : MonoBehaviour {
         lineup.cardLocations = boardInfo.cardLocations;
         lineup.boardName = boardInfo.attributes.boardName;
         lineup.complete = (lineup.tactics.Count == Lineup.tacticLimit);
+        // Incomplete Reminder
         lineupsManager.AddLineup(lineup);
         // upload to the server
         ResetLineup();
@@ -209,7 +213,7 @@ public class LineupBuilder : MonoBehaviour {
         if (returnCards)
         {
             // return cards
-            foreach (KeyValuePair<Vector2, Collection> pair in lineup.cardLocations)
+            foreach (KeyValuePair<Vector2Int, Collection> pair in lineup.cardLocations)
                 collectionManager.AddCollection(pair.Value);
             foreach (string tactic in lineup.tactics)
                 collectionManager.AddCollection(new Collection(tactic));
@@ -257,7 +261,7 @@ public class LineupBuilder : MonoBehaviour {
                     AddTactic(tactic);
                 }
             }
-            foreach (KeyValuePair<Vector2, Collection> pair in newLineup.cardLocations)
+            foreach (KeyValuePair<Vector2Int, Collection> pair in newLineup.cardLocations)
             {
                 Collection collection = pair.Value;
                 if (!collectionManager.RemoveCollection(collection))
@@ -292,5 +296,5 @@ public class LineupBuilder : MonoBehaviour {
 
     public void SetBoardInfo(BoardInfo info) { boardInfo = info; }
 
-    private string Vector2ToString(Vector2 v) { return v.x.ToString() + v.y.ToString(); }
+    private string Vector2IntToString(Vector2Int v) { return v.x.ToString() + v.y.ToString(); }
 }

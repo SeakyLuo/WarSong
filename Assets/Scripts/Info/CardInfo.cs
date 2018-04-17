@@ -13,15 +13,13 @@ public class CardInfo : MonoBehaviour {
 
     private string cardName, type, description;
     private int health = 1;
-    private Vector2 startLocation, location;
-    private bool active = true;
 
     public CardInfo() { }
 
     private void Start()
     {
-        heartImage = Resources.Load<Sprite>("Prefabs/heart");
-        coinImage = Resources.Load<Sprite>("Prefabs/coin");
+        heartImage = Resources.Load<Sprite>("Collections/Icons/heart");
+        coinImage = Resources.Load<Sprite>("Collections/Icons/coin");
         if (piece != null) SetAttributes(piece);
         else if (tactic != null) SetAttributes(tactic);
     }
@@ -112,11 +110,5 @@ public class CardInfo : MonoBehaviour {
     public string GetCardType() { return type; }
     public int GetHealth() { return health; }
     public string GetDescription() { return description; }
-    public Vector2 GetStartLocation() { return startLocation; }
-    public void SetStartLocation(Vector2 loc) { startLocation = loc; }
-    public Vector2 GetLocation() { return location; }
-    public void SetLocation(Vector2 loc) { location = loc; }
-    public bool IsActive() { return active; }
-    public void SetActive(bool value) { active = value; }
     public bool IsStandard() { return cardName.StartsWith("Standard "); }
 }

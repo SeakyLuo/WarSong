@@ -20,6 +20,3 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/GameMode.unity
     guid: e77d71b75539ff14c92449bdddd481c7
-  - enabled: 1
-    path: Assets/_Scenes/DemoGameMode.unity
-    guid: 42fc84ea2378d004ca6c0a635f96c0ad

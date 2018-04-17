@@ -1,29 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PieceInfo : MonoBehaviour {
-    public PieceAttributes pieceAttributes;
 
-    private Vector2 startLocation, location;
+    private Piece piece;
+    private PieceAttributes pieceAttributes;
 
-    public string GetCardType()
+    public void Setup(Collection collection, Vector2Int loc, bool isAlly)
     {
-        return pieceAttributes.type;
+        piece = new Piece(collection, loc, isAlly);
+        pieceAttributes = FindPieceAttributes(collection.name);
+        gameObject.GetComponentInChildren<Image>().sprite = pieceAttributes.image;
     }
 
-    public Vector2 GetLocation()
-    {
-        return location;
-    }
+    public Piece GetPiece() { return piece; }
+    public PieceAttributes GetPieceAttributes() { return pieceAttributes; }
+    public string GetPieceType() { return pieceAttributes.type; }
+    public void SetLocation(Vector2Int loc) { piece.SetLocation(loc); }
 
-    public void SetLocation(Vector2 loc)
-    {
-        location = loc;
-    }
-
-    public void SetStartLocation(Vector2 loc)
-    {
-        startLocation = loc;
-    }
+    private PieceAttributes FindPieceAttributes(string name) { return Resources.Load<PieceAttributes>("Pieces/Info/" + name + "/Attributes"); }
 }
