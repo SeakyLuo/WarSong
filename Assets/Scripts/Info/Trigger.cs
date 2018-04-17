@@ -16,12 +16,12 @@ public class Trigger {
     public virtual void EndofTheTurn() { }
     public virtual void StartofTheNextRound() { }
     public virtual void AfterTurn(int turn) { }
-    public virtual void InSelfRegion() { }
-    public virtual void InSelfPalace() { }
-    public virtual void AtSelfBottom() { }
-    public virtual void EnterEnemyRegion() { }
-    public virtual void EnterEnemyPalace() { }
-    public virtual void EnterEnemyBottom() { }
+    public virtual void InAllyField() { }
+    public virtual void InPalace() { }
+    public virtual void AtBottom() { }
+    public virtual void InEnemyRegion() { }
+    public virtual void InEnemyPalace() { }
+    public virtual void AtEnemyBottom() { }
     public virtual void EndOfTheGame() { }
 
 }

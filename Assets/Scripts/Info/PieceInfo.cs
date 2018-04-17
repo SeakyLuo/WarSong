@@ -20,5 +20,9 @@ public class PieceInfo : MonoBehaviour {
     public string GetPieceType() { return pieceAttributes.type; }
     public void SetLocation(Vector2Int loc) { piece.SetLocation(loc); }
 
-    private PieceAttributes FindPieceAttributes(string name) { return Resources.Load<PieceAttributes>("Pieces/Info/" + name + "/Attributes"); }
+    private PieceAttributes FindPieceAttributes(string name)
+    {
+        if (name.StartsWith("Standard ")) return InfoLoader.standardAttributes[name];
+        return Resources.Load<PieceAttributes>("Pieces/Info/" + name + "/Attributes");
+    }
 }

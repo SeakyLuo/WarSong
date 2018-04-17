@@ -8,7 +8,7 @@ public class UserInfo {
     public List<Collection> collections;
     public List<Lineup> lineups;
     public Dictionary<string,int> contracts;
-    public int coins, ranking, lastLineupSelected;
+    public int coins, rank, lastLineupSelected;
     //public int[] winningCount;
     //public Quest[] quest;
     //public Progress[] progress;
@@ -29,7 +29,7 @@ public class UserInfo {
             { "Wise Elder", 0}
         };
         coins = 0;
-        ranking = 0;
+        rank = 0;
         lastLineupSelected = -1;
     }
 }
@@ -117,7 +117,7 @@ public class CheatAccount:UserInfo
             { "Wise Elder", 1}
         };
         coins = 99999;
-        ranking = 9999;
+        rank = 9999;
         lastLineupSelected = -1;
     }
 }

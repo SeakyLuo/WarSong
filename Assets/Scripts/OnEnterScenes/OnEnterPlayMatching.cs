@@ -14,7 +14,7 @@ public class OnEnterPlayMatching : MonoBehaviour {
 
     private void Start()
     {
-        ranking.text = InfoLoader.user.ranking.ToString();
+        ranking.text = InfoLoader.user.rank.ToString();
         int lineupsCount = InfoLoader.user.lineups.Count;
         for (int i = 0; i < LineupsManager.lineupsLimit; i++)
         {

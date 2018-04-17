@@ -10,13 +10,16 @@ public class BoardSetup : MonoBehaviour {
     {
         foreach (KeyValuePair<Vector2Int,Collection> pair in lineup.cardLocations)
         {
-            string loc = Vec2ToString(pair.Key);
+            Vector2Int vec = pair.Key;
+            if (!isAlly)
+                vec = new Vector2Int(boardAttributes.boardWidth - pair.Key.x - 1, boardAttributes.boardHeight - pair.Key.y - 1);
+            string loc = Vec2ToString(vec);
             GameObject pieceObj = transform.Find(loc+"/Piece").gameObject;
-            pieceObj.GetComponent<PieceInfo>().Setup(pair.Value, pair.Key, isAlly);
+            pieceObj.GetComponent<PieceInfo>().Setup(pair.Value, vec, isAlly);
             Piece piece = pieceObj.GetComponent<PieceInfo>().GetPiece();
             if (isAlly) GameInfo.activeAlly.Add(piece);
             else GameInfo.activeEnemy.Add(piece);
-            GameInfo.board.Add(pair.Key, piece);
+            GameInfo.board.Add(vec, piece);
         }
     }
 

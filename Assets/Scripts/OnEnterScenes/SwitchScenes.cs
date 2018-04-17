@@ -55,6 +55,11 @@ public class SwitchScenes : MonoBehaviour, IPointerClickHandler
         Application.Quit();
     }
 
+    public void ChangeQuest()
+    {
+
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         foreach(GameObject close in closeObjects)
