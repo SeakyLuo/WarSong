@@ -335,19 +335,25 @@ Prefab:
         type: 2}
       propertyPath: m_SpriteState.m_PressedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: cf07b4c25b94cd944a8d4d79a6f93e14,
+      objectReference: {fileID: 21300000, guid: 0ecc1ba3feee0eb4abc8a56d09e00cfd,
         type: 3}
     - target: {fileID: 114525703526066432, guid: 0f937708fe908db45ba5db6f277238e0,
         type: 2}
       propertyPath: m_SpriteState.m_HighlightedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: cf07b4c25b94cd944a8d4d79a6f93e14,
+      objectReference: {fileID: 21300000, guid: 0ecc1ba3feee0eb4abc8a56d09e00cfd,
         type: 3}
     - target: {fileID: 114525703526066432, guid: 0f937708fe908db45ba5db6f277238e0,
         type: 2}
       propertyPath: m_SpriteState.m_DisabledSprite
       value: 
-      objectReference: {fileID: 21300000, guid: a34cfbbb501c378469b62f379e1b099d,
+      objectReference: {fileID: 21300000, guid: 0bb4b071eedd3d34381086f9513e4c65,
+        type: 3}
+    - target: {fileID: 114634104233792076, guid: 0f937708fe908db45ba5db6f277238e0,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0bb4b071eedd3d34381086f9513e4c65,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f937708fe908db45ba5db6f277238e0, type: 2}
@@ -498,7 +504,7 @@ GameObject:
   - component: {fileID: 411396896}
   - component: {fileID: 411396895}
   m_Layer: 5
-  m_Name: Button
+  m_Name: EnterCollection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -594,8 +600,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: dd1e697fe3911cc4bacef391ab20d742, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -662,7 +668,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 45d2b6c23ea88e142a598284562704d3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8894ae3a365b78e499fce5b3c53678da, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1007,19 +1013,25 @@ Prefab:
         type: 2}
       propertyPath: m_SpriteState.m_HighlightedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: cf07b4c25b94cd944a8d4d79a6f93e14,
+      objectReference: {fileID: 21300000, guid: 0ecc1ba3feee0eb4abc8a56d09e00cfd,
         type: 3}
     - target: {fileID: 114525703526066432, guid: 0f937708fe908db45ba5db6f277238e0,
         type: 2}
       propertyPath: m_SpriteState.m_PressedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: cf07b4c25b94cd944a8d4d79a6f93e14,
+      objectReference: {fileID: 21300000, guid: 0ecc1ba3feee0eb4abc8a56d09e00cfd,
         type: 3}
     - target: {fileID: 114525703526066432, guid: 0f937708fe908db45ba5db6f277238e0,
         type: 2}
       propertyPath: m_SpriteState.m_DisabledSprite
       value: 
-      objectReference: {fileID: 21300000, guid: a34cfbbb501c378469b62f379e1b099d,
+      objectReference: {fileID: 21300000, guid: 0bb4b071eedd3d34381086f9513e4c65,
+        type: 3}
+    - target: {fileID: 114634104233792076, guid: 0f937708fe908db45ba5db6f277238e0,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0bb4b071eedd3d34381086f9513e4c65,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f937708fe908db45ba5db6f277238e0, type: 2}
@@ -1417,19 +1429,25 @@ Prefab:
         type: 2}
       propertyPath: m_SpriteState.m_PressedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: cf07b4c25b94cd944a8d4d79a6f93e14,
+      objectReference: {fileID: 21300000, guid: 0ecc1ba3feee0eb4abc8a56d09e00cfd,
         type: 3}
     - target: {fileID: 114525703526066432, guid: 0f937708fe908db45ba5db6f277238e0,
         type: 2}
       propertyPath: m_SpriteState.m_HighlightedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: cf07b4c25b94cd944a8d4d79a6f93e14,
+      objectReference: {fileID: 21300000, guid: 0ecc1ba3feee0eb4abc8a56d09e00cfd,
         type: 3}
     - target: {fileID: 114525703526066432, guid: 0f937708fe908db45ba5db6f277238e0,
         type: 2}
       propertyPath: m_SpriteState.m_DisabledSprite
       value: 
-      objectReference: {fileID: 21300000, guid: a34cfbbb501c378469b62f379e1b099d,
+      objectReference: {fileID: 21300000, guid: 0bb4b071eedd3d34381086f9513e4c65,
+        type: 3}
+    - target: {fileID: 114634104233792076, guid: 0f937708fe908db45ba5db6f277238e0,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0bb4b071eedd3d34381086f9513e4c65,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f937708fe908db45ba5db6f277238e0, type: 2}
@@ -1456,7 +1474,7 @@ GameObject:
   - component: {fileID: 1103651700}
   - component: {fileID: 1103651699}
   m_Layer: 5
-  m_Name: RankMode
+  m_Name: RankedMode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1542,7 +1560,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 2bc82f8f97494d646a8ebb8b4dd34863, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dd1e697fe3911cc4bacef391ab20d742, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1734,7 +1752,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: aa2abc191da545141baf59866433788c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d08ec3df3e74d1243a0a6b58a07f78ee, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2120,19 +2138,25 @@ Prefab:
         type: 2}
       propertyPath: m_SpriteState.m_PressedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: cf07b4c25b94cd944a8d4d79a6f93e14,
+      objectReference: {fileID: 21300000, guid: 0ecc1ba3feee0eb4abc8a56d09e00cfd,
         type: 3}
     - target: {fileID: 114525703526066432, guid: 0f937708fe908db45ba5db6f277238e0,
         type: 2}
       propertyPath: m_SpriteState.m_HighlightedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: cf07b4c25b94cd944a8d4d79a6f93e14,
+      objectReference: {fileID: 21300000, guid: 0ecc1ba3feee0eb4abc8a56d09e00cfd,
         type: 3}
     - target: {fileID: 114525703526066432, guid: 0f937708fe908db45ba5db6f277238e0,
         type: 2}
       propertyPath: m_SpriteState.m_DisabledSprite
       value: 
-      objectReference: {fileID: 21300000, guid: a34cfbbb501c378469b62f379e1b099d,
+      objectReference: {fileID: 21300000, guid: 0bb4b071eedd3d34381086f9513e4c65,
+        type: 3}
+    - target: {fileID: 114634104233792076, guid: 0f937708fe908db45ba5db6f277238e0,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0bb4b071eedd3d34381086f9513e4c65,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f937708fe908db45ba5db6f277238e0, type: 2}
@@ -2485,19 +2509,25 @@ Prefab:
         type: 2}
       propertyPath: m_SpriteState.m_PressedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: cf07b4c25b94cd944a8d4d79a6f93e14,
+      objectReference: {fileID: 21300000, guid: 0ecc1ba3feee0eb4abc8a56d09e00cfd,
         type: 3}
     - target: {fileID: 114525703526066432, guid: 0f937708fe908db45ba5db6f277238e0,
         type: 2}
       propertyPath: m_SpriteState.m_HighlightedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: cf07b4c25b94cd944a8d4d79a6f93e14,
+      objectReference: {fileID: 21300000, guid: 0ecc1ba3feee0eb4abc8a56d09e00cfd,
         type: 3}
     - target: {fileID: 114525703526066432, guid: 0f937708fe908db45ba5db6f277238e0,
         type: 2}
       propertyPath: m_SpriteState.m_DisabledSprite
       value: 
-      objectReference: {fileID: 21300000, guid: a34cfbbb501c378469b62f379e1b099d,
+      objectReference: {fileID: 21300000, guid: 0bb4b071eedd3d34381086f9513e4c65,
+        type: 3}
+    - target: {fileID: 114634104233792076, guid: 0f937708fe908db45ba5db6f277238e0,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0bb4b071eedd3d34381086f9513e4c65,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f937708fe908db45ba5db6f277238e0, type: 2}
@@ -2672,19 +2702,25 @@ Prefab:
         type: 2}
       propertyPath: m_SpriteState.m_PressedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: cf07b4c25b94cd944a8d4d79a6f93e14,
+      objectReference: {fileID: 21300000, guid: 0ecc1ba3feee0eb4abc8a56d09e00cfd,
         type: 3}
     - target: {fileID: 114525703526066432, guid: 0f937708fe908db45ba5db6f277238e0,
         type: 2}
       propertyPath: m_SpriteState.m_HighlightedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: cf07b4c25b94cd944a8d4d79a6f93e14,
+      objectReference: {fileID: 21300000, guid: 0ecc1ba3feee0eb4abc8a56d09e00cfd,
         type: 3}
     - target: {fileID: 114525703526066432, guid: 0f937708fe908db45ba5db6f277238e0,
         type: 2}
       propertyPath: m_SpriteState.m_DisabledSprite
       value: 
-      objectReference: {fileID: 21300000, guid: a34cfbbb501c378469b62f379e1b099d,
+      objectReference: {fileID: 21300000, guid: 0bb4b071eedd3d34381086f9513e4c65,
+        type: 3}
+    - target: {fileID: 114634104233792076, guid: 0f937708fe908db45ba5db6f277238e0,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0bb4b071eedd3d34381086f9513e4c65,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f937708fe908db45ba5db6f277238e0, type: 2}
@@ -2995,19 +3031,25 @@ Prefab:
         type: 2}
       propertyPath: m_SpriteState.m_PressedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: cf07b4c25b94cd944a8d4d79a6f93e14,
+      objectReference: {fileID: 21300000, guid: 0ecc1ba3feee0eb4abc8a56d09e00cfd,
         type: 3}
     - target: {fileID: 114525703526066432, guid: 0f937708fe908db45ba5db6f277238e0,
         type: 2}
       propertyPath: m_SpriteState.m_HighlightedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: cf07b4c25b94cd944a8d4d79a6f93e14,
+      objectReference: {fileID: 21300000, guid: 0ecc1ba3feee0eb4abc8a56d09e00cfd,
         type: 3}
     - target: {fileID: 114525703526066432, guid: 0f937708fe908db45ba5db6f277238e0,
         type: 2}
       propertyPath: m_SpriteState.m_DisabledSprite
       value: 
-      objectReference: {fileID: 21300000, guid: a34cfbbb501c378469b62f379e1b099d,
+      objectReference: {fileID: 21300000, guid: 0bb4b071eedd3d34381086f9513e4c65,
+        type: 3}
+    - target: {fileID: 114634104233792076, guid: 0f937708fe908db45ba5db6f277238e0,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0bb4b071eedd3d34381086f9513e4c65,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f937708fe908db45ba5db6f277238e0, type: 2}
@@ -3193,19 +3235,25 @@ Prefab:
         type: 2}
       propertyPath: m_SpriteState.m_PressedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: cf07b4c25b94cd944a8d4d79a6f93e14,
+      objectReference: {fileID: 21300000, guid: 0ecc1ba3feee0eb4abc8a56d09e00cfd,
         type: 3}
     - target: {fileID: 114525703526066432, guid: 0f937708fe908db45ba5db6f277238e0,
         type: 2}
       propertyPath: m_SpriteState.m_HighlightedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: cf07b4c25b94cd944a8d4d79a6f93e14,
+      objectReference: {fileID: 21300000, guid: 0ecc1ba3feee0eb4abc8a56d09e00cfd,
         type: 3}
     - target: {fileID: 114525703526066432, guid: 0f937708fe908db45ba5db6f277238e0,
         type: 2}
       propertyPath: m_SpriteState.m_DisabledSprite
       value: 
-      objectReference: {fileID: 21300000, guid: a34cfbbb501c378469b62f379e1b099d,
+      objectReference: {fileID: 21300000, guid: 0bb4b071eedd3d34381086f9513e4c65,
+        type: 3}
+    - target: {fileID: 114634104233792076, guid: 0f937708fe908db45ba5db6f277238e0,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0bb4b071eedd3d34381086f9513e4c65,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f937708fe908db45ba5db6f277238e0, type: 2}
@@ -3555,19 +3603,25 @@ Prefab:
         type: 2}
       propertyPath: m_SpriteState.m_PressedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: cf07b4c25b94cd944a8d4d79a6f93e14,
+      objectReference: {fileID: 21300000, guid: 0ecc1ba3feee0eb4abc8a56d09e00cfd,
         type: 3}
     - target: {fileID: 114525703526066432, guid: 0f937708fe908db45ba5db6f277238e0,
         type: 2}
       propertyPath: m_SpriteState.m_HighlightedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: cf07b4c25b94cd944a8d4d79a6f93e14,
+      objectReference: {fileID: 21300000, guid: 0ecc1ba3feee0eb4abc8a56d09e00cfd,
         type: 3}
     - target: {fileID: 114525703526066432, guid: 0f937708fe908db45ba5db6f277238e0,
         type: 2}
       propertyPath: m_SpriteState.m_DisabledSprite
       value: 
-      objectReference: {fileID: 21300000, guid: a34cfbbb501c378469b62f379e1b099d,
+      objectReference: {fileID: 21300000, guid: 0bb4b071eedd3d34381086f9513e4c65,
+        type: 3}
+    - target: {fileID: 114634104233792076, guid: 0f937708fe908db45ba5db6f277238e0,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0bb4b071eedd3d34381086f9513e4c65,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f937708fe908db45ba5db6f277238e0, type: 2}

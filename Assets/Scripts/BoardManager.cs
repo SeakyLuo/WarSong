@@ -58,6 +58,7 @@ public class BoardManager : MonoBehaviour {
     {
         gameObject.SetActive(false);
         LoadBoard(boardAttributes[currentBoard]);
+        createLineupPanel.SetActive(true);
     }
 
     public void LoadBoard(Lineup lineup)

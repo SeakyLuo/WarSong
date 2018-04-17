@@ -10,9 +10,23 @@ public class BoardInfo : MonoBehaviour
     public Dictionary<string, PieceAttributes> attributesDict = new Dictionary<string, PieceAttributes>();
     public Dictionary<string, List<Vector2Int>> typeLocations = new Dictionary<string, List<Vector2Int>>();
     public Dictionary<string, string> locationType = new Dictionary<string, string>();
-    public Dictionary<Vector2Int, Collection> standardLocations = new Dictionary<Vector2Int, Collection>();
+    public Dictionary<Vector2Int, Collection> standardLocations;
 
     private void Awake()
+    {
+        if (standardLocations == null) SetupStandardLocation();
+        DataSetup();
+        GameObject.Find("Collections").GetComponent<CollectionGestureHandler>().SetBoardInfo(this);
+        gameObject.transform.parent.parent.parent.GetComponent<LineupBuilder>().SetBoardInfo(this);
+        gameObject.transform.parent.GetComponent<LineupBoardGestureHandler>().SetBoardInfo(this);
+    }
+
+    public void Reset()
+    {
+        SetAttributes(attributes);
+    }
+
+    private void SetupStandardLocation()
     {
         standardLocations = new Dictionary<Vector2Int, Collection>
         {
@@ -26,15 +40,6 @@ public class BoardInfo : MonoBehaviour
             {attributes.asloc3, Collection.Soldier },{attributes.asloc4, Collection.Soldier },
             {attributes.asloc5, Collection.Soldier }
         };
-        DataSetup();
-        GameObject.Find("Collections").GetComponent<CollectionGestureHandler>().SetBoardInfo(this);
-        gameObject.transform.parent.parent.parent.GetComponent<LineupBuilder>().SetBoardInfo(this);
-        gameObject.transform.parent.GetComponent<LineupBoardGestureHandler>().SetBoardInfo(this);
-    }
-
-    public void Reset()
-    {
-        SetAttributes(attributes);
     }
 
     public void SetAttributes(string boardName, Dictionary<Vector2Int, Collection> newLocations)
@@ -45,6 +50,7 @@ public class BoardInfo : MonoBehaviour
     public void SetAttributes(BoardAttributes board, Dictionary<Vector2Int, Collection> newLocations = null)
     {
         attributes = board;
+        if (standardLocations == null) SetupStandardLocation();
         DataSetup(newLocations);
         Color tmpColor;
         foreach (KeyValuePair<string, PieceAttributes> pair in attributesDict)
@@ -79,18 +85,25 @@ public class BoardInfo : MonoBehaviour
 
     private void DataSetup(Dictionary<Vector2Int, Collection> newLocations = null)
     {
-        if (newLocations == null) newLocations = standardLocations;
-        cardLocations = new Dictionary<Vector2Int, Collection>
+        if (newLocations == null)
         {
-            { attributes.agloc, newLocations[attributes.agloc] },
-            { attributes.aaloc1,newLocations[attributes.aaloc1] },{ attributes.aaloc2,newLocations[attributes.aaloc2] },
-            { attributes.aeloc1,newLocations[attributes.aeloc1] },{ attributes.aeloc2,newLocations[attributes.aeloc2] },
-            { attributes.ahloc1,newLocations[attributes.ahloc1] },{ attributes.ahloc2,newLocations[attributes.ahloc2] },
-            { attributes.arloc1,newLocations[attributes.arloc1] },{ attributes.arloc2,newLocations[attributes.arloc2] },
-            { attributes.acloc1,newLocations[attributes.acloc1] },{ attributes.acloc2,newLocations[attributes.acloc2] },
-            { attributes.asloc1,newLocations[attributes.asloc1] },{ attributes.asloc2,newLocations[attributes.asloc2] },
-            { attributes.asloc3,newLocations[attributes.asloc3] },{ attributes.asloc4,newLocations[attributes.asloc4] },{ attributes.asloc5,newLocations[attributes.asloc5] },
-        };
+            newLocations = standardLocations;
+            cardLocations = newLocations;
+        }
+        else
+        {
+            cardLocations = new Dictionary<Vector2Int, Collection>
+            {
+                { attributes.agloc, newLocations[attributes.agloc] },
+                { attributes.aaloc1,newLocations[attributes.aaloc1] },{ attributes.aaloc2,newLocations[attributes.aaloc2] },
+                { attributes.aeloc1,newLocations[attributes.aeloc1] },{ attributes.aeloc2,newLocations[attributes.aeloc2] },
+                { attributes.ahloc1,newLocations[attributes.ahloc1] },{ attributes.ahloc2,newLocations[attributes.ahloc2] },
+                { attributes.arloc1,newLocations[attributes.arloc1] },{ attributes.arloc2,newLocations[attributes.arloc2] },
+                { attributes.acloc1,newLocations[attributes.acloc1] },{ attributes.acloc2,newLocations[attributes.acloc2] },
+                { attributes.asloc1,newLocations[attributes.asloc1] },{ attributes.asloc2,newLocations[attributes.asloc2] },
+                { attributes.asloc3,newLocations[attributes.asloc3] },{ attributes.asloc4,newLocations[attributes.asloc4] },{ attributes.asloc5,newLocations[attributes.asloc5] },
+            };
+        }        
         attributesDict = new Dictionary<string, PieceAttributes>
         {
             { Vec2ToString(attributes.agloc), LoadPieceAttributes(newLocations[attributes.agloc].name) },
