@@ -19,7 +19,7 @@ public class CardInfo : MonoBehaviour {
     private void Start()
     {
         heartImage = Resources.Load<Sprite>("Collections/Icons/heart");
-        coinImage = Resources.Load<Sprite>("Main/coin");
+        coinImage = Resources.Load<Sprite>("Collections/Icons/coin");
         if (piece != null) SetAttributes(piece);
         else if (tactic != null) SetAttributes(tactic);
     }

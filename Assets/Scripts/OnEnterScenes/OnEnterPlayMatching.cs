@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class OnEnterPlayMatching : MonoBehaviour {
 
-    public Text ranking;
+    public Text rank, time;
     public Button launchWar;
     public GameObject launchWarText;
 
@@ -14,7 +13,7 @@ public class OnEnterPlayMatching : MonoBehaviour {
 
     private void Start()
     {
-        ranking.text = InfoLoader.user.rank.ToString();
+        rank.text = InfoLoader.user.rank.ToString();
         int lineupsCount = InfoLoader.user.lineups.Count;
         for (int i = 0; i < LineupsManager.lineupsLimit; i++)
         {
@@ -39,6 +38,11 @@ public class OnEnterPlayMatching : MonoBehaviour {
             lineupObjects[InfoLoader.user.lastLineupSelected].GetComponent<Button>().Select();
         }
         SelectLineup(InfoLoader.user.lastLineupSelected);
+    }
+
+    private void FixedUpdate()
+    {
+        time.text = DateTime.Now.ToString("h:mm tt");
     }
 
     public void Back()
