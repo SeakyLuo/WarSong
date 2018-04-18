@@ -1,5 +1,6 @@
 WindowsStandalone
 SceneListBegin?
+Assets/_Scenes/Login.unity
 Assets/_Scenes/Main.unity
 Assets/_Scenes/Collections.unity
 Assets/_Scenes/Recruitment.unity
@@ -114,6 +115,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 8c298cba7e3c2c4830026a5039f42c5b Assembly-CSharp.dll:.BoardAttributes
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PieceInfo
 322cb40e1e282f28af980cbef7922a90 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
 3a8ae517724b1f4a57b9994d9faefda5 Assembly-CSharp.dll:.TacticGestureHandler
@@ -125,10 +127,11 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 a586508af6261a5e98fdcf2a8366443f Assembly-CSharp.dll:.CollectionGestureHandler
 2eb34e97af3f844eefaabab5e6c3f811 Assembly-CSharp.dll:.TacticInfo
 1d3ef741962999b298a2af36eca31b6d Assembly-CSharp.dll:.AutoCreate
+5ac456bfaf4bca7ef24312627c1076eb Assembly-CSharp.dll:.Settings
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
 64b68c76bda28263283019e54b323754 Assembly-CSharp.dll:.BoardManager
-eb0fdd292e4293a115ce08c93044518c Assembly-CSharp.dll:.SwitchScenes
+0d846d36ca32ae8f6c955717b88365fd Assembly-CSharp.dll:.SwitchScenes
 a506194e7e367df4a7eff1f3049469a0 Assembly-CSharp.dll:.ContractAttributes
 8cebee14a6bfe5125808ff6a1b351886 Assembly-CSharp.dll:.BoardSetup
 3a8ae517724b1f4a57b9994d9faefda5 Assembly-CSharp.dll:.LineupBoardGestureHandler
@@ -152,7 +155,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
 96d0fbde9fd209878a0a291f82c9bcdd UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
 64eb32cc721b1cc68a91ed57461e188c UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.RemoteTestResultSender
-72307dff40e1918aa41513eb964e11b5 Assembly-CSharp.dll:.OnEnterPlayMatching
+1cb54c44bc07e6c62603bcc3bd1fdf0b Assembly-CSharp.dll:.OnEnterPlayMatching
 e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 c5c4c5d36927ce72b3ea1ddc983a6a1e Assembly-CSharp.dll:.TacticAttributes
@@ -168,7 +171,8 @@ b618a9825774a1442583f337814156a0 Assembly-CSharp.dll:.PieceAttributes
 b79fd752f695ce5ee46f5430c1bedeee Assembly-CSharp.dll:.LineupBuilder
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 f9123cf35a5a4d73f47625a1865ea33d Assembly-CSharp.dll:.ContractsManager
+0d50533b5be9717fc17e770faa884fb4 Assembly-CSharp.dll:.UpdateTime
 aeef4bae2f65504205e91c4da430c6a7 Assembly-CSharp.dll:.CardInfo
 b28b60187aee475939f824d2f4f36b9a Assembly-CSharp.dll:.OnEnterCollections
 b7e229189992bcbe7fa828b2fefeccea Assembly-CSharp.dll:.MovementController
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PieceInfo
+56d32961bb28c968c80486f51ee2da95 Assembly-CSharp.dll:.Login

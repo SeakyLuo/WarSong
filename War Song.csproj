@@ -316,11 +316,13 @@
     <Compile Include="Assets\Scripts\Info\UserInfo.cs" />
     <Compile Include="Assets\Scripts\LineupBuilder.cs" />
     <Compile Include="Assets\Scripts\LineupsManager.cs" />
+    <Compile Include="Assets\Scripts\Login.cs" />
     <Compile Include="Assets\Scripts\MovementController.cs" />
     <Compile Include="Assets\Scripts\OnEnterScenes\OnEnterCollections.cs" />
     <Compile Include="Assets\Scripts\OnEnterScenes\OnEnterPlayMatching.cs" />
     <Compile Include="Assets\Scripts\OnEnterScenes\OnEnterRecruitment.cs" />
     <Compile Include="Assets\Scripts\OnEnterScenes\SwitchScenes.cs" />
+    <Compile Include="Assets\Scripts\Settings.cs" />
     <Compile Include="Assets\Scripts\UpdateTime.cs" />
     <Compile Include="Assets\Scripts\UserContract.cs" />
   </ItemGroup>
