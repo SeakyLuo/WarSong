@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class MouseOverPiece : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
@@ -12,22 +11,17 @@ public class MouseOverPiece : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private GameObject parentCanvas, showCardInfo, dragCard;
     private BoardInfo boardInfo;
     private Vector2Int nameLoc;
-    private float enterTime;
-    private static float timeTnterval = 0.05f;
     private Color tmpColor;
 
     private void Start()
     {
         parentCanvas = GameObject.Find("Canvas");
-        boardInfo = gameObject.transform.parent.GetComponent<BoardInfo>();
-        nameLoc = StringToVector2Int(gameObject.name);
+        boardInfo = transform.parent.GetComponent<BoardInfo>();
+        nameLoc = StringToVec2(gameObject.name);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (Time.time - enterTime < timeTnterval) return;
-        if (showCardInfo != null) Destroy(showCardInfo);
-        enterTime = Time.time;
         showCardInfo = Instantiate(card);
         showCardInfo.transform.SetParent(parentCanvas.transform);
         showCardInfo.GetComponent<CardInfo>().SetAttributes(boardInfo.cardLocations[nameLoc]);
@@ -40,7 +34,7 @@ public class MouseOverPiece : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         if (showCardInfo != null) Destroy(showCardInfo);
     }
 
-    private Vector2Int StringToVector2Int(string loc) { return new Vector2Int((int)Char.GetNumericValue(loc[0]), (int)Char.GetNumericValue(loc[1])); }
+    private Vector2Int StringToVec2(string loc) { return new Vector2Int((int)Char.GetNumericValue(loc[0]), (int)Char.GetNumericValue(loc[1])); }
 
     private Vector3 AdjustedMousePosition()
     {

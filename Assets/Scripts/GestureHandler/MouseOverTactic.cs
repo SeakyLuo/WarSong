@@ -8,16 +8,11 @@ public class MouseOverTactic : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public static float xscale = Screen.width / 1920, yscale = Screen.width / 1080;
 
     private GameObject showCardInfo;
-    private float enterTime;
-    private static float timeTnterval = 0.05f;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (Time.time - enterTime < timeTnterval) return;
-        if (showCardInfo != null) Destroy(showCardInfo);
-        GameObject tactic = gameObject.transform.Find("Tactic").gameObject;        
+        GameObject tactic = transform.Find("Tactic").gameObject;        
         if (!tactic.activeSelf) return;
-        enterTime = Time.time;
         showCardInfo = Instantiate(card);
         showCardInfo.transform.SetParent(parentCanvas.transform);
         showCardInfo.GetComponent<CardInfo>().SetAttributes(tactic.GetComponent<TacticInfo>().tactic);
