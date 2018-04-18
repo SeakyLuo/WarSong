@@ -329,7 +329,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInfoPanel: {fileID: 671672177}
   settingsPanel: {fileID: 791681118}
-  time: {fileID: 1866505608}
 --- !u!114 &53613890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3188,12 +3187,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1866505608 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114691843224316156, guid: 4b399b577df5f004788c8377a7656893,
-    type: 2}
-  m_PrefabInternal: {fileID: 502686332}
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!224 &1866505610 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224792998063240594, guid: 4b399b577df5f004788c8377a7656893,
