@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 public class Trigger {
 
+    public int afterTurn = 0;
+
     public virtual void StartOfTheGame() { }
     public virtual void Link() { }
     public virtual void Revenge() { }
@@ -15,7 +17,6 @@ public class Trigger {
     public virtual void StartOfTheTurn() { }
     public virtual void EndofTheTurn() { }
     public virtual void StartofTheNextRound() { }
-    public virtual void AfterTurn(int turn) { }
     public virtual void InAllyField() { }
     public virtual void InPalace() { }
     public virtual void AtBottom() { }

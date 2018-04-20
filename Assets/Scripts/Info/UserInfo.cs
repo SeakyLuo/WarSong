@@ -8,7 +8,9 @@ public class UserInfo {
     public List<Collection> collections;
     public List<Lineup> lineups;
     public Dictionary<string,int> contracts;
-    public int coins, rank, lastLineupSelected;
+    public int coins, rank, lastLineupSelected, winsToday;
+    public Stats total;
+    public Dictionary<string, Stats> boardResult;
     //public int[] winningCount;
     //public Quest[] quest;
     //public Progress[] progress;

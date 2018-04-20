@@ -130,10 +130,11 @@ a586508af6261a5e98fdcf2a8366443f Assembly-CSharp.dll:.CollectionGestureHandler
 5ac456bfaf4bca7ef24312627c1076eb Assembly-CSharp.dll:.Settings
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
+56d32961bb28c968c80486f51ee2da95 Assembly-CSharp.dll:.Login
 64b68c76bda28263283019e54b323754 Assembly-CSharp.dll:.BoardManager
 0d846d36ca32ae8f6c955717b88365fd Assembly-CSharp.dll:.SwitchScenes
 a506194e7e367df4a7eff1f3049469a0 Assembly-CSharp.dll:.ContractAttributes
-8cebee14a6bfe5125808ff6a1b351886 Assembly-CSharp.dll:.BoardSetup
+7f796c0d0daf196122264b044de8c501 Assembly-CSharp.dll:.BoardSetup
 3a8ae517724b1f4a57b9994d9faefda5 Assembly-CSharp.dll:.LineupBoardGestureHandler
 9b747a869a2583849ea88b39e1a14c56 Assembly-CSharp.dll:.InfoLoader
 e830ccf1ff6b0d36d0195346bfea27b2 Assembly-CSharp.dll:.OnEnterRecruitment
@@ -175,4 +176,3 @@ f9123cf35a5a4d73f47625a1865ea33d Assembly-CSharp.dll:.ContractsManager
 aeef4bae2f65504205e91c4da430c6a7 Assembly-CSharp.dll:.CardInfo
 b28b60187aee475939f824d2f4f36b9a Assembly-CSharp.dll:.OnEnterCollections
 b7e229189992bcbe7fa828b2fefeccea Assembly-CSharp.dll:.MovementController
-56d32961bb28c968c80486f51ee2da95 Assembly-CSharp.dll:.Login

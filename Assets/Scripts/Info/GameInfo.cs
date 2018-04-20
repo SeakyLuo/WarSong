@@ -12,6 +12,38 @@ public static class GameInfo
                            activeEnemy = new List<Piece>(),
                            inactiveEnemy = new List<Piece>();
 
+    public static void Add(Piece piece, Vector2Int loc, bool reactivate = false)
+    {
+        piece.SetActive(true);
+        board.Add(loc, piece);
+        if (piece.IsAlly())
+        {
+            activeAlly.Add(piece);
+            if (reactivate) inactiveAlly.Remove(piece);
+        }
+        else
+        {
+            activeEnemy.Add(piece);
+            if (reactivate) inactiveEnemy.Remove(piece);
+        }
+    }
+
+    public static void Remove(Piece piece, Vector2Int loc)
+    {
+        piece.SetActive(false);
+        board.Remove(loc);
+        if (piece.IsAlly())
+        {
+            activeAlly.Remove(piece);
+            inactiveAlly.Add(piece);
+        }
+        else
+        {
+            activeEnemy.Remove(piece);
+            inactiveEnemy.Add(piece);
+        }
+    }
+
     public static void Clear()
     {
         board.Clear();
