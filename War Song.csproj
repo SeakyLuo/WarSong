@@ -13,14 +13,12 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectGenerator>VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>2017.3.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -300,9 +298,9 @@
     <Compile Include="Assets\Scripts\ContractsManager.cs" />
     <Compile Include="Assets\Scripts\DataType\Collection.cs" />
     <Compile Include="Assets\Scripts\DataType\Database.cs" />
-    <Compile Include="Assets\Scripts\DataType\Stats.cs" />
     <Compile Include="Assets\Scripts\DataType\Lineup.cs" />
     <Compile Include="Assets\Scripts\DataType\Piece.cs" />
+    <Compile Include="Assets\Scripts\DataType\Stats.cs" />
     <Compile Include="Assets\Scripts\GestureHandler\CollectionGestureHandler.cs" />
     <Compile Include="Assets\Scripts\GestureHandler\LineupBoardGestureHandler.cs" />
     <Compile Include="Assets\Scripts\GestureHandler\MouseOverPiece.cs" />

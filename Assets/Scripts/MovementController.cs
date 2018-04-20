@@ -70,8 +70,8 @@ public class MovementController : MonoBehaviour, IPointerEnterHandler, IPointerE
                     // Draw Valid path
                     foreach (Vector2Int path in validLoc)
                     {
-                        float posX = path.x * scale + scale / 2;
-                        float posY = path.y * scale + scale / 2;
+                        float posX = path.x * scale;
+                        float posY = path.y * scale;
                         float posZ = -1;
                         if (FindAt(path) == 'E') posZ -= hitObj.transform.localScale.z;
                         GameObject copy = Instantiate(pathDot);
@@ -142,10 +142,10 @@ public class MovementController : MonoBehaviour, IPointerEnterHandler, IPointerE
     {
         foreach (GameObject pathDot in pathDots) Destroy(pathDot);
         pathDots.Clear();
-        selected.transform.position -= raiseVector;
-        if (!oldLocation.activeSelf) oldLocation.SetActive(true);
+        selected.transform.position -= raiseVector;        
         if (x != -1 && y != -1)
-        {            
+        {
+            if (!oldLocation.activeSelf) oldLocation.SetActive(true);
             oldLocation.transform.position = selected.transform.position;
             if (previousSprite != null)
                 previousImage.sprite = previousSprite;
@@ -156,7 +156,7 @@ public class MovementController : MonoBehaviour, IPointerEnterHandler, IPointerE
             selected.transform.parent = loc;
             selected.transform.localPosition = new Vector3(0, 0, selected.transform.position.z);
             round++;
-            roundCounter.text = "Round: " + round.ToString();
+            roundCounter.text = round.ToString();
 
             previousImage = loc.Find("Image").GetComponent<Image>();
             previousSprite = previousImage.sprite;
