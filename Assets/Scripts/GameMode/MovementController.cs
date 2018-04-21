@@ -98,7 +98,7 @@ public class MovementController : MonoBehaviour
         if (GameInfo.board.TryGetValue(loc, out enemy) && !enemy.IsAlly())
         {
             if(enemy.GetPieceType() == "General")
-                onEnterGame.Gameover();
+                onEnterGame.YouWin();
             boardSetup.Deactivate(enemy);
         }
     }

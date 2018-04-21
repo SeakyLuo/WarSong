@@ -17,12 +17,7 @@ public class SwitchScenes : MonoBehaviour, IPointerClickHandler
     {
         parentCanvas = gameObject.GetComponent<Canvas>();
         closeObjects = new GameObject[] { optionsPanel, settingsPanel, playerInfoPanel };
-        winText.text = InfoLoader.user.total.win.ToString();
-        loseText.text = InfoLoader.user.total.lose.ToString();
-        drawText.text = InfoLoader.user.total.draw.ToString();
-        percentageText.text = InfoLoader.user.total.percentage.ToString();
-        rank.text = InfoLoader.user.rank.ToString();
-        title.text = Range.FindTitle(InfoLoader.user.rank);
+        SetPlayerInfo();
     }
 
     public void EnterCollection()
@@ -40,9 +35,20 @@ public class SwitchScenes : MonoBehaviour, IPointerClickHandler
         SceneManager.LoadScene("Recruitment");
     }
 
+    private void SetPlayerInfo()
+    {
+        winText.text = InfoLoader.user.total.win.ToString();
+        loseText.text = InfoLoader.user.total.lose.ToString();
+        drawText.text = InfoLoader.user.total.draw.ToString();
+        percentageText.text = InfoLoader.user.total.percentage.ToString();
+        rank.text = InfoLoader.user.rank.ToString();
+        title.text = Range.FindTitle(InfoLoader.user.rank);
+    }
+
     public void ShowPlayerInfo()
     {
         playerInfoPanel.SetActive(true);
+        SetPlayerInfo();
         settingsPanel.SetActive(false);
         settingsPanel.GetComponent<Settings>().optionsPanel.SetActive(false);
     }

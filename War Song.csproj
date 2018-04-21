@@ -328,6 +328,7 @@
     <Compile Include="Assets\Scripts\OnEnterScenes\OnEnterPlayMatching.cs" />
     <Compile Include="Assets\Scripts\OnEnterScenes\OnEnterRecruitment.cs" />
     <Compile Include="Assets\Scripts\OnEnterScenes\SwitchScenes.cs" />
+    <Compile Include="Assets\Scripts\Recruitment\ActivateCoinStore.cs" />
     <Compile Include="Assets\Scripts\Recruitment\ActivateContractStore.cs" />
     <Compile Include="Assets\Scripts\Recruitment\ContractsManager.cs" />
   </ItemGroup>

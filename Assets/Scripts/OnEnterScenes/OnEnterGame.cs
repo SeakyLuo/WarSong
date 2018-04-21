@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 using System;
 
-public class OnEnterGame : MonoBehaviour {
-
+public class OnEnterGame : MonoBehaviour, IPointerClickHandler
+{
     public static bool gameover = false;
-    public GameObject gameoverImage;
+
+    public GameObject youwinImage, defeatedImage, settingsPanel;
     public Transform tacticBag;
     public Text roundCount, timer;
     public Text playerName, playerWin, playerRank;
@@ -16,13 +18,19 @@ public class OnEnterGame : MonoBehaviour {
 
     private Lineup lineup;
     private GameObject board;
+    private Canvas parentCanvas;
     private List<Transform> tacticObjs = new List<Transform>();
     private BoardSetup boardSetup;
+    private Dictionary<String, int> credits = new Dictionary<string, int>()
+    {
+        { "Chariot", 8 }, { "Horse",4}, {"Elephant",3},{"Advisor",2},{"General",10},{"Cannon",4},{"Soldier",2}
+    };
 
     // Use this for initialization
     void Start () {
         lineup = InfoLoader.user.lineups[InfoLoader.user.lastLineupSelected];
         board = Instantiate(Resources.Load<GameObject>("Board/Info/" + lineup.boardName + "/Board"));
+        board.transform.SetAsFirstSibling();
         boardSetup = board.GetComponent<BoardSetup>();
         boardSetup.Setup(lineup, true);  // Set up Player Lineup
         boardSetup.Setup(new EnemyLineup(), false);  // Set up Enemy Lineup
@@ -41,6 +49,7 @@ public class OnEnterGame : MonoBehaviour {
             tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(FindTacticAttributes(lineup.tactics[i]));
         }
         StartCoroutine(Timer());
+        parentCanvas = transform.Find("Canvas").GetComponent<Canvas>();
     }
 
     private TacticAttributes FindTacticAttributes(string tacticName)
@@ -48,15 +57,23 @@ public class OnEnterGame : MonoBehaviour {
         return Resources.Load<TacticAttributes>("Tactics/Info/"+tacticName+"/Attributes");
     }
 
-    private void Update()
+    public void OnPointerClick(PointerEventData eventData)
     {
         if (gameover)
         {
-            if (Input.GetMouseButtonUp(0))
+            gameover = false;
+            SceneManager.LoadScene("PlayerMatching");
+            GameInfo.Clear();
+        }
+        else if (settingsPanel.activeSelf)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
             {
-                SceneManager.LoadScene("PlayerMatching");
-                GameInfo.Clear();
-            }
+                if(hit.collider.name!= "SettingsPanel")
+                    settingsPanel.SetActive(false);
+            } 
         }
     }
 
@@ -76,17 +93,57 @@ public class OnEnterGame : MonoBehaviour {
         }
     }
 
-    public void Gameover()
-    {
-        gameover = true;
-        gameoverImage.SetActive(true);
+    public void YouWin()
+    {        
+        youwinImage.SetActive(true);
         InfoLoader.user.total.Win();
+        GameOver();
+    }
+
+    public void YouLose()
+    {
+        defeatedImage.SetActive(true);
+        InfoLoader.user.total.Lost();
+        GameOver();
+    }
+
+    public void GameOver()
+    {
+        GameInfo.time = GameInfo.maxTime;
+        gameover = true;
+        // CalculateNewRank(); // should be done by server
         // remove collections
+    }
+
+    public void ShowSettingsPanel()
+    {
+        settingsPanel.SetActive(!settingsPanel.activeSelf);
+    }
+
+    public void Concede()
+    {
+        YouLose();
+    }
+
+    private void CalculateNewRank()
+    {
+        int credit = 0;
+        foreach(Piece piece in GameInfo.activeAlly)
+            credit += credits[piece.GetPieceType()];
+        foreach (Piece piece in GameInfo.inactiveEnemy)
+            credit += credits[piece.GetPieceType()];
     }
 
     public void NextTurn()
     {
         roundCount.text = (++GameInfo.round).ToString();
         GameInfo.time = GameInfo.maxTime;
+    }
+
+    private Vector2 AdjustedMousePosition()
+    {
+        Vector2 mousePosition;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(parentCanvas.transform as RectTransform, Input.mousePosition, parentCanvas.worldCamera, out mousePosition);
+        return mousePosition;
     }
 }
