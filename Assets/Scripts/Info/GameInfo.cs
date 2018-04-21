@@ -5,6 +5,7 @@ using UnityEngine;
 public static class GameInfo
 {
     public static Dictionary<Vector2Int, Piece> board = new Dictionary<Vector2Int, Piece>();
+    public static Dictionary<Vector2Int, string> landmines = new Dictionary<Vector2Int, string>();
     public static List<string> tactics = new List<string>();
     public static List<string> usedTactics = new List<string>();
     public static List<Piece> activeAlly = new List<Piece>(),
