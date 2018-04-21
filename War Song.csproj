@@ -286,21 +286,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\ActivateContractStore.cs" />
     <Compile Include="Assets\Scripts\Attributes\BoardAttributes.cs" />
+    <Compile Include="Assets\Scripts\Attributes\Challenge.cs" />
     <Compile Include="Assets\Scripts\Attributes\ContractAttributes.cs" />
     <Compile Include="Assets\Scripts\Attributes\PieceAttributes.cs" />
     <Compile Include="Assets\Scripts\Attributes\TacticAttributes.cs" />
     <Compile Include="Assets\Scripts\AutoCreate.cs" />
-    <Compile Include="Assets\Scripts\BoardManager.cs" />
-    <Compile Include="Assets\Scripts\BoardSetup.cs" />
-    <Compile Include="Assets\Scripts\CollectionManager.cs" />
-    <Compile Include="Assets\Scripts\ContractsManager.cs" />
+    <Compile Include="Assets\Scripts\Collections\BoardManager.cs" />
+    <Compile Include="Assets\Scripts\Collections\CollectionManager.cs" />
+    <Compile Include="Assets\Scripts\Collections\LineupBuilder.cs" />
+    <Compile Include="Assets\Scripts\Collections\LineupsManager.cs" />
     <Compile Include="Assets\Scripts\DataType\Collection.cs" />
     <Compile Include="Assets\Scripts\DataType\Database.cs" />
     <Compile Include="Assets\Scripts\DataType\Lineup.cs" />
     <Compile Include="Assets\Scripts\DataType\Piece.cs" />
+    <Compile Include="Assets\Scripts\DataType\Range.cs" />
     <Compile Include="Assets\Scripts\DataType\Stats.cs" />
+    <Compile Include="Assets\Scripts\GameMode\BoardSetup.cs" />
+    <Compile Include="Assets\Scripts\GameMode\MovementController.cs" />
     <Compile Include="Assets\Scripts\GestureHandler\CollectionGestureHandler.cs" />
     <Compile Include="Assets\Scripts\GestureHandler\LineupBoardGestureHandler.cs" />
     <Compile Include="Assets\Scripts\GestureHandler\MouseOverPiece.cs" />
@@ -314,18 +317,18 @@
     <Compile Include="Assets\Scripts\Info\PieceInfo.cs" />
     <Compile Include="Assets\Scripts\Info\TacticInfo.cs" />
     <Compile Include="Assets\Scripts\Info\Trigger.cs" />
+    <Compile Include="Assets\Scripts\Info\UserContract.cs" />
     <Compile Include="Assets\Scripts\Info\UserInfo.cs" />
-    <Compile Include="Assets\Scripts\LineupBuilder.cs" />
-    <Compile Include="Assets\Scripts\LineupsManager.cs" />
     <Compile Include="Assets\Scripts\Login.cs" />
-    <Compile Include="Assets\Scripts\MovementController.cs" />
     <Compile Include="Assets\Scripts\OnEnterScenes\OnEnterCollections.cs" />
+    <Compile Include="Assets\Scripts\OnEnterScenes\OnEnterGame.cs" />
     <Compile Include="Assets\Scripts\OnEnterScenes\OnEnterPlayMatching.cs" />
     <Compile Include="Assets\Scripts\OnEnterScenes\OnEnterRecruitment.cs" />
     <Compile Include="Assets\Scripts\OnEnterScenes\SwitchScenes.cs" />
+    <Compile Include="Assets\Scripts\Recruitment\ActivateContractStore.cs" />
+    <Compile Include="Assets\Scripts\Recruitment\ContractsManager.cs" />
     <Compile Include="Assets\Scripts\Settings.cs" />
     <Compile Include="Assets\Scripts\UpdateTime.cs" />
-    <Compile Include="Assets\Scripts\UserContract.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

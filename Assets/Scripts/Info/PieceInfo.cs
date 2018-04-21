@@ -19,6 +19,7 @@ public class PieceInfo : MonoBehaviour {
     public PieceAttributes GetPieceAttributes() { return pieceAttributes; }
     public string GetPieceType() { return pieceAttributes.type; }
     public void SetLocation(Vector2Int loc) { piece.SetLocation(loc); }
+    public bool IsStandard() { return piece.IsStandard(); }
 
     private PieceAttributes FindPieceAttributes(string name)
     {

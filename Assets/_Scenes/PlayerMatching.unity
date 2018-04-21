@@ -480,7 +480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088d65ba9596c3d43a34bbb46e473241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rank: {fileID: 549226506}
+  rank: {fileID: 1900726408}
   time: {fileID: 1908725716}
   launchWar: {fileID: 1133110218}
   launchWarText: {fileID: 1300927150}
@@ -3281,7 +3281,7 @@ GameObject:
   - component: {fileID: 1900726409}
   - component: {fileID: 1900726408}
   m_Layer: 5
-  m_Name: Ranking
+  m_Name: Rank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

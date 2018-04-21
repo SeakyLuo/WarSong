@@ -11,8 +11,7 @@ public class UserInfo {
     public int coins, rank, lastLineupSelected, winsToday;
     public Stats total;
     public Dictionary<string, Stats> boardResult;
-    //public int[] winningCount;
-    //public Quest[] quest;
+    public List<Challenge> challenges;
     //public Progress[] progress;
 
     public UserInfo()
@@ -33,6 +32,8 @@ public class UserInfo {
         coins = 0;
         rank = 0;
         lastLineupSelected = -1;
+        total = new Stats(0,0,0);
+        challenges = new List<Challenge>();
     }
 }
 
@@ -83,8 +84,8 @@ public class CheatAccount:UserInfo
                 },
                 new List<string>()
                 {
-                    "Tame An Elephant","Purchase An Horse","Advisor Recruitment","Soldier Recruitment","Minesweeper",
-                    "A Secret Plan","Buy 1 Get 1 Free","Build A Rook","Winner Trophy","No Way"
+                    "Minesweeper","Winner Trophy","Buy 1 Get 1 Free","A Secret Plan","Soldier Recruitment",
+                    "Advisor Recruitment", "No Way", "Tame An Elephant","Purchase An Horse","Build A Rook"
                 },
                 "Standard Board",
                 "CheatLineup2"
@@ -103,8 +104,8 @@ public class CheatAccount:UserInfo
                 },
                 new List<string>()
                 {
-                    "Tame An Elephant","Purchase An Horse","Advisor Recruitment","Soldier Recruitment","Minesweeper",
-                    "A Secret Plan","Buy 1 Get 1 Free","Build A Rook","Winner Trophy"
+                    "Minesweeper","Winner Trophy","Buy 1 Get 1 Free","A Secret Plan","Soldier Recruitment",
+                    "Advisor Recruitment", "Tame An Elephant","Purchase An Horse","Build A Rook"
                 },
                 "Standard Board",
                 "CheatLineup2"
@@ -121,5 +122,6 @@ public class CheatAccount:UserInfo
         coins = 99999;
         rank = 9999;
         lastLineupSelected = -1;
+        total = new Stats(10, 1, 1);
     }
 }

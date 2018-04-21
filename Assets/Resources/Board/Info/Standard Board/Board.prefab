@@ -933,6 +933,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4673085051196780}
   - component: {fileID: 114432915377800652}
+  - component: {fileID: 114523479533931128}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -5034,7 +5035,7 @@ Transform:
   - {fileID: 224385871173523618}
   - {fileID: 4058295622500982}
   m_Father: {fileID: 224532457779125180}
-  m_RootOrder: 85
+  m_RootOrder: 84
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4058295622500982
 Transform:
@@ -5460,7 +5461,7 @@ Transform:
   - {fileID: 224168506446522514}
   - {fileID: 4879367364972020}
   m_Father: {fileID: 224532457779125180}
-  m_RootOrder: 81
+  m_RootOrder: 82
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4257925596678626
 Transform:
@@ -5928,7 +5929,7 @@ Transform:
   m_Children:
   - {fileID: 224475264725877616}
   m_Father: {fileID: 224532457779125180}
-  m_RootOrder: 79
+  m_RootOrder: 78
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4534491201648522
 Transform:
@@ -6173,7 +6174,7 @@ Transform:
   - {fileID: 224719760432057624}
   - {fileID: 4550153914029586}
   m_Father: {fileID: 224532457779125180}
-  m_RootOrder: 82
+  m_RootOrder: 81
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4705789986934822
 Transform:
@@ -6347,7 +6348,7 @@ Transform:
   - {fileID: 224598646023642810}
   - {fileID: 4966822639159862}
   m_Father: {fileID: 224532457779125180}
-  m_RootOrder: 84
+  m_RootOrder: 85
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4803512323744400
 Transform:
@@ -6519,7 +6520,7 @@ Transform:
   m_Children:
   - {fileID: 224739137950139866}
   m_Father: {fileID: 224532457779125180}
-  m_RootOrder: 78
+  m_RootOrder: 79
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4879367364972020
 Transform:
@@ -14980,7 +14981,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boardAttributes: {fileID: 11400000, guid: e50c2e83326919d4ba85f55c70db662d, type: 2}
-  boardCanvas: {fileID: 223078118567020208}
+  boardCanvas: {fileID: 224532457779125180}
+  oldLocation: {fileID: 1106913621170358, guid: 27b49009268e1f14a852936e1b380e6e,
+    type: 2}
 --- !u!114 &114434904931514676
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -15472,6 +15475,21 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114523479533931128
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1173447531502868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0be77cf59c393648838959c1b82feee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathDot: {fileID: 1618921527313398, guid: 20d77b1dfba84294bad3c1df78d5f1a0, type: 2}
+  cardInfo: {fileID: 1812990188759276, guid: f8f777b2e4dad66418c2b9605225ecff, type: 2}
+  boardCanvas: {fileID: 224532457779125180}
+  newLocation: {fileID: 21300000, guid: de33d04fa2fd1cd4fb2e1220bc0085d1, type: 3}
 --- !u!114 &114527070391588510
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -20866,14 +20884,14 @@ RectTransform:
   - {fileID: 4730847077399380}
   - {fileID: 4484357357973752}
   - {fileID: 4291268974747702}
-  - {fileID: 4878310973150554}
   - {fileID: 4534378323146456}
+  - {fileID: 4878310973150554}
   - {fileID: 4296588264877272}
-  - {fileID: 4255270973057346}
   - {fileID: 4680917177367618}
+  - {fileID: 4255270973057346}
   - {fileID: 4867941543889496}
-  - {fileID: 4796536846277088}
   - {fileID: 4057172758526994}
+  - {fileID: 4796536846277088}
   - {fileID: 4845758282146350}
   - {fileID: 4100248492570596}
   - {fileID: 4610490198899810}

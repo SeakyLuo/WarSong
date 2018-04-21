@@ -12,6 +12,11 @@ public static class GameInfo
                            activeEnemy = new List<Piece>(),
                            inactiveEnemy = new List<Piece>();
 
+    public static string user = ""; //whose turn
+    public static int round = 1,
+                      time = 120,
+                      maxTime = 120;
+
     public static void Add(Piece piece, Vector2Int loc, bool reactivate = false)
     {
         piece.SetActive(true);
@@ -53,5 +58,6 @@ public static class GameInfo
         inactiveAlly.Clear();
         activeEnemy.Clear();
         inactiveEnemy.Clear();
+        round = 1;
     }
 }
