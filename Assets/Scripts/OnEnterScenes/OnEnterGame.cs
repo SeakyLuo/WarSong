@@ -111,6 +111,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     {
         GameInfo.time = GameInfo.maxTime;
         gameover = true;
+        if (settingsPanel.activeSelf) settingsPanel.SetActive(false);
         // CalculateNewRank(); // should be done by server
         // remove collections
     }
