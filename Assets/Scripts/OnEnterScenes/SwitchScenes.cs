@@ -22,7 +22,7 @@ public class SwitchScenes : MonoBehaviour, IPointerClickHandler
 
     public void EnterCollection()
     {
-        SceneManager.LoadScene("Collections");
+        SceneManager.LoadScene("Collection");
     }
 
     public void EnterWar()

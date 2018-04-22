@@ -10,7 +10,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 {
     public static bool gameover = false;
 
-    public GameObject youwinImage, defeatedImage, settingsPanel;
+    public GameObject victoryImage, defeatImage, settingsPanel;
     public Transform tacticBag;
     public Text roundCount, timer;
     public Text playerName, playerWin, playerRank;
@@ -93,16 +93,16 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void YouWin()
+    public void Victory()
     {        
-        youwinImage.SetActive(true);
+        victoryImage.SetActive(true);
         InfoLoader.user.total.Win();
         GameOver();
     }
 
-    public void YouLose()
+    public void Defeat()
     {
-        defeatedImage.SetActive(true);
+        defeatImage.SetActive(true);
         InfoLoader.user.total.Lost();
         GameOver();
     }
@@ -122,7 +122,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 
     public void Concede()
     {
-        YouLose();
+        Defeat();
     }
 
     private void CalculateNewRank()
@@ -138,6 +138,9 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     {
         roundCount.text = (++GameInfo.round).ToString();
         GameInfo.time = GameInfo.maxTime;
+        GameInfo.pieceMoved = false;
+        GameInfo.tacticUsed = false;
+        GameInfo.abilityActivated = false;
     }
 
     private Vector2 AdjustedMousePosition()

@@ -42,6 +42,11 @@ public class MovementController : MonoBehaviour
     private void Update()
     {
         if (OnEnterGame.gameover) return;
+        else if (GameInfo.pieceMoved)
+        {
+            // show moved
+            return;
+        }
         if (Input.GetMouseButtonUp(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -98,7 +103,7 @@ public class MovementController : MonoBehaviour
         if (GameInfo.board.TryGetValue(loc, out enemy) && !enemy.IsAlly())
         {
             if(enemy.GetPieceType() == "General")
-                onEnterGame.YouWin();
+                onEnterGame.Victory();
             boardSetup.Deactivate(enemy);
         }
     }
@@ -125,6 +130,8 @@ public class MovementController : MonoBehaviour
             previousImage = location.Find("Image").GetComponent<Image>();
             previousSprite = previousImage.sprite;
             previousImage.sprite = newLocation;
+
+
         }
         if (!oldLocation.activeSelf && previousSprite != null) oldLocation.SetActive(true);
         DeactivateActivateAbility();

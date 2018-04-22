@@ -13,10 +13,14 @@ public static class GameInfo
                            activeEnemy = new List<Piece>(),
                            inactiveEnemy = new List<Piece>();
 
+    public static bool pieceMoved = false;
+    public static bool tacticUsed = false;
+    public static bool abilityActivated = false;
+
     public static string user = ""; //whose turn
-    public static int round = 1,
-                      time = 120,
-                      maxTime = 120;
+    public static int round = 1;
+    public static int time = 120;
+    public static int maxTime = 120;
 
     public static void Add(Piece piece, Vector2Int loc, bool reactivate = false)
     {

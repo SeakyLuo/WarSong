@@ -53,7 +53,7 @@ public class OnEnterPlayMatching : MonoBehaviour {
     public void EnterCollection()
     {
         InfoLoader.switchSceneCaller = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene("Collections");
+        SceneManager.LoadScene("Collection");
     }
 
     public void Match()

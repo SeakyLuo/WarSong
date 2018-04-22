@@ -1264,7 +1264,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: My Collections
+  m_Text: My Collection
 --- !u!222 &1018975323
 CanvasRenderer:
   m_ObjectHideFlags: 0
