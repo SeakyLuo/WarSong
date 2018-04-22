@@ -319,6 +319,7 @@
     <Compile Include="Assets\Scripts\Info\Trigger.cs" />
     <Compile Include="Assets\Scripts\Info\UserContract.cs" />
     <Compile Include="Assets\Scripts\Info\UserInfo.cs" />
+    <Compile Include="Assets\Scripts\Main\AccountCreation.cs" />
     <Compile Include="Assets\Scripts\Main\AutoCreate.cs" />
     <Compile Include="Assets\Scripts\Main\Credits.cs" />
     <Compile Include="Assets\Scripts\Main\Login.cs" />

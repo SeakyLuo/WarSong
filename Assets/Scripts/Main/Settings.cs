@@ -21,6 +21,8 @@ public class Settings : MonoBehaviour
 
     public void ConfirmLogout()
     {
+        PlayerPrefs.SetString("email","");
+        PlayerPrefs.SetString("password","");
         SceneManager.LoadScene("Login");
     }
 

@@ -74,10 +74,8 @@ public class SwitchScenes : MonoBehaviour, IPointerClickHandler
                 Rect rect = close.GetComponent<RectTransform>().rect;
                 // rect.x and rect.y are negative
                 if (mousePosition.x < rect.x || mousePosition.x > -rect.x || mousePosition.y < rect.y || mousePosition.y > -rect.y)
-                {
                     close.SetActive(false);
-                    break;
-                }
+                break;
             }
         }
     }
