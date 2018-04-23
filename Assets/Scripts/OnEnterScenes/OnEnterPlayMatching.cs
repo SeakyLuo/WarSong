@@ -2,15 +2,18 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
-public class OnEnterPlayMatching : MonoBehaviour {
-
-    public Text rank, time;
+public class OnEnterPlayMatching : MonoBehaviour, IPointerClickHandler
+{
+    public Text rank;
     public Button launchWar;
-    public GameObject launchWarText;
-
+    public GameObject launchWarText, settingsPanel, optionsPanel;
     public GameObject[] lineupObjects = new GameObject[LineupsManager.lineupsLimit];
-    public GameObject[] xs = new GameObject[LineupsManager.lineupsLimit];
+
+    private GameObject[] xs = new GameObject[LineupsManager.lineupsLimit];
+    private GameObject[] closeObjects;
+    private Canvas parentCanvas;
 
     private void Start()
     {
@@ -37,11 +40,14 @@ public class OnEnterPlayMatching : MonoBehaviour {
             lineupObjects[InfoLoader.user.lastLineupSelected].GetComponent<Button>().Select();
         }
         SelectLineup(InfoLoader.user.lastLineupSelected);
+        closeObjects = new GameObject[] { optionsPanel, settingsPanel };
+        parentCanvas = gameObject.GetComponent<Canvas>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        time.text = DateTime.Now.ToString("h:mm tt");
+        if (Input.GetKeyUp(KeyCode.Escape))
+            ShowSettings();
     }
 
     public void Back()
@@ -80,5 +86,33 @@ public class OnEnterPlayMatching : MonoBehaviour {
                 lineupObjects[InfoLoader.user.lastLineupSelected].GetComponent<Image>().sprite = lineupObjects[InfoLoader.user.lastLineupSelected].GetComponent<Button>().spriteState.disabledSprite;
         }
         InfoLoader.user.lastLineupSelected = number;
+    }
+
+    public void ShowSettings()
+    {
+        settingsPanel.SetActive(true);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        foreach (GameObject close in closeObjects)
+        {
+            if (close.activeSelf)
+            {
+                Vector2 mousePosition = AdjustedMousePosition();
+                Rect rect = close.GetComponent<RectTransform>().rect;
+                // rect.x and rect.y are negative
+                if (mousePosition.x < rect.x || mousePosition.x > -rect.x || mousePosition.y < rect.y || mousePosition.y > -rect.y)
+                    close.SetActive(false);
+                break;
+            }
+        }
+    }
+
+    private Vector2 AdjustedMousePosition()
+    {
+        Vector2 mousePosition;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(parentCanvas.transform as RectTransform, Input.mousePosition, parentCanvas.worldCamera, out mousePosition);
+        return mousePosition;
     }
 }
