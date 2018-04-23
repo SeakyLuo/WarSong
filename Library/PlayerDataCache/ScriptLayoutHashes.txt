@@ -132,7 +132,7 @@ a586508af6261a5e98fdcf2a8366443f Assembly-CSharp.dll:.CollectionGestureHandler
 5ac456bfaf4bca7ef24312627c1076eb Assembly-CSharp.dll:.Settings
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
-956c753d43d927bb1d5be373e33885bf Assembly-CSharp.dll:.Login
+bc012045c7ad1b70d8856e33a79887a9 Assembly-CSharp.dll:.Login
 64b68c76bda28263283019e54b323754 Assembly-CSharp.dll:.BoardManager
 08a60b867a42a5117f4bbf0c52123143 Assembly-CSharp.dll:.SwitchScenes
 a506194e7e367df4a7eff1f3049469a0 Assembly-CSharp.dll:.ContractAttributes

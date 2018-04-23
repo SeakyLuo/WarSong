@@ -2,15 +2,14 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
-using System.Collections.Generic;
 
 public class SwitchScenes : MonoBehaviour, IPointerClickHandler
 {
     public GameObject playerInfoPanel, settingsPanel, optionsPanel;
-    private GameObject[] closeObjects;
     public Text winText, loseText, drawText, percentageText;
     public Text rank, title;
 
+    private GameObject[] closeObjects;
     private Canvas parentCanvas;
 
     private void Start()
