@@ -10,7 +10,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 {
     public static bool gameover = false;
 
-    public GameObject victoryImage, defeatImage, settingsPanel;
+    public GameObject victoryImage, defeatImage, optionsPanel, settingsPanel;
     public Transform tacticBag;
     public Button endTurn;
     public Text roundCount, timer;
@@ -67,15 +67,21 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             SceneManager.LoadScene("PlayerMatching");
             GameInfo.Clear();
         }
-        else if (settingsPanel.activeSelf)
+        else if (Input.GetKeyUp(KeyCode.Escape))
+            ShowSettings();
+        else if (optionsPanel.activeSelf || settingsPanel.activeSelf)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                if(hit.collider.name!= "SettingsPanel")
-                    settingsPanel.SetActive(false);
-            } 
+                Debug.Log(hit.collider.name);
+                if (hit.collider.name != "SettingsPanel")
+                {
+                    if (optionsPanel.activeSelf) optionsPanel.SetActive(false);
+                    else settingsPanel.SetActive(false);
+                }
+            }
         }
     }
 
@@ -118,9 +124,14 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         // remove collections
     }
 
-    public void ShowSettingsPanel()
+    public void ShowSettings()
     {
         settingsPanel.SetActive(!settingsPanel.activeSelf);
+    }
+
+    public void ShowOptions()
+    {
+        optionsPanel.SetActive(!optionsPanel.activeSelf);
     }
 
     public void Concede()
@@ -159,6 +170,11 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         GameInfo.pieceMoved = false;
         GameInfo.tacticUsed = false;
         GameInfo.abilityActivated = false;
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
     private Vector2 AdjustedMousePosition()

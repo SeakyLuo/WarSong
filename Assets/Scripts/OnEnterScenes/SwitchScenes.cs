@@ -19,6 +19,12 @@ public class SwitchScenes : MonoBehaviour, IPointerClickHandler
         SetPlayerInfo();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+            ShowSettings();
+    }
+
     public void EnterCollection()
     {
         SceneManager.LoadScene("Collection");
@@ -54,8 +60,7 @@ public class SwitchScenes : MonoBehaviour, IPointerClickHandler
 
     public void ShowSettings()
     {
-        playerInfoPanel.SetActive(false);
-        settingsPanel.SetActive(true);
+        settingsPanel.SetActive(!settingsPanel.activeSelf);
     }
 
     public void ChangeChallenge()

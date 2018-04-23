@@ -25,8 +25,14 @@ public class Login : MonoBehaviour, IPointerClickHandler
         if (email != "" && password != "")
             login(email, password);
 	}
-	
-	public void ConfirmLogin()
+
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+            ShowSettings();
+    }
+
+    public void ConfirmLogin()
     {
         bool emailIsEmpty = (inputEmail.text == ""), passwordIsEmpty = (inputPassword.text == "");
         if(emailIsEmpty || passwordIsEmpty)
@@ -73,9 +79,14 @@ public class Login : MonoBehaviour, IPointerClickHandler
         createAccountPanel.SetActive(true);
     }
 
-    public void ShowSettingsPanel()
+    public void ShowSettings()
     {
-        settingsPanel.SetActive(true);
+        settingsPanel.SetActive(!settingsPanel.activeSelf);
+    }
+
+    public void ShowOptions()
+    {
+        optionsPanel.SetActive(!optionsPanel.activeSelf);
     }
 
     public void OnPointerClick(PointerEventData eventData)

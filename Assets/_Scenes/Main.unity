@@ -1778,11 +1778,10 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114375487048315884, guid: 4958c9756dfc8774089db42160059d9e,
-        type: 2}
-      propertyPath: parentCanvas
-      value: 
-      objectReference: {fileID: 53613887}
+    - target: {fileID: 1420557156839094, guid: 4958c9756dfc8774089db42160059d9e, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4958c9756dfc8774089db42160059d9e, type: 2}
   m_IsPrefabParent: 0
