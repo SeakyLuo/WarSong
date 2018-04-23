@@ -159,7 +159,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
 96d0fbde9fd209878a0a291f82c9bcdd UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
 64eb32cc721b1cc68a91ed57461e188c UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.RemoteTestResultSender
-1cb54c44bc07e6c62603bcc3bd1fdf0b Assembly-CSharp.dll:.OnEnterPlayMatching
+bf67d37a52ffcaecaf2eebce94a027d4 Assembly-CSharp.dll:.OnEnterPlayMatching
 e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 c5c4c5d36927ce72b3ea1ddc983a6a1e Assembly-CSharp.dll:.TacticAttributes
@@ -176,7 +176,7 @@ b618a9825774a1442583f337814156a0 Assembly-CSharp.dll:.PieceAttributes
 b79fd752f695ce5ee46f5430c1bedeee Assembly-CSharp.dll:.LineupBuilder
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 f9123cf35a5a4d73f47625a1865ea33d Assembly-CSharp.dll:.ContractsManager
-40b5150a0606c126ffc69829ab207ffd Assembly-CSharp.dll:.OnEnterGame
+1ea69b90e2bd134ac100eb7cb4d2e5fa Assembly-CSharp.dll:.OnEnterGame
 0d50533b5be9717fc17e770faa884fb4 Assembly-CSharp.dll:.UpdateTime
 aeef4bae2f65504205e91c4da430c6a7 Assembly-CSharp.dll:.CardInfo
 ad38a63ab18060056f92f1ba7729013a Assembly-CSharp.dll:.AccountCreation

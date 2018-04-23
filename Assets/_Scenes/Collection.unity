@@ -5586,22 +5586,22 @@ Prefab:
     - target: {fileID: 224304635704260034, guid: 669cd415283f0be4a900b652d263b7db,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224304635704260034, guid: 669cd415283f0be4a900b652d263b7db,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -210
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224304635704260034, guid: 669cd415283f0be4a900b652d263b7db,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 360
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224304635704260034, guid: 669cd415283f0be4a900b652d263b7db,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 420
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224304635704260034, guid: 669cd415283f0be4a900b652d263b7db,
         type: 2}
@@ -5611,7 +5611,7 @@ Prefab:
     - target: {fileID: 224304635704260034, guid: 669cd415283f0be4a900b652d263b7db,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224304635704260034, guid: 669cd415283f0be4a900b652d263b7db,
         type: 2}
@@ -5621,7 +5621,7 @@ Prefab:
     - target: {fileID: 224304635704260034, guid: 669cd415283f0be4a900b652d263b7db,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224304635704260034, guid: 669cd415283f0be4a900b652d263b7db,
         type: 2}
@@ -21776,7 +21776,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
