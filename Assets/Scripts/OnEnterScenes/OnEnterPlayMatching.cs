@@ -10,6 +10,7 @@ public class OnEnterPlayMatching : MonoBehaviour {
     public GameObject launchWarText;
 
     public GameObject[] lineupObjects = new GameObject[LineupsManager.lineupsLimit];
+    public GameObject[] xs = new GameObject[LineupsManager.lineupsLimit];
 
     private void Start()
     {
@@ -17,14 +18,12 @@ public class OnEnterPlayMatching : MonoBehaviour {
         int lineupsCount = InfoLoader.user.lineups.Count;
         for (int i = 0; i < LineupsManager.lineupsLimit; i++)
         {
+            xs[i] = lineupObjects[i].transform.Find("Unavailable").gameObject;
             if (i < lineupsCount)
             {
                 lineupObjects[i].GetComponentInChildren<Text>().text = InfoLoader.user.lineups[i].lineupName;
-                Color color = lineupObjects[i].GetComponentInChildren<Image>().color;
-                if (InfoLoader.user.lineups[i].complete) color.a = 0;
-                else color.a = 255;
                 lineupObjects[i].GetComponent<Button>().interactable = InfoLoader.user.lineups[i].complete;
-                lineupObjects[i].transform.Find("Image").GetComponent<Image>().color = color;
+                xs[i].SetActive(!InfoLoader.user.lineups[i].complete);
             }
             else lineupObjects[i].SetActive(false);
         }
@@ -78,7 +77,7 @@ public class OnEnterPlayMatching : MonoBehaviour {
             }
             lineupObjects[number].GetComponent<Image>().sprite = lineupObjects[number].GetComponent<Button>().spriteState.highlightedSprite;
             if(InfoLoader.user.lastLineupSelected != -1)
-                lineupObjects[InfoLoader.user.lastLineupSelected].GetComponent<Image>().sprite = lineupObjects[number].GetComponent<Button>().spriteState.disabledSprite;
+                lineupObjects[InfoLoader.user.lastLineupSelected].GetComponent<Image>().sprite = lineupObjects[InfoLoader.user.lastLineupSelected].GetComponent<Button>().spriteState.disabledSprite;
         }
         InfoLoader.user.lastLineupSelected = number;
     }

@@ -22,8 +22,7 @@ public class MouseOverPiece : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        showCardInfo = Instantiate(card);
-        showCardInfo.transform.SetParent(parentCanvas.transform);
+        showCardInfo = Instantiate(card, parentCanvas.transform);
         showCardInfo.GetComponent<CardInfo>().SetAttributes(boardInfo.cardLocations[nameLoc]);
         showCardInfo.transform.position = AdjustedMousePosition() + new Vector3(-150 * xscale, 150 * yscale, 0);
     }

@@ -13,8 +13,7 @@ public class MouseOverTactic : MonoBehaviour, IPointerEnterHandler, IPointerExit
     {
         GameObject tactic = transform.Find("Tactic").gameObject;        
         if (!tactic.activeSelf) return;
-        showCardInfo = Instantiate(card);
-        showCardInfo.transform.SetParent(parentCanvas.transform);
+        showCardInfo = Instantiate(card, parentCanvas.transform);
         showCardInfo.GetComponent<CardInfo>().SetAttributes(tactic.GetComponent<TacticInfo>().tactic);
         showCardInfo.transform.localPosition = AdjustedMousePosition() - new Vector3(150 * xscale, 0, 0);
     }

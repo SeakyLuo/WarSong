@@ -27,13 +27,14 @@ public class CollectionManager : MonoBehaviour {
         searchByHealthValue = -1;
     private string searchByKeyword = "";
     private static GameObject[] tabs = new GameObject[types.Length];
-    private GameObject[] cards, counters;
+    private GameObject[] cards;
+    private Text[] counters;
     private Vector3 mousePosition;
 
     // Use this for initialization
     void Start () {
         cards = new GameObject[cardsPerPage];
-        counters = new GameObject[cardsPerPage];
+        counters = new Text[cardsPerPage];
         foreach (string type in types)
         {
             pageLimits.Add(type, 1);
@@ -44,7 +45,7 @@ public class CollectionManager : MonoBehaviour {
         {
             Transform slot = GameObject.Find("Slot" + i.ToString()).transform;
             cards[i] = slot.Find("Card").gameObject;
-            counters[i] = slot.Find("Count").gameObject;
+            counters[i] = slot.Find("Count/CountText").GetComponent<Text>();
         }
         for (int i = 0; i < types.Length; i++)
         {
@@ -177,7 +178,8 @@ public class CollectionManager : MonoBehaviour {
         {
             cards[i].GetComponent<CardInfo>().Clear();
             cards[i].SetActive(false);
-            counters[i].GetComponent<Text>().text = "";
+            counters[i].text = "";
+            counters[i].transform.parent.gameObject.SetActive(false);
         }
         pageText.text = "";
 
@@ -210,9 +212,21 @@ public class CollectionManager : MonoBehaviour {
             collection = collectionWithType[page * cardsPerPage + i];
             card.GetComponent<CardInfo>().SetAttributes(collection);
             card.SetActive(true);
-            if (collection.count == 1) counters[i].GetComponent<Text>().text = "";
-            else if (collection.count > 99) counters[i].GetComponent<Text>().text = "×99+";
-            else counters[i].GetComponent<Text>().text = "×" + collection.count.ToString();
+            if (collection.count == 1)
+            {
+                counters[i].text = "";
+                counters[i].transform.parent.gameObject.SetActive(false);
+            }
+            else if (collection.count > 99)
+            {
+                counters[i].text = "×99+";
+                counters[i].transform.parent.gameObject.SetActive(true);
+            }
+            else
+            {
+                counters[i].text = "×" + collection.count.ToString();
+                counters[i].transform.parent.gameObject.SetActive(true);
+            }
         }
     }
 

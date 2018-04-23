@@ -12,9 +12,11 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 
     public GameObject victoryImage, defeatImage, settingsPanel;
     public Transform tacticBag;
+    public Button endTurn;
     public Text roundCount, timer;
     public Text playerName, playerWin, playerRank;
     public Text opponentName, opponentWin, opponentRank;
+    public Text endTurnText;
 
     private Lineup lineup;
     private GameObject board;
@@ -133,6 +135,21 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             credit += credits[piece.GetPieceType()];
         foreach (Piece piece in GameInfo.inactiveEnemy)
             credit += credits[piece.GetPieceType()];
+    }
+
+    public void EndTurn()
+    {
+        endTurn.interactable = false;
+        endTurnText.text = "Enemy Turn";
+        NextTurn();
+        // opp turn;
+        YourTurn();
+    }
+
+    public void YourTurn()
+    {
+        endTurn.interactable = true;
+        endTurnText.text = "End Turn";
     }
 
     public void NextTurn()
