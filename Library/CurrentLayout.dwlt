@@ -110,7 +110,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 492}
   m_MaxSize: {x: 18008, y: 14042}
   vertical: 0
-  controlID: 138
+  controlID: 9
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -153,8 +153,8 @@ MonoBehaviour:
     y: 0
     width: 1086
     height: 302
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -210,7 +210,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 492}
   m_MaxSize: {x: 10004, y: 14042}
   vertical: 1
-  controlID: 117
+  controlID: 69
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -392,14 +392,14 @@ MonoBehaviour:
     height: 281
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 0
-  lastFramingTime: 1609.7972547501386
+  lastFramingTime: 1031.0294814249778
   m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 960, y: 540, z: 0}
+    m_Target: {x: 720, y: 222.5, z: 0}
     speed: 2
-    m_Value: {x: 960, y: 540, z: 0}
+    m_Value: {x: 720, y: 222.5, z: 0}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -427,9 +427,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 1427.7985
+    m_Target: 932.8339
     speed: 2
-    m_Value: 1427.7985
+    m_Value: 932.8339
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -524,9 +524,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 2e2c0000
+    m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 348bffff74d5fffff4f3ffff9efbffff00000000b4320000ee320000383300004a3300002e3400005c340000983500008e360000
+    m_ExpandedIDs: 9e4bfdff567efeff8e93feff70dcfeff28f8feff641fffffa890ffffdc95ffff6298ffff5cf3ffff9efbffff00000000263b0000123c00003e3d0000943d00007e570000165800008c5800002e5900001e5a00002e5b00000a5c00001e7a00002c7b0000be7c0000ce7d0000aa7e000064820000c085000014860000a6860000f0860000a688000000960000ec96000098a6000074ab000026ad0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -588,19 +588,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/_Scenes
+    - Assets/Resources/Board/Info/River Board
   m_ViewMode: 1
   m_StartGridSize: 60
   m_LastFolders:
-  - Assets/_Scenes
+  - Assets/Resources/Board/Info/River Board
   m_LastFoldersGridSize: 60
   m_LastProjectPath: D:\UnityProjects\War Song
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 3c2b0000
-    m_LastClickedID: 11068
-    m_ExpandedIDs: 00000000f8270000ba2800003a2a0000662a0000862a0000f62a0000062b00003c2b0000e22b00001431000016310000183100001a3100001c3100001e31000020310000223100002431000000ca9a3bffffff7f
+    m_SelectedIDs: 762b0000
+    m_LastClickedID: 11126
+    m_ExpandedIDs: 00000000f8270000fc270000b62800003a2a00006a2a00008a2a0000fa2a0000362b0000402b0000e62b0000d42c0000643a0000663a0000683a00006a3a00006c3a00006e3a0000703a0000723a0000743a000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -628,7 +628,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000f8270000fc270000ba2800003a2a0000662a0000862a0000f62a0000062b00003c2b0000e22b00001431000016310000183100001a3100001c3100001e310000203100002231000024310000
+    m_ExpandedIDs: 00000000f8270000fc270000b62800003a2a00006a2a00008a2a0000fa2a00000a2b0000402b0000e62b0000643a0000663a0000683a00006a3a00006c3a00006e3a0000703a0000723a0000743a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -656,7 +656,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: 8600ffff184d0000104d0000064d0000364f00003e2f00009c0700006cff000012e30000562b0000000000002e2a000034500100e6290000322c000050290000de2b0000662a0000702a0000522900001c2a0000ce2a00001c1d0200582a000006fe00007a280000
+    m_ExpandedInstanceIDs: 8600ffff184d0000104d0000064d0000364f00003e2f00009c0700006cff000012e30000562b00002e2a000034500100e6290000322c000050290000de2b0000662a0000702a0000522900001c2a0000ce2a00001c1d0200582a000006fe00007a2800000000000064280000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

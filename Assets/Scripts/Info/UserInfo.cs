@@ -12,7 +12,7 @@ public class UserInfo {
     public Stats total;
     public Dictionary<string, Stats> boardResult;
     public List<Challenge> challenges;
-    public bool newPlayer = true;
+    public string preferredBoard = "Standard Board";
     //public Progress[] progress;
 
     public UserInfo()
@@ -35,7 +35,7 @@ public class UserInfo {
         lastLineupSelected = -1;
         total = new Stats(0,0,0);
         challenges = new List<Challenge>();
-        newPlayer = true;
+        preferredBoard = "Standard Board";
     }
 }
 
@@ -125,6 +125,6 @@ public class CheatAccount:UserInfo
         rank = 9999;
         lastLineupSelected = -1;
         total = new Stats(10, 1, 1);
-        newPlayer = false;
+        preferredBoard = "Standard Board";
     }
 }

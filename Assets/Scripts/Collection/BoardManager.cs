@@ -7,7 +7,7 @@ public class BoardManager : MonoBehaviour {
 
     public GameObject nextBoardButton, previousBoardButton, confirmButton, preferButton, createLineupButton,
         createLineupPanel, board;
-    public Text boardName;
+    public Text boardName, boardInformation;
     public Image boardImage;
     public BoardAttributes standardBoardAttributes;
 
@@ -42,6 +42,7 @@ public class BoardManager : MonoBehaviour {
     {
         boardName.text = boardAttributes[currentBoard].boardName;
         boardImage.sprite = boardAttributes[currentBoard].completeImage;
+        boardInformation.text = boardAttributes[currentBoard].description;
         if (boardAttributes[currentBoard].available)
         {
             preferButton.SetActive(true);
