@@ -75,11 +75,6 @@ public class BoardManager : MonoBehaviour {
         loadedBoard.GetComponent<BoardInfo>().SetAttributes(attributes, newLocations);
     }
 
-    public void BackToCollection()
-    {
-        gameObject.SetActive(false);
-    }
-
     public void DestroyBoard()
     {
         Destroy(loadedBoard);

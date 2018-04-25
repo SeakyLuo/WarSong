@@ -10,7 +10,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 {
     public static bool gameover = false;
 
-    public GameObject victoryImage, defeatImage, optionsPanel, settingsPanel;
+    public GameObject victoryImage, defeatImage, settingsPanel;
     public Transform tacticBag;
     public Button endTurn;
     public Text roundCount, timer;
@@ -54,6 +54,12 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         parentCanvas = transform.Find("Canvas").GetComponent<Canvas>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+            settingsPanel.SetActive(!settingsPanel.activeSelf);
+    }
+
     private TacticAttributes FindTacticAttributes(string tacticName)
     {
         return Resources.Load<TacticAttributes>("Tactics/Info/"+tacticName+"/Attributes");
@@ -66,22 +72,6 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             gameover = false;
             SceneManager.LoadScene("PlayerMatching");
             GameInfo.Clear();
-        }
-        else if (Input.GetKeyUp(KeyCode.Escape))
-            ShowSettings();
-        else if (optionsPanel.activeSelf || settingsPanel.activeSelf)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                Debug.Log(hit.collider.name);
-                if (hit.collider.name != "SettingsPanel")
-                {
-                    if (optionsPanel.activeSelf) optionsPanel.SetActive(false);
-                    else settingsPanel.SetActive(false);
-                }
-            }
         }
     }
 
@@ -124,16 +114,6 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         // remove collections
     }
 
-    public void ShowSettings()
-    {
-        settingsPanel.SetActive(!settingsPanel.activeSelf);
-    }
-
-    public void ShowOptions()
-    {
-        optionsPanel.SetActive(!optionsPanel.activeSelf);
-    }
-
     public void Concede()
     {
         Defeat();
@@ -153,6 +133,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         endTurn.interactable = false;
         endTurnText.text = "Enemy Turn";
         NextTurn();
+        // need to put down piece
         // opp turn;
         YourTurn();
     }

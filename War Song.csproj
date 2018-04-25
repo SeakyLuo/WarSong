@@ -323,7 +323,6 @@
     <Compile Include="Assets\Scripts\Login\ForgotPassword.cs" />
     <Compile Include="Assets\Scripts\Login\Login.cs" />
     <Compile Include="Assets\Scripts\Main\AutoCreate.cs" />
-    <Compile Include="Assets\Scripts\Main\Credits.cs" />
     <Compile Include="Assets\Scripts\Main\Settings.cs" />
     <Compile Include="Assets\Scripts\Main\UpdateTime.cs" />
     <Compile Include="Assets\Scripts\OnEnterScenes\OnEnterCollections.cs" />
