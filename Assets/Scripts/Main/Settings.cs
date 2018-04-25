@@ -11,7 +11,6 @@ public class Settings : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-
         if ( (logoutPanel!=null && logoutPanel.activeSelf) || creditsPanel.activeSelf) return;
         GameObject close = mainSettingsPanel;
         if (optionsPanel.activeSelf) close = optionsPanel;
@@ -22,6 +21,17 @@ public class Settings : MonoBehaviour, IPointerClickHandler
         {
             if (optionsPanel.activeSelf) close.SetActive(false);
             else gameObject.SetActive(false);
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            if (creditsPanel.activeSelf) creditsPanel.SetActive(false);
+            else if (optionsPanel.activeSelf) optionsPanel.SetActive(false);
+            else if (logoutPanel.activeSelf) return;
+            else gameObject.SetActive(!gameObject.activeSelf);
         }
     }
 

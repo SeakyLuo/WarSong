@@ -43,7 +43,7 @@ public class OnEnterPlayMatching : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape))
-            settingsPanel.SetActive(!settingsPanel.activeSelf);
+            settingsPanel.SetActive(true);
     }
 
     public void Back()

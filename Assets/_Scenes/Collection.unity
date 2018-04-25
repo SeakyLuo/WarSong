@@ -7966,7 +7966,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1588430939}
+      - m_Target: {fileID: 0}
         m_MethodName: PreviousBoard
         m_Mode: 1
         m_Arguments:
@@ -9427,7 +9427,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1588430939}
+      - m_Target: {fileID: 0}
         m_MethodName: ConfirmBoardSelection
         m_Mode: 1
         m_Arguments:
@@ -14921,7 +14921,7 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1588430939}
+      objectReference: {fileID: 0}
     - target: {fileID: 114319263047940616, guid: 68676f8f54d8b40428e485cb1af5c27f,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -14936,7 +14936,7 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1588430939}
+      objectReference: {fileID: 0}
     - target: {fileID: 114898807336441938, guid: 68676f8f54d8b40428e485cb1af5c27f,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -16223,7 +16223,7 @@ MonoBehaviour:
   previousBoardButton: {fileID: 777814803}
   confirmButton: {fileID: 937825835}
   preferButton: {fileID: 789741397}
-  createLineupButton: {fileID: 0}
+  createLineupButton: {fileID: 67594667}
   createLineupPanel: {fileID: 669138942}
   board: {fileID: 1747433672}
   boardName: {fileID: 279690933}
@@ -17450,7 +17450,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1588430939}
+      - m_Target: {fileID: 0}
         m_MethodName: NextBoard
         m_Mode: 1
         m_Arguments:

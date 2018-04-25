@@ -2091,6 +2091,11 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224445548827804878, guid: 6b4b8898f9da8484fb41693e8722fc8c,
     type: 2}
   m_PrefabInternal: {fileID: 333148599}
+--- !u!1 &333148605 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1310785742778772, guid: 6b4b8898f9da8484fb41693e8722fc8c,
+    type: 2}
+  m_PrefabInternal: {fileID: 333148599}
 --- !u!1 &346165214
 GameObject:
   m_ObjectHideFlags: 0
@@ -8598,7 +8603,7 @@ MonoBehaviour:
   mainSettingsPanel: {fileID: 333148603}
   optionsPanel: {fileID: 333148602}
   logoutPanel: {fileID: 333148601}
-  creditsPanel: {fileID: 0}
+  creditsPanel: {fileID: 333148605}
   parentCanvas: {fileID: 1787884660}
 --- !u!224 &1434275546
 RectTransform:

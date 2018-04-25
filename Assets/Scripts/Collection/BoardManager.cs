@@ -19,7 +19,6 @@ public class BoardManager : MonoBehaviour {
     {
         boardAttributes = InfoLoader.boards;
         DisplayBoardSelectionInterface();
-        gameObject.SetActive(false);
     }
 
     public void NextBoard()
