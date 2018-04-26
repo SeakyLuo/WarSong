@@ -29,6 +29,7 @@ public class TacticGestureHandler : MonoBehaviour,IBeginDragHandler, IDragHandle
         if (!tactic.activeSelf) return;
         dragBegins = true;
         dragCard = Instantiate(card, parentCanvas.transform);
+        dragCard.SetActive(true);
         dragCard.GetComponent<CardInfo>().SetAttributes(tactic.GetComponent<TacticInfo>().tactic);
         dragCard.transform.position = AdjustedMousePosition();
         tactic.SetActive(false);

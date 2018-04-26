@@ -28,9 +28,9 @@ public class MovementController : MonoBehaviour
 
     private void Start()
     {
-        GameObject plane = GameObject.Find("Plane");
-        onEnterGame = plane.GetComponent<OnEnterGame>();
-        Transform activateAbility = plane.transform.Find("Canvas/ActivateAbility");
+        GameObject UIPanel = GameObject.Find("UIPanel");
+        onEnterGame = UIPanel.GetComponent<OnEnterGame>();
+        Transform activateAbility = UIPanel.transform.Find("Canvas/ActivateAbility");
         activateAbilityButton = activateAbility.GetComponent<Button>();
         activateAbilityText = activateAbility.Find("Text").gameObject;
         scale = gameObject.transform.localScale.x;

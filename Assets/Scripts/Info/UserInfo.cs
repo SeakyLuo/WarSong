@@ -13,7 +13,6 @@ public class UserInfo {
     public Dictionary<string, Stats> boardResult;
     public List<Challenge> challenges;
     public string preferredBoard = "Standard Board";
-    //public Progress[] progress;
 
     public UserInfo()
     {

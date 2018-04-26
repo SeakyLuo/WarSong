@@ -1,33 +1,38 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class MouseOverTactic : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public Canvas parentCanvas;
     public GameObject card;
-    public static float xscale = Screen.width / 1920, yscale = Screen.width / 1080;
 
-    private GameObject showCardInfo;
+    private Vector3 newPosition;
+    private GameObject tactic;
+
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().name == "GameMode")
+            newPosition = new Vector3(300, transform.localPosition.y, -4);  // I don't know why the fuck is this -360
+        else
+            newPosition = new Vector3(transform.position.x + GetComponent<RectTransform>().rect.x + card.GetComponent<RectTransform>().rect.x,
+                          transform.position.y - 15);
+        tactic = transform.Find("Tactic").gameObject;
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        GameObject tactic = transform.Find("Tactic").gameObject;        
         if (!tactic.activeSelf) return;
-        showCardInfo = Instantiate(card, parentCanvas.transform);
-        showCardInfo.GetComponent<CardInfo>().SetAttributes(tactic.GetComponent<TacticInfo>().tactic);
-        showCardInfo.transform.localPosition = AdjustedMousePosition() - new Vector3(150 * xscale, 0, 0);
+        card.SetActive(true);
+        card.GetComponent<CardInfo>().SetAttributes(tactic.GetComponent<TacticInfo>().tactic);
+        if (SceneManager.GetActiveScene().name == "GameMode")
+            card.transform.localPosition = new Vector3(300, transform.localPosition.y, -4); // So I have to do this
+        else
+            card.transform.position = newPosition;
     }
 
-    // Doesn't work as expected.
     public void OnPointerExit(PointerEventData eventData)
     {
-        if(showCardInfo!=null) Destroy(showCardInfo);
+        if(card.activeSelf) card.SetActive(false);
     }
 
-    private Vector3 AdjustedMousePosition()
-    {
-        Vector2 mousePosition;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(parentCanvas.transform as RectTransform, Input.mousePosition, parentCanvas.worldCamera, out mousePosition);
-        return mousePosition;
-    }
 }

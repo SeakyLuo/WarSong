@@ -10,7 +10,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 {
     public static bool gameover = false;
 
-    public GameObject victoryImage, defeatImage, settingsPanel;
+    public GameObject victoryImage, defeatImage, settingsPanel, yourTurnImage;
     public Transform tacticBag;
     public Button endTurn;
     public Text roundCount, timer;
@@ -32,7 +32,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     void Start () {
         lineup = InfoLoader.user.lineups[InfoLoader.user.lastLineupSelected];
         board = Instantiate(Resources.Load<GameObject>("Board/Info/" + lineup.boardName + "/Board"));
-        board.transform.SetAsFirstSibling();
+        board.transform.SetSiblingIndex(1);
         boardSetup = board.GetComponent<BoardSetup>();
         boardSetup.Setup(lineup, true);  // Set up Player Lineup
         boardSetup.Setup(new EnemyLineup(), false);  // Set up Enemy Lineup
@@ -134,14 +134,22 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         endTurnText.text = "Enemy Turn";
         NextTurn();
         // need to put down piece
-        // opp turn;
+        // Enemy turn;
         YourTurn();
     }
 
     public void YourTurn()
     {
+        StartCoroutine(ShowYourTurn());
         endTurn.interactable = true;
         endTurnText.text = "End Turn";
+    }
+
+    private IEnumerator ShowYourTurn()
+    {
+        yourTurnImage.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+        yourTurnImage.SetActive(false);
     }
 
     public void NextTurn()

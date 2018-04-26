@@ -35,6 +35,7 @@ public class LineupBoardGestureHandler : MonoBehaviour, IPointerClickHandler, IB
             dragBegins = true;            
             EnableImage(cardImage, false);
             dragCard = Instantiate(card, parentCanvas.transform);
+            dragCard.SetActive(true);
             dragCard.GetComponent<CardInfo>().SetAttributes(boardInfo.cardLocations[StringToVec2(parent.name)]);
             dragCard.transform.position = AdjustedMousePosition();
         }
