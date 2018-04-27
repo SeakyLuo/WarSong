@@ -13,18 +13,19 @@ public class MovementController : MonoBehaviour
     public Transform boardCanvas;
     public Sprite newLocation;
 
-    private Button activateAbilityButton;
-    private GameObject activateAbilityText;
+    private static Collider selected;
+    private static Button activateAbilityButton;
+    private static GameObject activateAbilityText;
+    private static GameObject oldLocation;
+    private static List<GameObject> pathDots = new List<GameObject>();
+    private static Image previousImage;
+    private static Sprite previousSprite;
+    private static List<Vector2Int> validLoc = new List<Vector2Int>();
 
     private OnEnterGame onEnterGame;
-    private GameObject oldLocation;
     private float scale;
-    private Collider selected;
     private BoardSetup boardSetup;
-    private List<Vector2Int> validLoc = new List<Vector2Int>();
-    private List<GameObject> pathDots = new List<GameObject>();
-    private Image previousImage;
-    private Sprite previousSprite;
+
 
     private void Start()
     {
@@ -33,20 +34,15 @@ public class MovementController : MonoBehaviour
         Transform activateAbility = UIPanel.transform.Find("Canvas/ActivateAbility");
         activateAbilityButton = activateAbility.GetComponent<Button>();
         activateAbilityText = activateAbility.Find("Text").gameObject;
-        scale = gameObject.transform.localScale.x;
-        boardSetup = gameObject.GetComponent<BoardSetup>();
-        boardAttributes = gameObject.GetComponent<BoardSetup>().boardAttributes;
-        oldLocation = boardSetup.oldLocation;
+        scale = transform.localScale.x;
+        boardSetup = GetComponent<BoardSetup>();
+        boardAttributes = boardSetup.boardAttributes;
+        oldLocation = Instantiate(Resources.Load<GameObject>("GameMode/OldLocation"));
     }
 
     private void Update()
     {
         if (OnEnterGame.gameover) return;
-        else if (GameInfo.pieceMoved)
-        {
-            // show moved
-            return;
-        }
         if (Input.GetMouseButtonUp(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -77,6 +73,12 @@ public class MovementController : MonoBehaviour
                 }
                 else if (selected != null)
                 {
+                    if (GameInfo.pieceMoved)
+                    {
+                        onEnterGame.ShowMoved();
+                        // show moved
+                        return;
+                    }
                     Vector2Int location;
                     if (hit.collider.name == "Piece") location = StringToVec2(hit.collider.transform.parent.name);
                     else location = StringToVec2(hit.collider.name);
@@ -110,6 +112,17 @@ public class MovementController : MonoBehaviour
 
     private Vector2Int GetGridLocation(float x, float y) { return new Vector2Int((int)Mathf.Floor(x / scale), (int)Mathf.Floor(y / scale)); }
 
+    public static void PutDownPiece()
+    {
+        if (selected == null) return;
+        foreach (GameObject pathDot in pathDots) Destroy(pathDot);
+        pathDots.Clear();
+        selected.transform.position -= raiseVector;
+        if (!oldLocation.activeSelf && previousSprite != null) oldLocation.SetActive(true);
+        DeactivateActivateAbility();
+        selected = null;
+    }
+
     private void SetLocation(Vector2Int loc)
     {
         foreach (GameObject pathDot in pathDots) Destroy(pathDot);
@@ -125,15 +138,16 @@ public class MovementController : MonoBehaviour
             Transform location = boardCanvas.Find(Vec2ToString(loc));
             selected.transform.parent = location;
             selected.transform.localPosition = new Vector3(0, 0, selected.transform.position.z);
-            onEnterGame.NextTurn();
+            //onEnterGame.NextTurn();
 
             previousImage = location.Find("Image").GetComponent<Image>();
             previousSprite = previousImage.sprite;
             previousImage.sprite = newLocation;
 
-
+            GameInfo.pieceMoved = true;
         }
-        if (!oldLocation.activeSelf && previousSprite != null) oldLocation.SetActive(true);
+        if (!oldLocation.activeSelf && previousSprite != null)
+            oldLocation.SetActive(true);
         DeactivateActivateAbility();
         selected = null;
     }
@@ -353,13 +367,13 @@ public class MovementController : MonoBehaviour
         return 'B';
     }
 
-    private void ActivateActivateAbility()
+    private static void ActivateActivateAbility()
     {
         activateAbilityButton.interactable = true;
         activateAbilityText.SetActive(true);
     }
 
-    private void DeactivateActivateAbility()
+    private static void DeactivateActivateAbility()
     {
         activateAbilityButton.interactable = false;
         activateAbilityText.SetActive(false);
@@ -372,11 +386,4 @@ public class MovementController : MonoBehaviour
     private bool InAllyField(int x, int y) { return 0 <= x && x < boardAttributes.boardWidth && 0 <= y && y <= boardAttributes.allyField; }
 
     private bool InBoard(int x, int y) { return 0 <= x && x < boardAttributes.boardWidth && 0 <= y && y < boardAttributes.boardHeight; }
-
-    private Vector3 AdjustedMousePosition()
-    {
-        Vector2 mousePosition;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(boardCanvas as RectTransform, Input.mousePosition, boardCanvas.GetComponent<Canvas>().worldCamera, out mousePosition);
-        return mousePosition;
-    }
 }

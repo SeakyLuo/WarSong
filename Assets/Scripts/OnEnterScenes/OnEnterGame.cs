@@ -10,7 +10,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 {
     public static bool gameover = false;
 
-    public GameObject victoryImage, defeatImage, settingsPanel, yourTurnImage;
+    public GameObject victoryImage, defeatImage, settingsPanel, yourTurnImage, youHaveMoved;
     public Transform tacticBag;
     public Button endTurn;
     public Text roundCount, timer;
@@ -130,6 +130,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 
     public void EndTurn()
     {
+        MovementController.PutDownPiece();
         endTurn.interactable = false;
         endTurnText.text = "Enemy Turn";
         NextTurn();
@@ -143,6 +144,20 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         StartCoroutine(ShowYourTurn());
         endTurn.interactable = true;
         endTurnText.text = "End Turn";
+        GameInfo.pieceMoved = false;
+    }
+
+    public void ShowMoved()
+    {
+        StartCoroutine(ShowYouHaveMoved());
+    }
+
+    private IEnumerator ShowYouHaveMoved()
+    {
+        MovementController.PutDownPiece();
+        youHaveMoved.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+        youHaveMoved.SetActive(false);
     }
 
     private IEnumerator ShowYourTurn()
@@ -159,17 +174,5 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         GameInfo.pieceMoved = false;
         GameInfo.tacticUsed = false;
         GameInfo.abilityActivated = false;
-    }
-
-    public void ExitGame()
-    {
-        Application.Quit();
-    }
-
-    private Vector2 AdjustedMousePosition()
-    {
-        Vector2 mousePosition;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(parentCanvas.transform as RectTransform, Input.mousePosition, parentCanvas.worldCamera, out mousePosition);
-        return mousePosition;
     }
 }

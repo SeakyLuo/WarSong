@@ -12,7 +12,7 @@ public class MouseOverTactic : MonoBehaviour, IPointerEnterHandler, IPointerExit
     private void Start()
     {
         if (SceneManager.GetActiveScene().name == "GameMode")
-            newPosition = new Vector3(300, transform.localPosition.y, -4);  // I don't know why the fuck is this -360
+            newPosition = new Vector3(300, transform.localPosition.y, -6.1f);  // I don't know why the fuck is this -360
         else
             newPosition = new Vector3(transform.position.x + GetComponent<RectTransform>().rect.x + card.GetComponent<RectTransform>().rect.x,
                           transform.position.y - 15);
@@ -25,7 +25,7 @@ public class MouseOverTactic : MonoBehaviour, IPointerEnterHandler, IPointerExit
         card.SetActive(true);
         card.GetComponent<CardInfo>().SetAttributes(tactic.GetComponent<TacticInfo>().tactic);
         if (SceneManager.GetActiveScene().name == "GameMode")
-            card.transform.localPosition = new Vector3(300, transform.localPosition.y, -4); // So I have to do this
+            card.transform.localPosition = new Vector3(300, transform.localPosition.y, -6.1f); // So I have to do this
         else
             card.transform.position = newPosition;
     }

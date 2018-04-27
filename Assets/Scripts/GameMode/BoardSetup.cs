@@ -6,14 +6,7 @@ public class BoardSetup : MonoBehaviour {
 
     public BoardAttributes boardAttributes;
     public Transform boardCanvas;
-    public GameObject oldLocation;
     public Dictionary<Vector2Int, GameObject> pieces = new Dictionary<Vector2Int, GameObject>();
-
-    private void Awake()
-    {
-        oldLocation = Instantiate(oldLocation);
-        oldLocation.SetActive(false);
-    }
 
     public void Setup(Lineup lineup, bool isAlly)
     {

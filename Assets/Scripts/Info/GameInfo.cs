@@ -17,7 +17,7 @@ public static class GameInfo
     public static bool tacticUsed = false;
     public static bool abilityActivated = false;
 
-    public static string user = ""; //whose turn
+    public static string firstPlayer = ""; //whose turn
     public static int round = 1;
     public static int time = 120;
     public static int maxTime = 120;
