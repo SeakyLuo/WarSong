@@ -11,6 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f29999796f29c144f9d2145ff7265ec4, type: 3}
   m_Name: Challenge
   m_EditorClassIdentifier: 
-  challengeName: Win A Game
+  challengeName: Chicken Dinner
   description: Win A Game
+  progress: 0
+  requirement: 1
   reward: 10

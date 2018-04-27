@@ -57,7 +57,10 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape))
+        {
             settingsPanel.SetActive(true);
+            MovementController.PutDownPiece();
+        }
     }
 
     private TacticAttributes FindTacticAttributes(string tacticName)
@@ -70,6 +73,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         if (gameover)
         {
             gameover = false;
+            Destroy(board);
             SceneManager.LoadScene("PlayerMatching");
             GameInfo.Clear();
         }

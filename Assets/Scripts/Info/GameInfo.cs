@@ -21,6 +21,7 @@ public static class GameInfo
     public static int round = 1;
     public static int time = 120;
     public static int maxTime = 120;
+    public static int gameID;
 
     public static void Add(Piece piece, Vector2Int loc, bool reactivate = false)
     {

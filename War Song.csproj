@@ -13,12 +13,14 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectGenerator>VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>2017.3.1f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -289,7 +291,7 @@
     <Compile Include="Assets\Scripts\Attributes\BoardAttributes.cs" />
     <Compile Include="Assets\Scripts\Attributes\Challenge.cs" />
     <Compile Include="Assets\Scripts\Attributes\ContractAttributes.cs" />
-    <Compile Include="Assets\Scripts\Attributes\Landmine.cs" />
+    <Compile Include="Assets\Scripts\Attributes\Trap.cs" />
     <Compile Include="Assets\Scripts\Attributes\PieceAttributes.cs" />
     <Compile Include="Assets\Scripts\Attributes\TacticAttributes.cs" />
     <Compile Include="Assets\Scripts\Collection\BoardManager.cs" />

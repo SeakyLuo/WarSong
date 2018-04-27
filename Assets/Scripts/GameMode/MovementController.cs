@@ -8,6 +8,7 @@ public class MovementController : MonoBehaviour
     public static float raiseHeight = -3f;
     public static Vector3 raiseVector = new Vector3(0, 0, raiseHeight);
     public static BoardAttributes boardAttributes;
+    public static List<Vector2Int> validLoc = new List<Vector2Int>();
 
     public GameObject pathDot, cardInfo;
     public Transform boardCanvas;
@@ -20,7 +21,6 @@ public class MovementController : MonoBehaviour
     private static List<GameObject> pathDots = new List<GameObject>();
     private static Image previousImage;
     private static Sprite previousSprite;
-    private static List<Vector2Int> validLoc = new List<Vector2Int>();
 
     private OnEnterGame onEnterGame;
     private float scale;
@@ -56,7 +56,9 @@ public class MovementController : MonoBehaviour
                     if (selected != null) SetLocation(Piece.noLocation); // switch piece
                     hit.collider.transform.position += raiseVector;
                     selected = hit.collider;
-                    if (!selected.GetComponent<PieceInfo>().IsStandard()) ActivateActivateAbility();
+                    PieceInfo pieceInfo = selected.GetComponent<PieceInfo>();
+                    pieceInfo.HideInfoCard();
+                    if (!pieceInfo.IsStandard()) ActivateActivateAbility();
                     validLoc = ValidLoc(hitObj);
                     if (validLoc.Count == 0) return;
                     // Draw Valid path
