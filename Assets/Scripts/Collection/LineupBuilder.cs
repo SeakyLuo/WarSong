@@ -231,13 +231,13 @@ public class LineupBuilder : MonoBehaviour {
     public void CopyLineup()
     {
         copy = lineup;        
-        StartCoroutine(CopyReminder(1.5f));
+        StartCoroutine(CopyReminder());
     }
 
-    private IEnumerator CopyReminder(float delay)
+    private IEnumerator CopyReminder()
     {
         copyReminder.SetActive(true);
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(1.5f);
         copyReminder.SetActive(false);
     }
 
@@ -286,12 +286,6 @@ public class LineupBuilder : MonoBehaviour {
         }
         boardInfo.SetAttributes(newLineup.boardName, boardInfo.cardLocations);
         SetTexts();        
-    }
-
-    public void ReturnToBoardSelection()
-    {
-        selectBoardPanel.SetActive(true);
-        createLineupPanel.SetActive(false);
     }
 
     public void SetBoardInfo(BoardInfo info) { boardInfo = info; }

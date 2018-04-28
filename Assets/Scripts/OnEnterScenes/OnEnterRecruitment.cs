@@ -32,10 +32,12 @@ public class OnEnterRecruitment : MonoBehaviour, IPointerClickHandler {
     public void OpenContractStoreWindow()
     {
         contractStore.SetActive(true);
+        coinStore.SetActive(false);
     }
 
     public void OpenCoinStoreWindow()
     {
+        contractStore.SetActive(false);
         coinStore.SetActive(true);
     }
 

@@ -10,7 +10,7 @@ public class MovementController : MonoBehaviour
     public static BoardAttributes boardAttributes;
     public static List<Vector2Int> validLoc = new List<Vector2Int>();
 
-    public GameObject pathDot, cardInfo;
+    public GameObject pathDot;
     public Transform boardCanvas;
     public Sprite newLocation;
 

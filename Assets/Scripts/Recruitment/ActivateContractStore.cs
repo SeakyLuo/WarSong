@@ -21,11 +21,6 @@ public class ActivateContractStore : MonoBehaviour {
         contractsManager = contractPanel.GetComponent<ContractsManager>();
     }
 
-    public void ClickModifyAmount()
-    {
-        popupInputAmountWindow.SetActive(true);
-    }
-
     public void ConfirmInput()
     {
         if (inputField.text != "")
@@ -49,11 +44,6 @@ public class ActivateContractStore : MonoBehaviour {
                 }
             }
         }
-        popupInputAmountWindow.SetActive(false);
-    }
-
-    public void CancelInput()
-    {
         popupInputAmountWindow.SetActive(false);
     }
 

@@ -142,7 +142,14 @@ public class CollectionManager : MonoBehaviour {
     public void SetCurrentPage(string type,int page)
     {
         if (page <= pageLimits[type])
+        {
+            ColorBlock colorBlock = tabs[Array.IndexOf(types, type)].GetComponent<Button>().colors;
+            tabs[Array.IndexOf(types, currentPage.Key)].GetComponent<Button>().colors = colorBlock; // Resume tab
+            colorBlock.normalColor = Color.white;
+            tabs[Array.IndexOf(types, type)].GetComponent<Button>().colors = colorBlock;
+
             currentPage = new KeyValuePair<string, int>(type, page);
+        }
     }
 
     public void SetCardsPerPage(int number)
@@ -274,14 +281,12 @@ public class CollectionManager : MonoBehaviour {
 
     public void ClickTab(string cardType)
     {
-        //tabs[Array.IndexOf(types, cardType)].GetComponent<Button>().Select();
         SetCurrentPage(cardType, 1);
         ShowCurrentPage();
     }
 
     public void ClickTab(GameObject obj)
     {
-        //obj.GetComponent<Button>().Select();
         SetCurrentPage(obj.name, 1);
         ShowCurrentPage();
     }
@@ -290,7 +295,6 @@ public class CollectionManager : MonoBehaviour {
     {
 
     }
-
 
     private void ShowSearchedCollection()
     {

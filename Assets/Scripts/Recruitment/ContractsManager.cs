@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ContractsManager : MonoBehaviour {
 
+    public GameObject GetCards;
     public List<GameObject> contractSlots = new List<GameObject>();
     public static List<string> contractName = new List<string>()
     {
@@ -31,12 +32,12 @@ public class ContractsManager : MonoBehaviour {
         Color color = counter.GetComponent<Image>().color;
         if (count > 1)
         {
-            counter.Find("Text").GetComponent<Text>().text = count.ToString();
+            counter.GetComponentInChildren<Text>().text = count.ToString();
             color.a = 255;
         }
         else
         {
-            counter.Find("Text").GetComponent<Text>().text = "";
+            counter.GetComponentInChildren<Text>().text = "";
             color.a = 0;
         }
         counter.GetComponent<Image>().color = color;
@@ -54,7 +55,8 @@ public class ContractsManager : MonoBehaviour {
     {
         int count = --InfoLoader.user.contracts[contract.name];
         SetContract(contract, count);
-        // Show Cards
+        GetCards.SetActive(true);
+        // retrieve cards from the server and set them
     }
 	
 }

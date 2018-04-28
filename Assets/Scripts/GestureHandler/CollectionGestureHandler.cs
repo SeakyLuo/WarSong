@@ -6,13 +6,13 @@ using UnityEngine.EventSystems;
 
 public class CollectionGestureHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public GameObject collectionPanel ,createLineupPanel;
+    public GameObject createLineupPanel, infoCard;
     public Canvas parentCanvas;
+
     public static string CARDSLOTPANEL = "CardSlotPanel";
     public static float xscale = Screen.width / 1920, yscale = Screen.width / 1080;
 
     private BoardInfo boardInfo;
-    private GameObject dragCard;
     private bool dragBegins = false;
     private LineupBuilder lineupBuilder;
 
@@ -28,28 +28,28 @@ public class CollectionGestureHandler : MonoBehaviour, IPointerClickHandler, IBe
         if (selectedObject.name == CARDSLOTPANEL)
         {
             dragBegins = true;
-            dragCard = Instantiate(selectedObject.transform.parent.Find("Card").gameObject, parentCanvas.transform);
-            dragCard.transform.position = AdjustedMousePosition();
-            dragCard.GetComponent<CardInfo>().SetAttributes(selectedObject.transform.parent.Find("Card").GetComponent<CardInfo>());
+            infoCard.SetActive(true);
+            infoCard.transform.position = AdjustedMousePosition();
+            infoCard.GetComponent<CardInfo>().SetAttributes(selectedObject.transform.parent.Find("Card").GetComponent<CardInfo>());
         }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         if (!dragBegins) return;
-        dragCard.transform.position = AdjustedMousePosition();
+        infoCard.transform.position = AdjustedMousePosition();
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         if (!dragBegins) return;
         dragBegins = false;
-        CardInfo cardInfo = dragCard.GetComponent<CardInfo>();
+        CardInfo cardInfo = infoCard.GetComponent<CardInfo>();
         if (InTacticRegion(Input.mousePosition) && cardInfo.GetCardType() == "Tactic")
             lineupBuilder.AddTactic(cardInfo);
         else if (InBoardRegion(Input.mousePosition) && cardInfo.GetCardType() != "Tactic")
             lineupBuilder.AddPiece(cardInfo, Input.mousePosition);
-        Destroy(dragCard);
+        infoCard.SetActive(false);
     }
 
     public void OnPointerClick(PointerEventData eventData)

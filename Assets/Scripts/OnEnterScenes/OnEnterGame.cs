@@ -20,7 +20,6 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 
     private Lineup lineup;
     private GameObject board;
-    private Canvas parentCanvas;
     private List<Transform> tacticObjs = new List<Transform>();
     private BoardSetup boardSetup;
     private Dictionary<String, int> credits = new Dictionary<string, int>()
@@ -51,7 +50,6 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(FindTacticAttributes(lineup.tactics[i]));
         }
         StartCoroutine(Timer());
-        parentCanvas = transform.Find("Canvas").GetComponent<Canvas>();
     }
 
     private void Update()
@@ -73,8 +71,8 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         if (gameover)
         {
             gameover = false;
-            Destroy(board);
             SceneManager.LoadScene("PlayerMatching");
+            Destroy(board);
             GameInfo.Clear();
         }
     }
@@ -90,7 +88,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             yield return new WaitForSeconds(1.0f);
             if (--GameInfo.time < 0)
             {
-                NextTurn();
+                EndTurn();
             }
         }
     }
@@ -107,6 +105,11 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         defeatImage.SetActive(true);
         InfoLoader.user.total.Lost();
         GameOver();
+    }
+
+    public void Draw()
+    {
+        
     }
 
     public void GameOver()

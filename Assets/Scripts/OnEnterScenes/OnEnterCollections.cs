@@ -7,6 +7,13 @@ public class OnEnterCollections : MonoBehaviour {
 
     public GameObject selectBoardPanel, createLineupPanel, settingsPanel;
 
+    private CollectionManager collectionManager;
+
+    private void Start()
+    {
+        collectionManager = transform.Find("Collection").GetComponent<CollectionManager>();
+    }
+
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape))
@@ -17,9 +24,11 @@ public class OnEnterCollections : MonoBehaviour {
     {
         if (createLineupPanel.activeSelf)
         {
+            collectionManager.SetCardsPerPage(8);
             Destroy(createLineupPanel.transform.Find("BoardPanel/Board/LineupBoard(Clone)").gameObject);
             createLineupPanel.SetActive(false);
-            selectBoardPanel.SetActive(true); // User should not click back when open a lineup
+            if (LineupsManager.modifyLineup == -1)
+                selectBoardPanel.SetActive(true);
         }
         else if (selectBoardPanel.activeSelf)
             selectBoardPanel.SetActive(false);

@@ -5,14 +5,15 @@ using UnityEngine.UI;
 
 public class LineupsManager : MonoBehaviour {
 
+    public static int modifyLineup = -1;
+    public static int lineupsLimit = 9;
+
     public GameObject createLineupButton, selectBoardPanel, collectionPanel, createLineupPanel;
     public Text myLineups;
-    public static int lineupsLimit = 9;
     public GameObject[] lineupObjects = new GameObject[lineupsLimit];
-
-    private int lineupsCount = 0,
-        modifyLineup = -1;
+        
     private static string CUSTOMLINEUP = "Custom Lineup";
+    private int lineupsCount = 0;
     private BoardManager boardManager;
     private LineupBuilder lineupBuilder;
 

@@ -54,6 +54,14 @@ public class BoardManager : MonoBehaviour {
         }            
     }
 
+    public void PreferBoard()
+    {
+        if (boardAttributes[currentBoard].available)
+        {
+            InfoLoader.user.preferredBoard = boardAttributes[currentBoard].boardName;
+        }
+    }
+
     public void ConfirmBoardSelection()
     {
         gameObject.SetActive(false);

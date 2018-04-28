@@ -36,6 +36,16 @@ public class UserInfo {
         challenges = new List<Challenge>();
         preferredBoard = "Standard Board";
     }
+
+    public void ClassToJson()
+    {
+
+    }
+
+    public void JsonToClass()
+    {
+
+    }
 }
 
 public class CheatAccount:UserInfo
@@ -43,7 +53,7 @@ public class CheatAccount:UserInfo
     public CheatAccount():base()
     {
         username = "WarSong CheatAccount";
-        Collection[] cheat = { new Collection("Greeeeeat Elephant", "Elephant", 3, 5), new Collection("Zhuge Liang", "General"), new Collection("A Secret Plan", 3),
+        Collection[] cheat = { new Collection("Space Witch", "General", 2, 20), new Collection("Greeeeeat Elephant", "Elephant", 3, 5), new Collection("Zhuge Liang", "General"), new Collection("A Secret Plan", 3),
             new Collection("No Way", 100), new Collection("Qin Shihuang", "General"), new Collection("Xiao He", "General"),new Collection("Turret","Cannon"),
              new Collection("Link Soldier","Soldier",11), new Collection("Buy 1 Get 1 Free",15), new Collection("Build A Cannon","Tactic"),
             new Collection("Build A Rook"),new Collection("Winner Trophy",5),new Collection("Horse Rider","Horse",4),new Collection("Minesweeper",20)

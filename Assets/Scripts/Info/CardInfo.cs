@@ -6,23 +6,13 @@ public class CardInfo : MonoBehaviour {
     public PieceAttributes piece;
     public TacticAttributes tactic;
 
-    public Text nameText, descriptionText, costText, healthText;
+    public Text nameText, descriptionText, costText, healthText, typeText;
     public Image image;
     public GameObject HealthImage, Background;
-    public static Sprite heartImage, coinImage;
+    public Sprite heartImage, coinImage;
 
     private string cardName, type, description;
     private int health = 1;
-
-    public CardInfo() { }
-
-    private void Start()
-    {
-        heartImage = Resources.Load<Sprite>("Main/heart");
-        coinImage = Resources.Load<Sprite>("Main/coin");
-        if (piece != null) SetAttributes(piece);
-        else if (tactic != null) SetAttributes(tactic);
-    }
 
     public void SetAttributes(CardInfo cardInfo)
     {
@@ -34,6 +24,7 @@ public class CardInfo : MonoBehaviour {
             health = cardInfo.GetHealth();
             if (health == 0) healthText.text = "∞";
             else healthText.text = health.ToString();
+            healthText.color = cardInfo.healthText.color;
         }
     }
 
@@ -46,7 +37,9 @@ public class CardInfo : MonoBehaviour {
         {
             SetAttributes(Resources.Load<PieceAttributes>("Pieces/Info/" + collection.name + "/Attributes"));
             if (collection.health != 0 && health != collection.health)
-            {                
+            {
+                if (health > collection.health) healthText.color = Color.red;
+                else healthText.color = Color.green;
                 health = collection.health;
                 healthText.text = collection.health.ToString();
             }            
@@ -69,8 +62,10 @@ public class CardInfo : MonoBehaviour {
         healthText.color = Color.white;
         if (health == 0) healthText.text = "∞";
         else healthText.text = attributes.health.ToString();
+        healthText.GetComponent<Outline>().enabled = true;
         image.sprite = attributes.image;
         type = attributes.type;
+        typeText.text = type;
         HealthImage.GetComponent<Image>().sprite = heartImage;
     }
 
@@ -87,8 +82,10 @@ public class CardInfo : MonoBehaviour {
         health = attributes.goldCost;
         healthText.text = attributes.goldCost.ToString();
         healthText.color = Color.black;
+        healthText.GetComponent<Outline>().enabled = false;
         image.sprite = attributes.image;
         type = "Tactic";
+        typeText.text = type;
         HealthImage.GetComponent<Image>().sprite = coinImage;
     }
 

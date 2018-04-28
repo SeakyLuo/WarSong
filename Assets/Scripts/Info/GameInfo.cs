@@ -66,4 +66,14 @@ public static class GameInfo
         inactiveEnemy.Clear();
         round = 1;
     }
+
+    public static void ClassToJson()
+    {
+
+    }
+
+    public static void JsonToClass()
+    {
+
+    }
 }
