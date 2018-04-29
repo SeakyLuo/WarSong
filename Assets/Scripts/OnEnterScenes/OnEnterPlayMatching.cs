@@ -8,7 +8,7 @@ public class OnEnterPlayMatching : MonoBehaviour
 {
     public Text rank;
     public Button launchWar;
-    public GameObject launchWarText, settingsPanel;
+    public GameObject launchWarText, settingsPanel, matchingPanel;
     public GameObject[] lineupObjects = new GameObject[LineupsManager.lineupsLimit];
 
     private GameObject[] xs = new GameObject[LineupsManager.lineupsLimit];
@@ -60,7 +60,15 @@ public class OnEnterPlayMatching : MonoBehaviour
     public void Match()
     {
         // Upload Lineup Info to the server and match according to the board
+        matchingPanel.SetActive(true);
         LaunchWar();
+        matchingPanel.SetActive(false);
+    }
+
+    public void CancelMatching()
+    {
+        // cancel network matching
+        matchingPanel.SetActive(false);
     }
 
     private void LaunchWar()

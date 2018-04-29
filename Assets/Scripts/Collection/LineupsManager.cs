@@ -9,6 +9,7 @@ public class LineupsManager : MonoBehaviour {
     public static int lineupsLimit = 9;
 
     public GameObject createLineupButton, selectBoardPanel, collectionPanel, createLineupPanel;
+    public GameObject lineupView;
     public Text myLineups;
     public GameObject[] lineupObjects = new GameObject[lineupsLimit];
         
@@ -33,6 +34,7 @@ public class LineupsManager : MonoBehaviour {
         myLineups.text = "My Lineups\n" + lineupsCount.ToString() + "/9";
         boardManager = selectBoardPanel.GetComponent<BoardManager>();
         lineupBuilder = createLineupPanel.GetComponent<LineupBuilder>();
+        ResizeLineup();
     }
 
     public void AddLineup(Lineup lineup)
@@ -58,6 +60,7 @@ public class LineupsManager : MonoBehaviour {
             myLineups.text = "My Lineups\n" + lineupsCount.ToString() + "/9";
             if (lineupsCount == lineupsLimit) createLineupButton.SetActive(false);
             else createLineupButton.SetActive(true);
+            ResizeLineup();
         }
         else
         {
@@ -79,6 +82,7 @@ public class LineupsManager : MonoBehaviour {
                 lineupObjects[i].GetComponentInChildren<Text>().text = InfoLoader.user.lineups[i].lineupName;
             myLineups.text = "My Lineups\n" + lineupsCount.ToString() + "/9";
             modifyLineup = -1;
+            ResizeLineup();
         }       
     }
 
@@ -90,4 +94,15 @@ public class LineupsManager : MonoBehaviour {
         lineupBuilder.SetLineup(InfoLoader.user.lineups[number]);
     }
 
+    private void ResizeLineup()
+    {
+        GridLayoutGroup gridLayoutGroup = lineupView.GetComponent<GridLayoutGroup>();
+        int count = InfoLoader.user.lineups.Count + 1;
+        if (createLineupButton.activeSelf) count++;
+        lineupView.GetComponent<RectTransform>().sizeDelta = new Vector2
+        (
+             lineupView.GetComponent<RectTransform>().rect.width,
+             gridLayoutGroup.padding.top + gridLayoutGroup.padding.bottom + gridLayoutGroup.cellSize.y * count + gridLayoutGroup.spacing.y * (count - 1)
+        );
+    }
 }

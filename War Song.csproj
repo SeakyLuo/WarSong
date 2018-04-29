@@ -13,14 +13,12 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectGenerator>VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>2017.3.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -317,9 +315,9 @@
     <Compile Include="Assets\Scripts\Info\GameInfo.cs" />
     <Compile Include="Assets\Scripts\Info\InfoLoader.cs" />
     <Compile Include="Assets\Scripts\Info\PieceInfo.cs" />
+    <Compile Include="Assets\Scripts\Info\PlayerContract.cs" />
     <Compile Include="Assets\Scripts\Info\TacticInfo.cs" />
     <Compile Include="Assets\Scripts\Info\Trigger.cs" />
-    <Compile Include="Assets\Scripts\Info\PlayerContract.cs" />
     <Compile Include="Assets\Scripts\Info\UserInfo.cs" />
     <Compile Include="Assets\Scripts\Login\AccountCreation.cs" />
     <Compile Include="Assets\Scripts\Login\ForgotPassword.cs" />

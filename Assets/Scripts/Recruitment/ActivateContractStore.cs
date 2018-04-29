@@ -52,7 +52,7 @@ public class ActivateContractStore : MonoBehaviour {
         current_contract = contract.GetComponent<ContractInfo>().attributes;
         priceText.text = (current_contract.price * contractsCount).ToString();
         contractDescription.text = current_contract.description.Replace("\\n", "\n");
-        foreach(GameObject obj in contracts) obj.GetComponent<Image>().sprite = current_contract.image;
+        foreach(GameObject obj in contracts) obj.GetComponent<PlayerContract>().SetAttributes(current_contract);
     }
 
     public void Purchase()
@@ -74,7 +74,7 @@ public class ActivateContractStore : MonoBehaviour {
     private void LoadContract()
     {
         GameObject contract = Instantiate(contractPrefab, displayContractsPanel.transform);
-        contract.GetComponent<Image>().sprite = current_contract.image;
+        contract.GetComponent<PlayerContract>().SetAttributes(current_contract);
         contracts.Add(contract);
     }
 }

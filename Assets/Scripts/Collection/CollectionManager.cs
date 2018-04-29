@@ -10,7 +10,7 @@ public class CollectionManager : MonoBehaviour {
     public Dictionary<string, int> pageLimits = new Dictionary<string, int>();
     public KeyValuePair<string, int> currentPage, notFound = new KeyValuePair<string, int>("", 0);
     public Vector3 raise = new Vector3(0, 0, 10);
-    public GameObject left, right, clearSearch, selectedBoardPanel, createLineupPanel;
+    public GameObject left, right, clearSearch, searchPanel, selectedBoardPanel, createLineupPanel;
     public Text TitleText, pageText;
     public InputField searchByInput;
     public Dropdown searchByGold, searchByOre, searchByHealth;
@@ -151,6 +151,11 @@ public class CollectionManager : MonoBehaviour {
             currentPage = new KeyValuePair<string, int>(type, page);
             ShowCurrentPage();
         }
+    }
+
+    private void SetCurrentPage(KeyValuePair<string, int> page)
+    {
+        SetCurrentPage(page.Key, page.Value);
     }
 
     public void SetCardsPerPage(int number)
@@ -299,7 +304,7 @@ public class CollectionManager : MonoBehaviour {
             if (collectionDict[types[i]].Count == 0) tabs[i].SetActive(false);
             else tabs[i].SetActive(true);
         }
-        currentPage = FirstPage();
+        SetCurrentPage(FirstPage());
         ShowCurrentPage();
     }
 
@@ -376,6 +381,11 @@ public class CollectionManager : MonoBehaviour {
         ShowSearchedCollection();
     }
 
+    public void ShowSearchPanel()
+    {
+        searchPanel.SetActive(!searchPanel.activeSelf);
+    }
+
     public void InputFieldSearch()
     {
         searchByKeyword = searchByInput.text.Trim();
@@ -384,11 +394,13 @@ public class CollectionManager : MonoBehaviour {
             clearSearch.SetActive(true);
             Search(searchByKeyword);
         }
+        else searchPanel.SetActive(false);
     }
 
     public void ClearSearch()
     {
         searchByInput.text = "";
+        searchByKeyword = "";
         clearSearch.SetActive(false);
         Search(searchByKeyword, searchByGoldValue, searchByOreValue, searchByHealthValue);
     }
