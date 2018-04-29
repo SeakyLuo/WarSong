@@ -13,7 +13,7 @@ public class SwitchScenes : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
-        parentCanvas = gameObject.GetComponent<Canvas>();
+        parentCanvas = GetComponent<Canvas>();
         SetPlayerInfo();
     }
 

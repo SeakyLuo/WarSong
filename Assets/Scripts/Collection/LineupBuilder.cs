@@ -7,10 +7,10 @@ using UnityEngine.UI;
 public class LineupBuilder : MonoBehaviour {
     // Recommend Tactics || Random Tactics
 
-    public GameObject collections, selectBoardPanel, createLineupPanel, myLineup, copyReminder;
+    public GameObject collections, selectBoardPanel, createLineupPanel, myLineup, copyReminder, fullReminder, sameTacticReminder;
     public Text tacticsCountText, totalOreCostText, totalGoldCostText;
     public InputField inputField;
-    public static int tacticsLimit = 10;
+    public static int tacticsLimit = 10, current_tactics = 0;
 
     private Lineup lineup = new Lineup();
     private static Lineup copy = new Lineup();
@@ -20,7 +20,7 @@ public class LineupBuilder : MonoBehaviour {
     private BoardInfo boardInfo;
     private GameObject[] tacticObjs;
     private List<TacticAttributes> tacticAttributes = new List<TacticAttributes>();    
-    private int current_tactics = 0, totalOreCost = 0, totalGoldCost = 0;
+    private int totalOreCost = 0, totalGoldCost = 0;
     private Vector3 mousePosition;
 
     private void Awake()
@@ -74,10 +74,15 @@ public class LineupBuilder : MonoBehaviour {
 
     public void AddTactic(CardInfo cardInfo)
     {
-        if (current_tactics == tacticsLimit) return;
+        if (current_tactics == tacticsLimit)
+        {
+            StartCoroutine(FullReminder());
+            return;
+        }
         else if (InTactics(cardInfo.GetCardName()))
         {
             // show animation;
+            StartCoroutine(SameTacticReminder());
             return;
         }
         TacticAdder(cardInfo.tactic);
@@ -121,7 +126,7 @@ public class LineupBuilder : MonoBehaviour {
         // called by user
         if (current_tactics == 0) return;
         TacticRemover(attributes);
-        collectionManager.AddCollection(new Collection(attributes.Name, "Tactic"));
+        collectionManager.AddCollection(new Collection(attributes.Name));
     }
     
     private void RemoveTactic(string TacticName)
@@ -164,6 +169,20 @@ public class LineupBuilder : MonoBehaviour {
     {
         foreach (string name in lineup.tactics) if (name == attributes) return true;
         return false;
+    }
+
+    private IEnumerator SameTacticReminder()
+    {
+        sameTacticReminder.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        sameTacticReminder.SetActive(false);
+    }
+
+    private IEnumerator FullReminder()
+    {
+        fullReminder.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        fullReminder.SetActive(false);
     }
 
     private void SetTexts()

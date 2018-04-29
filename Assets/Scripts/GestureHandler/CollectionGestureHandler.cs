@@ -59,11 +59,7 @@ public class CollectionGestureHandler : MonoBehaviour, IPointerClickHandler, IBe
         if (selectedObject.name == CARDSLOTPANEL)
         {
             CardInfo cardInfo = selectedObject.transform.parent.Find("Card").GetComponent<CardInfo>();
-            if (cardInfo.GetCardType() == "Tactic")
-            {
-                // Same tactic should warn.
-                lineupBuilder.AddTactic(cardInfo);
-            }            
+            if (cardInfo.GetCardType() == "Tactic") lineupBuilder.AddTactic(cardInfo);      
             else
             {
                 string cardName = cardInfo.GetCardName();

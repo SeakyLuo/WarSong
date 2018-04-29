@@ -55,11 +55,7 @@ public class TacticGestureHandler : MonoBehaviour,IBeginDragHandler, IDragHandle
         if (selectedObject.name == TACTICSLOTPANEL)
         {
              tactic = selectedObject.transform.parent.Find("Tactic").gameObject;
-             if (!tactic.activeSelf)
-             {
-                collectionManager.SetCurrentPage("Tactic",1);
-                collectionManager.ShowCurrentPage();
-             }
+             if (!tactic.activeSelf) collectionManager.SetCurrentPage("Tactic",1);
              else lineupBuilder.RemoveTactic(tactic.GetComponent<TacticInfo>().tactic);
         }            
     }
