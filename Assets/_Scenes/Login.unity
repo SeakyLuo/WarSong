@@ -3483,7 +3483,6 @@ GameObject:
   - component: {fileID: 613984388}
   - component: {fileID: 613984391}
   - component: {fileID: 613984390}
-  - component: {fileID: 613984389}
   m_Layer: 5
   m_Name: CreditsPanel
   m_TagString: Untagged
@@ -3514,18 +3513,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &613984389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114287368659040390, guid: 6b4b8898f9da8484fb41693e8722fc8c,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 613984387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64f0f50cb294ba643adbccf2d3797d2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &613984390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4203,7 +4190,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -635, y: -490}
+  m_AnchoredPosition: {x: 325, y: 50}
   m_SizeDelta: {x: 450, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &745854775
@@ -6669,6 +6656,7 @@ MonoBehaviour:
   optionsPanel: {fileID: 1398851219}
   logoutPanel: {fileID: 0}
   creditsPanel: {fileID: 613984387}
+  guidebookPanel: {fileID: 0}
   parentCanvas: {fileID: 902363128}
 --- !u!114 &1307400340
 MonoBehaviour:
