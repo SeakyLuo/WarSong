@@ -41,7 +41,7 @@ public class Settings : MonoBehaviour, IPointerClickHandler
 
     public void ShowSettings()
     {
-        if (creditsPanel.activeSelf)
+        if (creditsPanel != null && creditsPanel.activeSelf)
         {
             creditsPanel.SetActive(false);
             optionsPanel.SetActive(false);            

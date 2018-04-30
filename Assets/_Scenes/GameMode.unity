@@ -12193,10 +12193,10 @@ MonoBehaviour:
   timer: {fileID: 2080881921}
   modeName: {fileID: 1012175009}
   playerName: {fileID: 1530604653}
-  playerWin: {fileID: 0}
+  playerWin: {fileID: 950393824}
   playerRank: {fileID: 221050169}
   opponentName: {fileID: 1308403910}
-  opponentWin: {fileID: 0}
+  opponentWin: {fileID: 386953077}
   opponentRank: {fileID: 678719571}
   endTurnText: {fileID: 519979817}
 --- !u!114 &1488073805
