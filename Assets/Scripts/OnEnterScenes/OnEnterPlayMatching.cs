@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class OnEnterPlayMatching : MonoBehaviour
 {
     public Text rank;
-    public Button launchWar;
+    public Button rankedMode,casualMode,launchWar;
     public GameObject launchWarText, settingsPanel, matchingPanel;
     public GameObject[] lineupObjects = new GameObject[LineupsManager.lineupsLimit];
 
@@ -39,6 +39,8 @@ public class OnEnterPlayMatching : MonoBehaviour
             lineupObjects[InfoLoader.user.lastLineupSelected].GetComponent<Button>().Select();
         }
         SelectLineup(InfoLoader.user.lastLineupSelected);
+        if (InfoLoader.user.lastModeSelected == "Ranked Mode") RankedMode();
+        else if (InfoLoader.user.lastModeSelected == "Casual Mode") CasualMode();
     }
 
     private void Update()
@@ -58,6 +60,20 @@ public class OnEnterPlayMatching : MonoBehaviour
         SceneManager.LoadScene("Collection");
     }
 
+    public void RankedMode()
+    {
+        InfoLoader.user.lastModeSelected = "Ranked Mode";
+        rankedMode.GetComponent<Image>().sprite = rankedMode.spriteState.pressedSprite;
+        casualMode.GetComponent<Image>().sprite = casualMode.spriteState.disabledSprite;
+    }
+
+    public void CasualMode()
+    {
+        InfoLoader.user.lastModeSelected = "Casual Mode";
+        rankedMode.GetComponent<Image>().sprite = rankedMode.spriteState.disabledSprite;
+        casualMode.GetComponent<Image>().sprite = casualMode.spriteState.pressedSprite;
+    }
+
     public void Match()
     {
         // Upload Lineup Info to the server and match according to the board
@@ -74,7 +90,6 @@ public class OnEnterPlayMatching : MonoBehaviour
 
     private void LaunchWar()
     {
-        InfoLoader.user.lastModeSelected = "Ranked Mode";
         SceneManager.LoadScene("GameMode");
     }
 

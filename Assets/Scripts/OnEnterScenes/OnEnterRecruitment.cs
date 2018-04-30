@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class OnEnterRecruitment : MonoBehaviour, IPointerClickHandler {
 
     public static UserInfo user;
-    public GameObject contractStore, coinStore, popupInputAmountWindow, infoPanel;
+    public GameObject contractStore, coinStore, popupInputAmountWindow, infoPanel, settingsPanel;
     public Text playerCoinsAmount;
 
     private Camera canvasCamera;
@@ -23,7 +23,13 @@ public class OnEnterRecruitment : MonoBehaviour, IPointerClickHandler {
         playerCoinsAmount.text = InfoLoader.user.coins.ToString();
         closeObjects = new GameObject[] { infoPanel, contractStore, coinStore };
     }
-	
+
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+            settingsPanel.SetActive(true);
+    }
+
     public void Back()
     {
         SceneManager.LoadScene("Main");

@@ -27047,6 +27047,7 @@ MonoBehaviour:
   coinStore: {fileID: 239877993}
   popupInputAmountWindow: {fileID: 1804520632}
   infoPanel: {fileID: 1743250469}
+  settingsPanel: {fileID: 1117094451}
   playerCoinsAmount: {fileID: 1791894112}
 --- !u!1 &992913679
 GameObject:
@@ -30280,6 +30281,11 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1117094448}
   m_Script: {fileID: 11500000, guid: ea113087c40273b47a34b6c3674f4006, type: 3}
+--- !u!1 &1117094451 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1879161264321306, guid: 6b4b8898f9da8484fb41693e8722fc8c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1117094448}
 --- !u!1 &1117891895
 GameObject:
   m_ObjectHideFlags: 0
