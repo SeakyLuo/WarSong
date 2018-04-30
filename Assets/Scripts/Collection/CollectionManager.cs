@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
@@ -160,6 +159,8 @@ public class CollectionManager : MonoBehaviour {
     {
         cardsPerPage = number;
         SetPageLimits();
+        if (currentPage.Value > pageLimits[currentPage.Key])
+            SetCurrentPage(currentPage.Key, pageLimits[currentPage.Key]);
     }
 
     public KeyValuePair<string, int> FirstPage()

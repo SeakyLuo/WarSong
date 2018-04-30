@@ -83,9 +83,11 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         while (true)
         {
             if (gameover) break;
-            string seconds = ((int)(GameInfo.time % 60)).ToString();
+            string seconds = (GameInfo.time % 60).ToString();
             if (seconds.Length == 1) seconds = "0" + seconds;
-            timer.text = ((int)(GameInfo.time / 60)).ToString() + ":" + seconds;
+            timer.text = (GameInfo.time / 60).ToString() + ":" + seconds;
+            if (GameInfo.time < 30) timer.color = Color.red;
+            else timer.color = Color.white;
             yield return new WaitForSeconds(1.0f);
             if (--GameInfo.time < 0)
             {

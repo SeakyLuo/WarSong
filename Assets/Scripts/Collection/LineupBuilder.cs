@@ -7,13 +7,13 @@ using UnityEngine.UI;
 public class LineupBuilder : MonoBehaviour {
     // Recommend Tactics || Random Tactics
 
-    public GameObject collections, selectBoardPanel, createLineupPanel, myLineup, copyReminder, fullReminder, sameTacticReminder;
+    public GameObject collections, selectBoardPanel, myLineup, copyReminder, fullReminder, sameTacticReminder;
     public Text tacticsCountText, totalOreCostText, totalGoldCostText;
     public InputField inputField;
     public static int tacticsLimit = 10, current_tactics = 0;
+    public static Lineup copy = new Lineup();
 
     private Lineup lineup = new Lineup();
-    private static Lineup copy = new Lineup();
     private CollectionManager collectionManager;
     private LineupsManager lineupsManager;
     private Transform board, lineupBoard;
@@ -25,17 +25,27 @@ public class LineupBuilder : MonoBehaviour {
 
     private void Awake()
     {
+        collectionManager = collections.GetComponent<CollectionManager>();
         tacticObjs = GameObject.FindGameObjectsWithTag("Tactic");
         foreach (GameObject obj in tacticObjs) obj.SetActive(false);
         lineup.lineupName = "Custom Lineup";
     }
 
-    void Start()
+    private void OnEnable()
     {
-        collectionManager = collections.GetComponent<CollectionManager>();
         collectionManager.SetCardsPerPage(4);
         collectionManager.ShowCurrentPage();
-        createLineupPanel.SetActive(true);        
+        if (!copy.IsEmpty()) PasteLineup();
+    }
+
+    private void OnDisable()
+    {
+        collectionManager.SetCardsPerPage(8);
+        collectionManager.ShowCurrentPage();
+    }
+
+    void Start()
+    {
         lineupsManager = myLineup.GetComponent<LineupsManager>();
         board = transform.Find("BoardPanel/Board");
         lineupBoard = board.Find("LineupBoard(Clone)");
@@ -203,7 +213,7 @@ public class LineupBuilder : MonoBehaviour {
     {
         collectionManager.RemoveStandardCards();
         collectionManager.SetCardsPerPage(8);
-        createLineupPanel.SetActive(false);
+        gameObject.SetActive(false);
         selectBoardPanel.GetComponent<BoardManager>().DestroyBoard();
     }
 
@@ -265,28 +275,27 @@ public class LineupBuilder : MonoBehaviour {
         SetLineup(copy, true);
     }
 
-    public void SetLineup(Lineup newLineup, bool copy = false)
+    public void SetLineup(Lineup newLineup, bool isCopy = false)
     {
-        ResetLineup(copy);
+        ResetLineup(isCopy);
         lineup.lineupName = newLineup.lineupName;
         inputField.text = newLineup.lineupName;
         lineup.boardName = newLineup.boardName;
-        if (copy)
+        if (isCopy)
         {
             foreach (string tactic in newLineup.tactics)
             {
                 if (collectionManager.RemoveCollection(new Collection(tactic)))
-                {
                     AddTactic(tactic);
-                }
+                // can add virtual card like hearthstore
             }
             foreach (KeyValuePair<Vector2Int, Collection> pair in newLineup.cardLocations)
             {
                 Collection collection = pair.Value;
-                if (!collectionManager.RemoveCollection(collection))
+                if (!collectionManager.RemoveCollection(collection) || 
+                    !collectionManager.RemoveCollection(new Collection(collection.name,collection.type))) //find card with the same name
                 {
-                    // Can try find card with the same name
-                    Collection standardCollection = new Collection("Standard " + collection.type, collection.type);
+                    Collection standardCollection = Collection.standardCollection(collection.type);
                     boardInfo.cardLocations[pair.Key] = standardCollection;
                     lineup.cardLocations[pair.Key] = standardCollection;
                 }

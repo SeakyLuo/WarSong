@@ -6,10 +6,9 @@ public class CardInfo : MonoBehaviour {
     public PieceAttributes piece;
     public TacticAttributes tactic;
 
-    public Text nameText, descriptionText, costText, healthText, typeText;
-    public Image image;
-    public GameObject HealthImage, Background;
-    public Sprite heartImage, coinImage;
+    public Text nameText, descriptionText, costText, healthText, coinText, typeText;
+    public Image image, background;
+    public GameObject healthImage, coinImage;
 
     private string cardName, type, description;
     private int health = 1;
@@ -24,14 +23,13 @@ public class CardInfo : MonoBehaviour {
             health = cardInfo.GetHealth();
             if (health == 0) healthText.text = "∞";
             else healthText.text = health.ToString();
-            healthText.color = cardInfo.healthText.color;
         }
     }
 
     public void SetAttributes(Collection collection)
     {
         if (collection == null) return;
-        if(collection.type == "Tactic")
+        if (collection.type == "Tactic")
             SetAttributes(Resources.Load<TacticAttributes>("Tactics/Info/" + collection.name + "/Attributes"));
         else
         {
@@ -59,14 +57,13 @@ public class CardInfo : MonoBehaviour {
         descriptionText.text = attributes.description;
         costText.text = attributes.oreCost.ToString();
         health = attributes.health;
-        healthText.color = Color.white;
+        healthImage.SetActive(true);
+        coinImage.SetActive(false);
         if (health == 0) healthText.text = "∞";
         else healthText.text = attributes.health.ToString();
-        healthText.GetComponent<Outline>().enabled = true;
         image.sprite = attributes.image;
         type = attributes.type;
         typeText.text = type;
-        HealthImage.GetComponent<Image>().sprite = heartImage;
     }
 
     public void SetAttributes(TacticAttributes attributes)
@@ -79,14 +76,13 @@ public class CardInfo : MonoBehaviour {
         description = attributes.description;
         descriptionText.text = attributes.description;
         costText.text = attributes.oreCost.ToString();
+        healthImage.SetActive(false);
+        coinImage.SetActive(true);
         health = attributes.goldCost;
-        healthText.text = attributes.goldCost.ToString();
-        healthText.color = Color.black;
-        healthText.GetComponent<Outline>().enabled = false;
+        coinText.text = attributes.goldCost.ToString();
         image.sprite = attributes.image;
         type = "Tactic";
         typeText.text = type;
-        HealthImage.GetComponent<Image>().sprite = coinImage;
     }
 
     public void Clear()
@@ -97,10 +93,9 @@ public class CardInfo : MonoBehaviour {
         descriptionText.text = "Description";
         costText.text = "0";
         healthText.text = "0";
-        healthText.color = Color.white;
+        coinText.text = "0";
         image.sprite = null;
-        type = "";
-        HealthImage.GetComponent<Image>().sprite = heartImage;
+        cardName = type = description = "";
     }
 
     public string GetCardName() { return cardName; }

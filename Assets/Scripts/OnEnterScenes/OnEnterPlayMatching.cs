@@ -39,8 +39,18 @@ public class OnEnterPlayMatching : MonoBehaviour
             lineupObjects[InfoLoader.user.lastLineupSelected].GetComponent<Button>().Select();
         }
         SelectLineup(InfoLoader.user.lastLineupSelected);
-        if (InfoLoader.user.lastModeSelected == "Ranked Mode") RankedMode();
-        else if (InfoLoader.user.lastModeSelected == "Casual Mode") CasualMode();
+        switch (InfoLoader.user.lastModeSelected)
+        {
+            case "":
+                RankedMode();
+                break;
+            case "Ranked Mode":
+                RankedMode();
+                break;
+            case "Casual Mode":
+                CasualMode();
+                break;
+        }
     }
 
     private void Update()

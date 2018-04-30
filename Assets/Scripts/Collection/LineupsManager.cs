@@ -8,14 +8,14 @@ public class LineupsManager : MonoBehaviour {
     public static int modifyLineup = -1;
     public static int lineupsLimit = 9;
 
-    public GameObject createLineupButton, selectBoardPanel, collectionPanel, createLineupPanel;
+    public GameObject createLineupButton, collectionPanel, createLineupPanel;
     public GameObject lineupView;
     public Text myLineups;
+    public BoardManager boardManager;
     public GameObject[] lineupObjects = new GameObject[lineupsLimit];
-        
+
     private static string CUSTOMLINEUP = "Custom Lineup";
     private int lineupsCount = 0;
-    private BoardManager boardManager;
     private LineupBuilder lineupBuilder;
 
     // Use this for initialization
@@ -32,7 +32,6 @@ public class LineupsManager : MonoBehaviour {
             else lineupObjects[i].SetActive(false);
         }
         myLineups.text = "My Lineups\n" + lineupsCount.ToString() + "/9";
-        boardManager = selectBoardPanel.GetComponent<BoardManager>();
         lineupBuilder = createLineupPanel.GetComponent<LineupBuilder>();
         ResizeLineup();
     }

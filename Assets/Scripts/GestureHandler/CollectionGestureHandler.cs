@@ -91,16 +91,7 @@ public class CollectionGestureHandler : MonoBehaviour, IPointerClickHandler, IBe
         }
     }
 
-    // needs swipe for mobile device
-
     private bool InTacticRegion(Vector2 pos) { return createLineupPanel.activeSelf && 0.75 * Screen.width <= pos.x && pos.x <= Screen.width && 100 * yscale <= pos.y && pos.y <= 1000 * yscale; }
-
-    private bool InSwipeRegion(Vector2 pos)
-    {
-        int ymin = 60;
-        if (createLineupPanel.activeSelf) ymin = 560;
-        return 0 <= pos.x && pos.x <= 0.75 * Screen.width && ymin * yscale <= pos.y && pos.y <= 1020 * yscale;
-    }
 
     private bool InBoardRegion(Vector2 pos) { return 200 * xscale <= pos.x && pos.x <= 1440 * xscale && 10 * yscale <= pos.y && pos.y <= 510 * yscale; }
 
