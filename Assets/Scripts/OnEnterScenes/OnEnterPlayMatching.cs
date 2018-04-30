@@ -12,6 +12,7 @@ public class OnEnterPlayMatching : MonoBehaviour
     public GameObject[] lineupObjects = new GameObject[LineupsManager.lineupsLimit];
 
     private GameObject[] xs = new GameObject[LineupsManager.lineupsLimit];
+    private string modeSelected;
 
     private void Start()
     {
@@ -73,6 +74,7 @@ public class OnEnterPlayMatching : MonoBehaviour
 
     private void LaunchWar()
     {
+        InfoLoader.user.lastModeSelected = "Ranked Mode";
         SceneManager.LoadScene("GameMode");
     }
 

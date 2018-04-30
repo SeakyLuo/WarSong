@@ -54,8 +54,8 @@ public class SwitchScenes : MonoBehaviour, IPointerClickHandler
 
     public void ShowPlayerInfo()
     {
-        playerInfoPanel.SetActive(true);
         SetPlayerInfo();
+        playerInfoPanel.SetActive(true);
     }
 
     public void ChangeChallenge()

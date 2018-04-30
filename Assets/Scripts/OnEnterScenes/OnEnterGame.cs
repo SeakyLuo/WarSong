@@ -13,7 +13,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     public GameObject victoryImage, defeatImage, settingsPanel, yourTurnImage, youHaveMoved;
     public Transform tacticBag;
     public Button endTurn;
-    public Text roundCount, timer;
+    public Text roundCount, timer, modeName;
     public Text playerName, playerWin, playerRank;
     public Text opponentName, opponentWin, opponentRank;
     public Text endTurnText;
@@ -49,6 +49,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             tacticObjs.Add(tacticBag.Find(String.Format("TacticSlot{0}/Tactic", i)));
             tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(FindTacticAttributes(lineup.tactics[i]));
         }
+        modeName.text = InfoLoader.user.lastModeSelected;
         StartCoroutine(Timer());
     }
 
@@ -72,8 +73,8 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         {
             gameover = false;
             SceneManager.LoadScene("PlayerMatching");
-            Destroy(board);
             GameInfo.Clear();
+            Destroy(board);
         }
     }
 

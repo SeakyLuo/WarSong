@@ -13,7 +13,6 @@ public class CollectionManager : MonoBehaviour {
     public GameObject left, right, clearSearch, searchPanel, selectedBoardPanel, createLineupPanel;
     public Text TitleText, pageText;
     public InputField searchByInput;
-    public Dropdown searchByGold, searchByOre, searchByHealth;
 
     private static List<string> types = Collection.types;
     private List<Collection> displayCollections, searchedCollections;
@@ -138,9 +137,8 @@ public class CollectionManager : MonoBehaviour {
 
     public void SetCurrentPage(string type,int page)
     {
-        if (page <= pageLimits[type])
+        if (type != "" && page <= pageLimits[type])
         {
-
             // Hightlight Tab
             ColorBlock colorBlock = tabs[types.IndexOf(type)].GetComponent<Button>().colors;
             if (currentPage.Key != null)
@@ -208,6 +206,8 @@ public class CollectionManager : MonoBehaviour {
 
         if (currentPage.Equals(notFound) || collectionDict[type].Count == 0)
         {
+            left.SetActive(false);
+            right.SetActive(false);
             TitleText.text = "Not Found";
             return;
         }
@@ -405,25 +405,21 @@ public class CollectionManager : MonoBehaviour {
         Search(searchByKeyword, searchByGoldValue, searchByOreValue, searchByHealthValue);
     }
 
-    public void SetSearchByGold()
+    public void SetSearchByGold(int value)
     {
-        if (searchByGold.value == 0) searchByGoldValue = -1;
-        else searchByGoldValue = searchByGold.value - 1;
+        searchByGoldValue = value;
         Search(searchByKeyword, searchByGoldValue, searchByOreValue, searchByHealthValue);
     }
 
-    public void SetSearchByOre()
+    public void SetSearchByOre(int value)
     {
-        if (searchByOre.value == 0) searchByOreValue = -1;
-        else searchByOreValue = searchByOre.value - 1;
+        searchByOreValue = value;
         Search(searchByKeyword, searchByGoldValue, searchByOreValue, searchByHealthValue);
     }
 
-    public void SetSearchByHealth()
+    public void SetSearchByHealth(int value)
     {
-        if (searchByHealth.value == 0) searchByHealthValue = -1;
-        else if (searchByHealth.value == 6) searchByHealthValue = 0;
-        else searchByHealthValue = searchByHealth.value;
+        searchByHealthValue = value;
         Search(searchByKeyword, searchByGoldValue, searchByOreValue, searchByHealthValue);
     }
 

@@ -47,9 +47,9 @@ public class OnEnterRecruitment : MonoBehaviour, IPointerClickHandler {
         {
             if (close.activeSelf)
             {
-                Vector3 mouseposition = AdjustedMousePosition();
+                Vector3 mousePosition = AdjustedMousePosition();
                 Rect rect = close.GetComponent<RectTransform>().rect;
-                if (-rect.width / 2 > mouseposition.x || mouseposition.x > rect.width / 2 || -rect.height / 2 > mouseposition.y || mouseposition.y > rect.height / 2)
+                if (mousePosition.x < rect.x || mousePosition.x > -rect.x || mousePosition.y < rect.y || mousePosition.y > -rect.y)
                     close.SetActive(false);
                 break;
             }
