@@ -7141,6 +7141,7 @@ GameObject:
   - component: {fileID: 697159783}
   - component: {fileID: 697159785}
   - component: {fileID: 697159784}
+  - component: {fileID: 697159786}
   m_Layer: 5
   m_Name: SameTacticReminder
   m_TagString: Untagged
@@ -7198,13 +7199,27 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: This tactic is already in your bag!
+  m_Text: You have already added this tactic!
 --- !u!222 &697159785
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 697159782}
+--- !u!114 &697159786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 697159782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &734605403
 GameObject:
   m_ObjectHideFlags: 0
@@ -8637,6 +8652,7 @@ GameObject:
   - component: {fileID: 910545908}
   - component: {fileID: 910545910}
   - component: {fileID: 910545909}
+  - component: {fileID: 910545911}
   m_Layer: 5
   m_Name: SwitchReminder
   m_TagString: Untagged
@@ -8701,6 +8717,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 910545907}
+--- !u!114 &910545911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 910545907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &917610017
 GameObject:
   m_ObjectHideFlags: 0
@@ -9790,6 +9820,7 @@ GameObject:
   - component: {fileID: 1015176937}
   - component: {fileID: 1015176939}
   - component: {fileID: 1015176938}
+  - component: {fileID: 1015176940}
   m_Layer: 5
   m_Name: FullReminder
   m_TagString: Untagged
@@ -9854,6 +9885,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1015176936}
+--- !u!114 &1015176940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1015176936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1001 &1024799489
 Prefab:
   m_ObjectHideFlags: 0
@@ -16518,6 +16563,7 @@ GameObject:
   - component: {fileID: 1759182863}
   - component: {fileID: 1759182862}
   - component: {fileID: 1759182861}
+  - component: {fileID: 1759182864}
   m_Layer: 5
   m_Name: CopyReminder
   m_TagString: Untagged
@@ -16582,6 +16628,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 358}
   m_SizeDelta: {x: 600, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1759182864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1759182860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1779893062
 GameObject:
   m_ObjectHideFlags: 0

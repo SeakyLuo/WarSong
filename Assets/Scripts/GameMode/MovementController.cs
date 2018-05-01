@@ -9,14 +9,12 @@ public class MovementController : MonoBehaviour
     public static Vector3 raiseVector = new Vector3(0, 0, raiseHeight);
     public static BoardAttributes boardAttributes;
     public static List<Vector2Int> validLoc = new List<Vector2Int>();
+    public static Collider selected;
 
     public GameObject pathDot;
     public Transform boardCanvas;
     public Sprite newLocation;
-
-    private static Collider selected;
-    private static Button activateAbilityButton;
-    private static GameObject activateAbilityText;
+    
     private static GameObject oldLocation;
     private static List<GameObject> pathDots = new List<GameObject>();
     private static Image previousImage;
@@ -26,14 +24,10 @@ public class MovementController : MonoBehaviour
     private float scale;
     private BoardSetup boardSetup;
 
-
     private void Start()
     {
         GameObject UIPanel = GameObject.Find("UIPanel");
         onEnterGame = UIPanel.GetComponent<OnEnterGame>();
-        Transform activateAbility = UIPanel.transform.Find("Canvas/ActivateAbility");
-        activateAbilityButton = activateAbility.GetComponent<Button>();
-        activateAbilityText = activateAbility.Find("Text").gameObject;
         scale = transform.localScale.x;
         boardSetup = GetComponent<BoardSetup>();
         boardAttributes = boardSetup.boardAttributes;
@@ -58,7 +52,7 @@ public class MovementController : MonoBehaviour
                     selected = hit.collider;
                     PieceInfo pieceInfo = selected.GetComponent<PieceInfo>();
                     pieceInfo.HideInfoCard();
-                    if (!pieceInfo.IsStandard()) ActivateActivateAbility();
+                    ActivateAbility.Activate();
                     validLoc = ValidLoc(hitObj);
                     if (validLoc.Count == 0) return;
                     // Draw Valid path
@@ -121,7 +115,7 @@ public class MovementController : MonoBehaviour
         pathDots.Clear();
         selected.transform.position -= raiseVector;
         if (!oldLocation.activeSelf && previousSprite != null) oldLocation.SetActive(true);
-        DeactivateActivateAbility();
+        ActivateAbility.Deactivate();
         selected = null;
     }
 
@@ -150,7 +144,7 @@ public class MovementController : MonoBehaviour
         }
         if (!oldLocation.activeSelf && previousSprite != null)
             oldLocation.SetActive(true);
-        DeactivateActivateAbility();
+        ActivateAbility.Deactivate();
         selected = null;
     }
 
@@ -367,18 +361,6 @@ public class MovementController : MonoBehaviour
             else return 'E';
         }
         return 'B';
-    }
-
-    private static void ActivateActivateAbility()
-    {
-        activateAbilityButton.interactable = true;
-        activateAbilityText.SetActive(true);
-    }
-
-    private static void DeactivateActivateAbility()
-    {
-        activateAbilityButton.interactable = false;
-        activateAbilityText.SetActive(false);
     }
 
     private string Vec2ToString(Vector2Int vec) { return vec.x.ToString() + vec.y.ToString(); }

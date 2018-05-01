@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 224444948608820696}
   - component: {fileID: 222318077722556508}
   - component: {fileID: 114730074429873406}
+  - component: {fileID: 114228863429425944}
   m_Layer: 5
   m_Name: CoinsPanel
   m_TagString: Untagged
@@ -89,6 +90,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114228863429425944
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1177538538861054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a423f7180a9247f4b8906c5b0554a9f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coins: {fileID: 114342859537913492}
 --- !u!114 &114342859537913492
 MonoBehaviour:
   m_ObjectHideFlags: 1

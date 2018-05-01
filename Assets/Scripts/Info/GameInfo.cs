@@ -18,10 +18,14 @@ public static class GameInfo
     public static bool abilityActivated = false;
 
     public static string firstPlayer = ""; //whose turn
+    public static string secondPlayer = "";
     public static int round = 1;
     public static int time = 120;
     public static int maxTime = 120;
     public static int gameID;
+
+    public static int firstPlayerOre = 30;
+    public static int secondPlayerOre = 30;
 
     public static void Add(Piece piece, Vector2Int loc, bool reactivate = false)
     {

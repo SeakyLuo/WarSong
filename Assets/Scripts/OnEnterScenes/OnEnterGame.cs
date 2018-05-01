@@ -89,10 +89,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             if (GameInfo.time < 30) timer.color = Color.red;
             else timer.color = Color.white;
             yield return new WaitForSeconds(1.0f);
-            if (--GameInfo.time < 0)
-            {
-                EndTurn();
-            }
+            if (--GameInfo.time < 0) EndTurn();
         }
     }
 
@@ -112,7 +109,9 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 
     public void Draw()
     {
-        
+        // drawImage.SetActive(true);
+        InfoLoader.user.total.Draw();
+        GameOver();
     }
 
     public void GameOver()
@@ -144,7 +143,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         endTurn.interactable = false;
         endTurnText.text = "Enemy Turn";
         NextTurn();
-        // need to put down piece
+        MovementController.PutDownPiece();
         // Enemy turn;
         YourTurn();
     }
@@ -154,8 +153,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         StartCoroutine(ShowYourTurn());
         endTurn.interactable = true;
         endTurnText.text = "End Turn";
-        GameInfo.pieceMoved = false;
-    }
+}
 
     public void ShowMoved()
     {

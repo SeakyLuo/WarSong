@@ -349,8 +349,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efad9c1912558f645a670cfcd08bead3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinsPanel: {fileID: 594637959}
-  playerCoinsAmount: {fileID: 1774085728}
   standardGeneral: {fileID: 11400000, guid: 772eb50b4e4be3b4ea94fc23af08dd3c, type: 2}
   standardAdvisor: {fileID: 11400000, guid: 6e99b3258323a8b43bcde9f95c0583bd, type: 2}
   standardElephant: {fileID: 11400000, guid: 45b74712e9c5ee849bc526909bfe57e5, type: 2}
@@ -1793,11 +1791,6 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 40}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!1 &594637959 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1177538538861054, guid: 2df586e866a19dd45a7e98e98fceeccb,
-    type: 2}
-  m_PrefabInternal: {fileID: 2086824090}
 --- !u!1 &606920312
 GameObject:
   m_ObjectHideFlags: 0
@@ -4542,12 +4535,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1756618014}
---- !u!114 &1774085728 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114342859537913492, guid: 2df586e866a19dd45a7e98e98fceeccb,
-    type: 2}
-  m_PrefabInternal: {fileID: 2086824090}
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1801332040
 GameObject:
   m_ObjectHideFlags: 0

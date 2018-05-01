@@ -286,6 +286,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Main\ShowCoins.cs" />
     <Compile Include="Assets\Scripts\Attributes\BoardAttributes.cs" />
     <Compile Include="Assets\Scripts\Attributes\Challenge.cs" />
     <Compile Include="Assets\Scripts\Attributes\ContractAttributes.cs" />
@@ -302,6 +303,7 @@
     <Compile Include="Assets\Scripts\DataType\Piece.cs" />
     <Compile Include="Assets\Scripts\DataType\Range.cs" />
     <Compile Include="Assets\Scripts\DataType\Stats.cs" />
+    <Compile Include="Assets\Scripts\GameMode\ActivateAbility.cs" />
     <Compile Include="Assets\Scripts\GameMode\BoardSetup.cs" />
     <Compile Include="Assets\Scripts\GameMode\MovementController.cs" />
     <Compile Include="Assets\Scripts\GestureHandler\CollectionGestureHandler.cs" />

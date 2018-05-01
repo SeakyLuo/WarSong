@@ -25,4 +25,8 @@ public class Trigger {
     public virtual void AtEnemyBottom() { }
     public virtual void EndOfTheGame() { }
 
+    public bool interactable()
+    {
+        return true;
+    }
 }
