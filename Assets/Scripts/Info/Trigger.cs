@@ -2,12 +2,16 @@
 public class Trigger {
 
     public int afterTurn = 0;
+    public bool link = false;
+    public bool activatable = false;
+    public bool limited = false;
 
     public virtual void StartOfTheGame() { }
+    public virtual void Activate() { }
     public virtual void Link() { }
     public virtual void Revenge() { }
     public virtual void Bloodthirsty() { }
-    public virtual void Destroyed() { }
+    public virtual void Destroys() { }
     public virtual void Sacrifice() { }
     public virtual void BeforeMove() { }
     public virtual void AfterMove() { }
@@ -25,8 +29,8 @@ public class Trigger {
     public virtual void AtEnemyBottom() { }
     public virtual void EndOfTheGame() { }
 
-    public bool interactable()
+    public bool Activatable()
     {
-        return true;
+        return link && activatable && !limited;
     }
 }

@@ -53,6 +53,7 @@ public class MovementController : MonoBehaviour
                     PieceInfo pieceInfo = selected.GetComponent<PieceInfo>();
                     pieceInfo.HideInfoCard();
                     ActivateAbility.Activate();
+                    if (GameInfo.pieceMoved) return;
                     validLoc = ValidLoc(hitObj);
                     if (validLoc.Count == 0) return;
                     // Draw Valid path

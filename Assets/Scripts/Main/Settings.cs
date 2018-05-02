@@ -31,9 +31,9 @@ public class Settings : MonoBehaviour, IPointerClickHandler
     {
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            if (creditsPanel.activeSelf) creditsPanel.SetActive(false);
+            if (creditsPanel != null && creditsPanel.activeSelf) creditsPanel.SetActive(false);
             else if (optionsPanel.activeSelf) optionsPanel.SetActive(false);
-            else if (guidebookPanel.activeSelf) guidebookPanel.SetActive(false);
+            else if (guidebookPanel != null && guidebookPanel.activeSelf) guidebookPanel.SetActive(false);
             else if (logoutPanel.activeSelf) return;
             else gameObject.SetActive(!gameObject.activeSelf);
         }
