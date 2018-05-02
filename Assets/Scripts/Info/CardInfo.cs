@@ -23,6 +23,7 @@ public class CardInfo : MonoBehaviour {
             health = cardInfo.GetHealth();
             if (health == 0) healthText.text = "∞";
             else healthText.text = health.ToString();
+            healthText.color = cardInfo.healthText.color;
         }
     }
 
@@ -40,7 +41,8 @@ public class CardInfo : MonoBehaviour {
                 else healthText.color = Color.green;
                 health = collection.health;
                 healthText.text = collection.health.ToString();
-            }            
+            }
+            else healthText.color = Color.white;
         }
     }
 
