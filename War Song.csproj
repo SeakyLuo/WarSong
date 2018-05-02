@@ -305,7 +305,9 @@
     <Compile Include="Assets\Scripts\DataType\Stats.cs" />
     <Compile Include="Assets\Scripts\GameMode\ActivateAbility.cs" />
     <Compile Include="Assets\Scripts\GameMode\BoardSetup.cs" />
+    <Compile Include="Assets\Scripts\GameMode\GameController.cs" />
     <Compile Include="Assets\Scripts\GameMode\MovementController.cs" />
+    <Compile Include="Assets\Scripts\GameMode\Trigger.cs" />
     <Compile Include="Assets\Scripts\GestureHandler\CollectionGestureHandler.cs" />
     <Compile Include="Assets\Scripts\GestureHandler\LineupBoardGestureHandler.cs" />
     <Compile Include="Assets\Scripts\GestureHandler\MouseOverPiece.cs" />
@@ -319,7 +321,6 @@
     <Compile Include="Assets\Scripts\Info\PieceInfo.cs" />
     <Compile Include="Assets\Scripts\Info\PlayerContract.cs" />
     <Compile Include="Assets\Scripts\Info\TacticInfo.cs" />
-    <Compile Include="Assets\Scripts\Info\Trigger.cs" />
     <Compile Include="Assets\Scripts\Info\UserInfo.cs" />
     <Compile Include="Assets\Scripts\Login\AccountCreation.cs" />
     <Compile Include="Assets\Scripts\Login\ForgotPassword.cs" />

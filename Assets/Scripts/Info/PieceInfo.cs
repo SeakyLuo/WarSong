@@ -40,6 +40,7 @@ public class PieceInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         card.SetActive(true);
         card.GetComponent<CardInfo>().SetAttributes(pieceAttributes);
+        card.GetComponent<CardInfo>().SetIsAlly(piece.IsAlly());
         PieceInfoCard.transform.position = newPosition;
     }
 

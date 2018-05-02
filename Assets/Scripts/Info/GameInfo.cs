@@ -16,6 +16,7 @@ public static class GameInfo
     public static bool pieceMoved = false;
     public static bool tacticUsed = false;
     public static bool abilityActivated = false;
+    public static bool actionTaken = false;
 
     public static string firstPlayer = ""; //whose turn
     public static string secondPlayer = "";

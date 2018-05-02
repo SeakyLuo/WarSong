@@ -9,9 +9,11 @@ public class CardInfo : MonoBehaviour {
     public Text nameText, descriptionText, costText, healthText, coinText, typeText;
     public Image image, background;
     public GameObject healthImage, coinImage;
+    public Sprite allyBackground, enemyBackground;
 
     private string cardName, type, description;
     private int health = 1;
+    private bool isAlly = true;
 
     public void SetAttributes(CardInfo cardInfo)
     {
@@ -25,6 +27,8 @@ public class CardInfo : MonoBehaviour {
             else healthText.text = health.ToString();
             healthText.color = cardInfo.healthText.color;
         }
+        isAlly = cardInfo.isAlly;
+        background.sprite = cardInfo.background.sprite;
     }
 
     public void SetAttributes(Collection collection)
@@ -105,4 +109,10 @@ public class CardInfo : MonoBehaviour {
     public int GetHealth() { return health; }
     public string GetDescription() { return description; }
     public bool IsStandard() { return cardName.StartsWith("Standard "); }
+    public void SetIsAlly(bool value)
+    {
+        isAlly = value;
+        if(value) background.sprite = allyBackground;
+        else background.sprite = enemyBackground;
+    }
 }

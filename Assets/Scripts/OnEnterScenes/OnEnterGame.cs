@@ -153,7 +153,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         StartCoroutine(ShowYourTurn());
         endTurn.interactable = true;
         endTurnText.text = "End Turn";
-}
+    }
 
     public void ShowMoved()
     {

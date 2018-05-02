@@ -110,7 +110,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 471}
   m_MaxSize: {x: 18008, y: 14021}
   vertical: 0
-  controlID: 46
+  controlID: 135
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 442}
   m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
-  controlID: 27
+  controlID: 69
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -526,7 +526,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: f6e2ffff96e3ffffaee5ffff4ee8ffff82f3ffffcef5ffffd6f5ffff3af6ffff9efbffff00000000
+    m_ExpandedIDs: a096ffff3a97ffff5699fffffa9bffff32a7ffff82a9ffff8ea9fffff6a9ffff62d7ffff8af5ffff9efbffff00000000f432000022330000b0360000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -597,10 +597,10 @@ MonoBehaviour:
   m_LastProjectPath: D:\UnityProjects\War Song
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 56}
+    scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 222b0000
     m_LastClickedID: 11042
-    m_ExpandedIDs: 00000000fe270000a8280000442a0000682a0000f02a0000222b0000d22b0000b62c00009a3100009c3100009e310000a0310000a2310000a4310000a6310000a8310000aa31000000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000fe270000a8280000182a0000442a0000682a0000f02a0000222b0000d22b0000b62c00009a3100009c3100009e310000a0310000a2310000a4310000a6310000a8310000aa31000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -655,7 +655,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 8600ffff184d0000104d0000064d0000364f00003e2f00009c0700006cff000012e30000562b00002e2a000034500100e629000050290000de2b0000662a00001c2a0000ce2a00001c1d0200582a000006fe00007e2800007c2b00000a2a0000042b00001e280000642c00006c2a00007c2c00001c280000ee290000942c00002e5bf4ff00000000542a0000222a0000302c000056280000e6280000322c0000be280000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
