@@ -17,6 +17,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     public Text playerName, playerWin, playerRank;
     public Text opponentName, opponentWin, opponentRank;
     public Text endTurnText;
+    public Text oreText;
 
     private Lineup lineup;
     private GameObject board;
@@ -24,7 +25,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     private BoardSetup boardSetup;
     private Dictionary<String, int> credits = new Dictionary<string, int>()
     {
-        { "Chariot", 8 }, { "Horse",4}, {"Elephant",3},{"Advisor",2},{"General",10},{"Cannon",4},{"Soldier",2}
+        { "Chariot", 8 }, { "Horse", 4}, {"Elephant", 3}, {"Advisor", 2}, {"General", 10}, {"Cannon", 4}, {"Soldier", 2}
     };
 
     // Use this for initialization
@@ -50,6 +51,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(FindTacticAttributes(lineup.tactics[i]));
         }
         modeName.text = InfoLoader.user.lastModeSelected;
+        SetOreText();
         StartCoroutine(Timer());
     }
 
@@ -86,7 +88,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             string seconds = (GameInfo.time % 60).ToString();
             if (seconds.Length == 1) seconds = "0" + seconds;
             timer.text = (GameInfo.time / 60).ToString() + ":" + seconds;
-            if (GameInfo.time < 30) timer.color = Color.red;
+            if (GameInfo.time < 15) timer.color = Color.red;
             else timer.color = Color.white;
             yield return new WaitForSeconds(1.0f);
             if (--GameInfo.time < 0) EndTurn();
@@ -179,8 +181,11 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     {
         roundCount.text = (++GameInfo.round).ToString();
         GameInfo.time = GameInfo.maxTime;
-        GameInfo.pieceMoved = false;
-        GameInfo.tacticUsed = false;
-        GameInfo.abilityActivated = false;
+        GameInfo.actionTaken = false;
+    }
+
+    public void SetOreText()
+    {
+        oreText.text = GameInfo.firstPlayerOre.ToString() + "/" + GameInfo.firstPlayerMaxOre.ToString();
     }
 }

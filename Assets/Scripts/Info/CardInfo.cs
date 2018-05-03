@@ -91,6 +91,17 @@ public class CardInfo : MonoBehaviour {
         typeText.text = type;
     }
 
+    public void SetHealth(int Health)
+    {
+        if (piece == null || Health == health) return;
+        if (Health == 0) healthText.text = "∞";
+        if (health > Health) healthText.color = Color.red;
+        else if (health == Health) healthText.color = Color.white;
+        else healthText.color = Color.green;
+        health = Health;
+        healthText.text = health.ToString();
+    }
+
     public void Clear()
     {
         piece = null;

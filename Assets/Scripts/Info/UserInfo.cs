@@ -112,14 +112,14 @@ public class CheatAccount:UserInfo
             new Lineup(
                 new Dictionary<Vector2Int, Collection>()
                 {
-                    {new Vector2Int(4,0), new Collection("Space Witch", "General") },
-                    {new Vector2Int(3,0), new Collection("King Guardian","Advisor", 3) },{new Vector2Int(5,0), new Collection("King Guardian","Advisor", 3) },
+                    {new Vector2Int(4,0), new Collection("Space Witch", "General",1 , 9) },
+                    {new Vector2Int(3,0), new Collection("King Guardian","Advisor", 1, 4) },{new Vector2Int(5,0), new Collection("King Guardian","Advisor") },
                     {new Vector2Int(2,0), new Collection("Greeeeeat Elephant", "Elephant") },{new Vector2Int(6,0), new Collection("Greeeeeat Elephant", "Elephant")},
-                    {new Vector2Int(1,0), new Collection("Horse Rider","Horse",4) },{new Vector2Int(7,0), new Collection("Horse Rider","Horse",4) },
+                    {new Vector2Int(1,0), new Collection("Horse Rider","Horse") },{new Vector2Int(7,0), new Collection("Horse Rider","Horse") },
                     {new Vector2Int(0,0), new Collection("Monster Hunter","Chariot") },{new Vector2Int(8,0), new Collection("Monster Hunter","Chariot") },
                     {new Vector2Int(1,2), new Collection("Turret","Cannon") },{new Vector2Int(7,2), new Collection("Turret","Cannon") },
-                    {new Vector2Int(0,3), new Collection("Fat Soldier", "Soldier",4) },{new Vector2Int(2,3), new Collection("Link Soldier","Soldier",11) },
-                    {new Vector2Int(4,3), new Collection("Link Soldier","Soldier",11) },{new Vector2Int(6,3), new Collection("Link Soldier","Soldier",11) },{new Vector2Int(8,3), new Collection("Fat Soldier", "Soldier",4) }
+                    {new Vector2Int(0,3), new Collection("Fat Soldier", "Soldier") },{new Vector2Int(2,3), new Collection("Link Soldier","Soldier") },
+                    {new Vector2Int(4,3), new Collection("Link Soldier","Soldier") },{new Vector2Int(6,3), new Collection("Link Soldier","Soldier") },{new Vector2Int(8,3), new Collection("Fat Soldier", "Soldier") }
                 },
                 new List<string>()
                 {

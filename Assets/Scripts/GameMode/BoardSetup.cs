@@ -24,14 +24,14 @@ public class BoardSetup : MonoBehaviour {
 
     public void Reactivate(Piece piece)
     {
-        Vector2Int loc = piece.GetStartLocation();
+        Vector2Int loc = piece.GetCastle();
         pieces[loc].SetActive(true);
         GameInfo.Add(piece, loc, true);
     }
 
     public void Deactivate(Piece piece)
     {
-        Vector2Int loc = piece.GetStartLocation();
+        Vector2Int loc = piece.GetCastle();
         pieces[loc].SetActive(false);
         GameInfo.Remove(piece, loc);
     }

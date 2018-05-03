@@ -1010,6 +1010,7 @@ GameObject:
   - component: {fileID: 111718827}
   - component: {fileID: 111718829}
   - component: {fileID: 111718828}
+  - component: {fileID: 111718830}
   m_Layer: 5
   m_Name: GoldCostText
   m_TagString: Untagged
@@ -1077,6 +1078,20 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 111718826}
+--- !u!114 &111718830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 111718826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1001 &127567148
 Prefab:
   m_ObjectHideFlags: 0
@@ -1174,6 +1189,24 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114913064965628508, guid: f8f777b2e4dad66418c2b9605225ecff,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 984996b7fcc714342b045d9e88f94062,
+        type: 3}
+    - target: {fileID: 114236775130510770, guid: f8f777b2e4dad66418c2b9605225ecff,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1276b91eab103d64b9c4b6a8471377b6,
+        type: 3}
+    - target: {fileID: 114876570954330476, guid: f8f777b2e4dad66418c2b9605225ecff,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2d9109f2ed8d19940907bf278472cf43,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f8f777b2e4dad66418c2b9605225ecff, type: 2}
   m_IsPrefabParent: 0
@@ -4401,6 +4434,7 @@ GameObject:
   - component: {fileID: 506004735}
   - component: {fileID: 506004737}
   - component: {fileID: 506004736}
+  - component: {fileID: 506004738}
   m_Layer: 5
   m_Name: GoldCostText
   m_TagString: Untagged
@@ -4468,6 +4502,20 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 506004734}
+--- !u!114 &506004738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 506004734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &515557608
 GameObject:
   m_ObjectHideFlags: 0
@@ -8177,6 +8225,7 @@ GameObject:
   - component: {fileID: 1002723072}
   - component: {fileID: 1002723074}
   - component: {fileID: 1002723073}
+  - component: {fileID: 1002723075}
   m_Layer: 5
   m_Name: GoldCostText
   m_TagString: Untagged
@@ -8244,6 +8293,20 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1002723071}
+--- !u!114 &1002723075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1002723071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1010848859
 GameObject:
   m_ObjectHideFlags: 0
@@ -8255,6 +8318,7 @@ GameObject:
   - component: {fileID: 1010848860}
   - component: {fileID: 1010848862}
   - component: {fileID: 1010848861}
+  - component: {fileID: 1010848863}
   m_Layer: 5
   m_Name: GoldCostText
   m_TagString: Untagged
@@ -8322,6 +8386,20 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1010848859}
+--- !u!114 &1010848863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1010848859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1012175006
 GameObject:
   m_ObjectHideFlags: 0
@@ -9271,6 +9349,7 @@ GameObject:
   - component: {fileID: 1130061388}
   - component: {fileID: 1130061390}
   - component: {fileID: 1130061389}
+  - component: {fileID: 1130061391}
   m_Layer: 5
   m_Name: GoldCostText
   m_TagString: Untagged
@@ -9338,6 +9417,20 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1130061387}
+--- !u!114 &1130061391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1130061387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1161373800
 GameObject:
   m_ObjectHideFlags: 0
@@ -10927,6 +11020,7 @@ GameObject:
   - component: {fileID: 1350582536}
   - component: {fileID: 1350582538}
   - component: {fileID: 1350582537}
+  - component: {fileID: 1350582539}
   m_Layer: 5
   m_Name: GoldCostText
   m_TagString: Untagged
@@ -10994,6 +11088,20 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1350582535}
+--- !u!114 &1350582539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1350582535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1352683943
 GameObject:
   m_ObjectHideFlags: 0
@@ -11269,6 +11377,7 @@ GameObject:
   - component: {fileID: 1396235022}
   - component: {fileID: 1396235024}
   - component: {fileID: 1396235023}
+  - component: {fileID: 1396235025}
   m_Layer: 5
   m_Name: GoldCostText
   m_TagString: Untagged
@@ -11336,6 +11445,20 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1396235021}
+--- !u!114 &1396235025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1396235021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1412716603
 GameObject:
   m_ObjectHideFlags: 0
@@ -12265,6 +12388,7 @@ MonoBehaviour:
   opponentWin: {fileID: 386953077}
   opponentRank: {fileID: 678719571}
   endTurnText: {fileID: 519979817}
+  oreText: {fileID: 2001787759}
 --- !u!114 &1488073805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12660,6 +12784,7 @@ GameObject:
   - component: {fileID: 1517003201}
   - component: {fileID: 1517003203}
   - component: {fileID: 1517003202}
+  - component: {fileID: 1517003204}
   m_Layer: 5
   m_Name: GoldCostText
   m_TagString: Untagged
@@ -12727,6 +12852,20 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1517003200}
+--- !u!114 &1517003204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1517003200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1524305923
 GameObject:
   m_ObjectHideFlags: 0
@@ -15094,6 +15233,24 @@ Prefab:
       propertyPath: m_RootOrder
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 114913064965628508, guid: f8f777b2e4dad66418c2b9605225ecff,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 984996b7fcc714342b045d9e88f94062,
+        type: 3}
+    - target: {fileID: 114236775130510770, guid: f8f777b2e4dad66418c2b9605225ecff,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1276b91eab103d64b9c4b6a8471377b6,
+        type: 3}
+    - target: {fileID: 114876570954330476, guid: f8f777b2e4dad66418c2b9605225ecff,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2d9109f2ed8d19940907bf278472cf43,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f8f777b2e4dad66418c2b9605225ecff, type: 2}
   m_IsPrefabParent: 0
@@ -15820,6 +15977,7 @@ GameObject:
   - component: {fileID: 1862912605}
   - component: {fileID: 1862912607}
   - component: {fileID: 1862912606}
+  - component: {fileID: 1862912608}
   m_Layer: 5
   m_Name: GoldCostText
   m_TagString: Untagged
@@ -15887,6 +16045,20 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1862912604}
+--- !u!114 &1862912608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1862912604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1872573671
 GameObject:
   m_ObjectHideFlags: 0
@@ -16992,7 +17164,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 30/30
+  m_Text: 
 --- !u!222 &2001787760
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18296,6 +18468,7 @@ GameObject:
   - component: {fileID: 2139997217}
   - component: {fileID: 2139997219}
   - component: {fileID: 2139997218}
+  - component: {fileID: 2139997220}
   m_Layer: 5
   m_Name: GoldCostText
   m_TagString: Untagged
@@ -18363,3 +18536,17 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2139997216}
+--- !u!114 &2139997220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2139997216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1

@@ -36,7 +36,7 @@ public class MovementController : MonoBehaviour
 
     private void Update()
     {
-        if (OnEnterGame.gameover) return;
+        if (OnEnterGame.gameover || GameInfo.actionTaken) return;
         if (Input.GetMouseButtonUp(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -53,7 +53,6 @@ public class MovementController : MonoBehaviour
                     PieceInfo pieceInfo = selected.GetComponent<PieceInfo>();
                     pieceInfo.HideInfoCard();
                     ActivateAbility.Activate();
-                    if (GameInfo.pieceMoved) return;
                     validLoc = ValidLoc(hitObj);
                     if (validLoc.Count == 0) return;
                     // Draw Valid path
