@@ -18,7 +18,7 @@ public class BoardSetup : MonoBehaviour {
             pieceObj.GetComponent<PieceInfo>().Setup(pair.Value, loc, isAlly);
             if(pieceObj.GetComponent<PieceInfo>().trigger != null) pieceObj.GetComponent<PieceInfo>().trigger.StartOfGame();
             pieces.Add(loc, pieceObj);
-            GameInfo.Add(pieceObj.GetComponent<PieceInfo>().GetPiece());
+            GameInfo.Add(pieceObj.GetComponent<PieceInfo>().piece);
         }
         GameInfo.castles = new Dictionary<Vector2Int, Piece>(GameInfo.board);
     }

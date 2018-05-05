@@ -34,7 +34,7 @@ public class Piece
     public string GetPieceType() { return collection.type; }
     public Vector2Int GetLocation() { return location; }
     public Vector2Int GetCastle() { return castle; }
-    public void SetLocation(Vector2Int loc) { location = loc; }
+    public void SetLocation(Vector2Int newLocation) { location = newLocation; }
     public void SetCastle(Vector2Int loc) { castle = loc; }
     public bool IsAlly() { return isAlly; }
     public bool IsActive() { return active; }

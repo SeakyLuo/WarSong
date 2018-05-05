@@ -5,12 +5,23 @@ using UnityEngine;
 public class GameController : MonoBehaviour {
 
     public static OnEnterGame onEnterGame;
+
     private static BoardSetup boardSetup;
+    private static Dictionary<string, List<Vector2Int>> castles;
 
     // Use this for initialization
     void Start () {
         onEnterGame = GameObject.Find("UIPanel").GetComponent<OnEnterGame>();
         boardSetup = onEnterGame.boardSetup;
+        castles = new Dictionary<string, List<Vector2Int>>()
+        {
+            {"Advisor", boardSetup.boardAttributes.AdvisorCastle() },
+            {"Elephant", boardSetup.boardAttributes.ElephantCastle()  },
+            {"Horse", boardSetup.boardAttributes.HorseCastle()  },
+            {"Chariot", boardSetup.boardAttributes.ChariotCastle()  },
+            {"Cannon", boardSetup.boardAttributes.CannonCastle()  },
+            {"Soldier", boardSetup.boardAttributes.SoldierCastle()  },
+        };
     }
 
     public static void Reactivate(Piece piece)
@@ -44,4 +55,6 @@ public class GameController : MonoBehaviour {
         InfoLoader.user.coins += deltaAmount;
         onEnterGame.SetCoinText();
     }
+
+    public static List<Vector2Int> FindCastles(string type) { return castles[type]; }
 }

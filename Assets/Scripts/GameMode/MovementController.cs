@@ -120,7 +120,10 @@ public class MovementController : MonoBehaviour
         if (previousSprite != null)
             previousImage.sprite = previousSprite;
 
-        GameInfo.Move(GetGridLocation(selected.transform.position.x, selected.transform.position.y), loc); // SetLocationData
+        // SetLocationData
+        GameInfo.Move(GetGridLocation(selected.transform.position.x, selected.transform.position.y), loc);
+        selected.GetComponent<PieceInfo>().piece.SetLocation(loc);
+
         Transform location = boardCanvas.Find(InfoLoader.Vec2ToString(loc));
         selected.transform.parent = location;
         selected.transform.localPosition = new Vector3(0, 0, selected.transform.position.z);
@@ -166,9 +169,9 @@ public class MovementController : MonoBehaviour
         List<Vector2Int> validLoc = new List<Vector2Int>();
         for (int i = -1; i <= 1; i += 2)
         {
-            if (InPalace(x, y + i) && FindAt(x, y + i) != 'A')
+            if (boardAttributes.InPalace(x, y + i) && FindAt(x, y + i) != 'A')
                 validLoc.Add(new Vector2Int(x, y + i));
-            if (InPalace(x + i, y) && FindAt(x + i, y) != 'A')
+            if (boardAttributes.InPalace(x + i, y) && FindAt(x + i, y) != 'A')
                 validLoc.Add(new Vector2Int(x + i, y));
         }
         return validLoc;
@@ -179,7 +182,7 @@ public class MovementController : MonoBehaviour
         for (int i = -1; i <= 1; i += 2)
         {
             for (int j = -1; j <= 1; j += 2)
-                if (InPalace(x + i, y + j) && (FindAt(x + i, y + j) != 'A' ^ link))
+                if (boardAttributes.InPalace(x + i, y + j) && (FindAt(x + i, y + j) != 'A' ^ link))
                     validLoc.Add(new Vector2Int(x + i, y + j));
         }
         return validLoc;
@@ -190,7 +193,7 @@ public class MovementController : MonoBehaviour
         for (int i = -1; i <= 1; i += 2)
         {
             for (int j = -1; j <= 1; j += 2)
-                if (InAllyField(x + i * 2, y + j * 2) && FindAt(x + i, y + j) == 'B' && (FindAt(x + i * 2, y + j * 2) != 'A' ^ link))
+                if (boardAttributes.InAllyField(x + i * 2, y + j * 2) && FindAt(x + i, y + j) == 'B' && (FindAt(x + i * 2, y + j * 2) != 'A' ^ link))
                     validLoc.Add(new Vector2Int(x + i * 2, y + j * 2));
         }
         return validLoc;
@@ -200,13 +203,13 @@ public class MovementController : MonoBehaviour
         List<Vector2Int> validLoc = new List<Vector2Int>();
         for (int i = -1; i <= 1; i += 2)
         {
-            if (InBoard(x, y + i) && FindAt(x, y + i) == 'B')
+            if (boardAttributes.InBoard(x, y + i) && FindAt(x, y + i) == 'B')
                 for (int j = -1; j <= 1; j += 2)
-                    if (InBoard(x + j, y + i * 2) && (FindAt(x + j, y + i * 2) != 'A') ^ link)
+                    if (boardAttributes.InBoard(x + j, y + i * 2) && (FindAt(x + j, y + i * 2) != 'A') ^ link)
                         validLoc.Add(new Vector2Int(x + j, y + i * 2));
-            if (InBoard(x + i, y) && FindAt(x + i, y) == 'B')
+            if (boardAttributes.InBoard(x + i, y) && FindAt(x + i, y) == 'B')
                 for (int j = -1; j <= 1; j += 2)
-                    if (InBoard(x + i * 2, y + j) && (FindAt(x + i * 2, y + j) != 'A') ^ link)
+                    if (boardAttributes.InBoard(x + i * 2, y + j) && (FindAt(x + i * 2, y + j) != 'A') ^ link)
                         validLoc.Add(new Vector2Int(x + i * 2, y + j));
         }
         return validLoc;
@@ -496,11 +499,11 @@ public class MovementController : MonoBehaviour
     public static List<Vector2Int> SoldierLoc(int x, int y, bool link = false)
     {
         List<Vector2Int> validLoc = new List<Vector2Int>();
-        if (InBoard(x, y + 1) && (FindAt(x, y + 1) != 'A' ^ link))
+        if (boardAttributes.InBoard(x, y + 1) && (FindAt(x, y + 1) != 'A' ^ link))
             validLoc.Add(new Vector2Int(x, y + 1));
-        if (!InAllyField(x, y))
+        if (!boardAttributes.InAllyField(x, y))
             for (int i = -1; i <= 1; i += 2)
-                if (InBoard(x + i, y) && (FindAt(x + i, y) != 'A' ^ link))
+                if (boardAttributes.InBoard(x + i, y) && (FindAt(x + i, y) != 'A' ^ link))
                     validLoc.Add(new Vector2Int(x + i, y));
         return validLoc;
     }
@@ -528,11 +531,4 @@ public class MovementController : MonoBehaviour
         return 'B';
     }
 
-    public static bool InPalace(int x, int y) { return boardAttributes.palaceDownLeft.x <= x && x <= boardAttributes.palaceUpperRight.x && boardAttributes.palaceDownLeft.y <= y && y <= boardAttributes.palaceUpperRight.y; }
-
-    public static bool InAllyField(int x, int y) { return 0 <= x && x < boardAttributes.boardWidth && 0 <= y && y <= boardAttributes.allyField; }
-
-    public static bool InBoard(int x, int y) { return 0 <= x && x < boardAttributes.boardWidth && 0 <= y && y < boardAttributes.boardHeight; }
-
-    public static Trigger FindPieceTrigger(string piecename) { return Resources.Load<Trigger>("Pieces/Info/" + piecename + "/Trigger"); }
 }

@@ -64,6 +64,11 @@ public class ActivateAbility : MonoBehaviour {
         invalidTarget.SetActive(false);
     }
 
+    public void ButtonDrawTargets()
+    {
+        DrawTargets();
+    }
+
     public static void DrawTargets()
     {
         activated = true;

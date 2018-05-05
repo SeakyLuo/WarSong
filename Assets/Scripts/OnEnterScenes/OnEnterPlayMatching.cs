@@ -88,8 +88,9 @@ public class OnEnterPlayMatching : MonoBehaviour
     {
         // Upload Lineup Info to the server and match according to the board
         matchingPanel.SetActive(true);
-        LaunchWar();
+        // yield wait
         matchingPanel.SetActive(false);
+        LaunchWar();
     }
 
     public void CancelMatching()

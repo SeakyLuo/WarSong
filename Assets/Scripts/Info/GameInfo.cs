@@ -83,11 +83,11 @@ public static class GameInfo
         };
     }
 
-    public static void Move(Vector2Int before, Vector2Int after)
+    public static void Move(Vector2Int from, Vector2Int to)
     {
-        Piece piece = board[before];
-        board.Remove(before);
-        board.Add(after, piece);
+        Piece piece = board[from];
+        board.Remove(from);
+        board.Add(to, piece);
     }
 
     public static void Clear()

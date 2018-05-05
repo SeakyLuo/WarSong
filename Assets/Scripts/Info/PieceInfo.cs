@@ -28,16 +28,11 @@ public class PieceInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         newPosition = new Vector3(posX, posY, -11.5f);
     }
 
-    private void Update()
-    {
-        if (OnEnterGame.gameover || GameInfo.actionTaken) return;
-    }
-
     public void Setup(Collection collection, Vector2Int loc, bool isAlly)
     {
         pieceAttributes = FindPieceAttributes(collection.name);
         piece = new Piece(collection, loc, pieceAttributes.oreCost, isAlly);
-        trigger = pieceAttributes.trigger;
+        if (pieceAttributes.trigger != null) trigger = Instantiate(pieceAttributes.trigger);
         if (trigger != null) trigger.piece = piece; // remove the if when all completed
         GetComponentInChildren<Image>().sprite = pieceAttributes.image;
         if (isAlly) GetComponent<Renderer>().material = red;
@@ -46,11 +41,13 @@ public class PieceInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public List<Vector2Int> ValidLoc()
     {
+        if (trigger == null) return MovementController.ValidLoc(piece.GetLocation().x, piece.GetLocation().y, piece.GetPieceType());
         return trigger.ValidLoc(); 
     }
 
     public List<Vector2Int> ValidTarget()
     {
+        if (trigger == null) return new List<Vector2Int>();
         return trigger.ValidTarget();
     }
 
@@ -72,8 +69,7 @@ public class PieceInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         if (card.activeSelf) card.SetActive(false);
     }
-
-    public Piece GetPiece() { return piece; }
+    
     public PieceAttributes GetPieceAttributes() { return pieceAttributes; }
     public string GetPieceType() { return pieceAttributes.type; }
     public void SetLocation(Vector2Int loc) { piece.SetLocation(loc); }

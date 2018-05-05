@@ -10,7 +10,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 {
     public static bool gameover = false;
 
-    public GameObject victoryImage, defeatImage, settingsPanel, yourTurnImage;
+    public GameObject victoryImage, defeatImage, drawImage, settingsPanel, yourTurnImage;
     public GameObject pathDot, targetDot, oldLocation;
     public Transform tacticBag;
     public Text roundCount, timer, modeName;
@@ -112,7 +112,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 
     public void Draw()
     {
-        // drawImage.SetActive(true);
+        drawImage.SetActive(true);
         InfoLoader.user.total.Draw();
         GameOver();
     }
@@ -123,7 +123,10 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         gameover = true;
         if (settingsPanel.activeSelf) settingsPanel.SetActive(false);
         foreach(KeyValuePair<Vector2Int,GameObject> pair in boardSetup.pieces)
-            pair.Value.GetComponent<PieceInfo>().trigger.EndOfGame();
+        {
+            Trigger trigger = pair.Value.GetComponent<PieceInfo>().trigger;
+            if (trigger != null) trigger.EndOfGame();
+        }
         // CalculateNewRank(); // should be done by server
         // remove collections
     }
@@ -146,6 +149,11 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     {
         StartCoroutine(ShowYourTurn());
         GameInfo.actionTaken = false;
+        foreach (KeyValuePair<Vector2Int, GameObject> pair in boardSetup.pieces)
+        {
+            Trigger trigger = pair.Value.GetComponent<PieceInfo>().trigger;
+            if (trigger != null) trigger.StartOfTurn();
+        }
     }
 
     private IEnumerator ShowYourTurn()
@@ -157,7 +165,17 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 
     public void NextTurn()
     {
+        foreach (KeyValuePair<Vector2Int, GameObject> pair in boardSetup.pieces)
+        {
+            Trigger trigger = pair.Value.GetComponent<PieceInfo>().trigger;
+            if (trigger != null) trigger.EndOfTurn();
+        }
         roundCount.text = (++GameInfo.round).ToString();
+        if(GameInfo.round == 150)
+        {
+            Draw();
+            return;
+        }
         GameInfo.time = GameInfo.maxTime;
         GameInfo.actionTaken = true;
         YourTurn();

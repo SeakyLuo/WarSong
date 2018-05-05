@@ -601,8 +601,8 @@ MonoBehaviour:
   background: {fileID: 114676943143269446}
   healthImage: {fileID: 1796718553733164}
   coinImage: {fileID: 1454942332150290}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 21300000, guid: 915458f7936b5444a89afd632501f215, type: 3}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &114480046358940416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -723,7 +723,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 915458f7936b5444a89afd632501f215, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

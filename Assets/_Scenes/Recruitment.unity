@@ -248,8 +248,8 @@ MonoBehaviour:
   background: {fileID: 5329264}
   healthImage: {fileID: 1168228223}
   coinImage: {fileID: 636598000}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &5329264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,7 +269,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -507,8 +507,8 @@ MonoBehaviour:
   background: {fileID: 11263726}
   healthImage: {fileID: 57383871}
   coinImage: {fileID: 527902780}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &11263726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,7 +528,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3288,8 +3288,8 @@ MonoBehaviour:
   background: {fileID: 110769188}
   healthImage: {fileID: 1784007985}
   coinImage: {fileID: 957413177}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &110769188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3309,7 +3309,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6199,8 +6199,8 @@ MonoBehaviour:
   background: {fileID: 202974421}
   healthImage: {fileID: 200045116}
   coinImage: {fileID: 2087255131}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &202974421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6220,7 +6220,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7042,8 +7042,8 @@ MonoBehaviour:
   background: {fileID: 231825925}
   healthImage: {fileID: 1890959641}
   coinImage: {fileID: 943050327}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &231825925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7063,7 +7063,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8107,8 +8107,8 @@ MonoBehaviour:
   background: {fileID: 283508985}
   healthImage: {fileID: 720748794}
   coinImage: {fileID: 1718718500}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &283508985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8128,7 +8128,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9178,8 +9178,8 @@ MonoBehaviour:
   background: {fileID: 315778137}
   healthImage: {fileID: 449185654}
   coinImage: {fileID: 830269124}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &315778137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9199,7 +9199,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10226,8 +10226,8 @@ MonoBehaviour:
   background: {fileID: 347751351}
   healthImage: {fileID: 1531599554}
   coinImage: {fileID: 1182016537}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &347751351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10247,7 +10247,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10848,8 +10848,8 @@ MonoBehaviour:
   background: {fileID: 370379084}
   healthImage: {fileID: 1390068950}
   coinImage: {fileID: 1133792273}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &370379084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10869,7 +10869,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11092,8 +11092,8 @@ MonoBehaviour:
   background: {fileID: 375648163}
   healthImage: {fileID: 873525825}
   coinImage: {fileID: 638151582}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &375648163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11113,7 +11113,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12473,8 +12473,8 @@ MonoBehaviour:
   background: {fileID: 394818331}
   healthImage: {fileID: 2067187197}
   coinImage: {fileID: 83602675}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &394818331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12494,7 +12494,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16639,8 +16639,8 @@ MonoBehaviour:
   background: {fileID: 526753241}
   healthImage: {fileID: 335145222}
   coinImage: {fileID: 432949061}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &526753241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16660,7 +16660,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -17519,8 +17519,8 @@ MonoBehaviour:
   background: {fileID: 565908293}
   healthImage: {fileID: 1712427501}
   coinImage: {fileID: 1463127131}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &565908293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17540,7 +17540,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -18037,8 +18037,8 @@ MonoBehaviour:
   background: {fileID: 584180249}
   healthImage: {fileID: 1665600273}
   coinImage: {fileID: 608539289}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &584180249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18058,7 +18058,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -18671,8 +18671,8 @@ MonoBehaviour:
   background: {fileID: 608950764}
   healthImage: {fileID: 544552935}
   coinImage: {fileID: 840646547}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &608950764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18692,7 +18692,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -19858,8 +19858,8 @@ MonoBehaviour:
   background: {fileID: 644283914}
   healthImage: {fileID: 797915188}
   coinImage: {fileID: 374332481}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &644283914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19879,7 +19879,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -20280,8 +20280,8 @@ MonoBehaviour:
   background: {fileID: 654306548}
   healthImage: {fileID: 1340762146}
   coinImage: {fileID: 1240313043}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &654306548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20301,7 +20301,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -21278,8 +21278,8 @@ MonoBehaviour:
   background: {fileID: 686495887}
   healthImage: {fileID: 480088300}
   coinImage: {fileID: 1445428905}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &686495887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21299,7 +21299,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -26266,8 +26266,8 @@ MonoBehaviour:
   background: {fileID: 808635539}
   healthImage: {fileID: 192864874}
   coinImage: {fileID: 156447670}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &808635539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26287,7 +26287,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -27655,8 +27655,8 @@ MonoBehaviour:
   background: {fileID: 848532881}
   healthImage: {fileID: 1989878116}
   coinImage: {fileID: 9704045}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &848532881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27676,7 +27676,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -28035,8 +28035,8 @@ MonoBehaviour:
   background: {fileID: 864231386}
   healthImage: {fileID: 1404445745}
   coinImage: {fileID: 2133884121}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &864231386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28056,7 +28056,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -28136,8 +28136,8 @@ MonoBehaviour:
   background: {fileID: 865025415}
   healthImage: {fileID: 1554055877}
   coinImage: {fileID: 1449820607}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &865025415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28157,7 +28157,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -31761,8 +31761,8 @@ MonoBehaviour:
   background: {fileID: 1010509602}
   healthImage: {fileID: 59765875}
   coinImage: {fileID: 631403550}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1010509602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31782,7 +31782,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -33015,8 +33015,8 @@ MonoBehaviour:
   background: {fileID: 1052915511}
   healthImage: {fileID: 995564074}
   coinImage: {fileID: 88007243}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1052915511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33036,7 +33036,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -35366,8 +35366,8 @@ MonoBehaviour:
   background: {fileID: 1140262103}
   healthImage: {fileID: 739748833}
   coinImage: {fileID: 464492749}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1140262103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35387,7 +35387,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -39647,8 +39647,8 @@ MonoBehaviour:
   background: {fileID: 1261322935}
   healthImage: {fileID: 1976609331}
   coinImage: {fileID: 223193269}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1261322935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39668,7 +39668,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -41404,8 +41404,8 @@ MonoBehaviour:
   background: {fileID: 1328886199}
   healthImage: {fileID: 796352373}
   coinImage: {fileID: 1289870562}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1328886199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41425,7 +41425,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -43910,8 +43910,8 @@ MonoBehaviour:
   background: {fileID: 1382681311}
   healthImage: {fileID: 858611060}
   coinImage: {fileID: 469508914}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1382681311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43931,7 +43931,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -44519,8 +44519,8 @@ MonoBehaviour:
   background: {fileID: 1394600091}
   healthImage: {fileID: 1089129922}
   coinImage: {fileID: 1846810280}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1394600091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44540,7 +44540,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -45408,8 +45408,8 @@ MonoBehaviour:
   background: {fileID: 1421124388}
   healthImage: {fileID: 1113675835}
   coinImage: {fileID: 664779286}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1421124388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45429,7 +45429,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -45687,8 +45687,8 @@ MonoBehaviour:
   background: {fileID: 1426498933}
   healthImage: {fileID: 450609403}
   coinImage: {fileID: 386021435}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1426498933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45708,7 +45708,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -45857,8 +45857,8 @@ MonoBehaviour:
   background: {fileID: 1436558109}
   healthImage: {fileID: 143824901}
   coinImage: {fileID: 637049558}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1436558109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45878,7 +45878,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -46027,8 +46027,8 @@ MonoBehaviour:
   background: {fileID: 1438203942}
   healthImage: {fileID: 290247117}
   coinImage: {fileID: 1574721261}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1438203942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46048,7 +46048,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -47224,8 +47224,8 @@ MonoBehaviour:
   background: {fileID: 1496258164}
   healthImage: {fileID: 1432528082}
   coinImage: {fileID: 1135796587}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1496258164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47245,7 +47245,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -49635,8 +49635,8 @@ MonoBehaviour:
   background: {fileID: 1585830138}
   healthImage: {fileID: 38105502}
   coinImage: {fileID: 1700037465}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1585830138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49656,7 +49656,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -50332,8 +50332,8 @@ MonoBehaviour:
   background: {fileID: 1602986957}
   healthImage: {fileID: 1543155740}
   coinImage: {fileID: 296166947}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1602986957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50353,7 +50353,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -50522,8 +50522,8 @@ MonoBehaviour:
   background: {fileID: 1609041237}
   healthImage: {fileID: 1349627068}
   coinImage: {fileID: 2039253876}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1609041237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50543,7 +50543,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -51847,8 +51847,8 @@ MonoBehaviour:
   background: {fileID: 1657420728}
   healthImage: {fileID: 422045705}
   coinImage: {fileID: 1629622160}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1657420728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51868,7 +51868,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -54498,8 +54498,8 @@ MonoBehaviour:
   background: {fileID: 1732190152}
   healthImage: {fileID: 290750999}
   coinImage: {fileID: 1139365711}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1732190152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54519,7 +54519,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -54668,8 +54668,8 @@ MonoBehaviour:
   background: {fileID: 1741382316}
   healthImage: {fileID: 180505591}
   coinImage: {fileID: 245708483}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1741382316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54689,7 +54689,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -56163,8 +56163,8 @@ MonoBehaviour:
   background: {fileID: 1776144803}
   healthImage: {fileID: 1167768509}
   coinImage: {fileID: 1405010520}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1776144803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56184,7 +56184,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -56727,8 +56727,8 @@ MonoBehaviour:
   background: {fileID: 1790918331}
   healthImage: {fileID: 643723095}
   coinImage: {fileID: 247841562}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1790918331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56748,7 +56748,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -56923,8 +56923,8 @@ MonoBehaviour:
   background: {fileID: 1791996174}
   healthImage: {fileID: 1917231424}
   coinImage: {fileID: 355991342}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1791996174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56944,7 +56944,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -57324,8 +57324,8 @@ MonoBehaviour:
   background: {fileID: 1800921604}
   healthImage: {fileID: 2107480255}
   coinImage: {fileID: 706948663}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1800921604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57345,7 +57345,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -57425,8 +57425,8 @@ MonoBehaviour:
   background: {fileID: 1802920445}
   healthImage: {fileID: 97724284}
   coinImage: {fileID: 1246967420}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1802920445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57446,7 +57446,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -57777,8 +57777,8 @@ MonoBehaviour:
   background: {fileID: 1812303827}
   healthImage: {fileID: 1437010797}
   coinImage: {fileID: 729840273}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1812303827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57798,7 +57798,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -61211,8 +61211,8 @@ MonoBehaviour:
   background: {fileID: 1924432557}
   healthImage: {fileID: 774469791}
   coinImage: {fileID: 2071095171}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1924432557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61232,7 +61232,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -61841,8 +61841,8 @@ MonoBehaviour:
   background: {fileID: 1961087926}
   healthImage: {fileID: 1153215627}
   coinImage: {fileID: 1410751555}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &1961087926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61862,7 +61862,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -63132,8 +63132,8 @@ MonoBehaviour:
   background: {fileID: 2000049790}
   healthImage: {fileID: 391492079}
   coinImage: {fileID: 119027512}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &2000049790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63153,7 +63153,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -67066,8 +67066,8 @@ MonoBehaviour:
   background: {fileID: 2131163058}
   healthImage: {fileID: 399741153}
   coinImage: {fileID: 1617535141}
-  allyBackground: {fileID: 0}
-  enemyBackground: {fileID: 0}
+  allyBackground: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
+  enemyBackground: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
 --- !u!114 &2131163058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67087,7 +67087,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: f34f778594a3ae8448bac1bf36e9ef52, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7f4b3f4ff7d0d4f8e919817a15b3f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
