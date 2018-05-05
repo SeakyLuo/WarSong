@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class BoardSetup : MonoBehaviour {
@@ -15,18 +14,20 @@ public class BoardSetup : MonoBehaviour {
             Vector2Int loc = pair.Key;
             if (!isAlly)
                 loc = new Vector2Int(boardAttributes.boardWidth - pair.Key.x - 1, boardAttributes.boardHeight - pair.Key.y - 1);
-            GameObject pieceObj = boardCanvas.Find(Vec2ToString(loc) + "/Piece").gameObject;
+            GameObject pieceObj = boardCanvas.Find(InfoLoader.Vec2ToString(loc) + "/Piece").gameObject;
             pieceObj.GetComponent<PieceInfo>().Setup(pair.Value, loc, isAlly);
+            if(pieceObj.GetComponent<PieceInfo>().trigger != null) pieceObj.GetComponent<PieceInfo>().trigger.StartOfGame();
             pieces.Add(loc, pieceObj);
-            GameInfo.Add(pieceObj.GetComponent<PieceInfo>().GetPiece(), loc);
+            GameInfo.Add(pieceObj.GetComponent<PieceInfo>().GetPiece());
         }
+        GameInfo.castles = new Dictionary<Vector2Int, Piece>(GameInfo.board);
     }
 
     public void Reactivate(Piece piece)
     {
         Vector2Int loc = piece.GetCastle();
         pieces[loc].SetActive(true);
-        GameInfo.Add(piece, loc, true);
+        GameInfo.Add(piece, true);
     }
 
     public void Deactivate(Piece piece)
@@ -35,6 +36,4 @@ public class BoardSetup : MonoBehaviour {
         pieces[loc].SetActive(false);
         GameInfo.Remove(piece, loc);
     }
-
-    private string Vec2ToString(Vector2Int vec) { return vec.x.ToString() + vec.y.ToString(); }
 }

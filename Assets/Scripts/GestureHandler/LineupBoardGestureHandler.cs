@@ -36,7 +36,7 @@ public class LineupBoardGestureHandler : MonoBehaviour, IPointerClickHandler, IB
             dragBegins = true;            
             EnableImage(cardImage, false);
             infoCard.SetActive(true);
-            infoCard.GetComponent<CardInfo>().SetAttributes(boardInfo.cardLocations[StringToVec2(parent.name)]);
+            infoCard.GetComponent<CardInfo>().SetAttributes(boardInfo.cardLocations[InfoLoader.StringToVec2(parent.name)]);
             infoCard.transform.position = AdjustedMousePosition();
         }
     }
@@ -73,10 +73,10 @@ public class LineupBoardGestureHandler : MonoBehaviour, IPointerClickHandler, IB
                     PieceAttributes attributes = boardInfo.attributesDict[oldObject.name];                    
                     if (attributes.type == newCard.GetCardType())
                     {
-                        boardInfo.SetCard(attributes, StringToVec2(parent.name));
+                        boardInfo.SetCard(attributes, InfoLoader.StringToVec2(parent.name));
                         cardImage.GetComponent<Image>().sprite = attributes.image;
                         parent = oldObject;
-                        boardInfo.SetCard(newCard.piece, StringToVec2(parent.name));
+                        boardInfo.SetCard(newCard.piece, InfoLoader.StringToVec2(parent.name));
                         oldCardImage.sprite = newCard.piece.image;
                     }
                     else
@@ -97,7 +97,7 @@ public class LineupBoardGestureHandler : MonoBehaviour, IPointerClickHandler, IB
                 // Drag outside the board.
                 string cardType = newCard.GetCardType();
                 collectionManager.AddCollection(new Collection(newCard.piece));
-                boardInfo.SetStandardCard(cardType, StringToVec2(parent.name));
+                boardInfo.SetStandardCard(cardType, InfoLoader.StringToVec2(parent.name));
                 collectionManager.RemoveCollection(Collection.standardCollectionDict[cardType]);
                 cardImage.sprite = InfoLoader.standardAttributes["Standard " + cardType].image;
                 // drag to a infoCard to switch?
@@ -131,8 +131,6 @@ public class LineupBoardGestureHandler : MonoBehaviour, IPointerClickHandler, IB
             collectionManager.ClickTab(cardType);
         }
     }
-    
-    private Vector2Int StringToVec2(string loc) { return new Vector2Int((int)Char.GetNumericValue(loc[0]), (int)Char.GetNumericValue(loc[1])); }
 
     private Vector3 AdjustedMousePosition()
     {

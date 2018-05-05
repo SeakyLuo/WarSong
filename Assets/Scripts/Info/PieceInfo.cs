@@ -7,16 +7,17 @@ using UnityEngine.EventSystems;
 public class PieceInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Material red, black;
+    [HideInInspector] public Piece piece;
+    [HideInInspector] public Trigger trigger;
 
     private GameObject PieceInfoCard;
     private GameObject card;
-    private Piece piece;
     private PieceAttributes pieceAttributes;
     private Vector3 newPosition;
 
     private void Start()
     {
-        PieceInfoCard = GameObject.Find("PieceInfoCard");
+        PieceInfoCard = GameObject.Find("BoardInfoCard");
         card = PieceInfoCard.transform.Find("Canvas/Card").gameObject;
         float posX = transform.position.x;
         if (posX <=80) posX += 40;
@@ -27,13 +28,30 @@ public class PieceInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         newPosition = new Vector3(posX, posY, -11.5f);
     }
 
+    private void Update()
+    {
+        if (OnEnterGame.gameover || GameInfo.actionTaken) return;
+    }
+
     public void Setup(Collection collection, Vector2Int loc, bool isAlly)
     {
-        piece = new Piece(collection, loc, isAlly);
         pieceAttributes = FindPieceAttributes(collection.name);
+        piece = new Piece(collection, loc, pieceAttributes.oreCost, isAlly);
+        trigger = pieceAttributes.trigger;
+        if (trigger != null) trigger.piece = piece; // remove the if when all completed
         GetComponentInChildren<Image>().sprite = pieceAttributes.image;
         if (isAlly) GetComponent<Renderer>().material = red;
         else GetComponent<Renderer>().material = black;
+    }
+
+    public List<Vector2Int> ValidLoc()
+    {
+        return trigger.ValidLoc(); 
+    }
+
+    public List<Vector2Int> ValidTarget()
+    {
+        return trigger.ValidTarget();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -60,10 +78,9 @@ public class PieceInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public string GetPieceType() { return pieceAttributes.type; }
     public void SetLocation(Vector2Int loc) { piece.SetLocation(loc); }
     public bool IsStandard() { return piece.IsStandard(); }
-
     private PieceAttributes FindPieceAttributes(string name)
     {
         if (name.StartsWith("Standard ")) return InfoLoader.standardAttributes[name];
-        return Resources.Load<PieceAttributes>("Pieces/Info/" + name + "/Attributes");
+        return Resources.Load<PieceAttributes>("Pieces/" + name + "/Attributes");
     }
 }

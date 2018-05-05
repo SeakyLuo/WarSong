@@ -5,6 +5,7 @@ using UnityEngine;
 public class UserInfo {
 
     public string username;
+    public int playerID;
     public List<Collection> collection;
     public List<Lineup> lineups;
     public Dictionary<string,int> contracts;
@@ -14,7 +15,6 @@ public class UserInfo {
     public List<Challenge> challenges;
     public string preferredBoard = "Standard Board";
     public string lastModeSelected = "";
-    public int gameID;
 
     public UserInfo()
     {
@@ -77,6 +77,7 @@ public class CheatAccount:UserInfo
     public CheatAccount():base()
     {
         username = "WarSong CheatAccount";
+        playerID = 12345789;
         Collection[] cheat = {  new Collection("Space Witch", "General"), new Collection("Fat Soldier", "Soldier",4),new Collection("Cripple","Cannon",3),
             new Collection("Soldier Recruitment",5), new Collection("Advisor Recruitment"), new Collection("Greeeeeat Elephant","Elephant",3),
             new Collection("Tame An Elephant"),new Collection("Purchase A Horse"), new Collection("King Guardian","Advisor", 3),
@@ -160,7 +161,7 @@ public class CheatAccount:UserInfo
         };
         coins = 99999;
         rank = 9999;
-        lastLineupSelected = -1;
+        lastLineupSelected = 1;
         total = new Stats(10, 1, 1);
         preferredBoard = "Standard Board";
     }

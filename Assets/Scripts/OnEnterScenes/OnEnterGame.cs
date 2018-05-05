@@ -10,19 +10,18 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 {
     public static bool gameover = false;
 
-    public GameObject victoryImage, defeatImage, settingsPanel, yourTurnImage, youHaveMoved;
+    public GameObject victoryImage, defeatImage, settingsPanel, yourTurnImage;
+    public GameObject pathDot, targetDot, oldLocation;
     public Transform tacticBag;
-    public Button endTurn;
     public Text roundCount, timer, modeName;
     public Text playerName, playerWin, playerRank;
     public Text opponentName, opponentWin, opponentRank;
-    public Text endTurnText;
-    public Text oreText;
+    public Text oreText, coinText;
+    [HideInInspector] public GameObject board;
+    [HideInInspector] public BoardSetup boardSetup;
 
     private Lineup lineup;
-    private GameObject board;
     private List<Transform> tacticObjs = new List<Transform>();
-    private BoardSetup boardSetup;
     private Dictionary<String, int> credits = new Dictionary<string, int>()
     {
         { "Chariot", 8 }, { "Horse", 4}, {"Elephant", 3}, {"Advisor", 2}, {"General", 10}, {"Cannon", 4}, {"Soldier", 2}
@@ -31,7 +30,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     // Use this for initialization
     void Start () {
         lineup = InfoLoader.user.lineups[InfoLoader.user.lastLineupSelected];
-        board = Instantiate(Resources.Load<GameObject>("Board/Info/" + lineup.boardName + "/Board"));
+        board = Instantiate(Resources.Load<GameObject>("Board/" + lineup.boardName + "/Board"));
         board.transform.SetSiblingIndex(1);
         boardSetup = board.GetComponent<BoardSetup>();
         boardSetup.Setup(lineup, true);  // Set up Player Lineup
@@ -51,7 +50,9 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(FindTacticAttributes(lineup.tactics[i]));
         }
         modeName.text = InfoLoader.user.lastModeSelected;
+        GameInfo.SetOrder(InfoLoader.user.playerID, 100000000);
         SetOreText();
+        SetCoinText();
         StartCoroutine(Timer());
     }
 
@@ -66,7 +67,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 
     private TacticAttributes FindTacticAttributes(string tacticName)
     {
-        return Resources.Load<TacticAttributes>("Tactics/Info/"+tacticName+"/Attributes");
+        return Resources.Load<TacticAttributes>("Tactics/"+tacticName+"/Attributes");
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -91,7 +92,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             if (GameInfo.time < 15) timer.color = Color.red;
             else timer.color = Color.white;
             yield return new WaitForSeconds(1.0f);
-            if (--GameInfo.time < 0) EndTurn();
+            if (--GameInfo.time < 0) NextTurn();
         }
     }
 
@@ -121,6 +122,8 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         GameInfo.time = GameInfo.maxTime;
         gameover = true;
         if (settingsPanel.activeSelf) settingsPanel.SetActive(false);
+        foreach(KeyValuePair<Vector2Int,GameObject> pair in boardSetup.pieces)
+            pair.Value.GetComponent<PieceInfo>().trigger.EndOfGame();
         // CalculateNewRank(); // should be done by server
         // remove collections
     }
@@ -133,47 +136,22 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     private void CalculateNewRank()
     {
         int credit = 0;
-        foreach(Piece piece in GameInfo.activeAlly)
+        foreach(Piece piece in GameInfo.activeAllies)
             credit += credits[piece.GetPieceType()];
-        foreach (Piece piece in GameInfo.inactiveEnemy)
+        foreach (Piece piece in GameInfo.inactiveEnemies)
             credit += credits[piece.GetPieceType()];
-    }
-
-    public void EndTurn()
-    {
-        MovementController.PutDownPiece();
-        endTurn.interactable = false;
-        endTurnText.text = "Enemy Turn";
-        NextTurn();
-        MovementController.PutDownPiece();
-        // Enemy turn;
-        YourTurn();
     }
 
     public void YourTurn()
     {
         StartCoroutine(ShowYourTurn());
-        endTurn.interactable = true;
-        endTurnText.text = "End Turn";
-    }
-
-    public void ShowMoved()
-    {
-        StartCoroutine(ShowYouHaveMoved());
-    }
-
-    private IEnumerator ShowYouHaveMoved()
-    {
-        MovementController.PutDownPiece();
-        youHaveMoved.SetActive(true);
-        yield return new WaitForSeconds(1.0f);
-        youHaveMoved.SetActive(false);
+        GameInfo.actionTaken = false;
     }
 
     private IEnumerator ShowYourTurn()
     {
         yourTurnImage.SetActive(true);
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(2.0f);
         yourTurnImage.SetActive(false);
     }
 
@@ -181,11 +159,17 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     {
         roundCount.text = (++GameInfo.round).ToString();
         GameInfo.time = GameInfo.maxTime;
-        GameInfo.actionTaken = false;
+        GameInfo.actionTaken = true;
+        YourTurn();
     }
 
     public void SetOreText()
     {
-        oreText.text = GameInfo.firstPlayerOre.ToString() + "/" + GameInfo.firstPlayerMaxOre.ToString();
+        oreText.text = GameInfo.ores[InfoLoader.user.playerID].ToString();
+    }
+
+    public void SetCoinText()
+    {
+        coinText.text = InfoLoader.user.coins.ToString();
     }
 }

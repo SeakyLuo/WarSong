@@ -102,7 +102,7 @@ public class LineupBuilder : MonoBehaviour {
     private void AddTactic(string TacticName)
     {
         // called by progrommer
-        TacticAdder(Resources.Load<TacticAttributes>("Tactics/Info/" + TacticName + "/Attributes"));
+        TacticAdder(Resources.Load<TacticAttributes>("Tactics/" + TacticName + "/Attributes"));
     }
 
     private void TacticAdder(TacticAttributes attributes)
@@ -317,6 +317,4 @@ public class LineupBuilder : MonoBehaviour {
     }
 
     public void SetBoardInfo(BoardInfo info) { boardInfo = info; }
-
-    private string Vector2IntToString(Vector2Int v) { return v.x.ToString() + v.y.ToString(); }
 }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+[System.Serializable]
 public class Collection
 {
     public string name = "";
@@ -46,7 +47,7 @@ public class Collection
         name = tacticName;
         type = "Tactic";
         count = Count;
-        TacticAttributes attributes = Resources.Load<TacticAttributes>("Tactics/Info/" + tacticName + "/Attributes");
+        TacticAttributes attributes = Resources.Load<TacticAttributes>("Tactics/" + tacticName + "/Attributes");
         health = attributes.goldCost;
         oreCost = attributes.oreCost;
     }
@@ -68,13 +69,13 @@ public class Collection
         health = Health;
         if (Type == "Tactic")
         {
-            TacticAttributes attributes = Resources.Load<TacticAttributes>("Tactics/Info/" + Name + "/Attributes");
+            TacticAttributes attributes = Resources.Load<TacticAttributes>("Tactics/" + Name + "/Attributes");
             health = attributes.goldCost;
             oreCost = attributes.oreCost;
         }
         else if (!Name.StartsWith("Standard "))
         {
-            PieceAttributes attributes = Resources.Load<PieceAttributes>("Pieces/Info/" + Name + "/Attributes");
+            PieceAttributes attributes = Resources.Load<PieceAttributes>("Pieces/" + Name + "/Attributes");
             if (Health == 0) health = attributes.health;
             oreCost = attributes.oreCost;
         }

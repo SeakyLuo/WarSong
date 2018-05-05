@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 public class CardInfo : MonoBehaviour {
 
-    public PieceAttributes piece;
-    public TacticAttributes tactic;
+    [HideInInspector] public PieceAttributes piece;
+    [HideInInspector] public TacticAttributes tactic;
 
     public Text nameText, descriptionText, costText, healthText, coinText, typeText;
     public Image image, background;
@@ -35,10 +35,10 @@ public class CardInfo : MonoBehaviour {
     {
         if (collection == null) return;
         if (collection.type == "Tactic")
-            SetAttributes(Resources.Load<TacticAttributes>("Tactics/Info/" + collection.name + "/Attributes"));
+            SetAttributes(Resources.Load<TacticAttributes>("Tactics/" + collection.name + "/Attributes"));
         else
         {
-            SetAttributes(Resources.Load<PieceAttributes>("Pieces/Info/" + collection.name + "/Attributes"));
+            SetAttributes(Resources.Load<PieceAttributes>("Pieces/" + collection.name + "/Attributes"));
             if (collection.health != 0 && health != collection.health)
             {
                 if (health > collection.health) healthText.color = Color.red;

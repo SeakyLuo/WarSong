@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[System.Serializable]
 [CreateAssetMenu(fileName = "Attributes", menuName = "Board")]
 public class BoardAttributes : ScriptableObject {
 
@@ -9,6 +10,7 @@ public class BoardAttributes : ScriptableObject {
     public int boardWidth = 9;
     public int boardHeight = 10;
     public int allyField = 4;
+    [TextArea(2, 3)]
     public string description;
 
     public Vector2Int palaceDownLeft = new Vector2Int(3, 0);
