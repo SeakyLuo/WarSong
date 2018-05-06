@@ -9,6 +9,7 @@ public class PieceInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public Material red, black;
     [HideInInspector] public Piece piece;
     [HideInInspector] public Trigger trigger;
+    [HideInInspector] public bool selected = false;
 
     private GameObject PieceInfoCard;
     private GameObject card;
@@ -25,7 +26,7 @@ public class PieceInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         float posY = transform.position.y;
         if (posY <= 90) posY += 45;
         else if (posY > 90) posY -= 45;
-        newPosition = new Vector3(posX, posY, -11.5f);
+        newPosition = new Vector3(posX, posY, -13); // need to find better position
     }
 
     public void Setup(Collection collection, Vector2Int loc, bool isAlly)
@@ -41,7 +42,7 @@ public class PieceInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public List<Vector2Int> ValidLoc()
     {
-        if (trigger == null) return MovementController.ValidLoc(piece.GetLocation().x, piece.GetLocation().y, piece.GetPieceType());
+        if (trigger == null) return MovementController.ValidLoc(piece.location.x, piece.location.y, piece.GetPieceType());
         return trigger.ValidLoc(); 
     }
 
@@ -53,6 +54,7 @@ public class PieceInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (selected) return;
         card.SetActive(true);
         card.GetComponent<CardInfo>().SetAttributes(pieceAttributes);
         card.GetComponent<CardInfo>().SetIsAlly(piece.IsAlly());
@@ -62,6 +64,7 @@ public class PieceInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        selected = false;
         HideInfoCard();
     }
 
@@ -72,7 +75,7 @@ public class PieceInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     
     public PieceAttributes GetPieceAttributes() { return pieceAttributes; }
     public string GetPieceType() { return pieceAttributes.type; }
-    public void SetLocation(Vector2Int loc) { piece.SetLocation(loc); }
+    public void SetLocation(Vector2Int loc) { piece.location = loc; }
     public bool IsStandard() { return piece.IsStandard(); }
     private PieceAttributes FindPieceAttributes(string name)
     {

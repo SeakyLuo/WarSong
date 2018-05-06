@@ -24,24 +24,23 @@ public class GameController : MonoBehaviour {
         };
     }
 
-    public static void Reactivate(Piece piece)
+    public static void AddPiece(Collection collection, Vector2Int castle, bool isAlly)
     {
-        boardSetup.pieces[piece.GetCastle()].SetActive(true);
-        GameInfo.Add(piece, true);
+        boardSetup.AddPiece(collection, castle, isAlly);
     }
 
-    public static void Deactivate(Piece piece)
+    public static void Eliminate(Piece piece)
     {
-        Vector2Int loc = piece.GetCastle();
-        boardSetup.pieces[loc].SetActive(false);
-        GameInfo.Remove(piece, loc);
+        Destroy(boardSetup.pieces[piece.location]);
+        boardSetup.pieces.Remove(piece.location);
+        GameInfo.Remove(piece);
     }
 
-    public static void Deactivate(Vector2Int loc)
+    public static void Eliminate(Vector2Int loc)
     {
-        Vector2Int castle = GameInfo.board[loc].GetCastle();
-        boardSetup.pieces[castle].SetActive(false);
-        GameInfo.Remove(GameInfo.board[loc], loc);
+        Destroy(boardSetup.pieces[loc]);
+        boardSetup.pieces.Remove(loc);
+        GameInfo.Remove(GameInfo.board[loc]);
     }
 
     public static void ChangeOre(int deltaAmount)

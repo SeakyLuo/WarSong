@@ -51,6 +51,12 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         }
         modeName.text = InfoLoader.user.lastModeSelected;
         GameInfo.SetOrder(InfoLoader.user.playerID, 100000000);
+        GameInfo.SetGameID(1);
+        foreach (KeyValuePair<Vector2Int, GameObject> pair in boardSetup.pieces)
+        {
+            Trigger trigger = pair.Value.GetComponent<PieceInfo>().trigger;
+            if (trigger != null) trigger.StartOfGame();
+        }
         SetOreText();
         SetCoinText();
         StartCoroutine(Timer());
@@ -147,7 +153,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 
     public void YourTurn()
     {
-        StartCoroutine(ShowYourTurn());
+        //StartCoroutine(ShowYourTurn());
         GameInfo.actionTaken = false;
         foreach (KeyValuePair<Vector2Int, GameObject> pair in boardSetup.pieces)
         {

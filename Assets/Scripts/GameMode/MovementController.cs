@@ -11,9 +11,10 @@ public class MovementController : MonoBehaviour
     public static List<Vector2Int> validLoc = new List<Vector2Int>();
     public static Collider selected;
     public static float scale;
+    public static Transform boardCanvas;
+    public static float speed = 1f;
 
-    public Transform boardCanvas;
-    public Sprite newLocation;
+    public Sprite newLocation;    
     
     private static GameObject oldLocation;
     private static GameObject pathDot;
@@ -21,12 +22,12 @@ public class MovementController : MonoBehaviour
     private static Image previousImage;
     private static Sprite previousSprite;
     private static BoardSetup boardSetup;
-
-    private OnEnterGame onEnterGame;
+    private static OnEnterGame onEnterGame;
 
     private void Start()
     {
         GameObject UIPanel = GameObject.Find("UIPanel");
+        boardCanvas = transform.Find("Canvas");
         onEnterGame = UIPanel.GetComponent<OnEnterGame>();
         scale = transform.localScale.x;
         boardSetup = GetComponent<BoardSetup>();
@@ -85,18 +86,18 @@ public class MovementController : MonoBehaviour
         else if (Input.GetMouseButtonUp(1) && selected != null) PutDownPiece();
     }
 
-    private void KillAt(Vector2Int loc)
+    public static void KillAt(Vector2Int loc)
     {
         Piece enemy;
         if (GameInfo.board.TryGetValue(loc, out enemy) && !enemy.IsAlly())
         {
             if(enemy.GetPieceType() == "General")
                 onEnterGame.Victory();
-            boardSetup.Deactivate(enemy);
+            GameController.Eliminate(enemy);
         }
     }
 
-    private Vector2Int GetGridLocation(float x, float y) { return new Vector2Int((int)Mathf.Floor(x / scale), (int)Mathf.Floor(y / scale)); }
+    private static Vector2Int GetGridLocation(float x, float y) { return new Vector2Int((int)Mathf.Floor(x / scale), (int)Mathf.Floor(y / scale)); }
 
     public static void PutDownPiece()
     {
@@ -105,6 +106,7 @@ public class MovementController : MonoBehaviour
         selected.transform.position -= raiseVector;
         if (!oldLocation.activeSelf && previousSprite != null) oldLocation.SetActive(true);
         ActivateAbility.DeactivateButton();
+        selected.GetComponent<PieceInfo>().selected = true;
         selected = null;
     }
 
@@ -114,26 +116,36 @@ public class MovementController : MonoBehaviour
         pathDots.Clear();
     }
 
-    private void SetLocation(Vector2Int loc)
+    private void SetLocation(Vector2Int location)
     {
+        /// location is new location
         oldLocation.transform.position = selected.transform.position - raiseVector;
         if (previousSprite != null)
             previousImage.sprite = previousSprite;
 
-        // SetLocationData
-        GameInfo.Move(GetGridLocation(selected.transform.position.x, selected.transform.position.y), loc);
-        selected.GetComponent<PieceInfo>().piece.SetLocation(loc);
+        Move(selected.gameObject, GetGridLocation(selected.transform.position.x, selected.transform.position.y), location);
 
-        Transform location = boardCanvas.Find(InfoLoader.Vec2ToString(loc));
-        selected.transform.parent = location;
-        selected.transform.localPosition = new Vector3(0, 0, selected.transform.position.z);
-
-        previousImage = location.Find("Image").GetComponent<Image>();
+        previousImage = selected.transform.parent.Find("Image").GetComponent<Image>();
         previousSprite = previousImage.sprite;
         previousImage.sprite = newLocation;
 
         PutDownPiece();
         onEnterGame.NextTurn();
+    }
+
+    private static void Move(GameObject target, Vector2Int from, Vector2Int to)
+    {
+        // SetLocationData
+        GameInfo.Move(from, to);
+        target.GetComponent<PieceInfo>().piece.location = to;
+        
+        target.transform.parent = boardCanvas.Find(InfoLoader.Vec2ToString(to));
+        target.transform.localPosition = Vector3.Lerp(target.transform.localPosition, new Vector3(0, 0, target.transform.position.z), speed);
+    }
+
+    public static void Move(Piece piece, Vector2Int from, Vector2Int to)
+    {
+        Move(boardSetup.pieces[piece.location], from, to);
     }
 
     private List<Vector2Int> ValidLoc(Collider obj)
@@ -509,11 +521,10 @@ public class MovementController : MonoBehaviour
     }
     public static bool IsLink(Piece piece, List<Vector2Int> locations)
     {
-        /// For non-Cannon Pieces
         string type = piece.GetPieceType();
-        Vector2Int location = piece.GetLocation();
+        Vector2Int location = piece.location;
         foreach (Piece ally in GameInfo.activeAllies)
-            if (ally.GetPieceType() == type && locations.Contains(ally.GetLocation()) && boardSetup.pieces[ally.GetLocation()].GetComponent<PieceInfo>().trigger.ValidLoc(true).Contains(location))
+            if (ally.GetPieceType() == type && locations.Contains(ally.location) && boardSetup.pieces[ally.location].GetComponent<PieceInfo>().trigger.ValidLoc(true).Contains(location))
                 return true;
         return false;
     }

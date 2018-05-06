@@ -6,7 +6,7 @@ public class GameTacticGesture : MonoBehaviour, IPointerClickHandler, IPointerEn
 
     public GameObject infoCard;
 
-    private Vector3 newPosition;
+    //private Vector3 newPosition;
     private GameObject tactic;
     private Trigger trigger;
     private float prevClick = 0;
@@ -14,7 +14,7 @@ public class GameTacticGesture : MonoBehaviour, IPointerClickHandler, IPointerEn
 
     private void Start()
     {
-        newPosition = new Vector3(300, transform.localPosition.y, -6.1f);  // I don't know why the fuck is this -360
+        //newPosition = new Vector3(300, transform.localPosition.y, -6.1f);  // I don't know why the fuck is this -360
         tactic = transform.Find("Tactic").gameObject;
         trigger = tactic.GetComponent<TacticInfo>().trigger;
     }

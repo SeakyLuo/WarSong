@@ -331,7 +331,7 @@ MonoBehaviour:
   playerInfoPanel: {fileID: 671672177}
   settingsPanel: {fileID: 1717709614}
   optionsPanel: {fileID: 64866154}
-  challengeToday: {fileID: 185524015}
+  missionToday: {fileID: 185524015}
   winText: {fileID: 845225195}
   loseText: {fileID: 1801332042}
   drawText: {fileID: 759911184}
@@ -688,7 +688,7 @@ GameObject:
   - component: {fileID: 185524017}
   - component: {fileID: 185524016}
   m_Layer: 5
-  m_Name: ChallengeToday
+  m_Name: MissionToday
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -870,7 +870,7 @@ Prefab:
     - target: {fileID: 224192426819571844, guid: 2f1e1bbe29a95d7449764bea63a25151,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 100
+      value: 1100
       objectReference: {fileID: 0}
     - target: {fileID: 224192426819571844, guid: 2f1e1bbe29a95d7449764bea63a25151,
         type: 2}
@@ -925,6 +925,11 @@ Prefab:
     - target: {fileID: 1367203921268202, guid: 2f1e1bbe29a95d7449764bea63a25151, type: 2}
       propertyPath: m_Name
       value: Challenge4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114892723178226962, guid: 2f1e1bbe29a95d7449764bea63a25151,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeMission
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f1e1bbe29a95d7449764bea63a25151, type: 2}
@@ -1071,7 +1076,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Daily Challenges
+  m_Text: 'Daily Missions
+
+'
 --- !u!222 &401902149
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2340,7 +2347,7 @@ Prefab:
     - target: {fileID: 224192426819571844, guid: 2f1e1bbe29a95d7449764bea63a25151,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 100
+      value: 850
       objectReference: {fileID: 0}
     - target: {fileID: 224192426819571844, guid: 2f1e1bbe29a95d7449764bea63a25151,
         type: 2}
@@ -2395,6 +2402,11 @@ Prefab:
     - target: {fileID: 1367203921268202, guid: 2f1e1bbe29a95d7449764bea63a25151, type: 2}
       propertyPath: m_Name
       value: Challenge3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114892723178226962, guid: 2f1e1bbe29a95d7449764bea63a25151,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeMission
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f1e1bbe29a95d7449764bea63a25151, type: 2}
@@ -2812,7 +2824,7 @@ Prefab:
     - target: {fileID: 224192426819571844, guid: 2f1e1bbe29a95d7449764bea63a25151,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 100
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 224192426819571844, guid: 2f1e1bbe29a95d7449764bea63a25151,
         type: 2}
@@ -2867,6 +2879,11 @@ Prefab:
     - target: {fileID: 1367203921268202, guid: 2f1e1bbe29a95d7449764bea63a25151, type: 2}
       propertyPath: m_Name
       value: Challenge2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114892723178226962, guid: 2f1e1bbe29a95d7449764bea63a25151,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeMission
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f1e1bbe29a95d7449764bea63a25151, type: 2}
@@ -3711,7 +3728,7 @@ Prefab:
     - target: {fileID: 224192426819571844, guid: 2f1e1bbe29a95d7449764bea63a25151,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 100
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 224192426819571844, guid: 2f1e1bbe29a95d7449764bea63a25151,
         type: 2}
@@ -3767,6 +3784,11 @@ Prefab:
       propertyPath: m_Name
       value: Challenge1
       objectReference: {fileID: 0}
+    - target: {fileID: 114892723178226962, guid: 2f1e1bbe29a95d7449764bea63a25151,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeMission
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f1e1bbe29a95d7449764bea63a25151, type: 2}
   m_IsPrefabParent: 0
@@ -3781,7 +3803,7 @@ GameObject:
   - component: {fileID: 1493441396}
   - component: {fileID: 1493441395}
   m_Layer: 5
-  m_Name: DailyChallenges
+  m_Name: DailyMissions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4210,6 +4232,11 @@ Prefab:
     - target: {fileID: 1367203921268202, guid: 2f1e1bbe29a95d7449764bea63a25151, type: 2}
       propertyPath: m_Name
       value: Challenge0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114892723178226962, guid: 2f1e1bbe29a95d7449764bea63a25151,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeMission
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f1e1bbe29a95d7449764bea63a25151, type: 2}

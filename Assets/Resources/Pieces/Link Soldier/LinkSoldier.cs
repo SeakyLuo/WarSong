@@ -8,13 +8,19 @@ public class LinkSoldier : Trigger
 
     public override void Activate()
     {
-        if (link) gained = true;
+        if (link)
+        {
+            gained = true;
+            GameController.ChangeOre(-piece.GetOreCost());
+        }
     }
 
     public override void Revenge()
     {
         if (!gained) return;
-        GameInfo.Add(new Piece("Soldier", piece.GetCastle(), true));
+        MovementController.Move(piece, piece.location, piece.GetCastle());
+        MovementController.KillAt(piece.GetCastle());
+        // better to have a mark below
     }
 
 }

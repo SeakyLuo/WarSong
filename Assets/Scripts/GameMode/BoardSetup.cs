@@ -5,35 +5,35 @@ public class BoardSetup : MonoBehaviour {
 
     public BoardAttributes boardAttributes;
     public Transform boardCanvas;
-    public Dictionary<Vector2Int, GameObject> pieces = new Dictionary<Vector2Int, GameObject>();
+    public Dictionary<Vector2Int, GameObject> pieces = new Dictionary<Vector2Int, GameObject>(); // should not use castle
 
     public void Setup(Lineup lineup, bool isAlly)
     {
         foreach (KeyValuePair<Vector2Int,Collection> pair in lineup.cardLocations)
         {
             Vector2Int loc = pair.Key;
-            if (!isAlly)
-                loc = new Vector2Int(boardAttributes.boardWidth - pair.Key.x - 1, boardAttributes.boardHeight - pair.Key.y - 1);
-            GameObject pieceObj = boardCanvas.Find(InfoLoader.Vec2ToString(loc) + "/Piece").gameObject;
-            pieceObj.GetComponent<PieceInfo>().Setup(pair.Value, loc, isAlly);
-            if(pieceObj.GetComponent<PieceInfo>().trigger != null) pieceObj.GetComponent<PieceInfo>().trigger.StartOfGame();
-            pieces.Add(loc, pieceObj);
-            GameInfo.Add(pieceObj.GetComponent<PieceInfo>().piece);
+            if (!isAlly) loc = new Vector2Int(boardAttributes.boardWidth - pair.Key.x - 1, boardAttributes.boardHeight - pair.Key.y - 1);
+            AddPiece(boardCanvas.Find(InfoLoader.Vec2ToString(loc) + "/Piece").gameObject, pair.Value, loc, isAlly);
         }
-        GameInfo.castles = new Dictionary<Vector2Int, Piece>(GameInfo.board);
     }
 
-    public void Reactivate(Piece piece)
+    public void AddPiece(Collection collection, Vector2Int castle, bool isAlly)
     {
-        Vector2Int loc = piece.GetCastle();
-        pieces[loc].SetActive(true);
-        GameInfo.Add(piece, true);
+        GameObject pieceObj = Instantiate(boardCanvas.Find(InfoLoader.Vec2ToString(GameInfo.activeAllies[0].location) + "/Piece").gameObject);
+        pieceObj.transform.SetParent(boardCanvas.Find(InfoLoader.Vec2ToString(castle)));
+        pieceObj.transform.localPosition = new Vector3(0, 0, 0);
+        AddPiece(pieceObj, collection, castle, isAlly);
     }
 
-    public void Deactivate(Piece piece)
+    private void AddPiece(GameObject pieceObj, Collection collection, Vector2Int castle, bool isAlly)
     {
-        Vector2Int loc = piece.GetCastle();
-        pieces[loc].SetActive(false);
-        GameInfo.Remove(piece, loc);
+        pieceObj.GetComponent<PieceInfo>().Setup(collection, castle, isAlly);
+        pieces.Add(castle, pieceObj);
+        Piece piece = pieceObj.GetComponent<PieceInfo>().piece;
+        GameInfo.Add(piece);
+        List<Piece> piecesWithCastle;
+        if (GameInfo.castles.TryGetValue(piece.GetCastle(), out piecesWithCastle))
+            GameInfo.castles[piece.GetCastle()].Add(piece);
+        else GameInfo.castles.Add(piece.GetCastle(), new List<Piece> { piece });
     }
 }

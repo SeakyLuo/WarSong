@@ -96,8 +96,8 @@ public class Collection
         if(type == "Tactic" && collection.type == type)
         {
             return (oreCost < collection.oreCost) ||
-                    (oreCost == collection.oreCost && health < collection.health) ||
-                    (oreCost == collection.oreCost && health == collection.health && name.CompareTo(collection.name) < 0);
+                   (oreCost == collection.oreCost && health < collection.health) ||
+                   (oreCost == collection.oreCost && health == collection.health && name.CompareTo(collection.name) < 0);
         }
         else
         {

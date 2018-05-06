@@ -12,9 +12,10 @@ public class UserInfo {
     public int coins, rank, lastLineupSelected, winsToday;
     public Stats total;
     public Dictionary<string, Stats> boardResult;
-    public List<Challenge> challenges;
+    public List<Mission> missions;
     public string preferredBoard = "Standard Board";
     public string lastModeSelected = "";
+    public int gameID;
 
     public UserInfo()
     {
@@ -33,7 +34,7 @@ public class UserInfo {
         lastLineupSelected = -1;
         winsToday = 0;
         total = new Stats(0,0,0);
-        challenges = new List<Challenge>();
+        missions = new List<Mission>();
         preferredBoard = "Standard Board";
     }
 

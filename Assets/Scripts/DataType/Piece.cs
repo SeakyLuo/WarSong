@@ -4,10 +4,13 @@
 public class Piece
 {
     public static Vector2Int noLocation = new Vector2Int(-1, -1);
+    public Vector2Int location;
+    public bool active = true;
+
     private Collection collection;
-    private Vector2Int castle, location;
+    private Vector2Int castle;
     private int oreCost = 0;
-    private bool isAlly, active = true;
+    private bool isAlly;
 
     public Piece(string type, Vector2Int loc, bool IsAlly)
     {
@@ -32,22 +35,13 @@ public class Piece
     public int GetOreCost() { return oreCost; }
     public bool IsStandard() { return collection.name.StartsWith("Standard "); }
     public string GetPieceType() { return collection.type; }
-    public Vector2Int GetLocation() { return location; }
     public Vector2Int GetCastle() { return castle; }
-    public void SetLocation(Vector2Int newLocation) { location = newLocation; }
-    public void SetCastle(Vector2Int loc) { castle = loc; }
     public bool IsAlly() { return isAlly; }
-    public bool IsActive() { return active; }
-    public void SetActive(bool status)
+    public void Resurrect(Vector2Int loc)
     {
-        active = status;
-        if(active)
-        {
-            location = castle;
-        }
-        else
-        {
-            location = noLocation;
-        }
+        // may be useless
+        active = true;
+        if (loc == noLocation) location = castle;
+        else location = loc;
     }
 }

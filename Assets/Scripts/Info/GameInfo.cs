@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class GameInfo
 {
-    public static Dictionary<Vector2Int, Piece> castles = new Dictionary<Vector2Int, Piece>();
+    public static Dictionary<Vector2Int, List<Piece>> castles = new Dictionary<Vector2Int, List<Piece>>();
     public static Dictionary<Vector2Int, Piece> board = new Dictionary<Vector2Int, Piece>();
     public static Dictionary<Vector2Int, string> traps = new Dictionary<Vector2Int, string>();
     public static List<string> tactics = new List<string>();
@@ -34,7 +34,7 @@ public static class GameInfo
 
     public static void Add(Piece piece, bool reactivate = false)
     {
-        piece.SetActive(true);
+        piece.active = true;
         board.Add(piece.GetCastle(), piece);
         if (piece.IsAlly())
         {
@@ -48,10 +48,10 @@ public static class GameInfo
         }
     }
 
-    public static void Remove(Piece piece, Vector2Int loc)
+    public static void Remove(Piece piece)
     {
-        piece.SetActive(false);
-        board.Remove(loc);
+        piece.active = false;
+        board.Remove(piece.location);
         if (piece.IsAlly())
         {
             activeAllies.Remove(piece);
@@ -81,6 +81,13 @@ public static class GameInfo
             { firstPlayer, 30 },
             { secondPlayer, 30 }
         };
+    }
+
+    public static void SetGameID(int value)
+    {
+        gameID = value;
+        //firstPlayer.gameID = gameID
+        //secondPlayer.gameID = gameID
     }
 
     public static void Move(Vector2Int from, Vector2Int to)

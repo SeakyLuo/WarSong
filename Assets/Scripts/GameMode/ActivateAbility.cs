@@ -10,6 +10,7 @@ public class ActivateAbility : MonoBehaviour {
     public GameController gameController;
     public OnEnterGame onEnterGame;
     public GameObject invalidTarget;
+    public GameObject history;
 
     private static Button button;
     private static GameObject text;
@@ -47,6 +48,7 @@ public class ActivateAbility : MonoBehaviour {
                     if (targetLocs.Contains(location))
                     {
                         pieceInfo.trigger.Activate(location);
+                        AddToHistory();
                         RemoveTargets();
                         MovementController.PutDownPiece();
                         onEnterGame.NextTurn();
@@ -66,7 +68,14 @@ public class ActivateAbility : MonoBehaviour {
 
     public void ButtonDrawTargets()
     {
-        DrawTargets();
+        if (targetLocs.Count == 0)
+        {
+            pieceInfo.trigger.Activate();
+            AddToHistory();
+            MovementController.PutDownPiece();
+            onEnterGame.NextTurn();
+        }
+        else DrawTargets();
     }
 
     public static void DrawTargets()
@@ -99,7 +108,6 @@ public class ActivateAbility : MonoBehaviour {
         pieceInfo = MovementController.selected.GetComponent<PieceInfo>();
         if (pieceInfo.trigger != null && !pieceInfo.trigger.Activatable()) return;
         targetLocs = pieceInfo.ValidTarget();
-        if (targetLocs.Count == 0) return;
         button.interactable = true;
         text.SetActive(true);
     }
@@ -112,5 +120,10 @@ public class ActivateAbility : MonoBehaviour {
         text.SetActive(false);
         if (targetLocs.Count == 0) return;
         RemoveTargets();
+    }
+
+    private void AddToHistory()
+    {
+
     }
 }
