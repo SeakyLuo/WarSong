@@ -7,7 +7,8 @@ public class PieceAttributes : ScriptableObject {
     public string Name, type;
     [TextArea(2,3)]
     public string description;
-    public int oreCost, health;
+    public int oreCost;
+    public int health;
     public Sprite image;
     public Trigger trigger;
 }

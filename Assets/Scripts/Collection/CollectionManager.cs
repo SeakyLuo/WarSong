@@ -73,7 +73,6 @@ public class CollectionManager : MonoBehaviour {
             collectionDict[collection.type].Add(collection);
             SetPageLimits();
         }
-        ShowCurrentPage();
     }
 
     public bool RemoveCollection(Collection collection)
@@ -94,7 +93,6 @@ public class CollectionManager : MonoBehaviour {
             collectionDict[found.type].Remove(found);
             SetPageLimits();
         }
-        ShowCurrentPage();
         return true;
     }
 
@@ -226,27 +224,16 @@ public class CollectionManager : MonoBehaviour {
             collection = collectionOfType[previousCards + i];
             card.GetComponent<CardInfo>().SetAttributes(collection);
             card.SetActive(true);
-            if (collection.count == 1)
-            {
-                counters[i].text = "";
-                counters[i].transform.parent.gameObject.SetActive(false);
-            }
-            else if (collection.count > 99)
-            {
-                counters[i].text = "×99+";
-                counters[i].transform.parent.gameObject.SetActive(true);
-            }
-            else
-            {
-                counters[i].text = "×" + collection.count.ToString();
-                counters[i].transform.parent.gameObject.SetActive(true);
-            }
+            if (collection.count == 1) counters[i].text = "";
+            else if (collection.count > 99) counters[i].text = "×99+";
+            else counters[i].text = "×" + collection.count.ToString();
+            counters[i].transform.parent.gameObject.SetActive(collection.count != 1);
         }
     }
 
     public void PreviousPage()
     {
-        // Turn page animatioin    
+        // Turn page animation    
         string type = currentPage.Key;
         int page = currentPage.Value;
         if (currentPage.Value == 1)

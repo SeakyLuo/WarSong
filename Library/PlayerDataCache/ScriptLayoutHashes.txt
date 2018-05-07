@@ -122,10 +122,10 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 945eb6e07c514c1355472283274f08c5 Assembly-CSharp.dll:.BoardAttributes
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 8c720aade4e90ed391b89768ddbb0102 Assembly-CSharp.dll:.DropdownIcon
-c5671998206034c790640c588a5cf9c3 Assembly-CSharp.dll:.PieceInfo
+da253dbeb790758866c1b4b0b5fa9931 Assembly-CSharp.dll:.PieceInfo
 322cb40e1e282f28af980cbef7922a90 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
-9c32874129f4d2de85e1eabe3987acca Assembly-CSharp.dll:.TacticGestureHandler
+a0f831078ea16e0a56b26160fd2bb91c Assembly-CSharp.dll:.TacticGestureHandler
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
@@ -146,7 +146,8 @@ e68a747465b139f08d86c50d37c20a2e Assembly-CSharp.dll:.ShowCoins
 e502bbf0d326efd85984c72848f5a4e5 Assembly-CSharp.dll:.SwitchScenes
 a506194e7e367df4a7eff1f3049469a0 Assembly-CSharp.dll:.ContractAttributes
 ad193c88243f58abe58a272020014c66 Assembly-CSharp.dll:.BoardSetup
-50b7be87646a742da338510f33c3466f Assembly-CSharp.dll:.LineupBoardGestureHandler
+3b6c7a9e62860e384f92407c23ed8385 Assembly-CSharp.dll:.LineupBoardGestureHandler
+3fe69b809bc7d93c88484baf80116c7f Assembly-CSharp.dll:.Betrayal
 72d0a8caa9ae6051483f50072879638e Assembly-CSharp.dll:.InfoLoader
 e1ecf881babb6f6b74215af2428b367d Assembly-CSharp.dll:.OnEnterRecruitment
 258fc57e9ef1ade1cf5c8d4b6894e32d Assembly-CSharp.dll:.Mission
@@ -191,4 +192,3 @@ ad38a63ab18060056f92f1ba7729013a Assembly-CSharp.dll:.AccountCreation
 caeffdc9b344ca66ea24fc12e7eea4a2 Assembly-CSharp.dll:.OnEnterCollections
 3fe69b809bc7d93c88484baf80116c7f Assembly-CSharp.dll:.Turret
 2d6e73764bbc73c77b48ddb3bfe63dab Assembly-CSharp.dll:.MovementController
-3fe69b809bc7d93c88484baf80116c7f Assembly-CSharp.dll:.Betrayal

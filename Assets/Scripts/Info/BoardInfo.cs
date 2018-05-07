@@ -74,7 +74,6 @@ public class BoardInfo : MonoBehaviour
         cardLocations[location] = collection;
         string locName = InfoLoader.Vec2ToString(location);
         attributesDict[locName] = LoadPieceAttributes(collection.name);
-        attributesDict[locName].health = collection.health;
     }
 
     public void SetCard(PieceAttributes attributes, Vector2Int location)

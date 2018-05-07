@@ -39,14 +39,7 @@ public class CardInfo : MonoBehaviour {
         else
         {
             SetAttributes(Resources.Load<PieceAttributes>("Pieces/" + collection.name + "/Attributes"));
-            if (collection.health != 0 && health != collection.health)
-            {
-                if (health > collection.health) healthText.color = Color.red;
-                else healthText.color = Color.green;
-                health = collection.health;
-                healthText.text = collection.health.ToString();
-            }
-            else healthText.color = Color.white;
+            SetHealth(collection.health);
         }
     }
 
@@ -67,6 +60,7 @@ public class CardInfo : MonoBehaviour {
         coinImage.SetActive(false);
         if (health == 0) healthText.text = "∞";
         else healthText.text = attributes.health.ToString();
+        healthText.color = Color.white;
         image.sprite = attributes.image;
         type = attributes.type;
         typeText.text = type;
@@ -93,13 +87,13 @@ public class CardInfo : MonoBehaviour {
 
     public void SetHealth(int Health)
     {
-        if (piece == null || Health == health) return;
-        if (Health == 0) healthText.text = "∞";
-        if (health > Health) healthText.color = Color.red;
-        else if (health == Health) healthText.color = Color.white;
-        else healthText.color = Color.green;
+        if (piece == null) return;
         health = Health;
-        healthText.text = health.ToString();
+        if (health == 0) healthText.text = "∞";
+        else healthText.text = health.ToString();
+        if (piece.health > health) healthText.color = Color.red;
+        else if (piece.health == health) healthText.color = Color.white;
+        else healthText.color = Color.green;
     }
 
     public void Clear()
@@ -110,6 +104,7 @@ public class CardInfo : MonoBehaviour {
         descriptionText.text = "Description";
         costText.text = "0";
         healthText.text = "0";
+        healthText.color = Color.white;
         coinText.text = "0";
         image.sprite = null;
         cardName = type = description = "";

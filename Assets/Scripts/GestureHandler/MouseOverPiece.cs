@@ -21,7 +21,7 @@ public class MouseOverPiece : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         infoCard.SetActive(true);
         infoCard.GetComponent<CardInfo>().SetAttributes(boardInfo.cardLocations[nameLoc]);
         // could be closer
-        infoCard.transform.position = transform.localPosition;
+        infoCard.transform.position = transform.position - new Vector3(0, infoCard.GetComponent<RectTransform>().rect.y + GetComponent<RectTransform>().rect.y);
     }
 
     public void OnPointerExit(PointerEventData eventData)
