@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class GameTacticGesture : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler {
@@ -8,7 +9,8 @@ public class GameTacticGesture : MonoBehaviour, IPointerClickHandler, IPointerEn
 
     //private Vector3 newPosition;
     private GameObject tactic;
-    private Trigger trigger;
+    private Button button;
+    private TacticTrigger trigger;
     private float prevClick = 0;
     private float doubleClickInterval = 1;
 
@@ -16,12 +18,17 @@ public class GameTacticGesture : MonoBehaviour, IPointerClickHandler, IPointerEn
     {
         //newPosition = new Vector3(300, transform.localPosition.y, -6.1f);  // I don't know why the fuck is this -360
         tactic = transform.Find("Tactic").gameObject;
+        button = GetComponent<Button>();
         trigger = tactic.GetComponent<TacticInfo>().trigger;
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (Input.GetMouseButtonUp(1)) ActivateAbility.RemoveTargets();
+        if (Input.GetMouseButtonUp(1))
+        {
+            button.GetComponent<Image>().sprite = button.spriteState.disabledSprite;
+            ActivateAbility.RemoveTargets();
+        }
         else if (Input.GetMouseButtonUp(0))
         {
             if (Time.time - prevClick < doubleClickInterval)
@@ -30,6 +37,7 @@ public class GameTacticGesture : MonoBehaviour, IPointerClickHandler, IPointerEn
             }
             else
             {
+                button.GetComponent<Image>().sprite = button.spriteState.highlightedSprite;
                 List<Vector2Int> targets = trigger.ValidTarget();
                 if (targets.Count != 0) ActivateAbility.ShowTacticTarget(targets);
             }

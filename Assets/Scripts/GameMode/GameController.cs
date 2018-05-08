@@ -43,16 +43,48 @@ public class GameController : MonoBehaviour {
         GameInfo.Remove(GameInfo.board[loc]);
     }
 
-    public static void ChangeOre(int deltaAmount)
+    public static void TriggerTrap(Vector2Int loc)
     {
-        GameInfo.ores[InfoLoader.user.playerID] += deltaAmount;
-        onEnterGame.SetOreText();
+        if(GameInfo.traps.ContainsKey(loc))
+        {
+            // trigger it
+            InfoLoader.FindTrap(GameInfo.traps[loc]).trigger.Activate();
+            GameInfo.traps.Remove(loc);
+        }
     }
 
-    public static void ChangeCoin(int deltaAmount)
+    public static void PlaceTrap(Vector2Int loc, string trapName)
     {
+        GameInfo.traps.Add(loc, trapName);
+    }
+         
+    public static void PlaceFlag(Vector2Int loc, bool isAlly)
+    {
+        
+    }
+
+    public static bool ChangeOre(int deltaAmount)
+    {
+        if(GameInfo.ores[InfoLoader.user.playerID] + deltaAmount < 0)
+        {
+            onEnterGame.NotEnoughOres();
+            return false;
+        }
+        GameInfo.ores[InfoLoader.user.playerID] += deltaAmount;
+        onEnterGame.SetOreText();
+        return true;
+    }
+
+    public static bool ChangeCoin(int deltaAmount)
+    {
+        if(InfoLoader.user.coins + deltaAmount < 0)
+        {
+            onEnterGame.NotEnoughCoins();
+            return false;
+        }
         InfoLoader.user.coins += deltaAmount;
         onEnterGame.SetCoinText();
+        return true;
     }
 
     public static List<Vector2Int> FindCastles(string type) { return castles[type]; }

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
-public class OnEnterPlayMatching : MonoBehaviour
+public class OnEnterPlayerMatching : MonoBehaviour
 {
     public Text rank;
     public Button rankedMode,casualMode,launchWar;
@@ -24,6 +24,7 @@ public class OnEnterPlayMatching : MonoBehaviour
             if (i < lineupsCount)
             {
                 lineupObjects[i].GetComponentInChildren<Text>().text = InfoLoader.user.lineups[i].lineupName;
+                lineupObjects[i].transform.Find("ImagePanel/Image").GetComponent<Image>().sprite = InfoLoader.FindPieceAttributes(InfoLoader.user.lineups[i].general).image;
                 lineupObjects[i].GetComponent<Button>().interactable = InfoLoader.user.lineups[i].complete;
                 xs[i].SetActive(!InfoLoader.user.lineups[i].complete);
             }

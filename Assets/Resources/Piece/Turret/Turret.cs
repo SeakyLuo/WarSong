@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class Turret: Trigger {
 
-    private void Awake()
-    {
-        activatable = true;
-    }
-
     public override List<Vector2Int> ValidLoc(bool link = false)
     {
         if (silenced) return MovementController.ValidLoc(piece.location.x, piece.location.y, piece.GetPieceType());

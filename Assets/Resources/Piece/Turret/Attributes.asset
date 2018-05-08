@@ -11,10 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9d8e2c441c4cc4d8fd06a06d6c0997, type: 3}
   m_Name: Attributes
   m_EditorClassIdentifier: 
-  Name: Fat Soldier
-  type: Soldier
-  description: If he survives this game, coin +1.
-  oreCost: 0
-  health: 3
-  image: {fileID: 21300000, guid: 234e58738a60623458fb081aeed36a82, type: 3}
-  trigger: {fileID: 11400000, guid: f79b861e1ae2d5b47b70f656e88eebe2, type: 2}
+  Name: Turret
+  type: Cannon
+  description: Not moveable. Eliminate an attackable enemy.
+  oreCost: 5
+  health: 2
+  image: {fileID: 21300000, guid: d15998cfdbac17941bf90e6eb50d6a2b, type: 3}
+  trigger: {fileID: 11400000, guid: 81480f1914be20248b3c5099463ce8df, type: 2}

@@ -11,10 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9d8e2c441c4cc4d8fd06a06d6c0997, type: 3}
   m_Name: Attributes
   m_EditorClassIdentifier: 
-  Name: Turret
+  Name: Cripple
   type: Cannon
-  description: Not moveable. Eliminate an enemy in front of its Scope.
-  oreCost: 5
-  health: 2
-  image: {fileID: 21300000, guid: d15998cfdbac17941bf90e6eb50d6a2b, type: 3}
-  trigger: {fileID: 11400000, guid: 81480f1914be20248b3c5099463ce8df, type: 2}
+  description: 'Revenge: Set a random Landmine.'
+  oreCost: 0
+  health: 1
+  image: {fileID: 21300000, guid: fc2a7516ebada3748aa254d448d702fa, type: 3}
+  trigger: {fileID: 11400000, guid: 5668b88adde99d742bbdd20861583ad6, type: 2}

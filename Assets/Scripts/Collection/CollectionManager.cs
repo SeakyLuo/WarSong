@@ -295,7 +295,6 @@ public class CollectionManager : MonoBehaviour {
         SetCurrentPage(FirstPage());
         ShowCurrentPage();
     }
-
     public void Search(string word = "", int gold = -1, int ore = -1, int health = -1)
     {
         searchedCollections = InfoLoader.user.collection;
@@ -312,8 +311,8 @@ public class CollectionManager : MonoBehaviour {
             foreach (Collection collection in searchedCollections)
             {
                 if (collection.name.Contains(word) ||
-                    (collection.type == "Tactic" && Resources.Load<TacticAttributes>("Tactics/Info/" + collection.name + "/Attributes").description.Contains(word)) ||
-                    (collection.type != "Tactic" && Resources.Load<PieceAttributes>("Pieces/Info/" + collection.name + "/Attributes").description.Contains(word)))
+                    (collection.type == "Tactic" && InfoLoader.FindTacticAttributes(collection.name).description.Contains(word)) ||
+                    (collection.type != "Tactic" && InfoLoader.FindPieceAttributes(collection.name).description.Contains(word)))
                     newSearched.Add(collection);
             }
             searchedCollections = newSearched;
@@ -325,7 +324,7 @@ public class CollectionManager : MonoBehaviour {
             {
                 if (collection.type == "Tactic")
                 {
-                    int goldCost = Resources.Load<TacticAttributes>("Tactics/Info/" + collection.name + "/Attributes").goldCost;
+                    int goldCost = InfoLoader.FindTacticAttributes(collection.name).goldCost;
                     if ((gold == 5 && goldCost >= gold) ||
                         (gold < 5 && goldCost == gold))
                         newSearched.Add(collection);
@@ -340,8 +339,8 @@ public class CollectionManager : MonoBehaviour {
             foreach (Collection collection in searchedCollections)
             {
                 int oreCost;
-                if (collection.type == "Tactic") oreCost = Resources.Load<TacticAttributes>("Tactics/" + collection.name + "/Attributes").oreCost;
-                else oreCost = Resources.Load<PieceAttributes>("Pieces/" + collection.name + "/Attributes").oreCost;
+                if (collection.type == "Tactic") oreCost = InfoLoader.FindTacticAttributes(collection.name).oreCost;
+                else oreCost = InfoLoader.FindPieceAttributes(collection.name).oreCost;
                 if ((ore == 5 && oreCost >= ore) ||
                     (ore < 5 && oreCost == ore))
                     newSearched.Add(collection);
@@ -356,7 +355,7 @@ public class CollectionManager : MonoBehaviour {
                 if (collection.type != "Tactic")
                 {
                     // IDK whether ∞ is 5+ or not
-                    int Health = Resources.Load<PieceAttributes>("Pieces/" + collection.name + "/Attributes").health;
+                    int Health = InfoLoader.FindPieceAttributes(collection.name).health;
                     if ((health == 0 && Health == health) ||
                         (health == 5 && Health >= health) ||
                         (health < 5 && Health == health))
@@ -368,12 +367,10 @@ public class CollectionManager : MonoBehaviour {
         }
         ShowSearchedCollection();
     }
-
     public void ShowSearchPanel()
     {
         searchPanel.SetActive(!searchPanel.activeSelf);
     }
-
     public void InputFieldSearch()
     {
         searchByKeyword = searchByInput.text.Trim();
@@ -384,7 +381,6 @@ public class CollectionManager : MonoBehaviour {
         }
         else searchPanel.SetActive(false);
     }
-
     public void ClearSearch()
     {
         searchByInput.text = "";
@@ -392,19 +388,16 @@ public class CollectionManager : MonoBehaviour {
         clearSearch.SetActive(false);
         Search(searchByKeyword, searchByGoldValue, searchByOreValue, searchByHealthValue);
     }
-
     public void SetSearchByGold(int value)
     {
         searchByGoldValue = value;
         Search(searchByKeyword, searchByGoldValue, searchByOreValue, searchByHealthValue);
     }
-
     public void SetSearchByOre(int value)
     {
         searchByOreValue = value;
         Search(searchByKeyword, searchByGoldValue, searchByOreValue, searchByHealthValue);
     }
-
     public void SetSearchByHealth(int value)
     {
         searchByHealthValue = value;

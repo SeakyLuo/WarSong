@@ -6,7 +6,7 @@ public class TacticInfo : MonoBehaviour {
     [HideInInspector] public TacticAttributes tactic;
     public Text Name, oreCost, goldCost;
     public Image image;
-    [HideInInspector] public Trigger trigger;
+    [HideInInspector] public TacticTrigger trigger;
     [HideInInspector] public bool active = true;
 
     public void SetAttributes(TacticAttributes attributes)

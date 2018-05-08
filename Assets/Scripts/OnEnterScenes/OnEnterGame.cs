@@ -10,7 +10,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 {
     public static bool gameover = false;
 
-    public GameObject victoryImage, defeatImage, drawImage, settingsPanel, yourTurnImage;
+    public GameObject victoryImage, defeatImage, drawImage, settingsPanel, yourTurnImage, notEnoughCoinsImage, notEnoughOresImage;
     public GameObject pathDot, targetDot, oldLocation;
     public Transform tacticBag;
     public Text roundCount, timer, modeName;
@@ -47,11 +47,13 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         for (int i = 0; i < LineupBuilder.tacticsLimit; i++)
         {
             tacticObjs.Add(tacticBag.Find(String.Format("TacticSlot{0}/Tactic", i)));
-            tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(FindTacticAttributes(lineup.tactics[i]));
+            Debug.Log(tacticBag.Find(String.Format("TacticSlot{0}/Tactic", i)) == null);
+            tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(InfoLoader.FindTacticAttributes(lineup.tactics[i]));
         }
         modeName.text = InfoLoader.user.lastModeSelected;
         GameInfo.SetOrder(InfoLoader.user.playerID, 100000000);
         GameInfo.SetGameID(1);
+        GameInfo.unusedTactics = new List<string>(lineup.tactics);
         foreach (KeyValuePair<Vector2Int, GameObject> pair in boardSetup.pieces)
         {
             Trigger trigger = pair.Value.GetComponent<PieceInfo>().trigger;
@@ -71,10 +73,6 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    private TacticAttributes FindTacticAttributes(string tacticName)
-    {
-        return Resources.Load<TacticAttributes>("Tactics/"+tacticName+"/Attributes");
-    }
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -134,7 +132,29 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             if (trigger != null) trigger.EndOfGame();
         }
         // CalculateNewRank(); // should be done by server
-        // remove collections
+        foreach (KeyValuePair<Vector2Int, Collection> pair in lineup.cardLocations)
+        {
+            if (GameInfo.IsAllyAlive(pair.Value)) continue;
+            if (pair.Value.health > 0 && --pair.Value.health == 0)
+            {
+                int index = InfoLoader.user.FindCollection(pair.Value);
+                InfoLoader.user.collection.RemoveAt(index);
+                int next = InfoLoader.user.FindCollectionWithName(pair.Value.name);
+                if (next != -1) lineup.cardLocations[pair.Key] = InfoLoader.user.collection[next];
+                else lineup.cardLocations[pair.Key] = Collection.StandardCollection(pair.Value.type);
+            }
+        }
+        foreach(string tactic in lineup.tactics)
+        {
+            if (GameInfo.unusedTactics.Contains(tactic)) continue;
+            int index = InfoLoader.user.FindCollectionWithName(tactic);
+            if (index != -1)
+            {
+                if (--InfoLoader.user.collection[index].count == 0)
+                    InfoLoader.user.collection.RemoveAt(index);
+            }
+            else lineup.complete = false;
+        }
     }
 
     public void Concede()
@@ -161,12 +181,32 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             if (trigger != null) trigger.StartOfTurn();
         }
     }
-
-    private IEnumerator ShowYourTurn()
+    private IEnumerator ShowYourTurn(float time = 1.5f)
     {
         yourTurnImage.SetActive(true);
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(time);
         yourTurnImage.SetActive(false);
+    }
+
+    public void NotEnoughCoins()
+    {
+        StartCoroutine(ShowNotEnoughCoins());
+    }
+    private IEnumerator ShowNotEnoughCoins(float time = 1.5f)
+    {
+        notEnoughCoinsImage.SetActive(true);
+        yield return new WaitForSeconds(time);
+        notEnoughCoinsImage.SetActive(false);
+    }
+    public void NotEnoughOres()
+    {
+        StartCoroutine(ShowNotEnoughOres());
+    }
+    private IEnumerator ShowNotEnoughOres(float time = 1.5f)
+    {
+        notEnoughOresImage.SetActive(true);
+        yield return new WaitForSeconds(time);
+        notEnoughOresImage.SetActive(false);
     }
 
     public void NextTurn()

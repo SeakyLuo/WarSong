@@ -10,6 +10,7 @@ public class MovementController : MonoBehaviour
     public static BoardAttributes boardAttributes;
     public static List<Vector2Int> validLoc = new List<Vector2Int>();
     public static Collider selected;
+    public static PieceInfo pieceInfo;
     public static float scale;
     public static Transform boardCanvas;
     public static float speed = 1f;
@@ -53,7 +54,7 @@ public class MovementController : MonoBehaviour
                     if (selected != null) PutDownPiece(); // switch piece
                     hit.collider.transform.position += raiseVector;
                     selected = hit.collider;
-                    PieceInfo pieceInfo = selected.GetComponent<PieceInfo>();
+                    pieceInfo = selected.GetComponent<PieceInfo>();
                     pieceInfo.HideInfoCard();
                     ActivateAbility.ActivateButton();
                     validLoc = pieceInfo.ValidLoc();
@@ -89,11 +90,12 @@ public class MovementController : MonoBehaviour
     public static void KillAt(Vector2Int loc)
     {
         Piece enemy;
-        if (GameInfo.board.TryGetValue(loc, out enemy) && !enemy.IsAlly())
+        if (GameInfo.board.TryGetValue(loc, out enemy) && !enemy.isAlly)
         {
-            if(enemy.GetPieceType() == "General")
-                onEnterGame.Victory();
+            pieceInfo.trigger.Bloodthirsty();
             GameController.Eliminate(enemy);
+            if (enemy.GetPieceType() == "General")
+                onEnterGame.Victory();
         }
     }
 
@@ -106,7 +108,7 @@ public class MovementController : MonoBehaviour
         selected.transform.position -= raiseVector;
         if (!oldLocation.activeSelf && previousSprite != null) oldLocation.SetActive(true);
         ActivateAbility.DeactivateButton();
-        selected.GetComponent<PieceInfo>().selected = true;
+        pieceInfo.selected = true;
         selected = null;
     }
 
@@ -138,9 +140,12 @@ public class MovementController : MonoBehaviour
         // SetLocationData
         GameInfo.Move(from, to);
         target.GetComponent<PieceInfo>().piece.location = to;
-        
         target.transform.parent = boardCanvas.Find(InfoLoader.Vec2ToString(to));
         target.transform.localPosition = Vector3.Lerp(target.transform.localPosition, new Vector3(0, 0, target.transform.position.z), speed);
+        GameObject fromObject = boardSetup.pieces[from];
+        boardSetup.pieces.Remove(from);
+        boardSetup.pieces.Add(to, fromObject);
+        pieceInfo.trigger.AfterMove();
     }
 
     public static void Move(Piece piece, Vector2Int from, Vector2Int to)
@@ -181,9 +186,9 @@ public class MovementController : MonoBehaviour
         List<Vector2Int> validLoc = new List<Vector2Int>();
         for (int i = -1; i <= 1; i += 2)
         {
-            if (boardAttributes.InPalace(x, y + i) && FindAt(x, y + i) != 'A')
+            if (boardAttributes.InPalace(x, y + i) && Placeable(x, y + i))
                 validLoc.Add(new Vector2Int(x, y + i));
-            if (boardAttributes.InPalace(x + i, y) && FindAt(x + i, y) != 'A')
+            if (boardAttributes.InPalace(x + i, y) && Placeable(x + i, y))
                 validLoc.Add(new Vector2Int(x + i, y));
         }
         return validLoc;
@@ -194,7 +199,7 @@ public class MovementController : MonoBehaviour
         for (int i = -1; i <= 1; i += 2)
         {
             for (int j = -1; j <= 1; j += 2)
-                if (boardAttributes.InPalace(x + i, y + j) && (FindAt(x + i, y + j) != 'A' ^ link))
+                if (boardAttributes.InPalace(x + i, y + j) && (Placeable(x + i, y + j) ^ link))
                     validLoc.Add(new Vector2Int(x + i, y + j));
         }
         return validLoc;
@@ -205,7 +210,7 @@ public class MovementController : MonoBehaviour
         for (int i = -1; i <= 1; i += 2)
         {
             for (int j = -1; j <= 1; j += 2)
-                if (boardAttributes.InAllyField(x + i * 2, y + j * 2) && FindAt(x + i, y + j) == 'B' && (FindAt(x + i * 2, y + j * 2) != 'A' ^ link))
+                if (boardAttributes.InAllyField(x + i * 2, y + j * 2) && Ignorable(x + i, y + j) && (Placeable(x + i * 2, y + j * 2) ^ link))
                     validLoc.Add(new Vector2Int(x + i * 2, y + j * 2));
         }
         return validLoc;
@@ -215,13 +220,13 @@ public class MovementController : MonoBehaviour
         List<Vector2Int> validLoc = new List<Vector2Int>();
         for (int i = -1; i <= 1; i += 2)
         {
-            if (boardAttributes.InBoard(x, y + i) && FindAt(x, y + i) == 'B')
+            if (boardAttributes.InBoard(x, y + i) && Ignorable(x, y + i))
                 for (int j = -1; j <= 1; j += 2)
-                    if (boardAttributes.InBoard(x + j, y + i * 2) && (FindAt(x + j, y + i * 2) != 'A') ^ link)
+                    if (boardAttributes.InBoard(x + j, y + i * 2) && (Placeable(x + j, y + i * 2) ^ link))
                         validLoc.Add(new Vector2Int(x + j, y + i * 2));
-            if (boardAttributes.InBoard(x + i, y) && FindAt(x + i, y) == 'B')
+            if (boardAttributes.InBoard(x + i, y) && Ignorable(x + i, y))
                 for (int j = -1; j <= 1; j += 2)
-                    if (boardAttributes.InBoard(x + i * 2, y + j) && (FindAt(x + i * 2, y + j) != 'A') ^ link)
+                    if (boardAttributes.InBoard(x + i * 2, y + j) && (Placeable(x + i * 2, y + j) ^ link))
                         validLoc.Add(new Vector2Int(x + i * 2, y + j));
         }
         return validLoc;
@@ -242,6 +247,11 @@ public class MovementController : MonoBehaviour
                 case 'E':
                     if (!link) validLoc.Add(new Vector2Int(x, j));
                     break;
+                case 'F':
+                    continue;
+                case 'T':
+                    if (!link) validLoc.Add(new Vector2Int(x, j));
+                    continue;
             }
             break;
         }
@@ -258,6 +268,11 @@ public class MovementController : MonoBehaviour
                 case 'E':
                     if (!link) validLoc.Add(new Vector2Int(x, j));
                     break;
+                case 'F':
+                    continue;
+                case 'T':
+                    if (!link) validLoc.Add(new Vector2Int(x, j));
+                    continue;
             }
             break;
         }
@@ -274,6 +289,11 @@ public class MovementController : MonoBehaviour
                 case 'E':
                     if (!link) validLoc.Add(new Vector2Int(i, y));
                     break;
+                case 'F':
+                    continue;
+                case 'T':
+                    if (!link) validLoc.Add(new Vector2Int(i, y));
+                    continue;
             }
             break;
         }
@@ -290,6 +310,11 @@ public class MovementController : MonoBehaviour
                 case 'E':
                     if (!link) validLoc.Add(new Vector2Int(i, y));
                     break;
+                case 'F':
+                    continue;
+                case 'T':
+                    if (!link) validLoc.Add(new Vector2Int(i, y));
+                    continue;
             }
             break;
         }
@@ -300,18 +325,25 @@ public class MovementController : MonoBehaviour
         List<Vector2Int> validLoc = new List<Vector2Int>();
         for (int j = y + 1; j < boardAttributes.boardHeight; j++)
         {
-            if (FindAt(x, j) == 'B') validLoc.Add(new Vector2Int(x, j));
+            if (Ignorable(x, j)) validLoc.Add(new Vector2Int(x, j));
             else
             {
                 for (int jj = j + 1; jj < boardAttributes.boardHeight; jj++)
                 {
                     switch (FindAt(x, jj))
                     {
+                        case 'A':
+                            break;
                         case 'B':
                             continue;
                         case 'E':
                             validLoc.Add(new Vector2Int(x, jj));
                             break;
+                        case 'F':
+                            continue;
+                        case 'T':
+                            continue;
+
                     }
                     break;
                 }
@@ -320,18 +352,24 @@ public class MovementController : MonoBehaviour
         }
         for (int j = y - 1; j >= 0; j--)
         {
-            if (FindAt(x, j) == 'B') validLoc.Add(new Vector2Int(x, j));
+            if (Ignorable(x, j)) validLoc.Add(new Vector2Int(x, j));
             else
             {
                 for (int jj = j - 1; jj >= 0; jj--)
                 {
                     switch (FindAt(x, jj))
                     {
+                        case 'A':
+                            break;
                         case 'B':
                             continue;
                         case 'E':
                             validLoc.Add(new Vector2Int(x, jj));
                             break;
+                        case 'F':
+                            continue;
+                        case 'T':
+                            continue;
                     }
                     break;
                 }
@@ -340,18 +378,24 @@ public class MovementController : MonoBehaviour
         }
         for (int i = x - 1; i >= 0; i--)
         {
-            if (FindAt(i, y) == 'B') validLoc.Add(new Vector2Int(i, y));
+            if (Ignorable(i, y)) validLoc.Add(new Vector2Int(i, y));
             else
             {
                 for (int ii = i - 1; ii >= 0; ii--)
                 {
                     switch (FindAt(ii, y))
                     {
+                        case 'A':
+                            break;
                         case 'B':
                             continue;
                         case 'E':
                             validLoc.Add(new Vector2Int(ii, y));
                             break;
+                        case 'F':
+                            continue;
+                        case 'T':
+                            continue;
                     }
                     break;
                 }
@@ -360,18 +404,24 @@ public class MovementController : MonoBehaviour
         }
         for (int i = x + 1; i < boardAttributes.boardWidth; i++)
         {
-            if (FindAt(i, y) == 'B') validLoc.Add(new Vector2Int(i, y));
+            if (Ignorable(i, y)) validLoc.Add(new Vector2Int(i, y));
             else
             {
                 for (int ii = i + 1; ii < boardAttributes.boardWidth; ii++)
                 {
                     switch (FindAt(ii, y))
                     {
+                        case 'A':
+                            break;
                         case 'B':
                             continue;
                         case 'E':
                             validLoc.Add(new Vector2Int(ii, y));
                             break;
+                        case 'F':
+                            continue;
+                        case 'T':
+                            continue;
                     }
                     break;
                 }
@@ -385,7 +435,7 @@ public class MovementController : MonoBehaviour
         List<Vector2Int> validLoc = new List<Vector2Int>();
         for (int j = y + 1; j < boardAttributes.boardHeight; j++)
         {
-            if (FindAt(x, j) != 'B')
+            if (!Ignorable(x, j))
             {
                 validLoc.Add(new Vector2Int(x, j));
                 break;
@@ -393,21 +443,21 @@ public class MovementController : MonoBehaviour
         }
         for (int j = y - 1; j >= 0; j--)
         {
-            if (FindAt(x, j) == 'B'){
+            if (!Ignorable(x, j)){
                 validLoc.Add(new Vector2Int(x, j));
                 break;
             }
         }
         for (int i = x - 1; i >= 0; i--)
         {
-            if (FindAt(i, y) == 'B'){
+            if (!Ignorable(i, y)){
                 validLoc.Add(new Vector2Int(i, y));
                 break;
             }
         }
         for (int i = x + 1; i < boardAttributes.boardWidth; i++)
         {
-            if (FindAt(i, y) == 'B')
+            if (!Ignorable(i, y))
             {
                 validLoc.Add(new Vector2Int(i, y));
                 break;
@@ -420,7 +470,7 @@ public class MovementController : MonoBehaviour
         List<Vector2Int> validLoc = new List<Vector2Int>();
         for (int j = y + 1; j < boardAttributes.boardHeight; j++)
         {
-            if (FindAt(x, j) != 'B')
+            if (!Ignorable(x, j))
             {
                 for (int jj = j + 1; jj < boardAttributes.boardHeight; jj++)
                 {
@@ -434,6 +484,10 @@ public class MovementController : MonoBehaviour
                         case 'E':
                             if (!link) validLoc.Add(new Vector2Int(x, jj));
                             break;
+                        case 'F':
+                            continue;
+                        case 'T':
+                            continue;
                     }
                     break;
                 }
@@ -442,7 +496,7 @@ public class MovementController : MonoBehaviour
         }
         for (int j = y - 1; j >= 0; j--)
         {
-            if (FindAt(x, j) != 'B')
+            if (!Ignorable(x, j))
             {
                 for (int jj = j - 1; jj >= 0; jj--)
                 {
@@ -456,6 +510,10 @@ public class MovementController : MonoBehaviour
                         case 'E':
                             if (!link) validLoc.Add(new Vector2Int(x, jj));
                             break;
+                        case 'F':
+                            continue;
+                        case 'T':
+                            continue;
                     }
                     break;
                 }
@@ -464,7 +522,7 @@ public class MovementController : MonoBehaviour
         }
         for (int i = x - 1; i >= 0; i--)
         {
-            if (FindAt(i, y) != 'B')
+            if (!Ignorable(i, y))
             {
                 for (int ii = i - 1; ii >= 0; ii--)
                 {
@@ -478,6 +536,10 @@ public class MovementController : MonoBehaviour
                         case 'E':
                             if (!link) validLoc.Add(new Vector2Int(ii, y));
                             break;
+                        case 'F':
+                            continue;
+                        case 'T':
+                            continue;
                     }
                     break;
                 }
@@ -486,7 +548,7 @@ public class MovementController : MonoBehaviour
         }
         for (int i = x + 1; i < boardAttributes.boardWidth; i++)
         {
-            if (FindAt(i, y) != 'B')
+            if (!Ignorable(i, y))
             {
                 for (int ii = i + 1; ii < boardAttributes.boardWidth; ii++)
                 {
@@ -500,6 +562,10 @@ public class MovementController : MonoBehaviour
                         case 'E':
                             if (!link) validLoc.Add(new Vector2Int(ii, y));
                             break;
+                        case 'F':
+                            continue;
+                        case 'T':
+                            continue;
                     }
                     break;
                 }
@@ -533,13 +599,26 @@ public class MovementController : MonoBehaviour
     public static char FindAt(int x, int y) { return FindAt(new Vector2Int(x, y)); }
     private static char FindAt(Vector2Int loc)
     {
-        Piece piece;
-        if(GameInfo.board.TryGetValue(loc, out piece))
+        if (GameInfo.board.ContainsKey(loc))
         {
-            if (piece.IsAlly()) return 'A';
-            else return 'E';
+            if (GameInfo.board[loc].isAlly) return 'A'; // Ally
+            else return 'E'; // Enemy
+        }
+        else if (GameInfo.flags.ContainsKey(loc))
+        {
+            if (GameInfo.flags[loc] == InfoLoader.user.playerID) return 'T';   // True
+            else return 'F'; // False
         }
         return 'B';
     }
-
+    private static bool Placeable(int x, int y)
+    {
+        char result = FindAt(x, y);
+        return result != 'A' || result == 'F';
+    }
+    private static bool Ignorable(int x, int y)
+    {
+        char result = FindAt(x, y);
+        return result == 'B' || result == 'F' || result == 'T';
+    }
 }
