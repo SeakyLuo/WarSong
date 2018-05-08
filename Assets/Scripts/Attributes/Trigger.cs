@@ -41,7 +41,7 @@ public class Trigger: ScriptableObject {
     public bool Link() { link = MovementController.IsLink(piece, ValidLoc(true)); return link; }
     public bool Activatable()
     {
-        return (activatable || limitedUse == 0 || Link()); // fuck silence
+        return limitedUse != 0 && (activatable || Link()); // fuck silence
     }
 
 }

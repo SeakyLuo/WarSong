@@ -11,8 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b4cba165dd28c74c93c099e6b8666ec, type: 3}
   m_Name: Trigger
   m_EditorClassIdentifier: 
-  afterTurn: 0
-  link: 0
   activatable: 0
-  limited: 0
+  limitedUse: 1
   silenced: 0
+  piece:
+    location: {x: 0, y: 0}
+    active: 0
+    isAlly: 0

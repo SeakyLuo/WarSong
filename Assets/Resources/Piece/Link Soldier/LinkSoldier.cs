@@ -9,7 +9,10 @@ public class LinkSoldier : Trigger
     public override void Activate()
     {
         if (link && GameController.ChangeOre(-piece.GetOreCost()))
+        {
             gained = true;
+            limitedUse = 0;
+        }
     }
 
     public override void Revenge()
