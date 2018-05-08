@@ -6,17 +6,20 @@ using UnityEngine.UI;
 public class ActivateAbility : MonoBehaviour {
 
     public static bool activated = false;
+    public static int tacticCaller = -1;
 
     public GameController gameController;
     public OnEnterGame onEnterGame;
     public GameObject invalidTarget;
     public GameObject history;
+    public GameObject tacticBag;
 
     private static Button button;
     private static GameObject text;
     private static GameObject targetDot;
     private static Transform board;
     private static PieceInfo pieceInfo;
+    private static TacticTrigger tacticTrigger;
     
     private static List<Vector2Int> targetLocs = new List<Vector2Int>();
     private static List<GameObject> targetDots = new List<GameObject>();
@@ -47,10 +50,19 @@ public class ActivateAbility : MonoBehaviour {
                     else location = InfoLoader.StringToVec2(hitObj.name);
                     if (targetLocs.Contains(location))
                     {
-                        pieceInfo.trigger.Activate(location);
+                        if (tacticCaller != -1)
+                        {
+                            tacticTrigger.Activate();
+                            tacticBag.transform.Find("TacticSlot" + tacticCaller).gameObject.SetActive(false);
+                            tacticCaller = -1;
+                        }
+                        else
+                        {
+                            pieceInfo.trigger.Activate(location);
+                            MovementController.PutDownPiece();
+                        }
                         AddToHistory();
                         RemoveTargets();
-                        MovementController.PutDownPiece();
                         onEnterGame.NextTurn();
                     }
                 }
@@ -97,9 +109,11 @@ public class ActivateAbility : MonoBehaviour {
         targetDots.Clear();
     }
 
-    public static void ShowTacticTarget(List<Vector2Int> validTargets)
+    public static void ShowTacticTarget(List<Vector2Int> validTargets, int caller, TacticTrigger trigger)
     {
         targetLocs = validTargets;
+        tacticCaller = caller;
+        tacticTrigger = trigger;
         DrawTargets();
     }
 

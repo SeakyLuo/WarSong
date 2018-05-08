@@ -5,9 +5,8 @@ using UnityEngine;
 public class GameController : MonoBehaviour {
 
     public static OnEnterGame onEnterGame;
-
-    private static BoardSetup boardSetup;
-    private static Dictionary<string, List<Vector2Int>> castles;
+    public static BoardSetup boardSetup;
+    public static Dictionary<string, List<Vector2Int>> castles;
 
     // Use this for initialization
     void Start () {

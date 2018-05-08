@@ -47,7 +47,6 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         for (int i = 0; i < LineupBuilder.tacticsLimit; i++)
         {
             tacticObjs.Add(tacticBag.Find(String.Format("TacticSlot{0}/Tactic", i)));
-            Debug.Log(tacticBag.Find(String.Format("TacticSlot{0}/Tactic", i)) == null);
             tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(InfoLoader.FindTacticAttributes(lineup.tactics[i]));
         }
         modeName.text = InfoLoader.user.lastModeSelected;
@@ -231,7 +230,6 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     {
         oreText.text = GameInfo.ores[InfoLoader.user.playerID].ToString();
     }
-
     public void SetCoinText()
     {
         coinText.text = InfoLoader.user.coins.ToString();

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class SoldierRecruitment : TacticTrigger {
@@ -7,6 +6,7 @@ public class SoldierRecruitment : TacticTrigger {
     public override void Activate(Vector2Int loc)
     {
         GameInfo.Add(new Piece("Soldier", loc, true));
+        GameController.ChangeOre(-oreCost);
     }
 
     public override List<Vector2Int> ValidTarget()
