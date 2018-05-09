@@ -15,7 +15,7 @@ public class GameInfo
                            activeEnemies = new List<Piece>(),
                            inactiveEnemies = new List<Piece>();
 
-    public static bool actionTaken = false;
+    public static int actionRemaining = 1;
     public static int firstPlayer; //player ID
     public static int secondPlayer;
     public static Dictionary<int, int> ores;

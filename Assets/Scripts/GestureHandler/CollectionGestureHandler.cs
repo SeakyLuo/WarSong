@@ -53,9 +53,9 @@ public class CollectionGestureHandler : MonoBehaviour, IPointerClickHandler, IBe
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (!createLineupPanel.activeSelf) return;
+        if (!createLineupPanel.activeSelf || SetCursor.cursorSwitched) return;
         GameObject selectedObject = eventData.pointerCurrentRaycast.gameObject;
-        if (selectedObject.name != CARDSLOTPANEL) return;
+        if (selectedObject.name != CARDSLOTPANEL || !selectedObject.transform.parent.Find("Card").gameObject.activeSelf) return;
         CardInfo cardInfo = selectedObject.transform.parent.Find("Card").GetComponent<CardInfo>();
         if (cardInfo.GetCardType() == "Tactic") lineupBuilder.AddTactic(cardInfo);      
         else

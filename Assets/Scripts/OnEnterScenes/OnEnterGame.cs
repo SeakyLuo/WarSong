@@ -173,7 +173,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     public void YourTurn()
     {
         //StartCoroutine(ShowYourTurn());
-        GameInfo.actionTaken = false;
+        GameInfo.actionRemaining = 1;
         foreach (KeyValuePair<Vector2Int, GameObject> pair in boardSetup.pieces)
         {
             Trigger trigger = pair.Value.GetComponent<PieceInfo>().trigger;
@@ -222,7 +222,6 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             return;
         }
         GameInfo.time = GameInfo.maxTime;
-        GameInfo.actionTaken = true;
         YourTurn();
     }
 

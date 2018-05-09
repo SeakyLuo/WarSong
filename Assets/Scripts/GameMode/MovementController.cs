@@ -40,7 +40,7 @@ public class MovementController : MonoBehaviour
 
     private void Update()
     {
-        if (OnEnterGame.gameover || GameInfo.actionTaken || ActivateAbility.activated) return;
+        if (OnEnterGame.gameover || GameInfo.actionRemaining == 0 || ActivateAbility.activated) return;
         if (Input.GetMouseButtonUp(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -132,7 +132,7 @@ public class MovementController : MonoBehaviour
         previousImage.sprite = newLocation;
 
         PutDownPiece();
-        onEnterGame.NextTurn();
+        if(--GameInfo.actionRemaining == 0) onEnterGame.NextTurn();
     }
 
     private static void Move(GameObject target, Vector2Int from, Vector2Int to)

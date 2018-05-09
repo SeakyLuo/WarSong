@@ -34,6 +34,7 @@ public class TacticInfo : MonoBehaviour {
     public void SetGoldCost(int value)
     {
         goldCost = value;
+        if (trigger != null) trigger.goldCost = goldCost;
         goldCostText.text = goldCost.ToString();
     }
     public void ChangeGoldCost(int deltaAmount)

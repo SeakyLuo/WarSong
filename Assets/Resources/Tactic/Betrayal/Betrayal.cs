@@ -12,7 +12,8 @@ public class Betrayal: TacticTrigger
         enemy.isAlly = true;
         GameInfo.activeAllies.Add(enemy);
         // Join your ally
-        InfoLoader.user.AddCollection(new Collection(enemy.GetName(), enemy.GetPieceType(), 1, enemy.GetHealth()));
+        if(!enemy.IsStandard())
+            InfoLoader.user.AddCollection(new Collection(enemy.GetName(), enemy.GetPieceType(), 1, enemy.GetHealth()));
     }
 
     public override List<Vector2Int> ValidTarget()

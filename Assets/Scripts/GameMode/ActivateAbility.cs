@@ -20,7 +20,7 @@ public class ActivateAbility : MonoBehaviour {
     private static Transform board;
     private static PieceInfo pieceInfo;
     private static TacticTrigger tacticTrigger;
-    
+
     private static List<Vector2Int> targetLocs = new List<Vector2Int>();
     private static List<GameObject> targetDots = new List<GameObject>();
 
@@ -34,7 +34,7 @@ public class ActivateAbility : MonoBehaviour {
 
     private void Update()
     {
-        if (OnEnterGame.gameover || GameInfo.actionTaken || !activated) return;
+        if (OnEnterGame.gameover || GameInfo.actionRemaining == 0 || !activated) return;
         if (Input.GetMouseButtonUp(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -52,18 +52,20 @@ public class ActivateAbility : MonoBehaviour {
                     {
                         if (tacticCaller != -1)
                         {
+                            if (!GameController.ChangeOre(-tacticTrigger.oreCost) || !GameController.ChangeOre(-tacticTrigger.goldCost)) return;
                             tacticTrigger.Activate();
                             tacticBag.transform.Find("TacticSlot" + tacticCaller).gameObject.SetActive(false);
                             tacticCaller = -1;
                         }
                         else
                         {
+                            if (!GameController.ChangeOre(-pieceInfo.trigger.piece.GetOreCost())) return;
                             pieceInfo.trigger.Activate(location);
                             MovementController.PutDownPiece();
                         }
                         AddToHistory();
                         RemoveTargets();
-                        onEnterGame.NextTurn();
+                        if (--GameInfo.actionRemaining == 0) onEnterGame.NextTurn();
                     }
                 }
             }
@@ -82,10 +84,11 @@ public class ActivateAbility : MonoBehaviour {
     {
         if (targetLocs.Count == 0)
         {
+            if (!GameController.ChangeOre(-pieceInfo.trigger.piece.GetOreCost())) return;
             pieceInfo.trigger.Activate();
             AddToHistory();
             MovementController.PutDownPiece();
-            onEnterGame.NextTurn();
+            if (--GameInfo.actionRemaining == 0) onEnterGame.NextTurn();
         }
         else DrawTargets();
     }

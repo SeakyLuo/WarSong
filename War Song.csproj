@@ -306,6 +306,7 @@
     <Compile Include="Assets\Scripts\Collection\DropdownIcon.cs" />
     <Compile Include="Assets\Scripts\Collection\LineupBuilder.cs" />
     <Compile Include="Assets\Scripts\Collection\LineupsManager.cs" />
+    <Compile Include="Assets\Scripts\Collection\SetCursor.cs" />
     <Compile Include="Assets\Scripts\DataType\Collection.cs" />
     <Compile Include="Assets\Scripts\DataType\Database.cs" />
     <Compile Include="Assets\Scripts\DataType\Lineup.cs" />
@@ -331,6 +332,9 @@
     <Compile Include="Assets\Scripts\Info\PlayerContract.cs" />
     <Compile Include="Assets\Scripts\Info\TacticInfo.cs" />
     <Compile Include="Assets\Scripts\Info\UserInfo.cs" />
+    <Compile Include="Assets\Scripts\LAN\Client.cs" />
+    <Compile Include="Assets\Scripts\LAN\GameManager.cs" />
+    <Compile Include="Assets\Scripts\LAN\Server.cs" />
     <Compile Include="Assets\Scripts\Login\AccountCreation.cs" />
     <Compile Include="Assets\Scripts\Login\ForgotPassword.cs" />
     <Compile Include="Assets\Scripts\Login\Login.cs" />

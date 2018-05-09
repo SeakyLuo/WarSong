@@ -8189,7 +8189,7 @@ MonoBehaviour:
   optionsPanel: {fileID: 1872573671}
   logoutPanel: {fileID: 333148601}
   creditsPanel: {fileID: 0}
-  guidebookPanel: {fileID: 1559428347}
+  guidebookPanel: {fileID: 1466534024}
   parentCanvas: {fileID: 1787884660}
 --- !u!224 &1434275546
 RectTransform:

@@ -19,6 +19,5 @@ public class Turret: Trigger {
     public override void Activate(Vector2Int loc)
     {
         GameController.Eliminate(loc);
-        GameController.ChangeOre(-piece.GetOreCost());
     }
 }
