@@ -5,11 +5,12 @@ using UnityEngine.EventSystems;
 
 public class TacticGestureHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    public static string TACTICSLOTPANEL = "TacticSlotPanel";
+    public static bool dragBegins = false;
+
     public GameObject infoCard;
     public LineupBuilder lineupBuilder;
     public CollectionManager collectionManager;
-    public static string TACTICSLOTPANEL = "TacticSlotPanel";
-    public static bool dragBegins = false;
 
     private GameObject selectedObject, showCardInfo, tactic;
 

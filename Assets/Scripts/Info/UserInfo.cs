@@ -96,7 +96,7 @@ public class CheatAccount:UserInfo
         playerID = 12345789;
         Collection[] cheat = {  new Collection("Space Witch", "General"), new Collection("Fat Soldier", "Soldier",4),new Collection("Cripple","Cannon",3),
             new Collection("Soldier Recruitment",5), new Collection("Advisor Recruitment"), new Collection("Greeeeeat Elephant","Elephant",3),
-            new Collection("Tame An Elephant"),new Collection("Purchase A Horse"), new Collection("King's Guardian","Advisor", 3),new Collection("Secret Path", 8),
+            new Collection("Tame An Elephant"),new Collection("Purchase A Horse"), new Collection("King's Guardian","Advisor", 3),new Collection("Protect the King", 8),
             new Collection("Monster Hunter","Chariot",4),new Collection("Treasure Horse","Horse",100), new Collection("Space Witch", "General", 2, 20),
             new Collection("Greeeeeat Elephant", "Elephant", 3, 5), new Collection("Zhuge Liang", "General"), new Collection("A Secret Plan", 3),new Collection("Place A Flag",20),
             new Collection("No Way", 100), new Collection("Qin Shihuang", "General"), new Collection("Xiao He", "General"),new Collection("Turret","Cannon"),
@@ -142,7 +142,7 @@ public class CheatAccount:UserInfo
                 new List<string>()
                 {
                     "Minesweeper","Winner Trophy","Buy 1 Get 1 Free","A Secret Plan","Disarm",
-                    "Place A Flag","Soldier Recruitment","No Way", "Secret Path","Betrayal"
+                    "Place A Flag","Soldier Recruitment","No Way", "Protect the King","Betrayal"
                 },
                 "Standard Board",
                 "CheatLineup2",

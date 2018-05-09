@@ -10,9 +10,9 @@ public class SetCursor : MonoBehaviour
     public GameObject selectBoardPanel, createLineupPanel;
     public BoardManager boardManager;
     public RectTransform board;
-	public Texture2D leftCursor, rightCursor;
+	public Texture2D leftCursor, rightCursor, dragCursor;
 
-	private float lRight, rLeft, rRight;
+    private float lRight, rLeft, rRight;
     private float lowerBound, upperBound, newLowerBound;
 
 	private void Start(){
@@ -55,6 +55,11 @@ public class SetCursor : MonoBehaviour
                 collectionManager.NextPage ();
 			}
 		}
+        else if (createLineupPanel.activeSelf && (TacticGestureHandler.dragBegins || CollectionGestureHandler.dragBegins || LineupBoardGestureHandler.dragBegins))
+        {
+            cursorSwitched = true;
+            Cursor.SetCursor(dragCursor, Vector2.zero, CursorMode.Auto);
+        }
         else
         {
             cursorSwitched = false;

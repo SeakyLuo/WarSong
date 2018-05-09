@@ -6,13 +6,12 @@ using UnityEngine.EventSystems;
 
 public class CollectionGestureHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public GameObject createLineupPanel, infoCard;
-    public Canvas parentCanvas;
-
     public static string CARDSLOTPANEL = "CardSlotPanel";
+    public static bool dragBegins = false;
+
+    public GameObject createLineupPanel, infoCard;
 
     private BoardInfo boardInfo;
-    private bool dragBegins = false;
     private LineupBuilder lineupBuilder;
 
     private void Start()

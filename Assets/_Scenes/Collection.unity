@@ -4548,7 +4548,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   createLineupPanel: {fileID: 669138942}
   infoCard: {fileID: 593160203}
-  parentCanvas: {fileID: 1677667964}
 --- !u!1 &388453898
 GameObject:
   m_ObjectHideFlags: 0
@@ -10812,6 +10811,7 @@ MonoBehaviour:
   board: {fileID: 1747433673}
   leftCursor: {fileID: 2800000, guid: 1cc373af93c8118468ee6b51c83840fe, type: 3}
   rightCursor: {fileID: 2800000, guid: b7508df4995d3e84581269de01a9ad89, type: 3}
+  dragCursor: {fileID: 2800000, guid: 5f058b25e14c63445863a88ec158ff40, type: 3}
 --- !u!114 &1133740512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11023,7 +11023,7 @@ RectTransform:
   - {fileID: 1908872254}
   - {fileID: 115171211}
   m_Father: {fileID: 1588430936}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14226,8 +14226,8 @@ RectTransform:
   - {fileID: 1298700662}
   - {fileID: 1044066670}
   - {fileID: 1947381491}
-  - {fileID: 2029127912}
   - {fileID: 1173033664}
+  - {fileID: 2029127912}
   m_Father: {fileID: 1677667965}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
