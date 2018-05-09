@@ -16,4 +16,5 @@ MonoBehaviour:
   description: 'Bloodthirsty: Gold +1'
   oreCost: 0
   health: 3
-  image: {fileID: 21300000, guid: 24b942c3b179dcd418aeed6722c51c74, type: 3}
+  image: {fileID: 21300000, guid: 080e3374f4657e54894f1fc569fbad6a, type: 3}
+  trigger: {fileID: 0}
