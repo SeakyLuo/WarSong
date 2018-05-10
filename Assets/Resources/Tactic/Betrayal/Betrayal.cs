@@ -1,18 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Betrayal: TacticTrigger
 {
-    public override void Activate(Vector2Int loc)
+    public override void Activate(Vector2Int location)
     {
+        Piece enemy = GameInfo.board[location];
         // Gain Control
-        Piece enemy = GameInfo.board[loc];
-        GameInfo.activeEnemies.Remove(enemy);
-        enemy.isAlly = true;
-        GameInfo.activeAllies.Add(enemy);
+        GameController.ChangeSide(location, true);
         // Join your ally
-        if(!enemy.IsStandard())
+        if(!GameInfo.board[location].IsStandard())
             InfoLoader.user.AddCollection(new Collection(enemy.GetName(), enemy.GetPieceType(), 1, enemy.GetHealth()));
     }
 

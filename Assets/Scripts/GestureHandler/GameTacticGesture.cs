@@ -28,13 +28,13 @@ public class GameTacticGesture : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     public void UseTactic(int caller)
     {
-        if (Input.GetMouseButtonUp(1))
-        {
-            button.GetComponent<Image>().sprite = button.spriteState.disabledSprite;
-            ActivateAbility.RemoveTargets();
-        }
+        if (MovementController.selected != null) MovementController.PutDownPiece();
+        if(ActivateAbility.activated) ActivateAbility.DeactivateButton();
+        if (Input.GetMouseButtonUp(1)) Resume();
         else if (Input.GetMouseButtonUp(0))
         {
+            Resume();
+            OnEnterGame.current_tactic = caller;
             if (Time.time - prevClick < doubleClickInterval)
             {
                 if (trigger != null)
@@ -52,6 +52,12 @@ public class GameTacticGesture : MonoBehaviour, IPointerEnterHandler, IPointerEx
             infoCard.SetActive(false);
             prevClick = Time.time;
         }
+    }
+
+    public void Resume()
+    {
+        OnEnterGame.CancelTacticHighlight();
+        ActivateAbility.RemoveTargets();
     }
 
     public void OnPointerEnter(PointerEventData eventData)

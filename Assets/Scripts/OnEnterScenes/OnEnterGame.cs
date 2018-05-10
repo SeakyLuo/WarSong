@@ -9,9 +9,12 @@ using System;
 public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 {
     public static bool gameover = false;
+    public static int current_tactic = -1;
 
+    public GameInfo gameInfo;
     public GameObject victoryImage, defeatImage, drawImage, settingsPanel, yourTurnImage, notEnoughCoinsImage, notEnoughOresImage;
     public GameObject pathDot, targetDot, oldLocation;
+    public GameObject history, trapCard, playerFlag, enemyFlag;
     public Transform tacticBag;
     public Text roundCount, timer, modeName;
     public Text playerName, playerWin, playerRank;
@@ -20,9 +23,11 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     [HideInInspector] public GameObject board;
     [HideInInspector] public BoardSetup boardSetup;
 
-    private Lineup lineup;
-    private List<Transform> tacticObjs = new List<Transform>();
-    private Dictionary<String, int> credits = new Dictionary<string, int>()
+    private static Lineup lineup;
+    private static List<Transform> tacticObjs = new List<Transform>();
+    private static List<Button> tacticButtons = new List<Button>();
+    private static List<TacticTrigger> tacticTriggers = new List<TacticTrigger>();
+    private static Dictionary<String, int> credits = new Dictionary<string, int>()
     {
         { "Chariot", 8 }, { "Horse", 4}, {"Elephant", 3}, {"Advisor", 2}, {"General", 10}, {"Cannon", 4}, {"Soldier", 2}
     };
@@ -46,8 +51,11 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         // SetupTactics
         for (int i = 0; i < LineupBuilder.tacticsLimit; i++)
         {
-            tacticObjs.Add(tacticBag.Find(String.Format("TacticSlot{0}/Tactic", i)));
+            Transform tacticSlot = tacticBag.Find(String.Format("TacticSlot{0}", i));
+            tacticButtons.Add(tacticSlot.GetComponent<Button>());
+            tacticObjs.Add(tacticSlot.Find("Tactic"));
             tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(InfoLoader.FindTacticAttributes(lineup.tactics[i]));
+            tacticTriggers.Add(tacticObjs[i].GetComponent<TacticInfo>().trigger);
         }
         modeName.text = InfoLoader.user.lastModeSelected;
         GameInfo.SetOrder(InfoLoader.user.playerID, 100000000);
@@ -61,6 +69,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         SetOreText();
         SetCoinText();
         StartCoroutine(Timer());
+        YourTurn();
     }
 
     private void Update()
@@ -80,7 +89,6 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             gameover = false;
             SceneManager.LoadScene("PlayerMatching");
             GameInfo.Clear();
-            Destroy(board);
         }
     }
 
@@ -179,12 +187,59 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             Trigger trigger = pair.Value.GetComponent<PieceInfo>().trigger;
             if (trigger != null) trigger.StartOfTurn();
         }
+        // Set tactic interactable
+        for(int i = 0; i < LineupBuilder.tacticsLimit; i++)
+            tacticButtons[i].interactable = tacticTriggers[i].Activatable();
     }
     private IEnumerator ShowYourTurn(float time = 1.5f)
     {
         yourTurnImage.SetActive(true);
         yield return new WaitForSeconds(time);
         yourTurnImage.SetActive(false);
+    }
+
+    public void NextTurn()
+    {
+        foreach (KeyValuePair<Vector2Int, GameObject> pair in boardSetup.pieces)
+        {
+            Trigger trigger = pair.Value.GetComponent<PieceInfo>().trigger;
+            if (trigger != null) trigger.EndOfTurn();
+        }
+        roundCount.text = (++GameInfo.round).ToString();
+        if (GameInfo.round == 150)
+        {
+            Draw();
+            return;
+        }
+        GameInfo.time = GameInfo.maxTime;
+        YourTurn();
+    }
+
+    public static void CancelTacticHighlight()
+    {
+        if (current_tactic == -1) return;
+        tacticButtons[current_tactic].GetComponent<Image>().sprite = tacticButtons[current_tactic].spriteState.disabledSprite;
+        current_tactic = -1;
+    }
+
+    public void TriggerTrap(Vector2Int location)
+    {
+        if (GameInfo.traps.ContainsKey(location))
+        {
+            // trigger it
+            Trap trap = InfoLoader.FindTrap(GameInfo.traps[location]);
+            trapCard.GetComponent<TrapInfo>().SetAttributes(trap);
+            trap.trigger.Activate();
+            GameInfo.traps.Remove(location);
+            StartCoroutine(ShowTrapInfo());
+        }
+    }
+
+    private IEnumerator ShowTrapInfo(float time = 2f)
+    {
+        trapCard.SetActive(true);
+        yield return new WaitForSeconds(time);
+        trapCard.SetActive(false);
     }
 
     public void NotEnoughCoins()
@@ -207,24 +262,6 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         yield return new WaitForSeconds(time);
         notEnoughOresImage.SetActive(false);
     }
-
-    public void NextTurn()
-    {
-        foreach (KeyValuePair<Vector2Int, GameObject> pair in boardSetup.pieces)
-        {
-            Trigger trigger = pair.Value.GetComponent<PieceInfo>().trigger;
-            if (trigger != null) trigger.EndOfTurn();
-        }
-        roundCount.text = (++GameInfo.round).ToString();
-        if(GameInfo.round == 150)
-        {
-            Draw();
-            return;
-        }
-        GameInfo.time = GameInfo.maxTime;
-        YourTurn();
-    }
-
     public void SetOreText()
     {
         oreText.text = GameInfo.ores[InfoLoader.user.playerID].ToString();

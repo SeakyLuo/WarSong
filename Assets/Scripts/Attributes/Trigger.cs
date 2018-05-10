@@ -6,6 +6,7 @@ public class Trigger: ScriptableObject {
 
     public bool activatable = false;
     public int limitedUse = -1; // -1 if unlimited
+    [HideInInspector] public int freeze = 0; // Freeze countdown. Can't move if freezed. Might be removed
     [HideInInspector] public bool silenced = false;
     [HideInInspector] public Piece piece;
 
@@ -21,12 +22,16 @@ public class Trigger: ScriptableObject {
 
     public virtual void StartOfGame() { }
     public virtual void Activate() { }  // Override this if NO targets required
-    public virtual void Activate(Vector2Int loc) { } // Override this if targets required
+    public virtual void Activate(Vector2Int location) { } // Override this if targets required
     public virtual void Revenge() { } // triggered when eliminated
     public virtual void Bloodthirsty() { } // triggered when kills someone
     public virtual void AfterMove() { }
     public virtual List<string> CantBeDestroyedBy() { return new List<string>(); }
-    public virtual List<Vector2Int> ValidLoc(bool link = false) { return MovementController.ValidLoc(piece.location.x, piece.location.y, piece.GetPieceType(), link); }
+    public virtual List<Vector2Int> ValidLoc(bool link = false)
+    {
+        if (freeze == 0) return MovementController.ValidLoc(piece.location.x, piece.location.y, piece.GetPieceType(), link);
+        return new List<Vector2Int>();
+    }
     public virtual List<Vector2Int> ValidTarget() { return new List<Vector2Int>(); }  // Offers the location of targets
     public virtual void StartOfTurn() { }
     public virtual void EndOfTurn() { }

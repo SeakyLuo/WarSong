@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
+    public static float raiseHeight = -3f;
+    public static Vector3 raiseVector = new Vector3(0, 0, raiseHeight);
     public static OnEnterGame onEnterGame;
     public static BoardSetup boardSetup;
     public static Dictionary<string, List<Vector2Int>> castles;
+    public static PieceInfo pieceInfo;
+    public static Dictionary<Vector2Int, GameObject> flags;
 
     // Use this for initialization
     void Start () {
@@ -21,6 +25,79 @@ public class GameController : MonoBehaviour {
             {"Cannon", boardSetup.boardAttributes.CannonCastle()  },
             {"Soldier", boardSetup.boardAttributes.SoldierCastle()  },
         };
+        flags = new Dictionary<Vector2Int, GameObject>();
+    }
+
+    private void Update()
+    {
+        if (OnEnterGame.gameover || GameInfo.actionRemaining == 0) return;
+        if (Input.GetMouseButtonUp(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                Collider hitObj = hit.collider;
+                if (hitObj == MovementController.selected) MovementController.PutDownPiece(); // Put down
+                else if (hitObj.name == "Piece" && hitObj.GetComponent<PieceInfo>().piece.isAlly)
+                {
+                    if (MovementController.selected != null) MovementController.PutDownPiece(); // switch piece
+                    hit.collider.transform.position += raiseVector;
+                    MovementController.selected = hit.collider;
+                    pieceInfo = hitObj.GetComponent<PieceInfo>();
+                    MovementController.pieceInfo = ActivateAbility.pieceInfo = pieceInfo;
+                    pieceInfo.HideInfoCard();
+                    ActivateAbility.ActivateButton();
+                    MovementController.validLoc = pieceInfo.ValidLoc();
+                    MovementController.DrawPathDots();
+                }
+                else if (MovementController.validLoc.Count != 0)
+                {
+                    Vector2Int location;
+                    if (hitObj.name == "Piece") location = InfoLoader.StringToVec2(hitObj.transform.parent.name);
+                    else location = InfoLoader.StringToVec2(hitObj.name);
+                    if (MovementController.validLoc.Contains(location))
+                    {
+                        MovementController.MoveTo(location);
+                        if (--GameInfo.actionRemaining == 0) onEnterGame.NextTurn();
+                    }
+                }
+                else if (ActivateAbility.activated)
+                {
+                    Vector2Int location;
+                    if (hitObj.name == "Piece") location = InfoLoader.StringToVec2(hitObj.transform.parent.name);
+                    else location = InfoLoader.StringToVec2(hitObj.name);
+                    if (ActivateAbility.targetLocs.Contains(location))
+                    {
+                        ActivateAbility.Activate(location);
+                        if (--GameInfo.actionRemaining == 0) onEnterGame.NextTurn();
+                    }
+                }
+            }
+        }
+        else if (Input.GetMouseButtonUp(1) && MovementController.selected != null)
+        {
+            MovementController.PutDownPiece();
+            if (ActivateAbility.activated) ActivateAbility.RemoveTargets();
+        }
+    }
+
+    public static void ChangeSide(Vector2Int location, bool isAlly)
+    {
+        boardSetup.pieces[location].GetComponent<PieceInfo>().piece.isAlly = isAlly;
+        Piece piece = GameInfo.board[location];
+        if (isAlly)
+        {
+            GameInfo.activeEnemies.Remove(piece);
+            piece.isAlly = isAlly;
+            GameInfo.activeAllies.Add(piece);
+        }
+        else
+        {
+            GameInfo.activeAllies.Remove(piece);
+            piece.isAlly = isAlly;
+            GameInfo.activeEnemies.Add(piece);
+        }
     }
 
     public static void AddPiece(Collection collection, Vector2Int castle, bool isAlly)
@@ -35,21 +112,11 @@ public class GameController : MonoBehaviour {
         GameInfo.Remove(piece);
     }
 
-    public static void Eliminate(Vector2Int loc)
+    public static void Eliminate(Vector2Int location)
     {
-        Destroy(boardSetup.pieces[loc]);
-        boardSetup.pieces.Remove(loc);
-        GameInfo.Remove(GameInfo.board[loc]);
-    }
-
-    public static void TriggerTrap(Vector2Int loc)
-    {
-        if(GameInfo.traps.ContainsKey(loc))
-        {
-            // trigger it
-            InfoLoader.FindTrap(GameInfo.traps[loc]).trigger.Activate();
-            GameInfo.traps.Remove(loc);
-        }
+        Destroy(boardSetup.pieces[location]);
+        boardSetup.pieces.Remove(location);
+        GameInfo.Remove(GameInfo.board[location]);
     }
 
     public static void PlaceTrap(Vector2Int loc, string trapName)
@@ -57,9 +124,28 @@ public class GameController : MonoBehaviour {
         GameInfo.traps.Add(loc, trapName);
     }
          
-    public static void PlaceFlag(Vector2Int loc, bool isAlly)
+    public static void PlaceFlag(Vector2Int location, bool isAlly)
     {
-        
+        GameObject flag;
+        if (isAlly)
+        {
+            flag = Instantiate(onEnterGame.playerFlag);
+            GameInfo.flags.Add(location, InfoLoader.user.playerID);
+        }
+        else
+        {
+            flag = Instantiate(onEnterGame.enemyFlag);
+            GameInfo.flags.Add(location, GameInfo.TheOtherPlayerID());
+        }
+        flag.transform.position = new Vector3(location.x * MovementController.scale, location.y * MovementController.scale, -2.5f);
+        flags.Add(location, flag);
+    }
+
+    public static void RemovePlag(Vector2Int location)
+    {
+        Destroy(flags[location]);
+        flags.Remove(location);
+        GameInfo.flags.Remove(location);
     }
 
     public static bool ChangeOre(int deltaAmount)
@@ -73,7 +159,6 @@ public class GameController : MonoBehaviour {
         onEnterGame.SetOreText();
         return true;
     }
-
     public static bool ChangeCoin(int deltaAmount)
     {
         if(InfoLoader.user.coins + deltaAmount < 0)

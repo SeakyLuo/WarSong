@@ -29,14 +29,14 @@ public class PieceInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         newPosition = new Vector3(posX, posY, -13); // need to find better position
     }
 
-    public void Setup(Collection collection, Vector2Int loc, bool isAlly)
+    public void Setup(Collection collection, Vector2Int loc, bool IsAlly)
     {
         pieceAttributes = InfoLoader.FindPieceAttributes(collection.name);
-        piece = new Piece(collection, loc, pieceAttributes.oreCost, isAlly);
+        piece = new Piece(collection, loc, pieceAttributes.oreCost, IsAlly);
         if (pieceAttributes.trigger != null) trigger = Instantiate(pieceAttributes.trigger);
         if (trigger != null) trigger.piece = piece; // remove the if when all completed
         GetComponentInChildren<Image>().sprite = pieceAttributes.image;
-        if (isAlly) GetComponent<Renderer>().material = red;
+        if (IsAlly) GetComponent<Renderer>().material = red;
         else GetComponent<Renderer>().material = black;
     }
 

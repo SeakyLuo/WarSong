@@ -15,7 +15,7 @@ public class GameInfo
                            activeEnemies = new List<Piece>(),
                            inactiveEnemies = new List<Piece>();
 
-    public static int actionRemaining = 1;
+    public static int actionRemaining = 0;
     public static int firstPlayer; //player ID
     public static int secondPlayer;
     public static Dictionary<int, int> ores;
@@ -25,6 +25,11 @@ public class GameInfo
     public static int gameID;
 
     public GameInfo() { }
+    public static int TheOtherPlayerID()
+    {
+        if (firstPlayer == InfoLoader.user.playerID) return secondPlayer;
+        else return firstPlayer;
+    }
 
     public static void Add(Piece piece, bool reactivate = false)
     {

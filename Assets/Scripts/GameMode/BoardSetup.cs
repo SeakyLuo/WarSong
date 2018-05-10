@@ -5,6 +5,7 @@ public class BoardSetup : MonoBehaviour {
 
     public BoardAttributes boardAttributes;
     public Transform boardCanvas;
+    public Sprite newLocation;
     public Dictionary<Vector2Int, GameObject> pieces = new Dictionary<Vector2Int, GameObject>(); // is not castle
 
     public void Setup(Lineup lineup, bool isAlly)

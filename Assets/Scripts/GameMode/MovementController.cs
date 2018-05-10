@@ -15,8 +15,6 @@ public class MovementController : MonoBehaviour
     public static Transform boardCanvas;
     public static float speed = 1f;
 
-    public Sprite newLocation;    
-    
     private static GameObject oldLocation;
     private static GameObject pathDot;
     private static List<GameObject> pathDots = new List<GameObject>();
@@ -38,53 +36,20 @@ public class MovementController : MonoBehaviour
         pathDot = onEnterGame.pathDot;
     }
 
-    private void Update()
+    public static void DrawPathDots()
     {
-        if (OnEnterGame.gameover || GameInfo.actionRemaining == 0 || ActivateAbility.activated) return;
-        if (Input.GetMouseButtonUp(0))
+        if (validLoc.Count == 0) return;
+        // Draw Valid path
+        foreach (Vector2Int path in validLoc)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                Collider hitObj = hit.collider;
-                if (hitObj == selected) PutDownPiece(); // Put down
-                else if (hitObj.tag == "Ally")
-                {
-                    if (selected != null) PutDownPiece(); // switch piece
-                    hit.collider.transform.position += raiseVector;
-                    selected = hit.collider;
-                    pieceInfo = selected.GetComponent<PieceInfo>();
-                    pieceInfo.HideInfoCard();
-                    ActivateAbility.ActivateButton();
-                    validLoc = pieceInfo.ValidLoc();
-                    if (validLoc.Count == 0) return;
-                    // Draw Valid path
-                    foreach (Vector2Int path in validLoc)
-                    {
-                        float posZ = -1;
-                        if (FindAt(path) == 'E') posZ -= hitObj.transform.localScale.z;
-                        GameObject copy = Instantiate(pathDot);
-                        copy.name = InfoLoader.Vec2ToString(path);
-                        copy.transform.position = new Vector3(path.x * scale, path.y * scale, posZ);
-                        if (oldLocation.transform.position == copy.transform.position) oldLocation.SetActive(false);
-                        pathDots.Add(copy);
-                    }
-                }
-                else if (selected != null)
-                {
-                    Vector2Int location;
-                    if (hitObj.name == "Piece") location = InfoLoader.StringToVec2(hitObj.transform.parent.name);
-                    else location = InfoLoader.StringToVec2(hitObj.name);
-                    if (validLoc.Contains(location))
-                    {
-                        KillAt(location);
-                        SetLocation(location);
-                    }
-                }
-            }
+            float posZ = -1;
+            if (FindAt(path) == 'E') posZ -= selected.transform.localScale.z;
+            GameObject copy = Instantiate(pathDot);
+            copy.name = InfoLoader.Vec2ToString(path);
+            copy.transform.position = new Vector3(path.x * scale, path.y * scale, posZ);
+            if (oldLocation.transform.position == copy.transform.position) oldLocation.SetActive(false);
+            pathDots.Add(copy);
         }
-        else if (Input.GetMouseButtonUp(1) && selected != null) PutDownPiece();
     }
 
     public static void KillAt(Vector2Int loc)
@@ -108,7 +73,7 @@ public class MovementController : MonoBehaviour
         selected.transform.position -= raiseVector;
         if (!oldLocation.activeSelf && previousSprite != null) oldLocation.SetActive(true);
         ActivateAbility.DeactivateButton();
-        pieceInfo.selected = true;
+        pieceInfo.selected = true; // Not false!!!
         selected = null;
     }
 
@@ -118,7 +83,7 @@ public class MovementController : MonoBehaviour
         pathDots.Clear();
     }
 
-    private void SetLocation(Vector2Int location)
+    public static void SetLocation(Vector2Int location)
     {
         /// location is new location
         oldLocation.transform.position = selected.transform.position - raiseVector;
@@ -129,19 +94,19 @@ public class MovementController : MonoBehaviour
 
         previousImage = selected.transform.parent.Find("Image").GetComponent<Image>();
         previousSprite = previousImage.sprite;
-        previousImage.sprite = newLocation;
+        previousImage.sprite = boardSetup.newLocation;
 
         PutDownPiece();
-        if(--GameInfo.actionRemaining == 0) onEnterGame.NextTurn();
     }
 
     private static void Move(GameObject target, Vector2Int from, Vector2Int to)
     {
-        // SetLocationData
+        /// Set Location Data
         GameInfo.Move(from, to);
         target.GetComponent<PieceInfo>().piece.location = to;
         target.transform.parent = boardCanvas.Find(InfoLoader.Vec2ToString(to));
         target.transform.localPosition = Vector3.Lerp(target.transform.localPosition, new Vector3(0, 0, target.transform.position.z), speed);
+        if (GameInfo.traps.ContainsKey(to)) onEnterGame.TriggerTrap(to);
         GameObject fromObject = boardSetup.pieces[from];
         boardSetup.pieces.Remove(from);
         boardSetup.pieces.Add(to, fromObject);
@@ -150,7 +115,15 @@ public class MovementController : MonoBehaviour
 
     public static void Move(Piece piece, Vector2Int from, Vector2Int to)
     {
+        /// Called by trigger
         Move(boardSetup.pieces[piece.location], from, to);
+    }
+
+    public static void MoveTo(Vector2Int location)
+    {
+        /// Called by controllers
+        KillAt(location);
+        SetLocation(location);
     }
 
     private List<Vector2Int> ValidLoc(Collider obj)

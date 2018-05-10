@@ -16,8 +16,8 @@ public class Turret: Trigger {
         return MovementController.CannonTarget(piece.location.x, piece.location.y);
     }
 
-    public override void Activate(Vector2Int loc)
+    public override void Activate(Vector2Int location)
     {
-        GameController.Eliminate(loc);
+        GameController.Eliminate(location);
     }
 }

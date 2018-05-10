@@ -11,11 +11,11 @@ public class TacticTrigger : ScriptableObject
     [HideInInspector] public int goldCost;
 
     public virtual void Activate() { }  // Override this if NO targets required
-    public virtual void Activate(Vector2Int loc) { } // Override this if targets required
+    public virtual void Activate(Vector2Int location) { } // Override this if targets required
     public virtual List<Vector2Int> ValidTarget() { return new List<Vector2Int>(); } // Offers the location of targets
 
     public bool Activatable()
     {
-        return afterRound == 0 || afterRound >= GameInfo.round;
+        return GameInfo.round >= afterRound;
     }
 }
