@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Cripple
   type: Cannon
-  description: 'Revenge: Set a random Landmine.'
+  description: 'Revenge: Place a random Trap.'
   oreCost: 0
   health: 1
   image: {fileID: 21300000, guid: abefe87b1e2d4a84fba95ac5c4cd43cc, type: 3}
