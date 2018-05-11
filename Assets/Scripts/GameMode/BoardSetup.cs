@@ -20,9 +20,9 @@ public class BoardSetup : MonoBehaviour {
 
     public void AddPiece(Collection collection, Vector2Int castle, bool isAlly)
     {
-        GameObject pieceObj = Instantiate(boardCanvas.Find(InfoLoader.Vec2ToString(GameInfo.activeAllies[0].location) + "/Piece").gameObject);
+        GameObject pieceObj = Instantiate(boardCanvas.Find(InfoLoader.Vec2ToString(GameInfo.activeAllies[0].location) + "/Piece").gameObject, boardCanvas);
         pieceObj.transform.SetParent(boardCanvas.Find(InfoLoader.Vec2ToString(castle)));
-        pieceObj.transform.localPosition = new Vector3(0, 0, 0);
+        pieceObj.transform.localPosition = new Vector3(0, 0, -1);
         AddPiece(pieceObj, collection, castle, isAlly);
     }
 

@@ -11,9 +11,9 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     public static int current_tactic = -1;
 
     public GameInfo gameInfo;
-    public GameObject victoryImage, defeatImage, drawImage, settingsPanel, yourTurnImage, notEnoughCoinsImage, notEnoughOresImage, freezedText;
+    public GameObject gameStartImage, victoryImage, defeatImage, drawImage, settingsPanel, yourTurnImage, notEnoughCoinsImage, notEnoughOresImage, freezedText;
     public GameObject pathDot, targetDot, oldLocation, explosion, askTriggerPanel;
-    public GameObject history, trapInfoCard, enemyInfoCard, playerFlag, enemyFlag;
+    public GameObject history, boardInfoCard , trapInfoCard, enemyInfoCard, playerFlag, enemyFlag;
     public Transform tacticBag;
     public Button endTurnButton;
     public Text roundCount, timer, modeName;
@@ -51,15 +51,6 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         opponentName.text = "Opponent";
         opponentWin.text = "Win%: 80.00";
         opponentRank.text = "Rank: 9900";
-        // SetupTactics
-        for (int i = 0; i < LineupBuilder.tacticsLimit; i++)
-        {
-            Transform tacticSlot = tacticBag.Find(String.Format("TacticSlot{0}", i));
-            tacticButtons.Add(tacticSlot.GetComponent<Button>());
-            tacticObjs.Add(tacticSlot.Find("Tactic"));
-            tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(InfoLoader.FindTacticAttributes(lineup.tactics[i]));
-            tacticTriggers.Add(tacticObjs[i].GetComponent<TacticInfo>().trigger);
-        }
         modeName.text = InfoLoader.user.lastModeSelected;
         // Set GameInfo
         gameInfo = new GameInfo(); // should be downloading a GameInfo
@@ -71,8 +62,17 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         }
         SetOreText();
         SetCoinText();
+        // SetupTactics
+        for (int i = 0; i < LineupBuilder.tacticsLimit; i++)
+        {
+            Transform tacticSlot = tacticBag.Find(String.Format("TacticSlot{0}", i));
+            tacticButtons.Add(tacticSlot.GetComponent<Button>());
+            tacticObjs.Add(tacticSlot.Find("Tactic"));
+            tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(InfoLoader.FindTacticAttributes(lineup.tactics[i]));
+            tacticTriggers.Add(tacticObjs[i].GetComponent<TacticInfo>().trigger);
+        }
         StartCoroutine(Timer());
-        YourTurn();
+        ShowGameStartAnimation();
     }
 
     private void Update()
@@ -84,7 +84,6 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         }
     }
 
-
     public void OnPointerClick(PointerEventData eventData)
     {
         if (GameInfo.gameOver)
@@ -94,6 +93,19 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             GameInfo.Clear();
             Destroy(board);
         }
+    }
+
+    public void ShowGameStartAnimation()
+    {
+        StartCoroutine(GameStartAnimation());
+    }
+
+    private IEnumerator GameStartAnimation()
+    {
+        //gameStartImage.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        //gameStartImage.SetActive(false);
+        YourTurn();
     }
 
     private IEnumerator Timer()
@@ -199,7 +211,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             if (trigger != null) trigger.StartOfTurn();
         }
         // Set tactic interactable
-        for(int i = 0; i < LineupBuilder.tacticsLimit; i++)
+        for(int i = 0; i < GameInfo.unusedTactics.Count; i++)
             tacticButtons[i].interactable = tacticTriggers[i].Activatable();
     }
     private IEnumerator ShowYourTurn(float time = 1.5f)
@@ -257,6 +269,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         {
             GameEvent gameEvent = new GameEvent();
             explosion.transform.position = new Vector3(location.x * MovementController.scale, location.y * MovementController.scale, -3);
+            explosion.transform.SetParent(boardSetup.boardCanvas);
             Trap trap = InfoLoader.FindTrap(GameInfo.traps[location].Key);
             trapInfoCard.GetComponent<TrapInfo>().SetAttributes(trap, GameInfo.traps[location].Value);
             trap.trigger.Activate();
@@ -282,15 +295,20 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 
     public void AskTrigger(Trigger trigger_para, string message)
     {
-        if (trigger_para.piece.GetOreCost() > GameInfo.ores[InfoLoader.user.playerID]) return;
-        GameInfo.actions[InfoLoader.user.playerID]++;
-        trigger = trigger_para;
-        triggerMessage = message;
-        askTriggerPanel.SetActive(true);
+        if (!trigger_para.ReceiveMesseage(message) || trigger_para.piece.GetOreCost() > GameInfo.ores[InfoLoader.user.playerID]) return;
+        if (trigger_para.ReceiveMesseage(message) && trigger_para.piece.GetOreCost() <= GameInfo.ores[InfoLoader.user.playerID])
+        {
+            GameInfo.actions[InfoLoader.user.playerID]++;
+            trigger = trigger_para;
+            triggerMessage = message;
+            boardInfoCard.SetActive(false);
+            askTriggerPanel.SetActive(true);
+        }
     }
     public void ConfirmTrigger()
     {
-        if (triggerMessage == "AfterMove") trigger.AfterMove();
+        if (triggerMessage == "BloodThirsty") trigger.BloodThirsty();
+        else if (triggerMessage == "AfterMove") trigger.AfterMove();
         else if (triggerMessage == "InEnemyRegion") trigger.InEnemyRegion();
         else if (triggerMessage == "InEnemyPalace") trigger.InEnemyPalace();
         else if (triggerMessage == "AtEnemyBottom") trigger.AtEnemyBottom();

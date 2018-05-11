@@ -7,6 +7,7 @@ Assets/_Scenes/Collection.unity
 Assets/_Scenes/Recruitment.unity
 Assets/_Scenes/GameMode.unity
 SceneListEnd?
+aecc90d88d2ac9fd50892d71a42c351b Assembly-CSharp.dll:.Disarm
 0dbb03457432fbb78ca2acb77ffe4d85 Assembly-CSharp.dll:.Client
 eb3f8b68c877e96c16892bbc99c846cf Assembly-CSharp.dll:.CollectionManager
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
@@ -22,7 +23,7 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 31aaf521b3ef8699466676591ea0efd4 UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 df374c01140c2d578bf70cbd60073d1d UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
 ade9f258a466928b94a48b00d08a6c50 Assembly-CSharp.dll:.ActivateAbility
-e5d09e0fa8dedf2aecf0cbd23c5d09ea Assembly-CSharp.dll:.Cripple
+34dcb845897365f7bb4684e78b6aa729 Assembly-CSharp.dll:.Cripple
 d8e26b3ed8c01a552ac106f1a5a6e882 Assembly-CSharp.dll:.Trap
 4614c7482f80abc8d74f537724c2fc01 Assembly-CSharp.dll:.ActivateCoinStore
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
@@ -58,7 +59,7 @@ f61c0793411f10cf5fbfa1473fef5ef2 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 86d36c43c53541d667100dc90b89cfba UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 1b8c02d0aa82fbf036a2b9b2d713eec3 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
 f46c8ad4c2854409f6af88d4937c809f Assembly-CSharp.dll:.ForgotPassword
-e5d09e0fa8dedf2aecf0cbd23c5d09ea Assembly-CSharp.dll:.FatSoldier
+34dcb845897365f7bb4684e78b6aa729 Assembly-CSharp.dll:.FatSoldier
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 49cd62a578efc0a599b810a2b66cd49c UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -93,6 +94,7 @@ f61c0793411f10cf5fbfa1473fef5ef2 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 1b8c02d0aa82fbf036a2b9b2d713eec3 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.GameController
 4f14d5a522183779eb6c980414ac3758 Assembly-CSharp.dll:.Server
+aecc90d88d2ac9fd50892d71a42c351b Assembly-CSharp.dll:.ASecretPlan
 29fee9cbabe5be3e20c597725553e763 Assembly-CSharp.dll:.ContractInfo
 fd4138dce98132a8b240573213e46730 Assembly-CSharp.dll:.PlayerContract
 9f5129ae30ce2c5a00eb54acef70c319 Assembly-CSharp.dll:.MouseOverTactic
@@ -122,11 +124,12 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 3f32f08a64daf40b09ed864d96fe3840 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransform
 73843688b51256aed059f049c540bca8 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
-945eb6e07c514c1355472283274f08c5 Assembly-CSharp.dll:.BoardAttributes
+2b27a79b098dbfe2e89ebcabfbd1ec70 Assembly-CSharp.dll:.BoardAttributes
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 8c720aade4e90ed391b89768ddbb0102 Assembly-CSharp.dll:.DropdownIcon
 aecc90d88d2ac9fd50892d71a42c351b Assembly-CSharp.dll:.SoldierRecruitment
-e76072b0cd2cc4c9b315c04c80af579f Assembly-CSharp.dll:.PieceInfo
+19ec854ff28f6f83718deb05911bac69 Assembly-CSharp.dll:.PieceInfo
+aecc90d88d2ac9fd50892d71a42c351b Assembly-CSharp.dll:.NoWay
 322cb40e1e282f28af980cbef7922a90 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
 15ab66292b5ddadec7f6c46a19b96136 Assembly-CSharp.dll:.TacticGestureHandler
@@ -137,8 +140,8 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 c6c3024ed682b9402bae803ce3d3021c Assembly-CSharp.dll:.CollectionGestureHandler
 2c71ee271d2735209ed20f7408fa6463 Assembly-CSharp.dll:.TacticInfo
-e5d09e0fa8dedf2aecf0cbd23c5d09ea Assembly-CSharp.dll:.Trigger
-e5d09e0fa8dedf2aecf0cbd23c5d09ea Assembly-CSharp.dll:.LinkSoldier
+34dcb845897365f7bb4684e78b6aa729 Assembly-CSharp.dll:.Trigger
+34dcb845897365f7bb4684e78b6aa729 Assembly-CSharp.dll:.LinkSoldier
 1d3ef741962999b298a2af36eca31b6d Assembly-CSharp.dll:.AutoCreate
 651a9a27522d732f8fd0a18e38b4287c Assembly-CSharp.dll:.Settings
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
@@ -171,6 +174,8 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 73843688b51256aed059f049c540bca8 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MouseOverPiece
+aecc90d88d2ac9fd50892d71a42c351b Assembly-CSharp.dll:.WinnerTrophy
+aecc90d88d2ac9fd50892d71a42c351b Assembly-CSharp.dll:.Minesweeper
 751d3341b748bcc79623275becd82410 Assembly-CSharp.dll:.GameManager
 af8eb0407306b12af6d3f35cdbffa007 Assembly-CSharp.dll:.SetCursor
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
@@ -180,6 +185,7 @@ af8eb0407306b12af6d3f35cdbffa007 Assembly-CSharp.dll:.SetCursor
 e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 ec31bd99906b8eca92af1c583cac0bae Assembly-CSharp.dll:.TacticAttributes
+a01e0c804e96faee07ec922334101130 Assembly-CSharp.dll:.TrapInfo
 bc3cadfe539aa234063abfbae2702474 Assembly-CSharp.dll:.BoardInfo
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
@@ -189,22 +195,17 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 5a82aad09bfb0fab9c099254b28ede5c Assembly-CSharp.dll:.ActivateContractStore
 ad9f5c8ac3aecb5c1c339fa3deada303 Assembly-CSharp.dll:.LineupsManager
 cc8258461be35bd0c372322491a45a0a Assembly-CSharp.dll:.PieceAttributes
+aecc90d88d2ac9fd50892d71a42c351b Assembly-CSharp.dll:.PlaceAFlag
 88cb347ac647e4db8164a4211c9ac11e Assembly-CSharp.dll:.LineupBuilder
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 aecc90d88d2ac9fd50892d71a42c351b Assembly-CSharp.dll:.TacticTrigger
+aecc90d88d2ac9fd50892d71a42c351b Assembly-CSharp.dll:.ProtectTheKing
 f0750e250f55996faf5ffb87dcb84812 Assembly-CSharp.dll:.ContractsManager
-5a684763462752426890fc5c655dd0a8 Assembly-CSharp.dll:.OnEnterGame
+442a2bbc3ec5a6e23fab5335d3d47ecc Assembly-CSharp.dll:.OnEnterGame
 0d50533b5be9717fc17e770faa884fb4 Assembly-CSharp.dll:.UpdateTime
 06de0651f92ff2c4440c301805f29b3d Assembly-CSharp.dll:.CardInfo
 ad38a63ab18060056f92f1ba7729013a Assembly-CSharp.dll:.AccountCreation
 caeffdc9b344ca66ea24fc12e7eea4a2 Assembly-CSharp.dll:.OnEnterCollections
-e5d09e0fa8dedf2aecf0cbd23c5d09ea Assembly-CSharp.dll:.Turret
+34dcb845897365f7bb4684e78b6aa729 Assembly-CSharp.dll:.Turret
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MovementController
-aecc90d88d2ac9fd50892d71a42c351b Assembly-CSharp.dll:.WinnerTrophy
-aecc90d88d2ac9fd50892d71a42c351b Assembly-CSharp.dll:.ASecretPlan
-aecc90d88d2ac9fd50892d71a42c351b Assembly-CSharp.dll:.Disarm
-aecc90d88d2ac9fd50892d71a42c351b Assembly-CSharp.dll:.PlaceAFlag
-aecc90d88d2ac9fd50892d71a42c351b Assembly-CSharp.dll:.ProtectTheKing
-aecc90d88d2ac9fd50892d71a42c351b Assembly-CSharp.dll:.Minesweeper
-aecc90d88d2ac9fd50892d71a42c351b Assembly-CSharp.dll:.NoWay
-81877b2615001e9795db21f31aac730d Assembly-CSharp.dll:.TrapInfo
+aecc90d88d2ac9fd50892d71a42c351b Assembly-CSharp.dll:.FreezeTrap

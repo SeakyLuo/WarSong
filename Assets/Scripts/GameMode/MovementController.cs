@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class MovementController : MonoBehaviour
 {
     public static BoardAttributes boardAttributes;
-    public static List<Vector2Int> validLoc = new List<Vector2Int>();
+    public static List<Vector2Int> validLocs = new List<Vector2Int>();
     public static Collider selected;
     public static PieceInfo pieceInfo;
     public static float scale;
@@ -35,9 +35,9 @@ public class MovementController : MonoBehaviour
 
     public static void DrawPathDots()
     {
-        if (validLoc.Count == 0) return;
+        if (validLocs.Count == 0) return;
         // Draw Valid path
-        foreach (Vector2Int path in validLoc)
+        foreach (Vector2Int path in validLocs)
         {
             float posZ = -1;
             if (FindAt(path) == 'E') posZ -= selected.transform.localScale.z;
@@ -54,7 +54,7 @@ public class MovementController : MonoBehaviour
         Piece enemy;
         if (GameInfo.board.TryGetValue(loc, out enemy) && !enemy.isAlly)
         {
-            pieceInfo.trigger.Bloodthirsty();
+            onEnterGame.AskTrigger(pieceInfo.trigger, "BloodThirsty");
             GameController.Eliminate(enemy);
             if (enemy.GetPieceType() == "General")
                 onEnterGame.Victory();
@@ -78,6 +78,7 @@ public class MovementController : MonoBehaviour
     {
         foreach (GameObject pathDot in pathDots) Destroy(pathDot);
         pathDots.Clear();
+        validLocs.Clear();
     }
 
     public static void SetLocation(Vector2Int location)
@@ -170,74 +171,74 @@ public class MovementController : MonoBehaviour
     }
     public static List<Vector2Int> GeneralLoc(int x, int y)
     {
-        List<Vector2Int> validLoc = new List<Vector2Int>();
+        List<Vector2Int> validLocs = new List<Vector2Int>();
         for (int i = -1; i <= 1; i += 2)
         {
-            if (boardAttributes.InPalace(x, y + i) && Placeable(x, y + i))
-                validLoc.Add(new Vector2Int(x, y + i));
-            if (boardAttributes.InPalace(x + i, y) && Placeable(x + i, y))
-                validLoc.Add(new Vector2Int(x + i, y));
+            if (boardAttributes.InPalace(x, y + i) && Placeable("General", x, y + i))
+                validLocs.Add(new Vector2Int(x, y + i));
+            if (boardAttributes.InPalace(x + i, y) && Placeable("General", x + i, y))
+                validLocs.Add(new Vector2Int(x + i, y));
         }
-        return validLoc;
+        return validLocs;
     }
     public static List<Vector2Int> AdvisorLoc(int x, int y, bool link = false)
     {
-        List<Vector2Int> validLoc = new List<Vector2Int>();
+        List<Vector2Int> validLocs = new List<Vector2Int>();
         for (int i = -1; i <= 1; i += 2)
         {
             for (int j = -1; j <= 1; j += 2)
-                if (boardAttributes.InPalace(x + i, y + j) && (Placeable(x + i, y + j) ^ link))
-                    validLoc.Add(new Vector2Int(x + i, y + j));
+                if (boardAttributes.InPalace(x + i, y + j) && (Placeable("Advisor", x + i, y + j) ^ link))
+                    validLocs.Add(new Vector2Int(x + i, y + j));
         }
-        return validLoc;
+        return validLocs;
     }
     public static List<Vector2Int> ElephantLoc(int x, int y, bool link = false)
     {
-        List<Vector2Int> validLoc = new List<Vector2Int>();
+        List<Vector2Int> validLocs = new List<Vector2Int>();
         for (int i = -1; i <= 1; i += 2)
         {
             for (int j = -1; j <= 1; j += 2)
-                if (boardAttributes.InAllyField(x + i * 2, y + j * 2) && Ignorable(x + i, y + j) && (Placeable(x + i * 2, y + j * 2) ^ link))
-                    validLoc.Add(new Vector2Int(x + i * 2, y + j * 2));
+                if (boardAttributes.InAllyField(x + i * 2, y + j * 2) && Ignorable(x + i, y + j) && (Placeable("Elephant", x + i * 2, y + j * 2) ^ link))
+                    validLocs.Add(new Vector2Int(x + i * 2, y + j * 2));
         }
-        return validLoc;
+        return validLocs;
     }
     public static List<Vector2Int> HorseLoc(int x, int y, bool link = false)
     {
-        List<Vector2Int> validLoc = new List<Vector2Int>();
+        List<Vector2Int> validLocs = new List<Vector2Int>();
         for (int i = -1; i <= 1; i += 2)
         {
             if (boardAttributes.InBoard(x, y + i) && Ignorable(x, y + i))
                 for (int j = -1; j <= 1; j += 2)
-                    if (boardAttributes.InBoard(x + j, y + i * 2) && (Placeable(x + j, y + i * 2) ^ link))
-                        validLoc.Add(new Vector2Int(x + j, y + i * 2));
+                    if (boardAttributes.InBoard(x + j, y + i * 2) && (Placeable("Horse", x + j, y + i * 2) ^ link))
+                        validLocs.Add(new Vector2Int(x + j, y + i * 2));
             if (boardAttributes.InBoard(x + i, y) && Ignorable(x + i, y))
                 for (int j = -1; j <= 1; j += 2)
-                    if (boardAttributes.InBoard(x + i * 2, y + j) && (Placeable(x + i * 2, y + j) ^ link))
-                        validLoc.Add(new Vector2Int(x + i * 2, y + j));
+                    if (boardAttributes.InBoard(x + i * 2, y + j) && (Placeable("Horse", x + i * 2, y + j) ^ link))
+                        validLocs.Add(new Vector2Int(x + i * 2, y + j));
         }
-        return validLoc;
+        return validLocs;
     }
     public static List<Vector2Int> ChariotLoc(int x, int y, bool link = false)
     {
-        List<Vector2Int> validLoc = new List<Vector2Int>();
+        List<Vector2Int> validLocs = new List<Vector2Int>();
         for (int j = y + 1; j < boardAttributes.boardHeight; j++)
         {
             switch (FindAt(x, j))
             {
                 case 'A':
-                    if (link) validLoc.Add(new Vector2Int(x, j));
+                    if (link) validLocs.Add(new Vector2Int(x, j));
                     break;
                 case 'B':
-                    if (!link) validLoc.Add(new Vector2Int(x, j));
+                    if (!link) validLocs.Add(new Vector2Int(x, j));
                     continue;
                 case 'E':
-                    if (!link) validLoc.Add(new Vector2Int(x, j));
+                    if (!link && Placeable("Chariot", x, j)) validLocs.Add(new Vector2Int(x, j));
                     break;
                 case 'F':
                     continue;
                 case 'T':
-                    if (!link) validLoc.Add(new Vector2Int(x, j));
+                    if (!link) validLocs.Add(new Vector2Int(x, j));
                     continue;
             }
             break;
@@ -247,18 +248,18 @@ public class MovementController : MonoBehaviour
             switch (FindAt(x, j))
             {
                 case 'A':
-                    if (link) validLoc.Add(new Vector2Int(x, j));
+                    if (link) validLocs.Add(new Vector2Int(x, j));
                     break;
                 case 'B':
-                    if (!link) validLoc.Add(new Vector2Int(x, j));
+                    if (!link) validLocs.Add(new Vector2Int(x, j));
                     continue;
                 case 'E':
-                    if (!link) validLoc.Add(new Vector2Int(x, j));
+                    if (!link && Placeable("Chariot", x, j)) validLocs.Add(new Vector2Int(x, j));
                     break;
                 case 'F':
                     continue;
                 case 'T':
-                    if (!link) validLoc.Add(new Vector2Int(x, j));
+                    if (!link) validLocs.Add(new Vector2Int(x, j));
                     continue;
             }
             break;
@@ -268,18 +269,18 @@ public class MovementController : MonoBehaviour
             switch (FindAt(i, y))
             {
                 case 'A':
-                    if (link) validLoc.Add(new Vector2Int(i, y));
+                    if (link) validLocs.Add(new Vector2Int(i, y));
                     break;
                 case 'B':
-                    if (!link) validLoc.Add(new Vector2Int(i, y));
+                    if (!link) validLocs.Add(new Vector2Int(i, y));
                     continue;
                 case 'E':
-                    if (!link) validLoc.Add(new Vector2Int(i, y));
+                    if (!link && Placeable("Chariot", i, y)) validLocs.Add(new Vector2Int(i, y));
                     break;
                 case 'F':
                     continue;
                 case 'T':
-                    if (!link) validLoc.Add(new Vector2Int(i, y));
+                    if (!link) validLocs.Add(new Vector2Int(i, y));
                     continue;
             }
             break;
@@ -289,30 +290,30 @@ public class MovementController : MonoBehaviour
             switch (FindAt(i, y))
             {
                 case 'A':
-                    if (link) validLoc.Add(new Vector2Int(i, y));
+                    if (link) validLocs.Add(new Vector2Int(i, y));
                     break;
                 case 'B':
-                    if (!link) validLoc.Add(new Vector2Int(i, y));
+                    if (!link) validLocs.Add(new Vector2Int(i, y));
                     continue;
                 case 'E':
-                    if (!link) validLoc.Add(new Vector2Int(i, y));
+                    if (!link && Placeable("Chariot", i, y)) validLocs.Add(new Vector2Int(i, y));
                     break;
                 case 'F':
                     continue;
                 case 'T':
-                    if (!link) validLoc.Add(new Vector2Int(i, y));
+                    if (!link) validLocs.Add(new Vector2Int(i, y));
                     continue;
             }
             break;
         }
-        return validLoc;
+        return validLocs;
     }
     public static List<Vector2Int> CannonLoc(int x, int y)
     {
-        List<Vector2Int> validLoc = new List<Vector2Int>();
+        List<Vector2Int> validLocs = new List<Vector2Int>();
         for (int j = y + 1; j < boardAttributes.boardHeight; j++)
         {
-            if (Ignorable(x, j)) validLoc.Add(new Vector2Int(x, j));
+            if (Ignorable(x, j)) validLocs.Add(new Vector2Int(x, j));
             else
             {
                 for (int jj = j + 1; jj < boardAttributes.boardHeight; jj++)
@@ -324,7 +325,7 @@ public class MovementController : MonoBehaviour
                         case 'B':
                             continue;
                         case 'E':
-                            validLoc.Add(new Vector2Int(x, jj));
+                            if (Placeable("Cannon", x, jj)) validLocs.Add(new Vector2Int(x, jj));
                             break;
                         case 'F':
                             continue;
@@ -339,7 +340,7 @@ public class MovementController : MonoBehaviour
         }
         for (int j = y - 1; j >= 0; j--)
         {
-            if (Ignorable(x, j)) validLoc.Add(new Vector2Int(x, j));
+            if (Ignorable(x, j)) validLocs.Add(new Vector2Int(x, j));
             else
             {
                 for (int jj = j - 1; jj >= 0; jj--)
@@ -351,7 +352,7 @@ public class MovementController : MonoBehaviour
                         case 'B':
                             continue;
                         case 'E':
-                            validLoc.Add(new Vector2Int(x, jj));
+                            if (Placeable("Cannon", x, jj)) validLocs.Add(new Vector2Int(x, jj));
                             break;
                         case 'F':
                             continue;
@@ -365,7 +366,7 @@ public class MovementController : MonoBehaviour
         }
         for (int i = x - 1; i >= 0; i--)
         {
-            if (Ignorable(i, y)) validLoc.Add(new Vector2Int(i, y));
+            if (Ignorable(i, y)) validLocs.Add(new Vector2Int(i, y));
             else
             {
                 for (int ii = i - 1; ii >= 0; ii--)
@@ -377,7 +378,7 @@ public class MovementController : MonoBehaviour
                         case 'B':
                             continue;
                         case 'E':
-                            validLoc.Add(new Vector2Int(ii, y));
+                            if (Placeable("Cannon", ii, y)) validLocs.Add(new Vector2Int(ii, y));
                             break;
                         case 'F':
                             continue;
@@ -391,7 +392,7 @@ public class MovementController : MonoBehaviour
         }
         for (int i = x + 1; i < boardAttributes.boardWidth; i++)
         {
-            if (Ignorable(i, y)) validLoc.Add(new Vector2Int(i, y));
+            if (Ignorable(i, y)) validLocs.Add(new Vector2Int(i, y));
             else
             {
                 for (int ii = i + 1; ii < boardAttributes.boardWidth; ii++)
@@ -403,7 +404,7 @@ public class MovementController : MonoBehaviour
                         case 'B':
                             continue;
                         case 'E':
-                            validLoc.Add(new Vector2Int(ii, y));
+                            if (Placeable("Cannon", ii, y)) validLocs.Add(new Vector2Int(ii, y));
                             break;
                         case 'F':
                             continue;
@@ -415,30 +416,30 @@ public class MovementController : MonoBehaviour
                 break;
             }
         }
-        return validLoc;
+        return validLocs;
     }
     public static List<Vector2Int> CannonScope(int x, int y)
     {
-        List<Vector2Int> validLoc = new List<Vector2Int>();
+        List<Vector2Int> validLocs = new List<Vector2Int>();
         for (int j = y + 1; j < boardAttributes.boardHeight; j++)
         {
             if (!Ignorable(x, j))
             {
-                validLoc.Add(new Vector2Int(x, j));
+                validLocs.Add(new Vector2Int(x, j));
                 break;
             }
         }
         for (int j = y - 1; j >= 0; j--)
         {
             if (!Ignorable(x, j)){
-                validLoc.Add(new Vector2Int(x, j));
+                validLocs.Add(new Vector2Int(x, j));
                 break;
             }
         }
         for (int i = x - 1; i >= 0; i--)
         {
             if (!Ignorable(i, y)){
-                validLoc.Add(new Vector2Int(i, y));
+                validLocs.Add(new Vector2Int(i, y));
                 break;
             }
         }
@@ -446,15 +447,15 @@ public class MovementController : MonoBehaviour
         {
             if (!Ignorable(i, y))
             {
-                validLoc.Add(new Vector2Int(i, y));
+                validLocs.Add(new Vector2Int(i, y));
                 break;
             }
         }
-        return validLoc;
+        return validLocs;
     }
     public static List<Vector2Int> CannonTarget(int x, int y, bool link = false)
     {
-        List<Vector2Int> validLoc = new List<Vector2Int>();
+        List<Vector2Int> validLocs = new List<Vector2Int>();
         for (int j = y + 1; j < boardAttributes.boardHeight; j++)
         {
             if (!Ignorable(x, j))
@@ -464,12 +465,12 @@ public class MovementController : MonoBehaviour
                     switch (FindAt(x, jj))
                     {
                         case 'A':
-                            if (link) validLoc.Add(new Vector2Int(x, jj));
+                            if (link) validLocs.Add(new Vector2Int(x, jj));
                             break;
                         case 'B':
                             continue;
                         case 'E':
-                            if (!link) validLoc.Add(new Vector2Int(x, jj));
+                            if (!link && Placeable("Cannon", x, jj)) validLocs.Add(new Vector2Int(x, jj));
                             break;
                         case 'F':
                             continue;
@@ -490,12 +491,12 @@ public class MovementController : MonoBehaviour
                     switch (FindAt(x, jj))
                     {
                         case 'A':
-                            if (link) validLoc.Add(new Vector2Int(x, jj));
+                            if (link) validLocs.Add(new Vector2Int(x, jj));
                             break;
                         case 'B':
                             continue;
                         case 'E':
-                            if (!link) validLoc.Add(new Vector2Int(x, jj));
+                            if (!link && Placeable("Cannon", x, jj)) validLocs.Add(new Vector2Int(x, jj));
                             break;
                         case 'F':
                             continue;
@@ -516,12 +517,12 @@ public class MovementController : MonoBehaviour
                     switch (FindAt(ii, y))
                     {
                         case 'A':
-                            if (link) validLoc.Add(new Vector2Int(ii, y));
+                            if (link) validLocs.Add(new Vector2Int(ii, y));
                             break;
                         case 'B':
                             continue;
                         case 'E':
-                            if (!link) validLoc.Add(new Vector2Int(ii, y));
+                            if (!link && Placeable("Cannon", ii, y)) validLocs.Add(new Vector2Int(ii, y));
                             break;
                         case 'F':
                             continue;
@@ -542,12 +543,12 @@ public class MovementController : MonoBehaviour
                     switch (FindAt(ii, y))
                     {
                         case 'A':
-                            if (link) validLoc.Add(new Vector2Int(ii, y));
+                            if (link) validLocs.Add(new Vector2Int(ii, y));
                             break;
                         case 'B':
                             continue;
                         case 'E':
-                            if (!link) validLoc.Add(new Vector2Int(ii, y));
+                            if (!link && Placeable("Cannon", ii, y)) validLocs.Add(new Vector2Int(ii, y));
                             break;
                         case 'F':
                             continue;
@@ -559,18 +560,18 @@ public class MovementController : MonoBehaviour
                 break;
             }
         }
-        return validLoc;
+        return validLocs;
     }
     public static List<Vector2Int> SoldierLoc(int x, int y, bool link = false)
     {
-        List<Vector2Int> validLoc = new List<Vector2Int>();
+        List<Vector2Int> validLocs = new List<Vector2Int>();
         if (boardAttributes.InBoard(x, y + 1) && (FindAt(x, y + 1) != 'A' ^ link))
-            validLoc.Add(new Vector2Int(x, y + 1));
+            validLocs.Add(new Vector2Int(x, y + 1));
         if (!boardAttributes.InAllyField(x, y))
             for (int i = -1; i <= 1; i += 2)
                 if (boardAttributes.InBoard(x + i, y) && (FindAt(x + i, y) != 'A' ^ link))
-                    validLoc.Add(new Vector2Int(x + i, y));
-        return validLoc;
+                    validLocs.Add(new Vector2Int(x + i, y));
+        return validLocs;
     }
     public static bool IsLink(Piece piece, List<Vector2Int> locations)
     {
@@ -598,9 +599,10 @@ public class MovementController : MonoBehaviour
         }
         return 'B';
     }
-    private static bool Placeable(int x, int y)
+    private static bool Placeable(string type, int x, int y)
     {
         char result = FindAt(x, y);
+        if (result == 'E' && boardSetup.pieces[new Vector2Int(x, y)].GetComponent<PieceInfo>().trigger.cantBeDestroyedBy.Contains(type)) return false;
         return result != 'A' || result == 'F';
     }
     private static bool Ignorable(int x, int y)

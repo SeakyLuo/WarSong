@@ -55,15 +55,15 @@ public class GameController : MonoBehaviour {
                     MovementController.pieceInfo = ActivateAbility.pieceInfo = pieceInfo;
                     pieceInfo.HideInfoCard();
                     ActivateAbility.ActivateButton();
-                    MovementController.validLoc = pieceInfo.ValidLoc();
+                    MovementController.validLocs = pieceInfo.ValidLoc();
                     MovementController.DrawPathDots();
                 }
-                else if (MovementController.validLoc.Count != 0)
+                else if (MovementController.selected != null)
                 {
                     Vector2Int location;
                     if (hitObj.name == "Piece") location = InfoLoader.StringToVec2(hitObj.transform.parent.name);
                     else location = InfoLoader.StringToVec2(hitObj.name);
-                    if (MovementController.validLoc.Contains(location))
+                    if (MovementController.validLocs.Contains(location))
                     {
                         MovementController.MoveTo(location);
                         if (--GameInfo.actions[InfoLoader.user.playerID] == 0) onEnterGame.NextTurn();
@@ -157,7 +157,7 @@ public class GameController : MonoBehaviour {
         GameObject flag;
         if (isAlly)
         {
-            flag = Instantiate(onEnterGame.playerFlag);
+            flag = Instantiate(onEnterGame.playerFlag, onEnterGame.board.transform.Find("Canvas"));
             GameInfo.flags.Add(location, InfoLoader.user.playerID);
         }
         else
@@ -165,7 +165,7 @@ public class GameController : MonoBehaviour {
             flag = Instantiate(onEnterGame.enemyFlag);
             GameInfo.flags.Add(location, GameInfo.TheOtherPlayerID());
         }
-        flag.transform.position = new Vector3(location.x * MovementController.scale, location.y * MovementController.scale, -2.5f);
+        flag.transform.position = new Vector3(location.x * MovementController.scale, location.y * MovementController.scale, -0.5f);
         flags.Add(location, flag);
     }
 

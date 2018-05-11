@@ -6,8 +6,7 @@ using UnityEngine.EventSystems;
 public class GameTacticGesture : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
     public GameObject infoCard;
-
-    private Vector3 newPosition;
+    
     private GameObject tactic;
     private Button button;
     private TacticTrigger trigger;
@@ -15,11 +14,6 @@ public class GameTacticGesture : MonoBehaviour, IPointerEnterHandler, IPointerEx
     private float doubleClickInterval = 1;
 
     private static List<Vector2Int> targets = new List<Vector2Int>();
-
-    private void Awake()
-    {
-        newPosition = new Vector3(300, transform.localPosition.y, -6.1f);
-    }
 
     private void Start()
     {
@@ -64,7 +58,7 @@ public class GameTacticGesture : MonoBehaviour, IPointerEnterHandler, IPointerEx
         if (!tactic.activeSelf) return;
         infoCard.SetActive(true);
         infoCard.GetComponent<CardInfo>().SetAttributes(tactic.GetComponent<TacticInfo>().tactic);
-        infoCard.transform.localPosition = newPosition;
+        infoCard.transform.localPosition = new Vector3(300, transform.localPosition.y, -6.1f); ;
     }
 
     public void OnPointerExit(PointerEventData eventData)
