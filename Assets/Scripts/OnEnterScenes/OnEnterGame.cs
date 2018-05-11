@@ -38,11 +38,15 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     // Use this for initialization
     void Start () {
         lineup = InfoLoader.user.lineups[InfoLoader.user.lastLineupSelected];
+        // Set GameInfo
+        gameInfo = new GameInfo(lineup, InfoLoader.user.playerID, new EnemyLineup(), 100000000); // should be downloading a GameInfo
+        //GameInfo.JsonToClass();
+        InfoLoader.user.gameID = GameInfo.gameID;
         board = Instantiate(Resources.Load<GameObject>("Board/" + lineup.boardName + "/Board"));
         board.transform.SetSiblingIndex(1);
         boardSetup = board.GetComponent<BoardSetup>();
         boardSetup.Setup(lineup, true);  // Set up Player Lineup
-        boardSetup.Setup(new EnemyLineup(), false);  // Set up Enemy Lineup
+        boardSetup.Setup(GameInfo.lineups[GameInfo.TheOtherPlayer()], false);  // Set up Enemy Lineup
         // Set up Player Info
         playerName.text = InfoLoader.user.username;
         playerWin.text = "Win%: "+InfoLoader.user.total.percentage.ToString();
@@ -52,9 +56,6 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         opponentWin.text = "Win%: 80.00";
         opponentRank.text = "Rank: 9900";
         modeName.text = InfoLoader.user.lastModeSelected;
-        // Set GameInfo
-        gameInfo = new GameInfo(); // should be downloading a GameInfo
-        //GameInfo.JsonToClass();
         foreach (KeyValuePair<Vector2Int, GameObject> pair in boardSetup.pieces)
         {
             Trigger trigger = pair.Value.GetComponent<PieceInfo>().trigger;
@@ -169,7 +170,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         }
         foreach(string tactic in lineup.tactics)
         {
-            if (GameInfo.unusedTactics.Contains(tactic)) continue;
+            if (GameInfo.unusedTactics[InfoLoader.playerID].Contains(tactic)) continue;
             int index = InfoLoader.user.FindCollectionWithName(tactic);
             if (index != -1)
             {
@@ -188,9 +189,9 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     private void CalculateNewRank()
     {
         int credit = 0;
-        foreach(Piece piece in GameInfo.activeAllies)
+        foreach(Piece piece in GameInfo.activePieces[InfoLoader.playerID])
             credit += credits[piece.GetPieceType()];
-        foreach (Piece piece in GameInfo.inactiveEnemies)
+        foreach (Piece piece in GameInfo.inactivePieces[GameInfo.TheOtherPlayer()])
             credit += credits[piece.GetPieceType()];
     }
 

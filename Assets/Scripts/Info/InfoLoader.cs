@@ -7,6 +7,7 @@ using System.IO;
 public class InfoLoader : MonoBehaviour {
 
     public static UserInfo user;
+    public static int playerID;
     public static List<BoardAttributes> boards = new List<BoardAttributes>();
     public static string switchSceneCaller = "Main";
     public static Dictionary<string, PieceAttributes> standardAttributes = new Dictionary<string, PieceAttributes>();
@@ -18,6 +19,7 @@ public class InfoLoader : MonoBehaviour {
         // user = new UserInfo();
         // download Json
         // user.JsonToClass();
+        playerID = user.playerID;
         standardAttributes = new Dictionary<string, PieceAttributes>(){
             { "Standard General", standardGeneral },
             { "Standard Advisor", standardAdvisor },

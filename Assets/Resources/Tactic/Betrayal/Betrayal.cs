@@ -16,7 +16,7 @@ public class Betrayal: TacticTrigger
     public override List<Vector2Int> ValidTargets()
     {
         List<Vector2Int> target = new List<Vector2Int>();
-        foreach (Piece piece in GameInfo.activeEnemies)
+        foreach (Piece piece in GameInfo.activePieces[GameInfo.TheOtherPlayer()])
             if(piece.IsMinion())
                 target.Add(piece.location);
         return target;

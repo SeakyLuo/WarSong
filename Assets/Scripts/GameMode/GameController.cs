@@ -102,15 +102,15 @@ public class GameController : MonoBehaviour {
         Piece piece = GameInfo.board[location];
         if (isAlly)
         {
-            GameInfo.activeEnemies.Remove(piece);
+            GameInfo.activePieces[GameInfo.TheOtherPlayer()].Remove(piece);
             piece.isAlly = isAlly;
-            GameInfo.activeAllies.Add(piece);
+            GameInfo.activePieces[InfoLoader.playerID].Add(piece);
         }
         else
         {
-            GameInfo.activeAllies.Remove(piece);
+            GameInfo.activePieces[InfoLoader.playerID].Remove(piece);
             piece.isAlly = isAlly;
-            GameInfo.activeEnemies.Add(piece);
+            GameInfo.activePieces[GameInfo.TheOtherPlayer()].Add(piece);
         }
     }
 
@@ -136,13 +136,13 @@ public class GameController : MonoBehaviour {
     public static void FreezePiece(Vector2Int location, int round)
     {
         Piece piece = GameInfo.board[location];
-        int index = GameInfo.activeAllies.IndexOf(piece);
+        int index = GameInfo.activePieces[InfoLoader.playerID].IndexOf(piece);
         if (index == -1)
         {
-            index = GameInfo.activeEnemies.IndexOf(piece);
-            GameInfo.activeEnemies[index].freeze = round;
+            index = GameInfo.activePieces[GameInfo.TheOtherPlayer()].IndexOf(piece);
+            GameInfo.activePieces[GameInfo.TheOtherPlayer()][index].freeze = round;
         }
-        else GameInfo.activeAllies[index].freeze = round;
+        else GameInfo.activePieces[InfoLoader.playerID][index].freeze = round;
         GameInfo.board[location].freeze = round;
         boardSetup.pieces[location].GetComponent<PieceInfo>().piece.freeze = round;
     }
@@ -163,7 +163,7 @@ public class GameController : MonoBehaviour {
         else
         {
             flag = Instantiate(onEnterGame.enemyFlag);
-            GameInfo.flags.Add(location, GameInfo.TheOtherPlayerID());
+            GameInfo.flags.Add(location, GameInfo.TheOtherPlayer());
         }
         flag.transform.position = new Vector3(location.x * MovementController.scale, location.y * MovementController.scale, -0.5f);
         flags.Add(location, flag);

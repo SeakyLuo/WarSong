@@ -577,7 +577,7 @@ public class MovementController : MonoBehaviour
     {
         string type = piece.GetPieceType();
         Vector2Int location = piece.location;
-        foreach (Piece ally in GameInfo.activeAllies)
+        foreach (Piece ally in GameInfo.activePieces[InfoLoader.playerID])
             if (ally.GetPieceType() == type && locations.Contains(ally.location) && boardSetup.pieces[ally.location].GetComponent<PieceInfo>().trigger.ValidLocs(true).Contains(location))
                 return true;
         return false;

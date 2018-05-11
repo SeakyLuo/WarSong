@@ -63,5 +63,10 @@ public class EnemyLineup: Lineup
             {new Vector2Int(0,3), Collection.Soldier },{new Vector2Int(2,3), Collection.Soldier },
             {new Vector2Int(4,3), Collection.Soldier },{new Vector2Int(6,3), Collection.Soldier },{new Vector2Int(8,3), Collection.Soldier }
         };
+        tactics = new List<string>()
+        {
+            "Tame An Elephant","Purchase A Horse","Advisor Recruitment","Soldier Recruitment","Minesweeper",
+            "A Secret Plan","Buy 1 Get 1 Free","Build A Rook","Winner Trophy","No Way"
+        };
     }
 }
