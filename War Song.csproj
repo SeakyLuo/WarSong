@@ -298,6 +298,7 @@
     <Compile Include="Assets\Resources\Tactic\Minesweeper\Minesweeper.cs" />
     <Compile Include="Assets\Resources\Tactic\No Way\NoWay.cs" />
     <Compile Include="Assets\Resources\Tactic\Place A Flag\PlaceAFlag.cs" />
+    <Compile Include="Assets\Resources\Tactic\Place A Trap\PlaceATrap.cs" />
     <Compile Include="Assets\Resources\Tactic\Protect the King\ProtectTheKing.cs" />
     <Compile Include="Assets\Resources\Tactic\Soldier Recruitment\SoldierRecruitment.cs" />
     <Compile Include="Assets\Resources\Tactic\Winner Trophy\WinnerTrophy.cs" />
