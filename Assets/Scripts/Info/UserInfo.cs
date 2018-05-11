@@ -77,14 +77,15 @@ public class UserInfo {
         collection.Insert(index, insert);
     }
 
-    public void ClassToJson()
+    public static void ClassToJson()
     {
 
     }
 
-    public void JsonToClass()
+    public static UserInfo JsonToClass()
     {
-
+        UserInfo player = new UserInfo();
+        return player;
     }
 }
 

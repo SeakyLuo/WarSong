@@ -148,7 +148,7 @@ public class GameInfo
 
     }
 
-    public static void JsonToClass(GameInfo gameInfo)
+    public static void JsonToClass()
     {
 
     }
