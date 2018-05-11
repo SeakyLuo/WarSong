@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class MovementController : MonoBehaviour
 {
-    public static float raiseHeight = -3f;
-    public static Vector3 raiseVector = new Vector3(0, 0, raiseHeight);
     public static BoardAttributes boardAttributes;
     public static List<Vector2Int> validLoc = new List<Vector2Int>();
     public static Collider selected;
@@ -31,8 +29,7 @@ public class MovementController : MonoBehaviour
         scale = transform.localScale.x;
         boardSetup = GetComponent<BoardSetup>();
         boardAttributes = boardSetup.boardAttributes;
-        oldLocation = Instantiate(onEnterGame.oldLocation);
-        oldLocation.transform.position = new Vector3(0, 0, 100);
+        oldLocation = onEnterGame.oldLocation;
         pathDot = onEnterGame.pathDot;
     }
 
@@ -70,7 +67,7 @@ public class MovementController : MonoBehaviour
     {
         if (selected == null) return;
         HidePathDots();
-        selected.transform.position -= raiseVector;
+        selected.transform.position -= GameController.raiseVector;
         if (!oldLocation.activeSelf && previousSprite != null) oldLocation.SetActive(true);
         ActivateAbility.DeactivateButton();
         pieceInfo.selected = true; // Not false!!!
@@ -86,7 +83,7 @@ public class MovementController : MonoBehaviour
     public static void SetLocation(Vector2Int location)
     {
         /// location is new location
-        oldLocation.transform.position = selected.transform.position - raiseVector;
+        oldLocation.transform.position = selected.transform.position - GameController.raiseVector;
         if (previousSprite != null)
             previousImage.sprite = previousSprite;
 
@@ -107,10 +104,15 @@ public class MovementController : MonoBehaviour
         target.transform.parent = boardCanvas.Find(InfoLoader.Vec2ToString(to));
         target.transform.localPosition = Vector3.Lerp(target.transform.localPosition, new Vector3(0, 0, target.transform.position.z), speed);
         if (GameInfo.traps.ContainsKey(to)) onEnterGame.TriggerTrap(to);
+        // need to add game events
+        Trigger trigger = target.GetComponent<PieceInfo>().trigger;
+        onEnterGame.AskTrigger(trigger, "AfterMove");
+        if (boardAttributes.InEnemyRegion(to.x, to.y)) onEnterGame.AskTrigger(trigger, "InEnemyRegion");
+        else if (boardAttributes.InEnemyPalace(to.x, to.y)) onEnterGame.AskTrigger(trigger, "InEnemyPalace");
+        else if (boardAttributes.AtEnemyBottom(to.x,to.y)) onEnterGame.AskTrigger(trigger, "AtEnemyBottom");
         GameObject fromObject = boardSetup.pieces[from];
         boardSetup.pieces.Remove(from);
         boardSetup.pieces.Add(to, fromObject);
-        pieceInfo.trigger.AfterMove();
     }
 
     public static void Move(Piece piece, Vector2Int from, Vector2Int to)
@@ -126,13 +128,25 @@ public class MovementController : MonoBehaviour
         SetLocation(location);
     }
 
-    private List<Vector2Int> ValidLoc(Collider obj)
+    public static List<Vector2Int> Unoccupied()
+    {
+        List<Vector2Int> unoccupied = new List<Vector2Int>();
+        for (int i = 0; i < boardAttributes.boardWidth; i++)
+            for (int j = 0; j < boardAttributes.boardHeight; j++)
+            {
+                Vector2Int loc = new Vector2Int(i, j);
+                if (!GameInfo.board.ContainsKey(loc)) unoccupied.Add(loc);
+            }
+        return unoccupied;
+    }
+
+    private List<Vector2Int> ValidLocs(Collider obj)
     {
         int x = (int)Mathf.Floor(obj.transform.position.x / scale);
         int y = (int)Mathf.Floor(obj.transform.position.y / scale);
-        return ValidLoc(x, y, obj.GetComponent<PieceInfo>().GetPieceType());  //GameInfo.board[new Vector2Int(x, y)].GetPieceType()
+        return ValidLocs(x, y, obj.GetComponent<PieceInfo>().GetPieceType());  //GameInfo.board[new Vector2Int(x, y)].GetPieceType()
     }
-    public static List<Vector2Int> ValidLoc(int x, int y, string type, bool link = false)
+    public static List<Vector2Int> ValidLocs(int x, int y, string type, bool link = false)
     {
         switch (type)
         {
@@ -563,7 +577,7 @@ public class MovementController : MonoBehaviour
         string type = piece.GetPieceType();
         Vector2Int location = piece.location;
         foreach (Piece ally in GameInfo.activeAllies)
-            if (ally.GetPieceType() == type && locations.Contains(ally.location) && boardSetup.pieces[ally.location].GetComponent<PieceInfo>().trigger.ValidLoc(true).Contains(location))
+            if (ally.GetPieceType() == type && locations.Contains(ally.location) && boardSetup.pieces[ally.location].GetComponent<PieceInfo>().trigger.ValidLocs(true).Contains(location))
                 return true;
         return false;
     }

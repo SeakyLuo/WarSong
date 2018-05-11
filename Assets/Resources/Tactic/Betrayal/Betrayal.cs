@@ -13,7 +13,7 @@ public class Betrayal: TacticTrigger
             InfoLoader.user.AddCollection(new Collection(enemy.GetName(), enemy.GetPieceType(), 1, enemy.GetHealth()));
     }
 
-    public override List<Vector2Int> ValidTarget()
+    public override List<Vector2Int> ValidTargets()
     {
         List<Vector2Int> target = new List<Vector2Int>();
         foreach (Piece piece in GameInfo.activeEnemies)

@@ -14,6 +14,8 @@ public class GameTacticGesture : MonoBehaviour, IPointerEnterHandler, IPointerEx
     private float prevClick = 0;
     private float doubleClickInterval = 1;
 
+    private static List<Vector2Int> targets = new List<Vector2Int>();
+
     private void Awake()
     {
         newPosition = new Vector3(300, transform.localPosition.y, -6.1f);
@@ -29,35 +31,32 @@ public class GameTacticGesture : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public void UseTactic(int caller)
     {
         if (MovementController.selected != null) MovementController.PutDownPiece();
-        if(ActivateAbility.activated) ActivateAbility.DeactivateButton();
-        if (Input.GetMouseButtonUp(1)) Resume();
-        else if (Input.GetMouseButtonUp(0))
+        if (ActivateAbility.activated) ActivateAbility.DeactivateButton();
+        if (OnEnterGame.current_tactic != -1) Resume();
+        else
         {
-            Resume();
-            OnEnterGame.current_tactic = caller;
-            if (Time.time - prevClick < doubleClickInterval)
+            if (targets.Count == 0 && Time.time - prevClick < doubleClickInterval)
             {
-                if (trigger != null)
-                {
-                    trigger.Activate();
-                    gameObject.SetActive(false);
-                }
+                trigger.Activate();
+                gameObject.SetActive(false);
             }
             else
             {
+                OnEnterGame.current_tactic = caller;
                 button.GetComponent<Image>().sprite = button.spriteState.highlightedSprite;
-                List<Vector2Int> targets = trigger.ValidTarget();
+                targets = trigger.ValidTargets();
                 if (targets.Count != 0) ActivateAbility.ShowTacticTarget(targets, caller, trigger);
             }
-            infoCard.SetActive(false);
-            prevClick = Time.time;
         }
+        infoCard.SetActive(false);
+        prevClick = Time.time;
     }
 
-    public void Resume()
+    public static void Resume()
     {
         OnEnterGame.CancelTacticHighlight();
         ActivateAbility.RemoveTargets();
+        targets.Clear();
     }
 
     public void OnPointerEnter(PointerEventData eventData)

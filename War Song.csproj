@@ -300,6 +300,7 @@
     <Compile Include="Assets\Resources\Tactic\Protect the King\ProtectTheKing.cs" />
     <Compile Include="Assets\Resources\Tactic\Soldier Recruitment\SoldierRecruitment.cs" />
     <Compile Include="Assets\Resources\Tactic\Winner Trophy\WinnerTrophy.cs" />
+    <Compile Include="Assets\Resources\Trap\Freeze Trap\FreezeTrap.cs" />
     <Compile Include="Assets\Scripts\Attributes\BoardAttributes.cs" />
     <Compile Include="Assets\Scripts\Attributes\ContractAttributes.cs" />
     <Compile Include="Assets\Scripts\Attributes\Mission.cs" />
@@ -316,6 +317,7 @@
     <Compile Include="Assets\Scripts\Collection\SetCursor.cs" />
     <Compile Include="Assets\Scripts\DataType\Collection.cs" />
     <Compile Include="Assets\Scripts\DataType\Database.cs" />
+    <Compile Include="Assets\Scripts\DataType\GameEvent.cs" />
     <Compile Include="Assets\Scripts\DataType\Lineup.cs" />
     <Compile Include="Assets\Scripts\DataType\Piece.cs" />
     <Compile Include="Assets\Scripts\DataType\Range.cs" />

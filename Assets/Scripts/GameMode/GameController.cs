@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour {
 
     private void Update()
     {
-        if (OnEnterGame.gameover || GameInfo.actionRemaining == 0) return;
+        if (GameInfo.gameOver || !GameInfo.gameStarts || GameInfo.actions[InfoLoader.user.playerID] == 0) return;
         if (Input.GetMouseButtonUp(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -41,7 +41,14 @@ public class GameController : MonoBehaviour {
                 if (hitObj == MovementController.selected) MovementController.PutDownPiece(); // Put down
                 else if (hitObj.name == "Piece" && hitObj.GetComponent<PieceInfo>().piece.isAlly)
                 {
-                    if (MovementController.selected != null) MovementController.PutDownPiece(); // switch piece
+                    pieceInfo = hitObj.GetComponent<PieceInfo>();
+                    if(pieceInfo.piece.freeze > 0)
+                    {
+                        onEnterGame.ShowPieceFreezed();
+                        return;
+                    }
+                    if (ActivateAbility.activated) GameTacticGesture.Resume();
+                    else if (MovementController.selected != null) MovementController.PutDownPiece(); // switch piece
                     hit.collider.transform.position += raiseVector;
                     MovementController.selected = hit.collider;
                     pieceInfo = hitObj.GetComponent<PieceInfo>();
@@ -59,7 +66,7 @@ public class GameController : MonoBehaviour {
                     if (MovementController.validLoc.Contains(location))
                     {
                         MovementController.MoveTo(location);
-                        if (--GameInfo.actionRemaining == 0) onEnterGame.NextTurn();
+                        if (--GameInfo.actions[InfoLoader.user.playerID] == 0) onEnterGame.NextTurn();
                     }
                 }
                 else if (ActivateAbility.activated)
@@ -70,15 +77,22 @@ public class GameController : MonoBehaviour {
                     if (ActivateAbility.targetLocs.Contains(location))
                     {
                         ActivateAbility.Activate(location);
-                        if (--GameInfo.actionRemaining == 0) onEnterGame.NextTurn();
+                        if (--GameInfo.actions[InfoLoader.user.playerID] == 0) onEnterGame.NextTurn();
                     }
                 }
             }
         }
-        else if (Input.GetMouseButtonUp(1) && MovementController.selected != null)
+        else if (Input.GetMouseButtonUp(1))
         {
-            MovementController.PutDownPiece();
-            if (ActivateAbility.activated) ActivateAbility.RemoveTargets();
+            if (MovementController.selected != null)
+            {
+                MovementController.PutDownPiece();
+                if (ActivateAbility.activated) ActivateAbility.RemoveTargets();
+            }
+            else if (OnEnterGame.current_tactic != -1)
+            {
+                GameTacticGesture.Resume();
+            }
         }
     }
 
@@ -119,9 +133,23 @@ public class GameController : MonoBehaviour {
         GameInfo.Remove(GameInfo.board[location]);
     }
 
-    public static void PlaceTrap(Vector2Int loc, string trapName)
+    public static void FreezePiece(Vector2Int location, int round)
     {
-        GameInfo.traps.Add(loc, trapName);
+        Piece piece = GameInfo.board[location];
+        int index = GameInfo.activeAllies.IndexOf(piece);
+        if (index == -1)
+        {
+            index = GameInfo.activeEnemies.IndexOf(piece);
+            GameInfo.activeEnemies[index].freeze = round;
+        }
+        else GameInfo.activeAllies[index].freeze = round;
+        GameInfo.board[location].freeze = round;
+        boardSetup.pieces[location].GetComponent<PieceInfo>().piece.freeze = round;
+    }
+
+    public static void PlaceTrap(Vector2Int location, string trapName, int creator)
+    {
+        GameInfo.traps.Add(location, new KeyValuePair<string, int>(trapName, creator));
     }
          
     public static void PlaceFlag(Vector2Int location, bool isAlly)
@@ -148,11 +176,32 @@ public class GameController : MonoBehaviour {
         GameInfo.flags.Remove(location);
     }
 
+    public static void DecodeGameEvent(GameEvent gameEvent)
+    {
+        if (gameEvent.move)
+        {
+
+        }
+        else if (gameEvent.trap)
+        {
+
+        }
+        else if (gameEvent.piece)
+        {
+
+        }
+        else if (gameEvent.tactic)
+        {
+
+        }
+        
+    }
+
     public static bool ChangeOre(int deltaAmount)
     {
         if(GameInfo.ores[InfoLoader.user.playerID] + deltaAmount < 0)
         {
-            onEnterGame.NotEnoughOres();
+            onEnterGame.ShowNotEnoughOres();
             return false;
         }
         GameInfo.ores[InfoLoader.user.playerID] += deltaAmount;
@@ -163,7 +212,7 @@ public class GameController : MonoBehaviour {
     {
         if(InfoLoader.user.coins + deltaAmount < 0)
         {
-            onEnterGame.NotEnoughCoins();
+            onEnterGame.ShowNotEnoughCoins();
             return false;
         }
         InfoLoader.user.coins += deltaAmount;

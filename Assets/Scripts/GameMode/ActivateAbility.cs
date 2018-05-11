@@ -35,6 +35,7 @@ public class ActivateAbility : MonoBehaviour {
 
     public static void Activate(Vector2Int location)
     {
+        GameEvent gameEvent = new GameEvent();
         if (tacticCaller != -1)
         {
             // use tactic
@@ -52,7 +53,7 @@ public class ActivateAbility : MonoBehaviour {
         }
         activated = false;
         pieceInfo = null;
-        AddToHistory();
+        onEnterGame.AddToHistory(gameEvent);
         RemoveTargets();
     }
 
@@ -68,10 +69,11 @@ public class ActivateAbility : MonoBehaviour {
         if (targetLocs.Count == 0)
         {
             if (!GameController.ChangeOre(-pieceInfo.trigger.piece.GetOreCost())) return;
+            GameEvent gameEvent = new GameEvent();
             pieceInfo.trigger.Activate();
-            AddToHistory();
+            onEnterGame.AddToHistory(gameEvent);
             MovementController.PutDownPiece();
-            if (--GameInfo.actionRemaining == 0) onEnterGame.NextTurn();
+            if (--GameInfo.actions[InfoLoader.user.playerID] == 0) onEnterGame.NextTurn();
         }
         else DrawTargets();
     }
@@ -121,10 +123,5 @@ public class ActivateAbility : MonoBehaviour {
         textObj.SetActive(false);
         if (targetLocs.Count == 0) return;
         RemoveTargets();
-    }
-
-    private static void AddToHistory()
-    {
-
     }
 }

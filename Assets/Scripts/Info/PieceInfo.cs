@@ -42,14 +42,14 @@ public class PieceInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public List<Vector2Int> ValidLoc()
     {
-        if (trigger == null) return MovementController.ValidLoc(piece.location.x, piece.location.y, piece.GetPieceType());
-        return trigger.ValidLoc(); 
+        if (trigger == null) return MovementController.ValidLocs(piece.location.x, piece.location.y, piece.GetPieceType());
+        return trigger.ValidLocs(); 
     }
 
     public List<Vector2Int> ValidTarget()
     {
         if (trigger == null) return new List<Vector2Int>();
-        return trigger.ValidTarget();
+        return trigger.ValidTargets();
     }
 
     public void OnPointerEnter(PointerEventData eventData)

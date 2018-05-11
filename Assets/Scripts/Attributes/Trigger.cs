@@ -6,7 +6,6 @@ public class Trigger: ScriptableObject {
 
     public bool activatable = false;
     public int limitedUse = -1; // -1 if unlimited
-    [HideInInspector] public int freeze = 0; // Freeze countdown. Can't move if freezed. Might be removed
     [HideInInspector] public bool silenced = false;
     [HideInInspector] public Piece piece;
 
@@ -27,23 +26,17 @@ public class Trigger: ScriptableObject {
     public virtual void Bloodthirsty() { } // triggered when kills someone
     public virtual void AfterMove() { }
     public virtual List<string> CantBeDestroyedBy() { return new List<string>(); }
-    public virtual List<Vector2Int> ValidLoc(bool link = false)
-    {
-        if (freeze == 0) return MovementController.ValidLoc(piece.location.x, piece.location.y, piece.GetPieceType(), link);
-        return new List<Vector2Int>();
-    }
-    public virtual List<Vector2Int> ValidTarget() { return new List<Vector2Int>(); }  // Offers the location of targets
+    public virtual List<Vector2Int> ValidLocs(bool link = false) { return MovementController.ValidLocs(piece.location.x, piece.location.y, piece.GetPieceType(), link); }
+    public virtual List<Vector2Int> ValidTargets() { return new List<Vector2Int>(); }  // Offers the location of targets
     public virtual void StartOfTurn() { }
     public virtual void EndOfTurn() { }
-    public virtual void InCastle() { }
-    public virtual void InPalace() { }
     public virtual void InEnemyRegion() { }
     public virtual void InEnemyPalace() { }
     public virtual void InEnemyCastle() { }
     public virtual void AtEnemyBottom() { }
     public virtual void EndOfGame() { }
 
-    public bool Link() { link = MovementController.IsLink(piece, ValidLoc(true)); return link; }
+    public bool Link() { link = MovementController.IsLink(piece, ValidLocs(true)); return link; }
     public bool Activatable()
     {
         return limitedUse != 0 && (activatable || Link()); // fuck silence

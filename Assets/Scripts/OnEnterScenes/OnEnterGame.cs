@@ -8,18 +8,18 @@ using System;
 
 public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 {
-    public static bool gameover = false;
     public static int current_tactic = -1;
 
     public GameInfo gameInfo;
-    public GameObject victoryImage, defeatImage, drawImage, settingsPanel, yourTurnImage, notEnoughCoinsImage, notEnoughOresImage;
-    public GameObject pathDot, targetDot, oldLocation;
-    public GameObject history, trapCard, playerFlag, enemyFlag;
+    public GameObject victoryImage, defeatImage, drawImage, settingsPanel, yourTurnImage, notEnoughCoinsImage, notEnoughOresImage, freezedText;
+    public GameObject pathDot, targetDot, oldLocation, explosion, askTriggerPanel;
+    public GameObject history, trapInfoCard, enemyInfoCard, playerFlag, enemyFlag;
     public Transform tacticBag;
+    public Button endTurnButton;
     public Text roundCount, timer, modeName;
     public Text playerName, playerWin, playerRank;
     public Text opponentName, opponentWin, opponentRank;
-    public Text oreText, coinText;
+    public Text oreText, coinText, endTurnText;
     [HideInInspector] public GameObject board;
     [HideInInspector] public BoardSetup boardSetup;
 
@@ -31,6 +31,9 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     {
         { "Chariot", 8 }, { "Horse", 4}, {"Elephant", 3}, {"Advisor", 2}, {"General", 10}, {"Cannon", 4}, {"Soldier", 2}
     };
+
+    private static Trigger trigger;
+    private static string triggerMessage;
 
     // Use this for initialization
     void Start () {
@@ -58,9 +61,9 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             tacticTriggers.Add(tacticObjs[i].GetComponent<TacticInfo>().trigger);
         }
         modeName.text = InfoLoader.user.lastModeSelected;
-        GameInfo.SetOrder(InfoLoader.user.playerID, 100000000);
-        GameInfo.SetGameID(1);
-        GameInfo.unusedTactics = new List<string>(lineup.tactics);
+        // Set GameInfo
+        gameInfo = new GameInfo(); // should be downloading a GameInfo
+        //GameInfo.JsonToClass();
         foreach (KeyValuePair<Vector2Int, GameObject> pair in boardSetup.pieces)
         {
             Trigger trigger = pair.Value.GetComponent<PieceInfo>().trigger;
@@ -84,11 +87,12 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (gameover)
+        if (GameInfo.gameOver)
         {
-            gameover = false;
+            GameInfo.gameOver = false;
             SceneManager.LoadScene("PlayerMatching");
             GameInfo.Clear();
+            Destroy(board);
         }
     }
 
@@ -96,7 +100,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     {
         while (true)
         {
-            if (gameover) break;
+            if (GameInfo.gameOver) break;
             string seconds = (GameInfo.time % 60).ToString();
             if (seconds.Length == 1) seconds = "0" + seconds;
             timer.text = (GameInfo.time / 60).ToString() + ":" + seconds;
@@ -131,7 +135,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     public void GameOver()
     {
         GameInfo.time = GameInfo.maxTime;
-        gameover = true;
+        GameInfo.gameOver = true;
         if (settingsPanel.activeSelf) settingsPanel.SetActive(false);
         foreach(KeyValuePair<Vector2Int,GameObject> pair in boardSetup.pieces)
         {
@@ -178,10 +182,17 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             credit += credits[piece.GetPieceType()];
     }
 
+    public void EndTurn()
+    {
+        endTurnButton.interactable = false;
+        NextTurn();
+    }
+
     public void YourTurn()
     {
+        endTurnText.text = "Your Turn";
         //StartCoroutine(ShowYourTurn());
-        GameInfo.actionRemaining = 1;
+        GameInfo.actions[InfoLoader.user.playerID] = 1;
         foreach (KeyValuePair<Vector2Int, GameObject> pair in boardSetup.pieces)
         {
             Trigger trigger = pair.Value.GetComponent<PieceInfo>().trigger;
@@ -200,10 +211,16 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 
     public void NextTurn()
     {
+        endTurnText.text = "Enemy Turn";
         foreach (KeyValuePair<Vector2Int, GameObject> pair in boardSetup.pieces)
         {
+            Piece piece = pair.Value.GetComponent<PieceInfo>().piece;
             Trigger trigger = pair.Value.GetComponent<PieceInfo>().trigger;
-            if (trigger != null) trigger.EndOfTurn();
+            if (trigger != null)
+            {
+                if (piece.freeze > 0) --piece.freeze;
+                trigger.EndOfTurn();
+            }
         }
         roundCount.text = (++GameInfo.round).ToString();
         if (GameInfo.round == 150)
@@ -211,7 +228,19 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             Draw();
             return;
         }
+        if (GameInfo.actions[InfoLoader.user.playerID] > 1) endTurnButton.interactable = true;
         GameInfo.time = GameInfo.maxTime;
+        StartCoroutine(EnemyTurn());
+    }
+
+    public IEnumerator EnemyTurn()
+    {
+        GameEvent gameEvent = new GameEvent();
+        while (false) // fetching enemy response // should return "" if no response
+            yield return new WaitForSeconds(1);
+        GameController.DecodeGameEvent(gameEvent);
+        // decode gameEvent
+        // if trigger enemyCardInfo.GetComponent<CardInfo>().SetAttributes()
         YourTurn();
     }
 
@@ -226,37 +255,79 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     {
         if (GameInfo.traps.ContainsKey(location))
         {
-            // trigger it
-            Trap trap = InfoLoader.FindTrap(GameInfo.traps[location]);
-            trapCard.GetComponent<TrapInfo>().SetAttributes(trap);
+            GameEvent gameEvent = new GameEvent();
+            explosion.transform.position = new Vector3(location.x * MovementController.scale, location.y * MovementController.scale, -3);
+            Trap trap = InfoLoader.FindTrap(GameInfo.traps[location].Key);
+            trapInfoCard.GetComponent<TrapInfo>().SetAttributes(trap, GameInfo.traps[location].Value);
             trap.trigger.Activate();
             GameInfo.traps.Remove(location);
+            AddToHistory(gameEvent);
             StartCoroutine(ShowTrapInfo());
         }
     }
 
     private IEnumerator ShowTrapInfo(float time = 2f)
     {
-        trapCard.SetActive(true);
+        trapInfoCard.SetActive(true);
+        explosion.SetActive(true);
         yield return new WaitForSeconds(time);
-        trapCard.SetActive(false);
+        trapInfoCard.SetActive(false);
+        explosion.SetActive(false);
     }
 
-    public void NotEnoughCoins()
+    public void AddToHistory(GameEvent gameEvent)
     {
-        StartCoroutine(ShowNotEnoughCoins());
+
     }
-    private IEnumerator ShowNotEnoughCoins(float time = 1.5f)
+
+    public void AskTrigger(Trigger trigger_para, string message)
+    {
+        if (trigger_para.piece.GetOreCost() > GameInfo.ores[InfoLoader.user.playerID]) return;
+        GameInfo.actions[InfoLoader.user.playerID]++;
+        trigger = trigger_para;
+        triggerMessage = message;
+        askTriggerPanel.SetActive(true);
+    }
+    public void ConfirmTrigger()
+    {
+        if (triggerMessage == "AfterMove") trigger.AfterMove();
+        else if (triggerMessage == "InEnemyRegion") trigger.InEnemyRegion();
+        else if (triggerMessage == "InEnemyPalace") trigger.InEnemyPalace();
+        else if (triggerMessage == "AtEnemyBottom") trigger.AtEnemyBottom();
+        CancelTrigger();
+    }
+    public void CancelTrigger()
+    {
+        trigger = null;
+        triggerMessage = "";
+        askTriggerPanel.SetActive(false);
+        if(--GameInfo.actions[InfoLoader.user.playerID] == 0) NextTurn();
+    }
+    public void ShowPieceFreezed()
+    {
+        StartCoroutine(PieceFreezed());
+    }
+    private IEnumerator PieceFreezed(float time = 1.5f)
+    {
+        freezedText.SetActive(true);
+        yield return new WaitForSeconds(time);
+        freezedText.SetActive(false);
+    }
+    public void ShowNotEnoughCoins()
+    {
+        StartCoroutine(NotEnoughCoins());
+    }
+    private IEnumerator NotEnoughCoins(float time = 1.5f)
     {
         notEnoughCoinsImage.SetActive(true);
         yield return new WaitForSeconds(time);
         notEnoughCoinsImage.SetActive(false);
     }
-    public void NotEnoughOres()
+    public void ShowNotEnoughOres()
     {
-        StartCoroutine(ShowNotEnoughOres());
+        StartCoroutine(NotEnoughOres());
     }
-    private IEnumerator ShowNotEnoughOres(float time = 1.5f)
+    private IEnumerator NotEnoughOres(float time = 1.5f)
     {
         notEnoughOresImage.SetActive(true);
         yield return new WaitForSeconds(time);
