@@ -41,30 +41,6 @@ public class Login : MonoBehaviour
         StartCoroutine(RequestLogin(inputEmail.text, inputPassword.text));
     }
 
-    //public void RequestLogin(string email, string password)
-    //{
-    //    // Connect to the server
-    //    // if not work return and warn
-    //    // else save email and password
-    //    // download data
-    //    // Info Loader
-
-    //    if (email == "1@1.com" && password == "12345678") // match
-    //    {
-    //        PlayerPrefs.SetString("email", email);
-    //        PlayerPrefs.SetString("password", password);
-    //        if (emptyEmail.activeSelf) emptyEmail.SetActive(false);
-    //        if (emptyPassword.activeSelf) emptyPassword.SetActive(false);
-    //        if (wrongPassword.activeSelf) wrongPassword.SetActive(false);
-    //        SceneManager.LoadScene("Main");
-    //    }
-    //    else
-    //    {
-    //        inputPassword.text = "";
-    //        wrongPassword.SetActive(true);
-    //    }        
-    //}
-
     public IEnumerator RequestLogin(string email, string password, bool showError = true)  //connect with server, and VERIFY credentials
     {
         WWWForm infoToPhp = new WWWForm();

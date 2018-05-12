@@ -127,7 +127,7 @@ public class ContractsManager : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public void SetCards(int count = 5)
     {
-
+        Debug.Log(targetContract.name);
     }
 
     public void ResizeCardView(int count)

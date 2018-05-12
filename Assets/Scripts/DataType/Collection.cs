@@ -47,7 +47,7 @@ public class Collection
         name = tacticName;
         type = "Tactic";
         count = Count;
-        TacticAttributes attributes = InfoLoader.FindTacticAttributes(tacticName);
+        TacticAttributes attributes = Database.FindTacticAttributes(tacticName);
         oreCost = attributes.oreCost;
         health = attributes.goldCost;
     }
@@ -77,13 +77,13 @@ public class Collection
         health = Health;
         if (Type == "Tactic")
         {
-            TacticAttributes attributes = InfoLoader.FindTacticAttributes(Name);
+            TacticAttributes attributes = Database.FindTacticAttributes(Name);
             health = attributes.goldCost;
             oreCost = attributes.oreCost;
         }
         else if (!Name.StartsWith("Standard "))
         {
-            PieceAttributes attributes = InfoLoader.FindPieceAttributes(Name);
+            PieceAttributes attributes = Database.FindPieceAttributes(Name);
             if (Health == 0) health = attributes.health;
             oreCost = attributes.oreCost;
         }

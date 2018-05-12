@@ -69,7 +69,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             Transform tacticSlot = tacticBag.Find(String.Format("TacticSlot{0}", i));
             tacticButtons.Add(tacticSlot.GetComponent<Button>());
             tacticObjs.Add(tacticSlot.Find("Tactic"));
-            tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(InfoLoader.FindTacticAttributes(lineup.tactics[i].tacticName));
+            tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(Database.FindTacticAttributes(lineup.tactics[i].tacticName));
             tacticTriggers.Add(tacticObjs[i].GetComponent<TacticInfo>().trigger);
         }
         StartCoroutine(Timer());
@@ -263,7 +263,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             GameEvent gameEvent = new GameEvent();
             explosion.transform.position = new Vector3(location.x * MovementController.scale, location.y * MovementController.scale, -3);
             explosion.transform.SetParent(boardSetup.boardCanvas);
-            Trap trap = InfoLoader.FindTrap(GameInfo.traps[location].Key);
+            Trap trap = Database.FindTrapAttributes(GameInfo.traps[location].Key);
             trapInfoCard.GetComponent<TrapInfo>().SetAttributes(trap, GameInfo.traps[location].Value);
             trap.trigger.Activate(location);
             GameInfo.traps.Remove(location);

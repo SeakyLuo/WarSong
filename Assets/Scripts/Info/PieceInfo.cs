@@ -23,7 +23,7 @@ public class PieceInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void Setup(Collection collection, Vector2Int loc, bool IsAlly)
     {
-        pieceAttributes = InfoLoader.FindPieceAttributes(collection.name);
+        pieceAttributes = Database.FindPieceAttributes(collection.name);
         piece = new Piece(collection, loc, pieceAttributes.oreCost, IsAlly);
         if (pieceAttributes.trigger != null) trigger = Instantiate(pieceAttributes.trigger);
         if (trigger != null) trigger.piece = piece; // remove the if when all completed

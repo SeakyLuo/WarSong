@@ -100,7 +100,7 @@ public class LineupBuilder : MonoBehaviour {
     private void AddTactic(Tactic tactic)
     {
         // called by progrommer
-        TacticAdder(InfoLoader.FindTacticAttributes(tactic.tacticName));
+        TacticAdder(Database.FindTacticAttributes(tactic.tacticName));
     }
 
     private void TacticAdder(TacticAttributes attributes)
