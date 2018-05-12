@@ -8,9 +8,11 @@ public class GameController : MonoBehaviour {
     public static Vector3 raiseVector = new Vector3(0, 0, raiseHeight);
     public static OnEnterGame onEnterGame;
     public static BoardSetup boardSetup;
+    public static Transform boardCanvas;
     public static Dictionary<string, List<Vector2Int>> castles;
     public static PieceInfo pieceInfo;
     public static Dictionary<Vector2Int, GameObject> flags;
+    public static Dictionary<Vector2Int, GameObject> freezeImages;
 
     [HideInInspector] public GameObject settingsPanel;
 
@@ -18,6 +20,7 @@ public class GameController : MonoBehaviour {
     void Start () {
         onEnterGame = GameObject.Find("UIPanel").GetComponent<OnEnterGame>();
         boardSetup = onEnterGame.boardSetup;
+        boardCanvas = onEnterGame.board.transform.Find("Canvas");
         settingsPanel = onEnterGame.settingsPanel;
         castles = new Dictionary<string, List<Vector2Int>>()
         {
@@ -29,6 +32,7 @@ public class GameController : MonoBehaviour {
             {"Soldier", boardSetup.boardAttributes.SoldierCastle()  },
         };
         flags = new Dictionary<Vector2Int, GameObject>();
+        freezeImages = new Dictionary<Vector2Int, GameObject>();
     }
 
     private void Update()
@@ -52,7 +56,7 @@ public class GameController : MonoBehaviour {
                     pieceInfo = hitObj.GetComponent<PieceInfo>();
                     if(pieceInfo.piece.freeze > 0)
                     {
-                        onEnterGame.ShowPieceFreezed();
+                        onEnterGame.ShowPieceFrozen();
                         return;
                     }
                     if (ActivateAbility.activated) GameTacticGesture.Resume();
@@ -168,6 +172,11 @@ public class GameController : MonoBehaviour {
         else GameInfo.activePieces[InfoLoader.playerID][index].freeze = round;
         GameInfo.board[location].freeze = round;
         boardSetup.pieces[location].GetComponent<PieceInfo>().piece.freeze = round;
+
+        // Add freeze image
+        GameObject freezeImage = Instantiate(onEnterGame.freezeImage, boardCanvas);
+        freezeImage.transform.position = new Vector3(location.x * MovementController.scale, location.y * MovementController.scale, -0.5f);
+        freezeImages.Add(location, freezeImage);
     }
 
     public static void PlaceTrap(Vector2Int location, string trapName, int creator)
@@ -180,12 +189,12 @@ public class GameController : MonoBehaviour {
         GameObject flag;
         if (isAlly)
         {
-            flag = Instantiate(onEnterGame.playerFlag, onEnterGame.board.transform.Find("Canvas"));
+            flag = Instantiate(onEnterGame.playerFlag, boardCanvas);
             GameInfo.flags.Add(location, InfoLoader.user.playerID);
         }
         else
         {
-            flag = Instantiate(onEnterGame.enemyFlag);
+            flag = Instantiate(onEnterGame.enemyFlag, boardCanvas);
             GameInfo.flags.Add(location, GameInfo.TheOtherPlayer());
         }
         flag.transform.position = new Vector3(location.x * MovementController.scale, location.y * MovementController.scale, -0.5f);

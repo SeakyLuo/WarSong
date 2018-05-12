@@ -54,10 +54,14 @@ public class MovementController : MonoBehaviour
         Piece enemy;
         if (GameInfo.board.TryGetValue(loc, out enemy) && !enemy.isAlly)
         {
-            onEnterGame.AskTrigger(pieceInfo.trigger, "BloodThirsty");
             GameController.Eliminate(enemy);
             if (enemy.GetPieceType() == "General")
+            {
+                // Maybe should include asktrigger
                 onEnterGame.Victory();
+                return;
+            }
+            onEnterGame.AskTrigger(pieceInfo.trigger, "BloodThirsty");
         }
     }
 
@@ -85,8 +89,7 @@ public class MovementController : MonoBehaviour
     {
         /// location is new location
         oldLocation.transform.position = selected.transform.position - GameController.raiseVector;
-        if (previousSprite != null)
-            previousImage.sprite = previousSprite;
+        if (previousSprite != null && previousImage != null) previousImage.sprite = previousSprite;
 
         Move(selected.gameObject, GetGridLocation(selected.transform.position.x, selected.transform.position.y), location);
 
@@ -141,7 +144,6 @@ public class MovementController : MonoBehaviour
             }
         return unoccupied;
     }
-
     private List<Vector2Int> ValidLocs(Collider obj)
     {
         int x = (int)Mathf.Floor(obj.transform.position.x / scale);

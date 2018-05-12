@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class UserInfo {
 
+    public static int maxWinPerDay = 10;
+
     public string username;
     public int playerID;
     public List<Collection> collection;

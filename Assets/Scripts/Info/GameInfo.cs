@@ -25,6 +25,7 @@ public class GameInfo
     public static int gameID;
     public static bool gameStarts = false;
     public static bool gameOver = false;
+    public static int victory = -1; // -1 if draw, otherwise playerID
 
     public GameInfo(Lineup playerLineup, int playerID, Lineup enemyLineup, int enemyID)
     {

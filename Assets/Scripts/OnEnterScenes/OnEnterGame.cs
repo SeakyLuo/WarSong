@@ -11,9 +11,9 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     public static int current_tactic = -1;
 
     public GameInfo gameInfo;
-    public GameObject gameStartImage, victoryImage, defeatImage, drawImage, settingsPanel, yourTurnImage, notEnoughCoinsImage, notEnoughOresImage, freezedText;
+    public GameObject gameStartImage, victoryImage, defeatImage, drawImage, settingsPanel, yourTurnImage, notEnoughCoinsImage, notEnoughOresImage, freezeText, winReward;
     public GameObject pathDot, targetDot, oldLocation, explosion, askTriggerPanel;
-    public GameObject history, boardInfoCard , trapInfoCard, enemyInfoCard, playerFlag, enemyFlag;
+    public GameObject history, boardInfoCard , trapInfoCard, enemyInfoCard, playerFlag, enemyFlag, freezeImage;
     public Transform tacticBag;
     public Button endTurnButton;
     public Text roundCount, timer, modeName;
@@ -25,8 +25,8 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 
     private static Lineup lineup;
     private static List<Transform> tacticObjs;
-    private static List<Button> tacticButtons = new List<Button>();
-    private static List<TacticTrigger> tacticTriggers = new List<TacticTrigger>();
+    private static List<Button> tacticButtons;
+    private static List<TacticTrigger> tacticTriggers;
     private static Dictionary<String, int> credits = new Dictionary<string, int>()
     {
         { "Chariot", 8 }, { "Horse", 4}, {"Elephant", 3}, {"Advisor", 2}, {"General", 10}, {"Cannon", 4}, {"Soldier", 2}
@@ -65,6 +65,8 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         SetCoinText();
         // SetupTactics
         tacticObjs = new List<Transform>();
+        tacticButtons = new List<Button>();
+        tacticTriggers = new List<TacticTrigger>();
         for (int i = 0; i < LineupBuilder.tacticsLimit; i++)
         {
             Transform tacticSlot = tacticBag.Find(String.Format("TacticSlot{0}", i));
@@ -74,23 +76,25 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             tacticTriggers.Add(tacticObjs[i].GetComponent<TacticInfo>().trigger);
         }
         StartCoroutine(Timer());
-        ShowGameStartAnimation();
+        StartCoroutine(GameStartAnimation());
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if (GameInfo.gameOver)
         {
+            if (victoryImage.activeSelf && InfoLoader.user.winsToday <= UserInfo.maxWinPerDay)
+            {
+                victoryImage.SetActive(false);
+                winReward.SetActive(true);
+                InfoLoader.user.coins++;
+                return;
+            }
             GameInfo.gameOver = false;
             SceneManager.LoadScene("PlayerMatching");
             GameInfo.Clear();
             Destroy(board);
         }
-    }
-
-    public void ShowGameStartAnimation()
-    {
-        StartCoroutine(GameStartAnimation());
     }
 
     private IEnumerator GameStartAnimation()
@@ -117,7 +121,8 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     }
 
     public void Victory()
-    {        
+    {
+        GameInfo.victory = InfoLoader.playerID;
         victoryImage.SetActive(true);
         InfoLoader.user.total.Win();
         GameOver();
@@ -125,6 +130,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 
     public void Defeat()
     {
+        GameInfo.victory = GameInfo.TheOtherPlayer();
         defeatImage.SetActive(true);
         InfoLoader.user.total.Lost();
         GameOver();
@@ -132,6 +138,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 
     public void Draw()
     {
+        GameInfo.victory = -1;
         drawImage.SetActive(true);
         InfoLoader.user.total.Draw();
         GameOver();
@@ -139,6 +146,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 
     public void GameOver()
     {
+        boardInfoCard.SetActive(false);
         GameInfo.time = GameInfo.maxTime;
         GameInfo.gameOver = true;
         if (settingsPanel.activeSelf) settingsPanel.SetActive(false);
@@ -224,7 +232,11 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             Trigger trigger = pair.Value.GetComponent<PieceInfo>().trigger;
             if (trigger != null)
             {
-                if (piece.freeze > 0) --piece.freeze;
+                if (piece.freeze > 0 && --piece.freeze == 0)
+                {
+                    Destroy(GameController.freezeImages[pair.Key]);
+                    GameController.freezeImages.Remove(pair.Key);
+                }
                 trigger.EndOfTurn();
             }
         }
@@ -242,6 +254,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     public IEnumerator EnemyTurn()
     {
         GameEvent gameEvent = new GameEvent();
+        // WWWForm
         while (false) // fetching enemy response // should return "" if no response
             yield return new WaitForSeconds(1);
         GameController.DecodeGameEvent(gameEvent);
@@ -314,15 +327,15 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         askTriggerPanel.SetActive(false);
         if(--GameInfo.actions[InfoLoader.user.playerID] == 0) NextTurn();
     }
-    public void ShowPieceFreezed()
+    public void ShowPieceFrozen()
     {
-        StartCoroutine(PieceFreezed());
+        StartCoroutine(PieceFrozen());
     }
-    private IEnumerator PieceFreezed(float time = 1.5f)
+    private IEnumerator PieceFrozen(float time = 1.5f)
     {
-        freezedText.SetActive(true);
+        freezeText.SetActive(true);
         yield return new WaitForSeconds(time);
-        freezedText.SetActive(false);
+        freezeText.SetActive(false);
     }
     public void ShowNotEnoughCoins()
     {

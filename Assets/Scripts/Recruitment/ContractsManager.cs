@@ -160,6 +160,8 @@ public class ContractsManager : MonoBehaviour, IBeginDragHandler, IDragHandler, 
                 string piece = pieces[Random.Range(0, pieces.Count)];
                 PieceAttributes attributes = Database.FindPieceAttributes(piece);
                 collection = new Collection(attributes);
+                if (luck > 90) collection.health += (int) Mathf.Ceil(collection.health * 0.2f);
+                if (luck > 95) collection.health += (int)Mathf.Ceil(collection.health * 0.1f);
                 cardView.transform.Find("Card" + i.ToString()).GetComponent<CardInfo>().SetAttributes(attributes);
             }
             InfoLoader.user.AddCollection(collection);
