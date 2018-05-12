@@ -8,7 +8,7 @@ public class Database {
 
     public static List<PieceAttributes> pieces = new List<PieceAttributes>();
     public static List<TacticAttributes> tactics = new List<TacticAttributes>();
-    public static Dictionary<string, List<PieceAttributes>> attributes = new Dictionary<string, List<PieceAttributes>>()
+    public static Dictionary<string, List<PieceAttributes>> pieceDict = new Dictionary<string, List<PieceAttributes>>()
     {
         {"General", new List<PieceAttributes>() }, {"Advisor", new List<PieceAttributes>() }, {"Elephant", new List<PieceAttributes>() },
         {"Horse", new List<PieceAttributes>() }, {"Chariot", new List<PieceAttributes>() }, {"Cannon", new List<PieceAttributes>() }, {"Soldier", new List<PieceAttributes>() }
@@ -19,10 +19,10 @@ public class Database {
 
     public Database()
     {
-        //foreach(string path in Directory.GetFiles("Assets/Resources/Piece/"))
-        //    pieces.Add(InfoLoader.FindPieceAttributes(path));
-        //foreach (string path in Directory.GetFiles("Assets/Resources/Tactic/"))
-        //    tactics.Add(InfoLoader.FindTacticAttributes(path));
+        foreach (string path in Directory.GetFiles("Assets/Resources/Piece/"))
+            pieces.Add(InfoLoader.FindPieceAttributes(path));
+        foreach (string path in Directory.GetFiles("Assets/Resources/Tactic/"))
+            tactics.Add(InfoLoader.FindTacticAttributes(path));
         //foreach (string path in Directory.GetFiles("Assets/Resources/Board/"))
         //    boards.Add(InfoLoader.FindBoardAttributes(path));
         FindAttributes("Trap");
@@ -35,7 +35,12 @@ public class Database {
         {
             string folder = file.Substring(path.Length);
             folder = folder.Substring(0, folder.Length - 5);
-            if (type == "Piece") pieces.Add(InfoLoader.FindPieceAttributes(folder));
+            if (type == "Piece")
+            {
+                PieceAttributes pieceAttributes = InfoLoader.FindPieceAttributes(folder);
+                pieceDict[pieceAttributes.type].Add(pieceAttributes);
+                pieces.Add(pieceAttributes);
+            }
             else if (type == "Tactic") tactics.Add(InfoLoader.FindTacticAttributes(folder));
             else if (type == "Board") boards.Add(InfoLoader.FindBoardAttributes(folder));
             else if (type == "Trap") traps.Add(InfoLoader.FindTrap(folder));

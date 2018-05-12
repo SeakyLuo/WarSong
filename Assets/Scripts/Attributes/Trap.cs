@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [System.Serializable]
-[CreateAssetMenu(fileName = "Trap", menuName = "Trap")]
+[CreateAssetMenu(fileName = "Attributes", menuName = "Trap")]
 public class Trap : ScriptableObject
 {
     public string Name;

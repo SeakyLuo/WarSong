@@ -84,6 +84,7 @@ public class ContractsManager : MonoBehaviour, IBeginDragHandler, IDragHandler, 
             {
                 --InfoLoader.user.contracts[targetContract.name];
                 // retrieve cards from the server and set them
+                SetCards();
                 claimCards.SetActive(true);
             }
             else
@@ -91,6 +92,7 @@ public class ContractsManager : MonoBehaviour, IBeginDragHandler, IDragHandler, 
                 if (warned)
                 {
                     Use10Contracts();
+                    SetCards(count * 5);
                 }
                 else
                 {
@@ -121,6 +123,11 @@ public class ContractsManager : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         use10Contracts.SetActive(false);
         claimCards.SetActive(true);
         warned = true;
+    }
+
+    public void SetCards(int count = 5)
+    {
+
     }
 
     public void ResizeCardView(int count)

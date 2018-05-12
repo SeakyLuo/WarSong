@@ -41,5 +41,6 @@ public class InfoLoader : MonoBehaviour {
         return Resources.Load<PieceAttributes>("Piece/" + pieceName + "/Attributes");
     }
     public static TacticAttributes FindTacticAttributes(string tacticName) { return Resources.Load<TacticAttributes>("Tactic/" + tacticName + "/Attributes"); }
-    public static Trap FindTrap(string trapName) { return Resources.Load<Trap>("Trap/" + trapName + "/Trap"); }
+    public static Trap FindTrap(string trapName) { return Resources.Load<Trap>("Trap/" + trapName + "/Attributes"); }
+    public static ContractAttributes FindContractAttributes(string contractName) { return Resources.Load<ContractAttributes>("Contract/" + contractName + "/Attributes"); }
 }
