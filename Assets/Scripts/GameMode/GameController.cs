@@ -194,7 +194,6 @@ public class GameController : MonoBehaviour {
         {
 
         }
-        
     }
 
     public static bool ChangeOre(int deltaAmount)

@@ -288,11 +288,12 @@ MonoBehaviour:
   oreCostText: {fileID: 114405012157007180}
   goldCostText: {fileID: 114462870522323160}
   image: {fileID: 114652757754111082}
-  tactic: {fileID: 11400000, guid: 29bf13c0601e965449e5a81b0a52482a, type: 2}
+  tacticAttributes: {fileID: 0}
   trigger: {fileID: 0}
-  oreCost: 0
-  goldCost: 4
-  active: 1
+  tactic:
+    tacticName: 
+    oreCost: 0
+    goldCost: 0
 --- !u!114 &114136905204218430
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -666,6 +667,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoCard: {fileID: 0}
+  oreCostText: {fileID: 0}
+  goldCostText: {fileID: 0}
 --- !u!222 &222000284884291066
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -69,7 +69,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             Transform tacticSlot = tacticBag.Find(String.Format("TacticSlot{0}", i));
             tacticButtons.Add(tacticSlot.GetComponent<Button>());
             tacticObjs.Add(tacticSlot.Find("Tactic"));
-            tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(InfoLoader.FindTacticAttributes(lineup.tactics[i]));
+            tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(InfoLoader.FindTacticAttributes(lineup.tactics[i].tacticName));
             tacticTriggers.Add(tacticObjs[i].GetComponent<TacticInfo>().trigger);
         }
         StartCoroutine(Timer());
@@ -168,10 +168,10 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
                 else lineup.cardLocations[pair.Key] = Collection.StandardCollection(pair.Value.type);
             }
         }
-        foreach(string tactic in lineup.tactics)
+        foreach(Tactic tactic in lineup.tactics)
         {
             if (GameInfo.unusedTactics[InfoLoader.playerID].Contains(tactic)) continue;
-            int index = InfoLoader.user.FindCollectionWithName(tactic);
+            int index = InfoLoader.user.FindCollectionWithName(tactic.tacticName);
             if (index != -1)
             {
                 if (--InfoLoader.user.collection[index].count == 0)

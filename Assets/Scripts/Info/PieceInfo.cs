@@ -49,8 +49,7 @@ public class PieceInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         if (selected) return;
         card.SetActive(true);
         card.GetComponent<CardInfo>().SetAttributes(pieceAttributes);
-        card.GetComponent<CardInfo>().SetIsAlly(piece.isAlly);
-        card.GetComponent<CardInfo>().SetHealth(piece.GetHealth());
+        card.GetComponent<CardInfo>().SetPiece(piece);
 
         Vector3 newPosition = new Vector3();
         float posX = transform.position.x;

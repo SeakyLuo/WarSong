@@ -6,8 +6,10 @@ using UnityEngine.EventSystems;
 public class GameTacticGesture : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
     public GameObject infoCard;
-    
-    private GameObject tactic;
+    public Text oreCostText;
+    public Text goldCostText;
+
+    private GameObject tacticObj;
     private Button button;
     private TacticTrigger trigger;
     private float prevClick = 0;
@@ -17,9 +19,9 @@ public class GameTacticGesture : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     private void Start()
     {
-        tactic = transform.Find("Tactic").gameObject;
+        tacticObj = transform.Find("Tactic").gameObject;
         button = GetComponent<Button>();
-        trigger = tactic.GetComponent<TacticInfo>().trigger;
+        trigger = tacticObj.GetComponent<TacticInfo>().trigger;
     }
 
     public void UseTactic(int caller)
@@ -32,7 +34,7 @@ public class GameTacticGesture : MonoBehaviour, IPointerEnterHandler, IPointerEx
             // double click doesn't work well
             if (!trigger.needsTarget && Time.time - prevClick < doubleClickInterval)
             {
-                if (!GameController.ChangeOre(-trigger.oreCost) || !GameController.ChangeCoin(-trigger.goldCost)) return;
+                if (!GameController.ChangeOre(-trigger.tactic.oreCost) || !GameController.ChangeCoin(-trigger.tactic.goldCost)) return;
                 trigger.Activate();
                 gameObject.SetActive(false);
             }
@@ -57,9 +59,12 @@ public class GameTacticGesture : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!tactic.activeSelf) return;
+        if (!tacticObj.activeSelf) return;
         infoCard.SetActive(true);
-        infoCard.GetComponent<CardInfo>().SetAttributes(tactic.GetComponent<TacticInfo>().tactic);
+        CardInfo cardInfo = infoCard.GetComponent<CardInfo>();
+        cardInfo.SetAttributes(tacticObj.GetComponent<TacticInfo>().tacticAttributes);
+        cardInfo.SetIsAlly(true);
+        cardInfo.SetTactic(tacticObj.GetComponent<TacticInfo>().tactic);
         infoCard.transform.localPosition = new Vector3(300, transform.localPosition.y, -6.1f); ;
     }
 

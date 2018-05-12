@@ -8,8 +8,8 @@ public class GameInfo
     public static Dictionary<Vector2Int, Piece> board = new Dictionary<Vector2Int, Piece>();
     public static Dictionary<Vector2Int, KeyValuePair<string, int>> traps = new Dictionary<Vector2Int, KeyValuePair<string, int>>(); // loc and trap name & creator ID
     public static Dictionary<Vector2Int, int> flags = new Dictionary<Vector2Int, int>();  // loc and player ID
-    public static Dictionary<int, List<string>> unusedTactics = new Dictionary<int, List<string>>();
-    public static Dictionary<int, List<string>> usedTactics = new Dictionary<int, List<string>>();
+    public static Dictionary<int, List<Tactic>> unusedTactics = new Dictionary<int, List<Tactic>>();
+    public static Dictionary<int, List<Tactic>> usedTactics = new Dictionary<int, List<Tactic>>();
     public static Dictionary<int, List<Piece>> activePieces = new Dictionary<int, List<Piece>>(),
                                                inactivePieces = new Dictionary<int, List<Piece>>();
 
@@ -57,15 +57,15 @@ public class GameInfo
             { playerID, new List<Piece>() },
             { enemyID, new List<Piece>() },
         };
-        unusedTactics = new Dictionary<int, List<string>>()
+        unusedTactics = new Dictionary<int, List<Tactic>>()
         {
-            { playerID, new List<string>(playerLineup.tactics) },
-            { enemyID, new List<string>(enemyLineup.tactics) }
+            { playerID, playerLineup.tactics },
+            { enemyID, enemyLineup.tactics }
         };
-        usedTactics = new Dictionary<int, List<string>>()
+        usedTactics = new Dictionary<int, List<Tactic>>()
         {
-            { playerID, new List<string>() },
-            { enemyID, new List<string>() }
+            { playerID, new List<Tactic>() },
+            { enemyID, new List<Tactic>() }
         };
         gameStarts = true;
     }
@@ -115,15 +115,15 @@ public class GameInfo
         return false;
     }
 
-    public static void AddTactic(string tacticName)
+    public static void AddTactic(Tactic tactic)
     {
-        unusedTactics[InfoLoader.playerID].Add(tacticName);
+        unusedTactics[InfoLoader.playerID].Add(tactic);
     }
 
-    public static void RemoveTactic(string tacticName)
+    public static void RemoveTactic(Tactic tactic)
     {
-        unusedTactics[InfoLoader.playerID].Remove(tacticName);
-        usedTactics[InfoLoader.playerID].Add(tacticName);
+        unusedTactics[InfoLoader.playerID].Remove(tactic);
+        usedTactics[InfoLoader.playerID].Add(tactic);
     }
 
     public static void SetOrder(int player1, int player2)

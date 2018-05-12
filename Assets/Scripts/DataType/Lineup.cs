@@ -5,7 +5,7 @@ using UnityEngine;
 public class Lineup
 {
     public Dictionary<Vector2Int, Collection> cardLocations;
-    public List<string> tactics;
+    public List<Tactic> tactics;
     public string boardName;
     public string lineupName;
     public string general;
@@ -19,10 +19,17 @@ public class Lineup
 
     public Lineup(Dictionary<Vector2Int, Collection> cardLoc, List<string> Tactics, string BoardName = "Standard Board", string LineupName = "Custom Lineup", string General = "Standard General")
     {
+        List<Tactic> playerTactics = new List<Tactic>();
+        foreach (string tacticName in Tactics) playerTactics.Add(new Tactic(InfoLoader.FindTacticAttributes(tacticName)));
+        SetInfo(cardLoc, playerTactics, BoardName, LineupName, General);
+    }
+
+    public Lineup(Dictionary<Vector2Int, Collection> cardLoc, List<Tactic> Tactics, string BoardName = "Standard Board", string LineupName = "Custom Lineup", string General = "Standard General")
+    {
         SetInfo(cardLoc, Tactics, BoardName, LineupName, General);
     }
 
-    public void SetInfo(Dictionary<Vector2Int, Collection> cardLoc, List<string> Tactics, string BoardName = "Standard Board", string LineupName = "Custom Lineup", string General = "Standard General")
+    public void SetInfo(Dictionary<Vector2Int, Collection> cardLoc, List<Tactic> Tactics, string BoardName = "Standard Board", string LineupName = "Custom Lineup", string General = "Standard General")
     {
         cardLocations = cardLoc;
         tactics = Tactics;
@@ -35,7 +42,7 @@ public class Lineup
     public void Clear()
     {
         cardLocations = new Dictionary<Vector2Int, Collection>();
-        tactics = new List<string>();
+        tactics = new List<Tactic>();
         boardName = "Standard Board";
         lineupName = "Custom Lineup";
         general = "Standard General";
@@ -63,10 +70,12 @@ public class EnemyLineup: Lineup
             {new Vector2Int(0,3), Collection.Soldier },{new Vector2Int(2,3), Collection.Soldier },
             {new Vector2Int(4,3), Collection.Soldier },{new Vector2Int(6,3), Collection.Soldier },{new Vector2Int(8,3), Collection.Soldier }
         };
-        tactics = new List<string>()
+        List<string> enemyTactics = new List<string>()
         {
             "Tame An Elephant","Purchase A Horse","Advisor Recruitment","Soldier Recruitment","Minesweeper",
             "A Secret Plan","Buy 1 Get 1 Free","Build A Rook","Winner Trophy","No Way"
         };
+        tactics = new List<Tactic>();
+        foreach (string tacticName in enemyTactics) tactics.Add(new Tactic(InfoLoader.FindTacticAttributes(tacticName)));
     }
 }

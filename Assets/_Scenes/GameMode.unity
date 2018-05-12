@@ -358,7 +358,7 @@ RectTransform:
   - {fileID: 742308120}
   - {fileID: 749817101}
   m_Father: {fileID: 826842010}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -432,6 +432,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoCard: {fileID: 1725673013}
+  oreCostText: {fileID: 0}
+  goldCostText: {fileID: 0}
 --- !u!114 &9253369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -832,7 +834,7 @@ RectTransform:
   - {fileID: 1722502928}
   - {fileID: 2014693456}
   m_Father: {fileID: 826842010}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -906,6 +908,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoCard: {fileID: 1725673013}
+  oreCostText: {fileID: 0}
+  goldCostText: {fileID: 0}
 --- !u!114 &33711876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2146,7 +2150,7 @@ RectTransform:
   - {fileID: 798488628}
   - {fileID: 283955754}
   m_Father: {fileID: 826842010}
-  m_RootOrder: 0
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2220,6 +2224,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoCard: {fileID: 1725673013}
+  oreCostText: {fileID: 0}
+  goldCostText: {fileID: 0}
 --- !u!114 &185907365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2313,11 +2319,12 @@ MonoBehaviour:
   oreCostText: {fileID: 902109383}
   goldCostText: {fileID: 2122882128}
   image: {fileID: 1146920678}
-  tactic: {fileID: 11400000, guid: 29bf13c0601e965449e5a81b0a52482a, type: 2}
+  tacticAttributes: {fileID: 0}
   trigger: {fileID: 0}
-  oreCost: 0
-  goldCost: 4
-  active: 1
+  tactic:
+    tacticName: 
+    oreCost: 0
+    goldCost: 0
 --- !u!114 &186280948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4511,7 +4518,7 @@ RectTransform:
   - {fileID: 868445643}
   - {fileID: 1829182756}
   m_Father: {fileID: 826842010}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4585,6 +4592,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoCard: {fileID: 1725673013}
+  oreCostText: {fileID: 0}
+  goldCostText: {fileID: 0}
 --- !u!114 &376760145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6181,7 +6190,7 @@ RectTransform:
   - {fileID: 645697739}
   - {fileID: 309205509}
   m_Father: {fileID: 826842010}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6255,6 +6264,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoCard: {fileID: 1725673013}
+  oreCostText: {fileID: 0}
+  goldCostText: {fileID: 0}
 --- !u!114 &589696517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6426,11 +6437,12 @@ MonoBehaviour:
   oreCostText: {fileID: 28727808}
   goldCostText: {fileID: 39911900}
   image: {fileID: 940704515}
-  tactic: {fileID: 11400000, guid: 29bf13c0601e965449e5a81b0a52482a, type: 2}
+  tacticAttributes: {fileID: 0}
   trigger: {fileID: 0}
-  oreCost: 0
-  goldCost: 4
-  active: 1
+  tactic:
+    tacticName: 
+    oreCost: 0
+    goldCost: 0
 --- !u!114 &645697741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6772,11 +6784,12 @@ MonoBehaviour:
   oreCostText: {fileID: 1043161507}
   goldCostText: {fileID: 1082240742}
   image: {fileID: 1461423600}
-  tactic: {fileID: 11400000, guid: 29bf13c0601e965449e5a81b0a52482a, type: 2}
+  tacticAttributes: {fileID: 0}
   trigger: {fileID: 0}
-  oreCost: 0
-  goldCost: 4
-  active: 1
+  tactic:
+    tacticName: 
+    oreCost: 0
+    goldCost: 0
 --- !u!114 &701818006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7343,11 +7356,12 @@ MonoBehaviour:
   oreCostText: {fileID: 2131840676}
   goldCostText: {fileID: 1598751967}
   image: {fileID: 1606550865}
-  tactic: {fileID: 11400000, guid: 29bf13c0601e965449e5a81b0a52482a, type: 2}
+  tacticAttributes: {fileID: 0}
   trigger: {fileID: 0}
-  oreCost: 0
-  goldCost: 4
-  active: 1
+  tactic:
+    tacticName: 
+    oreCost: 0
+    goldCost: 0
 --- !u!114 &742308122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7730,7 +7744,7 @@ RectTransform:
   - {fileID: 1651812038}
   - {fileID: 826903777}
   m_Father: {fileID: 826842010}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7804,6 +7818,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoCard: {fileID: 1725673013}
+  oreCostText: {fileID: 0}
+  goldCostText: {fileID: 0}
 --- !u!114 &787950307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7967,11 +7983,12 @@ MonoBehaviour:
   oreCostText: {fileID: 821256790}
   goldCostText: {fileID: 456512168}
   image: {fileID: 1019436551}
-  tactic: {fileID: 11400000, guid: 29bf13c0601e965449e5a81b0a52482a, type: 2}
+  tacticAttributes: {fileID: 0}
   trigger: {fileID: 0}
-  oreCost: 0
-  goldCost: 4
-  active: 1
+  tactic:
+    tacticName: 
+    oreCost: 0
+    goldCost: 0
 --- !u!114 &798488630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8428,7 +8445,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 185907362}
   - {fileID: 589696514}
   - {fileID: 1661892439}
   - {fileID: 9253366}
@@ -8438,6 +8454,7 @@ RectTransform:
   - {fileID: 376760142}
   - {fileID: 1880697053}
   - {fileID: 33711873}
+  - {fileID: 185907362}
   m_Father: {fileID: 1434275546}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8938,11 +8955,12 @@ MonoBehaviour:
   oreCostText: {fileID: 277275523}
   goldCostText: {fileID: 141900961}
   image: {fileID: 1010167950}
-  tactic: {fileID: 11400000, guid: 29bf13c0601e965449e5a81b0a52482a, type: 2}
+  tacticAttributes: {fileID: 0}
   trigger: {fileID: 0}
-  oreCost: 0
-  goldCost: 4
-  active: 1
+  tactic:
+    tacticName: 
+    oreCost: 0
+    goldCost: 0
 --- !u!114 &868445645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9860,7 +9878,7 @@ RectTransform:
   - {fileID: 701818004}
   - {fileID: 23646422}
   m_Father: {fileID: 826842010}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -9934,6 +9952,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoCard: {fileID: 1725673013}
+  oreCostText: {fileID: 0}
+  goldCostText: {fileID: 0}
 --- !u!114 &980030460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12124,11 +12144,12 @@ MonoBehaviour:
   oreCostText: {fileID: 1126635631}
   goldCostText: {fileID: 1301556929}
   image: {fileID: 1012154652}
-  tactic: {fileID: 11400000, guid: 29bf13c0601e965449e5a81b0a52482a, type: 2}
+  tacticAttributes: {fileID: 0}
   trigger: {fileID: 0}
-  oreCost: 0
-  goldCost: 4
-  active: 1
+  tactic:
+    tacticName: 
+    oreCost: 0
+    goldCost: 0
 --- !u!114 &1189620025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14954,11 +14975,12 @@ MonoBehaviour:
   oreCostText: {fileID: 1859385430}
   goldCostText: {fileID: 1930413200}
   image: {fileID: 1448780981}
-  tactic: {fileID: 11400000, guid: 29bf13c0601e965449e5a81b0a52482a, type: 2}
+  tacticAttributes: {fileID: 0}
   trigger: {fileID: 0}
-  oreCost: 0
-  goldCost: 4
-  active: 1
+  tactic:
+    tacticName: 
+    oreCost: 0
+    goldCost: 0
 --- !u!114 &1461976094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15051,7 +15073,7 @@ RectTransform:
   - {fileID: 1189620023}
   - {fileID: 1864320373}
   m_Father: {fileID: 826842010}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -15125,6 +15147,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoCard: {fileID: 1725673013}
+  oreCostText: {fileID: 0}
+  goldCostText: {fileID: 0}
 --- !u!114 &1462688769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17890,11 +17914,12 @@ MonoBehaviour:
   oreCostText: {fileID: 1334577038}
   goldCostText: {fileID: 340564728}
   image: {fileID: 1885699340}
-  tactic: {fileID: 11400000, guid: 29bf13c0601e965449e5a81b0a52482a, type: 2}
+  tacticAttributes: {fileID: 0}
   trigger: {fileID: 0}
-  oreCost: 0
-  goldCost: 4
-  active: 1
+  tactic:
+    tacticName: 
+    oreCost: 0
+    goldCost: 0
 --- !u!114 &1651812040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17987,7 +18012,7 @@ RectTransform:
   - {fileID: 1461976092}
   - {fileID: 1973162756}
   m_Father: {fileID: 826842010}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -18061,6 +18086,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoCard: {fileID: 1725673013}
+  oreCostText: {fileID: 0}
+  goldCostText: {fileID: 0}
 --- !u!114 &1661892442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18562,11 +18589,12 @@ MonoBehaviour:
   oreCostText: {fileID: 134015508}
   goldCostText: {fileID: 1278396409}
   image: {fileID: 903941272}
-  tactic: {fileID: 11400000, guid: 29bf13c0601e965449e5a81b0a52482a, type: 2}
+  tacticAttributes: {fileID: 0}
   trigger: {fileID: 0}
-  oreCost: 0
-  goldCost: 4
-  active: 1
+  tactic:
+    tacticName: 
+    oreCost: 0
+    goldCost: 0
 --- !u!114 &1722502930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20036,7 +20064,7 @@ RectTransform:
   - {fileID: 186280946}
   - {fileID: 1649326388}
   m_Father: {fileID: 826842010}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -20110,6 +20138,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoCard: {fileID: 1725673013}
+  oreCostText: {fileID: 0}
+  goldCostText: {fileID: 0}
 --- !u!114 &1880697056
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,7 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   needsTarget: 0
   afterRound: 0
-  lastRound: 1
-  effectiveStarts: 0
-  oreCost: 3
-  goldCost: 0
+  lastRound: 3
+  effectiveRound: 0

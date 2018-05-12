@@ -39,7 +39,7 @@ public class ActivateAbility : MonoBehaviour {
         if (tacticCaller != -1)
         {
             // use tactic
-            if (!GameController.ChangeOre(-tacticTrigger.oreCost) || !GameController.ChangeCoin(-tacticTrigger.goldCost)) return;
+            if (!GameController.ChangeOre(-tacticTrigger.tactic.oreCost) || !GameController.ChangeCoin(-tacticTrigger.tactic.goldCost)) return;
             tacticTrigger.Activate(location);
             onEnterGame.tacticBag.Find("TacticSlot" + tacticCaller).gameObject.SetActive(false);
             tacticCaller = -1;
