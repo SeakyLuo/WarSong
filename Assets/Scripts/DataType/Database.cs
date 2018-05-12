@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 [System.Serializable]
@@ -16,33 +17,28 @@ public class Database {
     public static List<Trap> traps = new List<Trap>();
     public static List<Mission> missions = new List<Mission>();
 
-    public Database(Dictionary<string, List<Collection>> dict)
+    public Database()
     {
-        foreach(KeyValuePair<string,List<Collection>> pair in dict)
+        //foreach(string path in Directory.GetFiles("Assets/Resources/Piece/"))
+        //    pieces.Add(InfoLoader.FindPieceAttributes(path));
+        //foreach (string path in Directory.GetFiles("Assets/Resources/Tactic/"))
+        //    tactics.Add(InfoLoader.FindTacticAttributes(path));
+        //foreach (string path in Directory.GetFiles("Assets/Resources/Board/"))
+        //    boards.Add(InfoLoader.FindBoardAttributes(path));
+        FindAttributes("Trap");
+    }
+
+    private void FindAttributes(string type)
+    {
+        string path = "Assets/Resources/" + type + "/";
+        foreach(string file in Directory.GetFiles(path))
         {
-            foreach(Collection collection in pair.Value)
-            {
-                if (collection.type == "Tactic") tactics.Add(Resources.Load<TacticAttributes>("Tactics/" + collection.name + "/Attributes"));
-                else
-                {
-                    PieceAttributes pieceAttributes = Resources.Load<PieceAttributes>("Pieces/" + collection.name + "/Attributes");
-                    pieces.Add(pieceAttributes);
-                    attributes[collection.type].Add(pieceAttributes);
-                }
-            }
+            string folder = file.Substring(path.Length);
+            folder = folder.Substring(0, folder.Length - 5);
+            if (type == "Piece") pieces.Add(InfoLoader.FindPieceAttributes(folder));
+            else if (type == "Tactic") tactics.Add(InfoLoader.FindTacticAttributes(folder));
+            else if (type == "Board") boards.Add(InfoLoader.FindBoardAttributes(folder));
+            else if (type == "Trap") traps.Add(InfoLoader.FindTrap(folder));
         }
-    }
-
-    public string FindDescription(string name)
-    {
-        foreach(PieceAttributes attributes in pieces)
-            if (attributes.name == name)
-                return attributes.description;
-        return "";
-    }
-
-    public string FindDescription(Collection collection)
-    {
-        return FindDescription(collection.name);
     }
 }

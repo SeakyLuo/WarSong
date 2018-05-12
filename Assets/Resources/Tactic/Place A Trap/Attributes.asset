@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59ce146b8e2925b49861d09c5bc69ea7, type: 3}
   m_Name: Attributes
   m_EditorClassIdentifier: 
-  Name: Place A Trap
+  Name: Place a Trap
   description: Place a random Trap.
   goldCost: 1
   oreCost: 1

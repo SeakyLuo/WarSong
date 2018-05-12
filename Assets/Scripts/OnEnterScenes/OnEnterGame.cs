@@ -76,15 +76,6 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         ShowGameStartAnimation();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.Escape))
-        {
-            settingsPanel.SetActive(true);
-            MovementController.PutDownPiece();
-        }
-    }
-
     public void OnPointerClick(PointerEventData eventData)
     {
         if (GameInfo.gameOver)
@@ -212,8 +203,9 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             if (trigger != null) trigger.StartOfTurn();
         }
         // Set tactic interactable
-        for(int i = 0; i < GameInfo.unusedTactics.Count; i++)
-            tacticButtons[i].interactable = tacticTriggers[i].Activatable();
+        for(int i = 0; i < LineupBuilder.tacticsLimit; i++)
+            if(tacticObjs[i].gameObject.activeSelf)
+                tacticButtons[i].interactable = tacticTriggers[i].Activatable();
     }
     private IEnumerator ShowYourTurn(float time = 1.5f)
     {
@@ -273,7 +265,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             explosion.transform.SetParent(boardSetup.boardCanvas);
             Trap trap = InfoLoader.FindTrap(GameInfo.traps[location].Key);
             trapInfoCard.GetComponent<TrapInfo>().SetAttributes(trap, GameInfo.traps[location].Value);
-            trap.trigger.Activate();
+            trap.trigger.Activate(location);
             GameInfo.traps.Remove(location);
             AddToHistory(gameEvent);
             StartCoroutine(ShowTrapInfo());
@@ -296,8 +288,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 
     public void AskTrigger(Trigger trigger_para, string message)
     {
-        if (!trigger_para.ReceiveMesseage(message) || trigger_para.piece.GetOreCost() > GameInfo.ores[InfoLoader.user.playerID]) return;
-        if (trigger_para.ReceiveMesseage(message) && trigger_para.piece.GetOreCost() <= GameInfo.ores[InfoLoader.user.playerID])
+        if (trigger_para.ReceiveMesseage(message) && trigger_para.piece.oreCost <= GameInfo.ores[InfoLoader.user.playerID])
         {
             GameInfo.actions[InfoLoader.user.playerID]++;
             trigger = trigger_para;

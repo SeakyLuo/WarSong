@@ -8,7 +8,7 @@ public class InfoLoader : MonoBehaviour {
 
     public static UserInfo user;
     public static int playerID;
-    public static List<BoardAttributes> boards = new List<BoardAttributes>();
+    public static Database database;
     public static string switchSceneCaller = "Main";
     public static Dictionary<string, PieceAttributes> standardAttributes = new Dictionary<string, PieceAttributes>();
     public PieceAttributes standardGeneral, standardAdvisor, standardElephant, standardHorse, standardChariot, standardCannon, standardSoldier;
@@ -20,6 +20,7 @@ public class InfoLoader : MonoBehaviour {
         // download Json
         // user.JsonToClass();
         playerID = user.playerID;
+        database = new Database();
         standardAttributes = new Dictionary<string, PieceAttributes>(){
             { "Standard General", standardGeneral },
             { "Standard Advisor", standardAdvisor },
@@ -29,15 +30,6 @@ public class InfoLoader : MonoBehaviour {
             { "Standard Cannon", standardCannon },
             { "Standard Soldier", standardSoldier }
         };
-    }
-
-    // Use this for initialization
-    void Start () {
-        boards.Add(FindBoardAttributes(user.preferredBoard));
-        boards.Add(FindBoardAttributes("River Board"));
-        //foreach(string boardName in Directory.GetFiles("Assets/Resources/Board"))
-        //    if(boardName!= user.preferredBoard)
-        //        boards.Add(FindBoardAttributes(boardName));
     }
 
     public static string Vec2ToString(Vector2Int vec) { return vec.x.ToString() + vec.y.ToString(); }

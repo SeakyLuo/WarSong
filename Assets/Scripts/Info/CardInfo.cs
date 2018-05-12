@@ -91,8 +91,8 @@ public class CardInfo : MonoBehaviour {
     public void SetPiece(Piece setupPiece)
     {
         SetIsAlly(setupPiece.isAlly);
-        SetHealth(setupPiece.GetHealth());
-        cost = setupPiece.GetOreCost();
+        SetHealth(setupPiece.health);
+        cost = setupPiece.oreCost;
         costText.text = cost.ToString();
         if (piece.oreCost > cost) costText.color = Color.green;
         else if (piece.oreCost == cost) costText.color = Color.white;

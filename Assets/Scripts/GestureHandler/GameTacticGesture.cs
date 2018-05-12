@@ -6,8 +6,6 @@ using UnityEngine.EventSystems;
 public class GameTacticGesture : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
     public GameObject infoCard;
-    public Text oreCostText;
-    public Text goldCostText;
 
     private GameObject tacticObj;
     private Button button;

@@ -13,8 +13,8 @@ public class TacticInfo : MonoBehaviour {
     {
         tacticAttributes = attributes;
         tactic = new Tactic(attributes.Name, attributes.oreCost, attributes.goldCost);
-        trigger = Instantiate(tacticAttributes.trigger);
-        trigger.tactic = tactic;
+        if (tacticAttributes.trigger != null) trigger = Instantiate(tacticAttributes.trigger);
+        if (tacticAttributes.trigger != null) trigger.tactic = tactic;
         nameText.text = attributes.Name;
         SetOreCost(attributes.oreCost);
         SetGoldCost(attributes.goldCost);
@@ -23,7 +23,7 @@ public class TacticInfo : MonoBehaviour {
 
     public void SetOreCost(int value)
     {
-        trigger.tactic.oreCost = value;
+        if (tacticAttributes.trigger != null) trigger.tactic.oreCost = value;
         tactic.oreCost = value;
         oreCostText.text = value.ToString();
     }
@@ -33,7 +33,7 @@ public class TacticInfo : MonoBehaviour {
     }
     public void SetGoldCost(int value)
     {
-        trigger.tactic.goldCost = value;
+        if (tacticAttributes.trigger != null) trigger.tactic.goldCost = value;
         tactic.goldCost = value;
         goldCostText.text = value.ToString();
     }

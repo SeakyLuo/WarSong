@@ -72,8 +72,8 @@ public class EnemyLineup: Lineup
         };
         List<string> enemyTactics = new List<string>()
         {
-            "Tame An Elephant","Purchase A Horse","Advisor Recruitment","Soldier Recruitment","Minesweeper",
-            "A Secret Plan","Buy 1 Get 1 Free","Build A Rook","Winner Trophy","No Way"
+            "Minesweeper","Winner Trophy","Buy 1 Get 1 Free","Secret Plan","Soldier Recruitment",
+            "No Way","Seek for Advisors","Tame an Elephant","Purchase a Horse","Build a Chariot"
         };
         tactics = new List<Tactic>();
         foreach (string tacticName in enemyTactics) tactics.Add(new Tactic(InfoLoader.FindTacticAttributes(tacticName)));

@@ -12,10 +12,13 @@ public class GameController : MonoBehaviour {
     public static PieceInfo pieceInfo;
     public static Dictionary<Vector2Int, GameObject> flags;
 
+    [HideInInspector] public GameObject settingsPanel;
+
     // Use this for initialization
     void Start () {
         onEnterGame = GameObject.Find("UIPanel").GetComponent<OnEnterGame>();
         boardSetup = onEnterGame.boardSetup;
+        settingsPanel = onEnterGame.settingsPanel;
         castles = new Dictionary<string, List<Vector2Int>>()
         {
             {"Advisor", boardSetup.boardAttributes.AdvisorCastle() },
@@ -30,6 +33,11 @@ public class GameController : MonoBehaviour {
 
     private void Update()
     {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            settingsPanel.SetActive(true);
+            MovementController.PutDownPiece();
+        }
         if (GameInfo.gameOver || !GameInfo.gameStarts || GameInfo.actions[InfoLoader.user.playerID] == 0) return;
         if (Input.GetMouseButtonUp(0))
         {
@@ -119,6 +127,21 @@ public class GameController : MonoBehaviour {
         boardSetup.AddPiece(collection, castle, isAlly);
     }
 
+    public static void ChangePieceHealth(Vector2Int location, int deltaAmount)
+    {
+
+    }
+
+    public static void ChangePieceOreCost(Vector2Int location, int deltaAmount)
+    {
+
+    }
+
+    public static void ChangeTacticOreCost(int deltaAmount)
+    {
+
+    }
+
     public static void Eliminate(Piece piece)
     {
         Destroy(boardSetup.pieces[piece.location]);
@@ -169,7 +192,7 @@ public class GameController : MonoBehaviour {
         flags.Add(location, flag);
     }
 
-    public static void RemovePlag(Vector2Int location)
+    public static void RemoveFlag(Vector2Int location)
     {
         Destroy(flags[location]);
         flags.Remove(location);

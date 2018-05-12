@@ -104,6 +104,10 @@ public class MovementController : MonoBehaviour
         target.GetComponent<PieceInfo>().piece.location = to;
         target.transform.parent = boardCanvas.Find(InfoLoader.Vec2ToString(to));
         target.transform.localPosition = Vector3.Lerp(target.transform.localPosition, new Vector3(0, 0, target.transform.position.z), speed);
+        GameObject fromObject = boardSetup.pieces[from];
+        boardSetup.pieces.Remove(from);
+        boardSetup.pieces.Add(to, fromObject);
+
         if (GameInfo.traps.ContainsKey(to)) onEnterGame.TriggerTrap(to);
         // need to add game events
         Trigger trigger = target.GetComponent<PieceInfo>().trigger;
@@ -111,9 +115,6 @@ public class MovementController : MonoBehaviour
         if (boardAttributes.InEnemyRegion(to.x, to.y)) onEnterGame.AskTrigger(trigger, "InEnemyRegion");
         else if (boardAttributes.InEnemyPalace(to.x, to.y)) onEnterGame.AskTrigger(trigger, "InEnemyPalace");
         else if (boardAttributes.AtEnemyBottom(to.x,to.y)) onEnterGame.AskTrigger(trigger, "AtEnemyBottom");
-        GameObject fromObject = boardSetup.pieces[from];
-        boardSetup.pieces.Remove(from);
-        boardSetup.pieces.Add(to, fromObject);
     }
 
     public static void Move(Piece piece, Vector2Int from, Vector2Int to)

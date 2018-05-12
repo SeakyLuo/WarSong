@@ -47,7 +47,7 @@ public class ActivateAbility : MonoBehaviour {
         else
         {
             // activate ability
-            if (!GameController.ChangeOre(-pieceInfo.trigger.piece.GetOreCost())) return;
+            if (!GameController.ChangeOre(-pieceInfo.trigger.piece.oreCost)) return;
             pieceInfo.trigger.Activate(location);
             MovementController.PutDownPiece();
         }
@@ -68,7 +68,7 @@ public class ActivateAbility : MonoBehaviour {
     {
         if (targetLocs.Count == 0)
         {
-            if (!GameController.ChangeOre(-pieceInfo.trigger.piece.GetOreCost())) return;
+            if (!GameController.ChangeOre(-pieceInfo.trigger.piece.oreCost)) return;
             GameEvent gameEvent = new GameEvent();
             pieceInfo.trigger.Activate();
             onEnterGame.AddToHistory(gameEvent);

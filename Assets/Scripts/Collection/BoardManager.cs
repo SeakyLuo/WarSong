@@ -22,7 +22,7 @@ public class BoardManager : MonoBehaviour {
 
     private void Start()
     {
-        boardAttributes = InfoLoader.boards;
+        boardAttributes = Database.boards;
         DisplayBoardSelectionInterface();
     }
 

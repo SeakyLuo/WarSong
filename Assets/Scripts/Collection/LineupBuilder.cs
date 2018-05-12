@@ -87,7 +87,7 @@ public class LineupBuilder : MonoBehaviour {
             StartCoroutine(FullReminder());
             return;
         }
-        else if (InTactics(cardInfo.GetCardName()))
+        else if (TacticIndex(cardInfo.GetCardName()) != -1)
         {
             StartCoroutine(SameTacticReminder());
             return;
@@ -147,7 +147,7 @@ public class LineupBuilder : MonoBehaviour {
     private void TacticRemover(TacticAttributes attributes)
     {
         Tactic remove = new Tactic(attributes);
-        int index = lineup.tactics.IndexOf(remove);
+        int index = TacticIndex(remove.tacticName);
         totalOreCost -= attributes.oreCost;
         totalGoldCost -= attributes.goldCost;
         if (current_tactics > 1)
@@ -169,17 +169,17 @@ public class LineupBuilder : MonoBehaviour {
               (attributes1.oreCost == attributes2.oreCost && attributes1.goldCost < attributes2.goldCost) ||
               (attributes1.oreCost == attributes2.oreCost && attributes1.goldCost == attributes2.goldCost && attributes1.Name.CompareTo(attributes2.Name) < 0);
     }
-
     private bool GreaterThan(TacticAttributes attributes1, TacticAttributes attributes2)
     {
         // Because tactics can't be the same.
         return !LessThan(attributes1, attributes2);
     }
 
-    private bool InTactics(string tacticName)
+    private int TacticIndex(string tacticName)
     {
-        foreach (Tactic tactic in lineup.tactics) if (tactic.tacticName == tacticName) return true;
-        return false;
+        for (int i = 0; i < lineup.tactics.Count; i++)
+            if (lineup.tactics[i].tacticName == tacticName) return i;
+        return -1;
     }
 
     private IEnumerator SameTacticReminder()
