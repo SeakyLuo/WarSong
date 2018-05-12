@@ -96,7 +96,7 @@ public class CheatAccount:UserInfo
         username = "WarSong CheatAccount";
         playerID = 12345789;
         Collection[] cheat = {  new Collection("Space Witch", "General"), new Collection("Fat Soldier", "Soldier",4),new Collection("Cripple","Cannon",3),new Collection("Dark Bargain", 5),
-            new Collection("Soldier Recruitment",5), new Collection("Seek For Advisors"), new Collection("Greeeeeat Elephant","Elephant",3),new Collection("Place a Trap", 5),
+            new Collection("Soldier Recruitment",5), new Collection("Seek for Advisors"), new Collection("Greeeeeat Elephant","Elephant",3),new Collection("Place a Trap", 5),
             new Collection("Tame an Elephant"),new Collection("Purchase a Horse"), new Collection("King's Guardian","Advisor", 3),new Collection("Protect the King", 8),
             new Collection("Monster Hunter","Chariot",4),new Collection("Treasure Horse","Horse",100), new Collection("Space Witch", "General", 2, 20),
             new Collection("Greeeeeat Elephant", "Elephant", 3, 5), new Collection("Zhuge Liang", "General"), new Collection("Secret Plan", 3),new Collection("Place a Flag",20),

@@ -227,7 +227,7 @@ public class LineupBuilder : MonoBehaviour {
     public void SaveLineup()
     {
         lineup.cardLocations = boardInfo.cardLocations;
-        lineup.boardName = boardInfo.attributes.boardName;
+        lineup.boardName = boardInfo.attributes.Name;
         lineup.complete = (lineup.tactics.Count == Lineup.tacticLimit);
         // Incomplete Reminder
         lineupsManager.AddLineup(lineup);

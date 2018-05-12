@@ -263,7 +263,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             GameEvent gameEvent = new GameEvent();
             explosion.transform.position = new Vector3(location.x * MovementController.scale, location.y * MovementController.scale, -3);
             explosion.transform.SetParent(boardSetup.boardCanvas);
-            Trap trap = Database.FindTrapAttributes(GameInfo.traps[location].Key);
+            TrapAttributes trap = Database.FindTrapAttributes(GameInfo.traps[location].Key);
             trapInfoCard.GetComponent<TrapInfo>().SetAttributes(trap, GameInfo.traps[location].Value);
             trap.trigger.Activate(location);
             GameInfo.traps.Remove(location);

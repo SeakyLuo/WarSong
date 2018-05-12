@@ -1,8 +1,5 @@
-using System.Collections.Generic;
 using System;
-using System.Linq;
 using UnityEngine;
-using System.IO;
 
 public class InfoLoader : MonoBehaviour {
 
@@ -16,7 +13,6 @@ public class InfoLoader : MonoBehaviour {
     {
         if (!called)
         {
-
             database = new Database();
             user = new CheatAccount(); // This line should be
                                        // user = new UserInfo();

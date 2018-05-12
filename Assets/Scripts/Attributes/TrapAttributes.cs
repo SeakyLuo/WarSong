@@ -2,7 +2,7 @@
 
 [System.Serializable]
 [CreateAssetMenu(fileName = "Attributes", menuName = "Trap")]
-public class Trap : ScriptableObject
+public class TrapAttributes : ScriptableObject
 {
     public string Name;
     [TextArea(2, 3)]

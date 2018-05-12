@@ -107,8 +107,8 @@ public class ContractsManager : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public void AddContract(ContractAttributes contractAttributes, int contractsCount)
     {
-        InfoLoader.user.contracts[contractAttributes.contractName] += contractsCount;
-        contractSlots[contractName.IndexOf(contractAttributes.contractName)].GetComponent<PlayerContract>().SetCount(InfoLoader.user.contracts[contractAttributes.contractName]);
+        InfoLoader.user.contracts[contractAttributes.Name] += contractsCount;
+        contractSlots[contractName.IndexOf(contractAttributes.Name)].GetComponent<PlayerContract>().SetCount(InfoLoader.user.contracts[contractAttributes.Name]);
     }
 
     public void CancelUse10Contract()
@@ -127,7 +127,8 @@ public class ContractsManager : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public void SetCards(int count = 5)
     {
-        Debug.Log(targetContract.name);
+        List<string> types = Database.FindContractAttributes(targetContract.name).cardTypes;
+        //for()
     }
 
     public void ResizeCardView(int count)
