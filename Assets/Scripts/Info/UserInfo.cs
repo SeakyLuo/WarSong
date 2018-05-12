@@ -173,10 +173,10 @@ public class CheatAccount:UserInfo
         };
         contracts = new Dictionary<string, int>()
         {
-            { "Standard Contract", 100},
-            { "Artillery Seller", 10},
-            { "Human Resource", 5},
-            { "Animal Smuggler", 2},
+            { "Standard Contract", 1111},
+            { "Artillery Seller", 111},
+            { "Human Resource", 11},
+            { "Animal Smuggler", 5},
             { "Wise Elder", 1}
         };
         coins = 99999;

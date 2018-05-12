@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de93c9480db268646b3bd23023b088f0, type: 3}
   m_Name: Attributes
   m_EditorClassIdentifier: 
-  contractName: Human Resource
+  Name: Human Resource
   description: HR will help you recruit 5 human allies!
   image: {fileID: 21300000, guid: 95a9cfd7cdd166b43a17324efa50eef6, type: 3}
   price: 15

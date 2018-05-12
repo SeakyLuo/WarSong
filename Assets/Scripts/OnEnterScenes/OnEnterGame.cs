@@ -24,7 +24,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     [HideInInspector] public BoardSetup boardSetup;
 
     private static Lineup lineup;
-    private static List<Transform> tacticObjs = new List<Transform>();
+    private static List<Transform> tacticObjs;
     private static List<Button> tacticButtons = new List<Button>();
     private static List<TacticTrigger> tacticTriggers = new List<TacticTrigger>();
     private static Dictionary<String, int> credits = new Dictionary<string, int>()
@@ -64,6 +64,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         SetOreText();
         SetCoinText();
         // SetupTactics
+        tacticObjs = new List<Transform>();
         for (int i = 0; i < LineupBuilder.tacticsLimit; i++)
         {
             Transform tacticSlot = tacticBag.Find(String.Format("TacticSlot{0}", i));

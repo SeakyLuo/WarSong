@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de93c9480db268646b3bd23023b088f0, type: 3}
   m_Name: Attributes
   m_EditorClassIdentifier: 
-  contractName: Artillery Seller
+  Name: Artillery Seller
   description: Artillery Seller will give you 5 Cannons and Chariots combined!
   image: {fileID: 21300000, guid: dc49d9df21f74ac4287051537a22614c, type: 3}
   price: 20

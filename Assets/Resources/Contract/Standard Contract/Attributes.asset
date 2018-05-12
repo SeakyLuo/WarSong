@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de93c9480db268646b3bd23023b088f0, type: 3}
   m_Name: Attributes
   m_EditorClassIdentifier: 
-  contractName: Standard Contract
+  Name: Standard Contract
   description: 'Use contracts to hire recruiters.
 
     Each recruiter will help you recruit 5 allies!'

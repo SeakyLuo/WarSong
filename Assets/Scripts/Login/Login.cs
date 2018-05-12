@@ -11,7 +11,7 @@ public class Login : MonoBehaviour
     public GameObject createAccountPanel, emptyEmail, wrongPassword, emptyPassword;
     public GameObject settingsPanel, forgotPasswordPanel, networkError;
 
-    //support phone number
+    // better to support phone number registration
 
     // Use this for initialization
     void Start () {
@@ -19,7 +19,8 @@ public class Login : MonoBehaviour
         string email = PlayerPrefs.GetString("email"),
                 password = PlayerPrefs.GetString("password");
         if (email != "" && password != "")
-            StartCoroutine(RequestLogin(email, password, false));
+            login(email, password);
+            //StartCoroutine(RequestLogin(email, password, false));
 	}
 
     private void Update()
@@ -38,7 +39,8 @@ public class Login : MonoBehaviour
             return;
         }
         emptyPassword.SetActive(false);
-        StartCoroutine(RequestLogin(inputEmail.text, inputPassword.text));
+        login(inputEmail.text, inputPassword.text);
+        //StartCoroutine(RequestLogin(inputEmail.text, inputPassword.text));
     }
 
     public IEnumerator RequestLogin(string email, string password, bool showError = true)  //connect with server, and VERIFY credentials
@@ -70,6 +72,19 @@ public class Login : MonoBehaviour
         else                                               //connection failure
         {
             if(showError) networkError.SetActive(true);
+        }
+    }
+
+    private void login(string email, string password)
+    {
+        if(email == "1@1.com" && password == "12345678")
+        {
+            PlayerPrefs.SetString("email", email);
+            PlayerPrefs.SetString("password", password);
+            if (emptyEmail.activeSelf) emptyEmail.SetActive(false);
+            if (emptyPassword.activeSelf) emptyPassword.SetActive(false);
+            if (wrongPassword.activeSelf) wrongPassword.SetActive(false);
+            SceneManager.LoadScene("Main");
         }
     }
     
