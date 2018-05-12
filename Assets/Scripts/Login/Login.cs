@@ -9,7 +9,7 @@ public class Login : MonoBehaviour
 {
     public InputField inputEmail, inputPassword;
     public GameObject createAccountPanel, emptyEmail, wrongPassword, emptyPassword;
-    public GameObject settingsPanel, forgotPasswordPanel;
+    public GameObject settingsPanel, forgotPasswordPanel, networkError;
 
     //support phone number
 
@@ -19,7 +19,7 @@ public class Login : MonoBehaviour
         string email = PlayerPrefs.GetString("email"),
                 password = PlayerPrefs.GetString("password");
         if (email != "" && password != "")
-            login(email, password);
+            StartCoroutine(RequestLogin(email, password, false));
 	}
 
     private void Update()
@@ -38,29 +38,63 @@ public class Login : MonoBehaviour
             return;
         }
         emptyPassword.SetActive(false);
-        login(inputEmail.text, inputPassword.text);
+        StartCoroutine(RequestLogin(inputEmail.text, inputPassword.text));
     }
 
-    public void login(string email, string password)
+    //public void RequestLogin(string email, string password)
+    //{
+    //    // Connect to the server
+    //    // if not work return and warn
+    //    // else save email and password
+    //    // download data
+    //    // Info Loader
+
+    //    if (email == "1@1.com" && password == "12345678") // match
+    //    {
+    //        PlayerPrefs.SetString("email", email);
+    //        PlayerPrefs.SetString("password", password);
+    //        if (emptyEmail.activeSelf) emptyEmail.SetActive(false);
+    //        if (emptyPassword.activeSelf) emptyPassword.SetActive(false);
+    //        if (wrongPassword.activeSelf) wrongPassword.SetActive(false);
+    //        SceneManager.LoadScene("Main");
+    //    }
+    //    else
+    //    {
+    //        inputPassword.text = "";
+    //        wrongPassword.SetActive(true);
+    //    }        
+    //}
+
+    public IEnumerator RequestLogin(string email, string password, bool showError = true)  //connect with server, and VERIFY credentials
     {
-        // Connect to the server
-        // if not work return and warn
-        // else save email and password
-        // download data
-        // Info Loader
-        if (email == "1@1.com" && password == "12345678") // match
+        WWWForm infoToPhp = new WWWForm();
+        infoToPhp.AddField("email", email);
+        infoToPhp.AddField("password", password);
+
+        WWW sendToPhp = new WWW("http://localhost:8888/action_login.php", infoToPhp);
+        yield return sendToPhp;
+
+        if (string.IsNullOrEmpty(sendToPhp.error)) //if no error connecting to server
         {
-            PlayerPrefs.SetString("email", email);
-            PlayerPrefs.SetString("password", password);
-            if (emptyEmail.activeSelf) emptyEmail.SetActive(false);
-            if (emptyPassword.activeSelf) emptyPassword.SetActive(false);
-            if (wrongPassword.activeSelf) wrongPassword.SetActive(false);
-            SceneManager.LoadScene("Main");
+            if (sendToPhp.text.Contains("invalid creds"))  //if credentials don't exist 
+            {
+                inputPassword.text = "";
+                wrongPassword.SetActive(true);
+            }
+            else                                           //connection and credentials success
+            {
+                PlayerPrefs.SetString("email", email);
+                PlayerPrefs.SetString("password", password);
+                if (emptyEmail.activeSelf) emptyEmail.SetActive(false);
+                if (emptyPassword.activeSelf) emptyPassword.SetActive(false);
+                if (wrongPassword.activeSelf) wrongPassword.SetActive(false);
+                SceneManager.LoadScene("Main");
+            }
         }
-        else
+        else                                               //connection failure
         {
-            inputPassword.text = "";
-            wrongPassword.SetActive(true);
-        }        
+            if(showError) networkError.SetActive(true);
+        }
     }
+    
 }
