@@ -46,7 +46,7 @@ public class ContractsManager : MonoBehaviour, IBeginDragHandler, IDragHandler, 
             {
                 targetContract = selectedObject.transform.parent.gameObject;
                 dragContract.GetComponent<PlayerContract>().SetAttributes(targetContract.GetComponent<PlayerContract>().attributes);
-                targetContract.GetComponent<PlayerContract>().SetCount(InfoLoader.user.contracts[targetContract.name] - 1);
+                targetContract.GetComponent<PlayerContract>().ChangeCount(-1);
                 dragContract.GetComponent<PlayerContract>().SetCount(1);
                 contractCount = 1;
             }
@@ -57,7 +57,7 @@ public class ContractsManager : MonoBehaviour, IBeginDragHandler, IDragHandler, 
                 int count = InfoLoader.user.contracts[targetContract.name];
                 if(count > 10)
                 {
-                    targetContract.GetComponent<PlayerContract>().SetCount(InfoLoader.user.contracts[targetContract.name] - 10);
+                    targetContract.GetComponent<PlayerContract>().ChangeCount(-10);
                     dragContract.GetComponent<PlayerContract>().SetCount(10);
                     contractCount = 10;
                 }
@@ -140,7 +140,7 @@ public class ContractsManager : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public void SetCards()
     {
-        InfoLoader.user.ChangeContracts(targetContract.name, contractCount);
+        InfoLoader.user.ChangeContracts(targetContract.name, -contractCount);
         List<string> types = Database.FindContractAttributes(targetContract.name).cardTypes;
         for(int i = 0; i < contractCount * 5; i++)
         {
