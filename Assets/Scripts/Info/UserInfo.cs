@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
+[Serializable]
 public class UserInfo {
 
     public string username;
@@ -16,6 +18,7 @@ public class UserInfo {
     public string preferredBoard = "Standard Board";
     public string lastModeSelected = "";
     public int gameID;
+
 
     public UserInfo()
     {
@@ -77,14 +80,33 @@ public class UserInfo {
         collection.Insert(index, insert);
     }
 
-    public void ClassToJson()
+    public string ClassToJson(UserInfo user)
     {
+        string gameDataFile = JsonUtility.ToJson(user);
+        return gameDataFile;
+    }
+
+    public UserInfo JsonToClass(string userJson)
+    {
+        return JsonUtility.FromJson<UserInfo>(userJson);
+    }
+
+    public IEnumerator uploadJsonClass(UserInfo user){
+        //user.username = "Connor";
+        string userJson = ClassToJson(user); //convert class to json string
+
+        WWWForm infoToPhp = new WWWForm(); //create WWWform to send to php script
+        infoToPhp.AddField("userName", user.username);
+        infoToPhp.AddField("userJson", userJson);
+
+
+        WWW sendToPhp = new WWW("http://localhost:8888/update_userinfo.php", infoToPhp);
+        yield return sendToPhp;
 
     }
 
-    public void JsonToClass()
-    {
-
+    public void downloadLatestJson(UserInfo user){//will test after upload is correct
+        
     }
 }
 

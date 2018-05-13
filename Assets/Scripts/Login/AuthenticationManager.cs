@@ -15,7 +15,11 @@ public class AuthenticationManager : MonoBehaviour
     public Button buttonRegister, cancelRegister;
     public GameObject createAccountPanel;
 
+    public string urlLogin = "http://localhost:8888/action_login.php";
+    public string urlReg = "http://localhost:8888/action_reg.php";
     public WWWForm infoToPhp;
+
+
 
     private void Start()
     {
@@ -31,8 +35,6 @@ public class AuthenticationManager : MonoBehaviour
     public void displayCreateAccount()
     {
         overall_textFeedback.text = "";
-        login_textEmail.text = "";
-        login_textPassword.text = "";
         createAccountPanel.SetActive(true);
     }
 
@@ -62,7 +64,7 @@ public class AuthenticationManager : MonoBehaviour
         infoToPhp.AddField("email", email);
         infoToPhp.AddField("password", password);
 
-        WWW sendToPhp = new WWW("http://localhost:8888/action_login.php", infoToPhp);
+        WWW sendToPhp = new WWW(urlLogin, infoToPhp);
         yield return sendToPhp;
 
         if (string.IsNullOrEmpty(sendToPhp.error)) //if no error connecting to server
@@ -75,6 +77,7 @@ public class AuthenticationManager : MonoBehaviour
             {
                 overall_textFeedback.text = "Success";
                 SceneManager.LoadScene("Main");
+
 
             }
 
@@ -94,6 +97,10 @@ public class AuthenticationManager : MonoBehaviour
         string confPassword = create_textConfirmPassword.text;
         string userName = create_textUsername.text;
 
+        UserInfo user = new UserInfo();
+        string new_userJson = user.ClassToJson(user);
+
+
         if (password != confPassword)
         {
             overall_textFeedback.text = "Error - Passwords do not match!";
@@ -109,8 +116,9 @@ public class AuthenticationManager : MonoBehaviour
         infoToPhp.AddField("email", email);
         infoToPhp.AddField("password", password);
         infoToPhp.AddField("userName", userName);
+        infoToPhp.AddField("userJson", new_userJson);
 
-        WWW sendToPhp = new WWW("http://localhost:8888/action_reg.php", infoToPhp);
+        WWW sendToPhp = new WWW(urlReg, infoToPhp);
         yield return sendToPhp;
 
         if (string.IsNullOrEmpty(sendToPhp.error))
@@ -131,4 +139,5 @@ public class AuthenticationManager : MonoBehaviour
 
         }
     }
+
 }

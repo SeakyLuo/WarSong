@@ -11,7 +11,7 @@ public class InfoLoader : MonoBehaviour {
     public static string switchSceneCaller = "Main";
     public static Dictionary<string, PieceAttributes> standardAttributes = new Dictionary<string, PieceAttributes>();
     public PieceAttributes standardGeneral, standardAdvisor, standardElephant, standardHorse, standardChariot, standardCannon, standardSoldier;
-
+   
     private void Awake()
     {
         user = new CheatAccount(); // This line should be
