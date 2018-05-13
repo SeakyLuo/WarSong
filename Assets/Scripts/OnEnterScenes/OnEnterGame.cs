@@ -325,7 +325,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         trigger = null;
         triggerMessage = "";
         askTriggerPanel.SetActive(false);
-        if(--GameInfo.actions[InfoLoader.user.playerID] == 0) NextTurn();
+        if (--GameInfo.actions[InfoLoader.user.playerID] == 0) NextTurn();
     }
     public void ShowPieceFrozen()
     {

@@ -42,7 +42,7 @@ public class GameController : MonoBehaviour {
             settingsPanel.SetActive(true);
             MovementController.PutDownPiece();
         }
-        if (GameInfo.gameOver || !GameInfo.gameStarts || GameInfo.actions[InfoLoader.user.playerID] == 0) return;
+        if (GameInfo.gameOver || !GameInfo.gameStarts || GameInfo.actions[InfoLoader.user.playerID] == 0 || onEnterGame.askTriggerPanel.activeSelf) return;
         if (Input.GetMouseButtonUp(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

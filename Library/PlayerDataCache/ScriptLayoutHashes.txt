@@ -206,7 +206,7 @@ cc8258461be35bd0c372322491a45a0a Assembly-CSharp.dll:.PieceAttributes
 77197768d1baf7eb045d6279c85382a8 Assembly-CSharp.dll:.ProtectTheKing
 11271fdb91ff27af0d5960d26c47d6d2 Assembly-CSharp.dll:.ContractsManager
 77197768d1baf7eb045d6279c85382a8 Assembly-CSharp.dll:.HorribleLandmine
-ccf49c9c89d1548ff285e7b7df856bfb Assembly-CSharp.dll:.OnEnterGame
+8d8539d404145a63ec67e04eaed897da Assembly-CSharp.dll:.OnEnterGame
 0d50533b5be9717fc17e770faa884fb4 Assembly-CSharp.dll:.UpdateTime
 06de0651f92ff2c4440c301805f29b3d Assembly-CSharp.dll:.CardInfo
 10fa26471de4b62f1deb5de6d24f4833 Assembly-CSharp.dll:.AccountCreation
