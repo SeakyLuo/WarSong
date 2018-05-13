@@ -142,9 +142,9 @@ public class UserInfo {
     {
         return JsonUtility.ToJson(user);
     }
-    public static UserInfo JsonToClass(string userJson)
+    public static UserInfo JsonToClass(string json)
     {
-        return JsonUtility.FromJson<UserInfo>(userJson);
+        return JsonUtility.FromJson<UserInfo>(json);
     }
     public IEnumerator Upload(UserInfo user)
     {

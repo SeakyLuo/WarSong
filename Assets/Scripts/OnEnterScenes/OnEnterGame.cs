@@ -318,8 +318,6 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     public void RemoveTactic(Tactic tactic)
     {
         int index = GameInfo.unusedTactics[InfoLoader.playerID].IndexOf(tactic);
-        Debug.Log(GameInfo.unusedTactics[InfoLoader.playerID][1] == tactic);
-        Debug.Log(index);
         int count = GameInfo.unusedTactics[InfoLoader.playerID].Count;
         if (count > 1)
         {
