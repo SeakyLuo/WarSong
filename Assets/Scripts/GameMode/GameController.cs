@@ -129,7 +129,12 @@ public class GameController : MonoBehaviour {
 
     public static void AddPiece(Collection collection, Vector2Int castle, bool isAlly)
     {
-        boardSetup.AddPiece(collection, castle, isAlly);
+        boardSetup.AddPiece(collection, castle, isAlly, false);
+    }
+
+    public static void ResurrectPiece(Collection collection, Vector2Int castle, bool isAlly)
+    {
+        boardSetup.AddPiece(collection, castle, isAlly, true, true);
     }
 
     public static void AddTactic(Tactic tactic)
@@ -147,6 +152,7 @@ public class GameController : MonoBehaviour {
         Piece before = GameInfo.board[location];
         Piece after = new Piece(before);
         after.health += deltaAmount;
+        after.collection.health += deltaAmount;
         GameInfo.board[location] = after;
         if (before.isAlly) GameInfo.activePieces[InfoLoader.playerID][GameInfo.activePieces[InfoLoader.playerID].IndexOf(before)] = after;
         else GameInfo.activePieces[GameInfo.TheOtherPlayer()][GameInfo.activePieces[GameInfo.TheOtherPlayer()].IndexOf(before)] = after;
@@ -290,6 +296,5 @@ public class GameController : MonoBehaviour {
         onEnterGame.SetCoinText();
         return true;
     }
-
     public static List<Vector2Int> FindCastles(string type) { return castles[type]; }
 }

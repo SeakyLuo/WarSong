@@ -72,7 +72,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             Transform tacticSlot = tacticBag.Find(String.Format("TacticSlot{0}", i));
             tacticButtons.Add(tacticSlot.GetComponent<Button>());
             tacticObjs.Add(tacticSlot.Find("Tactic"));
-            tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(Database.FindTacticAttributes(lineup.tactics[i].tacticName));
+            tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(Database.FindTacticAttributes(lineup.tactics[i].tacticName), true);
             tacticTriggers.Add(tacticObjs[i].GetComponent<TacticInfo>().trigger);
         }
         StartCoroutine(Timer());
@@ -156,11 +156,15 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         // CalculateNewRank(); // should be done by server
         foreach (KeyValuePair<Vector2Int, Collection> pair in lineup.cardLocations)
         {
-            if (GameInfo.IsAllyAlive(pair.Value))
-            {
-                lineup.cardLocations[pair.Key] = pair.Value; // bug
-            }
-            else if (pair.Value.health > 0 && --pair.Value.health == 0)
+            bool alive = false;
+            foreach(Piece piece in GameInfo.activePieces[InfoLoader.playerID])
+                if (piece.original && piece.GetCastle() == pair.Key)
+                {
+                    alive = true;
+                    lineup.cardLocations[pair.Key] = piece.collection;
+                    break;
+                }
+            if (!alive && pair.Value.health > 0 && --pair.Value.health == 0)
             {
                 int index = InfoLoader.user.FindCollection(pair.Value);
                 InfoLoader.user.RemoveCollection(index);
@@ -177,6 +181,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             else lineup.complete = false;
         }
         InfoLoader.user.ModifyLineup(lineup, InfoLoader.user.lastLineupSelected);
+        // upload
     }
 
     public void Concede()
@@ -209,10 +214,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             Trigger trigger = pair.Value.GetComponent<PieceInfo>().trigger;
             if (trigger != null) trigger.StartOfTurn();
         }
-        // Set tactic interactable
-        for(int i = 0; i < LineupBuilder.tacticsLimit; i++)
-            if(tacticObjs[i].gameObject.activeSelf)
-                tacticButtons[i].interactable = tacticTriggers[i].Activatable();
+        SetTacticInteractable();
     }
     private IEnumerator ShowYourTurn(float time = 1.5f)
     {
@@ -244,13 +246,27 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             Draw();
             return;
         }
-        if (GameInfo.actions[InfoLoader.playerID] > 1) endTurnButton.interactable = true;
+        if (GameInfo.actions[InfoLoader.playerID] > 1)
+        {
+            endTurnButton.interactable = true;
+            endTurnText.text = "End Turn";
+        }
+        else
+        {
+            endTurnButton.interactable = false;
+            endTurnText.text = "Your Turn";
+        }
         GameInfo.time = GameInfo.maxTime;
         StartCoroutine(EnemyTurn());
     }
 
     public IEnumerator EnemyTurn()
     {
+        // Set Button interactable
+        SetTacticInteractable(false);
+        endTurnButton.interactable = false;
+        endTurnText.text = "Enemy Turn";
+
         GameEvent gameEvent = new GameEvent();
         // WWWForm
         while (false) // fetching enemy response // should return "" if no response
@@ -307,27 +323,42 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             {
                 index = GameInfo.unusedTactics[InfoLoader.playerID].IndexOf(tactic);
                 for (int i = count; i > index; i--)
-                    tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(tacticObjs[i - 1].GetComponent<TacticInfo>().tacticAttributes);
+                {
+                    TacticInfo tacticInfo = tacticObjs[i - 1].GetComponent<TacticInfo>();
+                    tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(tacticInfo.tacticAttributes, tacticInfo.tactic.original);
+                }
             }
             TacticAttributes tacticAttributes = Database.FindTacticAttributes(tactic.tacticName);
-            tacticObjs[index].GetComponent<TacticInfo>().SetAttributes(tacticAttributes);
+            tacticObjs[index].GetComponent<TacticInfo>().SetAttributes(tacticAttributes, false);
             tacticTriggers.Insert(index, tacticAttributes.trigger);
+            SetTacticInteractable();
         }
     }
 
     public void RemoveTactic(Tactic tactic)
     {
-        int index = GameInfo.unusedTactics[InfoLoader.playerID].IndexOf(tactic);
+        int index = GameInfo.FindTactic(tactic.tacticName, InfoLoader.playerID);
         int count = GameInfo.unusedTactics[InfoLoader.playerID].Count;
         if (count > 1)
         {
             for (int i = index; i < count - 1; i++)
-                tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(tacticObjs[i + 1].GetComponent<TacticInfo>().tacticAttributes);
+            {
+                TacticInfo tacticInfo = tacticObjs[i + 1].GetComponent<TacticInfo>();
+                tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(tacticInfo.tacticAttributes, tacticInfo.tactic.original);
+            }
         }
         else tacticObjs[0].GetComponent<TacticInfo>().Clear();
         tacticTriggers.RemoveAt(index);
         tacticObjs[count - 1].parent.gameObject.SetActive(false);
-        GameInfo.RemoveTactic(tactic);
+        GameInfo.RemoveTactic(index);
+        SetTacticInteractable();
+        CancelTacticHighlight();
+    }
+
+    public void SetTacticInteractable(bool interactable = true)
+    {
+        for (int i = 0; i < tacticTriggers.Count; i++)
+            tacticButtons[i].interactable = interactable && tacticTriggers[i].Activatable();
     }
 
     public void ChangeTacticOreCost(int index, int deltaAmount)

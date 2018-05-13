@@ -113,14 +113,6 @@ public class GameInfo
         // upload
     }
 
-    public static bool IsAllyAlive(Collection collection)
-    {
-        foreach(Piece piece in activePieces[InfoLoader.playerID])
-            if (piece.SameCollection(collection))
-                return true;
-        return false;
-    }
-
     public static void AddTactic(Tactic tactic)
     {
         int index = 0;
@@ -142,13 +134,10 @@ public class GameInfo
         // upload
     }
 
-    public static void RemoveTactic(Tactic tactic)
+    public static void RemoveTactic(int index)
     {
-        Debug.Log(tactic == unusedTactics[InfoLoader.playerID][1]);
-        Debug.Log(unusedTactics[InfoLoader.playerID].Count);
-        unusedTactics[InfoLoader.playerID].Remove(tactic);
-        Debug.Log(unusedTactics[InfoLoader.playerID].Count);
-        usedTactics[InfoLoader.playerID].Add(tactic);
+        usedTactics[InfoLoader.playerID].Add(unusedTactics[InfoLoader.playerID][index]);
+        unusedTactics[InfoLoader.playerID].RemoveAt(index);
         // upload
     }
 

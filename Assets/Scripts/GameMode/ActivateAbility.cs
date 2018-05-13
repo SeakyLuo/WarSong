@@ -10,12 +10,12 @@ public class ActivateAbility : MonoBehaviour {
     public static int tacticCaller = -1;
     public static List<Vector2Int> targetLocs = new List<Vector2Int>();
     public static PieceInfo pieceInfo;
+    public static Button button;
 
     public GameController gameController;
     public GameObject invalidTarget;
     public GameObject tacticBag;
 
-    private static Button button;
     private static Text text;
     private static GameObject textObj;
     private static GameObject targetDot;
@@ -51,10 +51,8 @@ public class ActivateAbility : MonoBehaviour {
             pieceInfo.trigger.Activate(location);
             MovementController.PutDownPiece();
         }
-        activated = false;
-        pieceInfo = null;
         onEnterGame.AddToHistory(gameEvent);
-        RemoveTargets();
+        DeactivateButton();
     }
 
     private IEnumerator ShowInvalidTarget()
@@ -66,8 +64,10 @@ public class ActivateAbility : MonoBehaviour {
 
     public void ButtonDrawTargets()
     {
+        OnEnterGame.CancelTacticHighlight();
         if (targetLocs.Count == 0)
         {
+            // if not targets, trigger directly
             if (!GameController.ChangeOre(-pieceInfo.trigger.piece.oreCost)) return;
             GameEvent gameEvent = new GameEvent();
             pieceInfo.trigger.Activate();
@@ -107,6 +107,7 @@ public class ActivateAbility : MonoBehaviour {
 
     public static void ActivateButton()
     {
+        OnEnterGame.CancelTacticHighlight();
         if (pieceInfo.trigger != null && !pieceInfo.trigger.Activatable()) return;
         targetLocs = pieceInfo.ValidTarget();
         button.interactable = true;

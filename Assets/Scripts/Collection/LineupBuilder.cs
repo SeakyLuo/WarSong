@@ -121,11 +121,11 @@ public class LineupBuilder : MonoBehaviour {
                 }
             }
         }
-        lineup.tactics.Insert(index, new Tactic(attributes));
+        lineup.tactics.Insert(index, new Tactic(attributes, true));
         tacticAttributes.Insert(index, attributes);
         tacticObjs[current_tactics++].SetActive(true);
         for (int i = index; i < current_tactics; i++)
-            tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(tacticAttributes[i]);
+            tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(tacticAttributes[i], true);
         SetTexts();
     }
 
@@ -146,14 +146,14 @@ public class LineupBuilder : MonoBehaviour {
 
     private void TacticRemover(TacticAttributes attributes)
     {
-        Tactic remove = new Tactic(attributes);
+        Tactic remove = new Tactic(attributes, true);
         int index = FindTactic(remove.tacticName);
         totalOreCost -= attributes.oreCost;
         totalGoldCost -= attributes.goldCost;
         if (current_tactics > 1)
         {
             for (int i = index; i < current_tactics - 1; i++)
-                tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(tacticAttributes[i + 1]);
+                tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(tacticAttributes[i + 1], true);
         }
         else tacticObjs[0].GetComponent<TacticInfo>().Clear();
         lineup.tactics.Remove(remove);
