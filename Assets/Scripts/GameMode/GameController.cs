@@ -78,7 +78,7 @@ public class GameController : MonoBehaviour {
                     if (MovementController.validLocs.Contains(location))
                     {
                         MovementController.MoveTo(location);
-                        if (--GameInfo.actions[InfoLoader.user.playerID] == 0) onEnterGame.NextTurn();
+                        if (--GameInfo.actions[InfoLoader.playerID] == 0) onEnterGame.NextTurn();
                     }
                 }
                 else if (ActivateAbility.activated)
@@ -89,7 +89,7 @@ public class GameController : MonoBehaviour {
                     if (ActivateAbility.targetLocs.Contains(location))
                     {
                         ActivateAbility.Activate(location);
-                        if (--GameInfo.actions[InfoLoader.user.playerID] == 0) onEnterGame.NextTurn();
+                        if (--GameInfo.actions[InfoLoader.playerID] == 0) onEnterGame.NextTurn();
                     }
                 }
             }
@@ -124,6 +124,7 @@ public class GameController : MonoBehaviour {
             piece.isAlly = isAlly;
             GameInfo.activePieces[GameInfo.TheOtherPlayer()].Add(piece);
         }
+        // upload
     }
 
     public static void AddPiece(Collection collection, Vector2Int castle, bool isAlly)
@@ -131,33 +132,62 @@ public class GameController : MonoBehaviour {
         boardSetup.AddPiece(collection, castle, isAlly);
     }
 
+    public static void AddTactic(Tactic tactic)
+    {
+        onEnterGame.AddTactic(tactic);
+    }
+
+    public static void RemoveTactic(Tactic tactic)
+    {
+        onEnterGame.RemoveTactic(tactic);
+    }
+
     public static void ChangePieceHealth(Vector2Int location, int deltaAmount)
     {
-
+        Piece before = GameInfo.board[location];
+        Piece after = new Piece(before);
+        after.health += deltaAmount;
+        GameInfo.board[location] = after;
+        if (before.isAlly) GameInfo.activePieces[InfoLoader.playerID][GameInfo.activePieces[InfoLoader.playerID].IndexOf(before)] = after;
+        else GameInfo.activePieces[GameInfo.TheOtherPlayer()][GameInfo.activePieces[GameInfo.TheOtherPlayer()].IndexOf(before)] = after;
+        // upload
     }
 
     public static void ChangePieceOreCost(Vector2Int location, int deltaAmount)
     {
-
+        Piece before = GameInfo.board[location];
+        Piece after = new Piece(before);
+        after.oreCost += deltaAmount;
+        GameInfo.board[location] = after;
+        if (before.isAlly) GameInfo.activePieces[InfoLoader.playerID][GameInfo.activePieces[InfoLoader.playerID].IndexOf(before)] = after;
+        else GameInfo.activePieces[GameInfo.TheOtherPlayer()][GameInfo.activePieces[GameInfo.TheOtherPlayer()].IndexOf(before)] = after;
+        // upload
     }
 
-    public static void ChangeTacticOreCost(int deltaAmount)
+    public static void ChangeTacticOreCost(string tacticName, int deltaAmount)
     {
-
+        int index = GameInfo.FindTactic(tacticName, InfoLoader.playerID);
+        Tactic tactic = GameInfo.unusedTactics[InfoLoader.playerID][index];
+        tactic.oreCost += deltaAmount;
+        GameInfo.unusedTactics[InfoLoader.playerID][index] = tactic;
+        onEnterGame.ChangeTacticOreCost(index, deltaAmount);
+        // upload
     }
 
     public static void Eliminate(Piece piece)
     {
         Destroy(boardSetup.pieces[piece.location]);
         boardSetup.pieces.Remove(piece.location);
-        GameInfo.Remove(piece);
+        GameInfo.RemovePiece(piece);
+        // upload
     }
 
     public static void Eliminate(Vector2Int location)
     {
         Destroy(boardSetup.pieces[location]);
         boardSetup.pieces.Remove(location);
-        GameInfo.Remove(GameInfo.board[location]);
+        GameInfo.RemovePiece(GameInfo.board[location]);
+        // upload
     }
 
     public static void FreezePiece(Vector2Int location, int round)
@@ -177,20 +207,22 @@ public class GameController : MonoBehaviour {
         GameObject freezeImage = Instantiate(onEnterGame.freezeImage, boardCanvas);
         freezeImage.transform.position = new Vector3(location.x * MovementController.scale, location.y * MovementController.scale, -0.5f);
         freezeImages.Add(location, freezeImage);
+        // upload
     }
 
     public static void PlaceTrap(Vector2Int location, string trapName, int creator)
     {
         GameInfo.traps.Add(location, new KeyValuePair<string, int>(trapName, creator));
+        // upload
     }
-         
+
     public static void PlaceFlag(Vector2Int location, bool isAlly)
     {
         GameObject flag;
         if (isAlly)
         {
             flag = Instantiate(onEnterGame.playerFlag, boardCanvas);
-            GameInfo.flags.Add(location, InfoLoader.user.playerID);
+            GameInfo.flags.Add(location, InfoLoader.playerID);
         }
         else
         {
@@ -199,6 +231,7 @@ public class GameController : MonoBehaviour {
         }
         flag.transform.position = new Vector3(location.x * MovementController.scale, location.y * MovementController.scale, -0.5f);
         flags.Add(location, flag);
+        // upload
     }
 
     public static void RemoveFlag(Vector2Int location)
@@ -206,6 +239,13 @@ public class GameController : MonoBehaviour {
         Destroy(flags[location]);
         flags.Remove(location);
         GameInfo.flags.Remove(location);
+        // upload
+    }
+
+    public static void RemoveTrap(Vector2Int location)
+    {
+        GameInfo.traps.Remove(location);
+        // upload
     }
 
     public static void DecodeGameEvent(GameEvent gameEvent)
@@ -230,12 +270,12 @@ public class GameController : MonoBehaviour {
 
     public static bool ChangeOre(int deltaAmount)
     {
-        if(GameInfo.ores[InfoLoader.user.playerID] + deltaAmount < 0)
+        if(GameInfo.ores[InfoLoader.playerID] + deltaAmount < 0)
         {
             onEnterGame.ShowNotEnoughOres();
             return false;
         }
-        GameInfo.ores[InfoLoader.user.playerID] += deltaAmount;
+        GameInfo.ores[InfoLoader.playerID] += deltaAmount;
         onEnterGame.SetOreText();
         return true;
     }
@@ -246,7 +286,7 @@ public class GameController : MonoBehaviour {
             onEnterGame.ShowNotEnoughCoins();
             return false;
         }
-        InfoLoader.user.coins += deltaAmount;
+        InfoLoader.user.ChangeCoins(deltaAmount);
         onEnterGame.SetCoinText();
         return true;
     }

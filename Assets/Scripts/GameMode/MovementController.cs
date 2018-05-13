@@ -597,7 +597,7 @@ public class MovementController : MonoBehaviour
         }
         else if (GameInfo.flags.ContainsKey(loc))
         {
-            if (GameInfo.flags[loc] == InfoLoader.user.playerID) return 'T';   // True
+            if (GameInfo.flags[loc] == InfoLoader.playerID) return 'T';   // True
             else return 'F'; // False
         }
         return 'B';

@@ -41,7 +41,7 @@ public class ActivateAbility : MonoBehaviour {
             // use tactic
             if (!GameController.ChangeOre(-tacticTrigger.tactic.oreCost) || !GameController.ChangeCoin(-tacticTrigger.tactic.goldCost)) return;
             tacticTrigger.Activate(location);
-            onEnterGame.tacticBag.Find("TacticSlot" + tacticCaller).gameObject.SetActive(false);
+            GameController.RemoveTactic(tacticTrigger.tactic);
             tacticCaller = -1;
         }
         else
@@ -73,7 +73,7 @@ public class ActivateAbility : MonoBehaviour {
             pieceInfo.trigger.Activate();
             onEnterGame.AddToHistory(gameEvent);
             MovementController.PutDownPiece();
-            if (--GameInfo.actions[InfoLoader.user.playerID] == 0) onEnterGame.NextTurn();
+            if (--GameInfo.actions[InfoLoader.playerID] == 0) onEnterGame.NextTurn();
         }
         else DrawTargets();
     }

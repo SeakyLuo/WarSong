@@ -30,11 +30,6 @@ public class BoardSetup : MonoBehaviour {
     {
         pieceObj.GetComponent<PieceInfo>().Setup(collection, castle, isAlly);
         pieces.Add(castle, pieceObj);
-        Piece piece = pieceObj.GetComponent<PieceInfo>().piece;
-        GameInfo.Add(piece);
-        List<Piece> piecesWithCastle;
-        if (GameInfo.castles.TryGetValue(piece.GetCastle(), out piecesWithCastle))
-            GameInfo.castles[piece.GetCastle()].Add(piece);
-        else GameInfo.castles.Add(piece.GetCastle(), new List<Piece> { piece });
+        GameInfo.AddPiece(pieceObj.GetComponent<PieceInfo>().piece);
     }
 }

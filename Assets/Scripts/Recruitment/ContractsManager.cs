@@ -113,7 +113,7 @@ public class ContractsManager : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public void AddContract(ContractAttributes contractAttributes, int contractsCount)
     {
-        InfoLoader.user.contracts[contractAttributes.Name] += contractsCount;
+        InfoLoader.user.ChangeContracts(contractAttributes.Name, contractsCount);
         contractSlots[contractName.IndexOf(contractAttributes.Name)].GetComponent<PlayerContract>().SetCount(InfoLoader.user.contracts[contractAttributes.Name]);
     }
 
@@ -140,7 +140,7 @@ public class ContractsManager : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public void SetCards()
     {
-        InfoLoader.user.contracts[targetContract.name] -= contractCount;
+        InfoLoader.user.ChangeContracts(targetContract.name, contractCount);
         List<string> types = Database.FindContractAttributes(targetContract.name).cardTypes;
         for(int i = 0; i < contractCount * 5; i++)
         {

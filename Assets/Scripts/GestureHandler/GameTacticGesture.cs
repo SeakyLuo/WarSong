@@ -29,12 +29,11 @@ public class GameTacticGesture : MonoBehaviour, IPointerEnterHandler, IPointerEx
         if (OnEnterGame.current_tactic != -1 && targets.Count != 0) Resume();
         else
         {
-            // double click doesn't work well
             if (!trigger.needsTarget && Time.time - prevClick < doubleClickInterval)
             {
                 if (!GameController.ChangeOre(-trigger.tactic.oreCost) || !GameController.ChangeCoin(-trigger.tactic.goldCost)) return;
                 trigger.Activate();
-                gameObject.SetActive(false);
+                GameController.RemoveTactic(trigger.tactic);
             }
             else
             {

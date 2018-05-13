@@ -14,6 +14,18 @@ public class Piece
     private Collection collection;
     private Vector2Int castle;
 
+    public Piece(Piece piece)
+    {
+        location = piece.location;
+        freeze = piece.freeze;
+        active = piece.active;
+        isAlly = piece.isAlly;
+        oreCost = piece.oreCost;
+        health = piece.health;
+        collection = piece.collection;
+        castle = piece.castle;
+    }
+
     public Piece(string type, Vector2Int loc, bool IsAlly)
     {
         /// Standard Piece

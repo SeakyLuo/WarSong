@@ -18,4 +18,20 @@ public class Tactic {
         oreCost = OreCost;
         goldCost = GoldCost;
     }
+
+    public static bool operator == (Tactic tactic1, Tactic tactic2)
+    {
+        return tactic1.oreCost == tactic2.oreCost && tactic1.goldCost == tactic2.goldCost && tactic1.tacticName == tactic2.tacticName;
+    }
+
+    public static bool operator !=(Tactic tactic1, Tactic tactic2) { return !(tactic1 == tactic2); }
+
+    public static bool operator < (Tactic tactic1, Tactic tactic2)
+    {
+        return tactic1.oreCost < tactic2.oreCost ||
+                (tactic1.oreCost == tactic2.oreCost && tactic1.goldCost < tactic2.goldCost) ||
+                (tactic1.oreCost == tactic2.oreCost && tactic1.goldCost == tactic2.goldCost && tactic1.tacticName.CompareTo(tactic2.tacticName) < 0);
+    }
+
+    public static bool operator >(Tactic tactic1, Tactic tactic2) { return !(tactic1 < tactic2 && tactic1 != tactic2); } // Because tactics can't be the same.
 }
