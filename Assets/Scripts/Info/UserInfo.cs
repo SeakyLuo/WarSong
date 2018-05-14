@@ -105,8 +105,17 @@ public class UserInfo {
 
     }
 
-    public void downloadLatestJson(UserInfo user){//will test after upload is correct
-        
+    public IEnumerator downloadLatestJson(UserInfo user){
+        string findUsername = user.username;
+
+        WWWForm infoToPhp = new WWWForm();
+        infoToPhp.AddField("userName", findUsername);
+
+        WWW sendToPhp = new WWW("http://localhost:8888/download_userinfo.php", infoToPhp);
+        yield return sendToPhp;
+
+        user = user.JsonToClass(sendToPhp.text);  //sendToPhp.text is the userInfo json file
+
     }
 }
 

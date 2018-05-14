@@ -98,6 +98,7 @@ public class AuthenticationManager : MonoBehaviour
         string userName = create_textUsername.text;
 
         UserInfo user = new UserInfo();
+        user.username = userName;
         string new_userJson = user.ClassToJson(user);
 
 
