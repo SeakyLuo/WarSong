@@ -57,13 +57,13 @@ public class UserInfo {
     public void AddCollection(Collection insert)
     {
         int index = 0;
-        if (collection.Count == 0 || insert.LessThan(collection[0])) index = 0;
-        else if (insert.GreaterThan(collection[collection.Count - 1])) index = collection.Count;
+        if (collection.Count == 0 || insert < collection[0]) index = 0;
+        else if (insert > collection[collection.Count - 1]) index = collection.Count;
         else
         {
             for (int i = 0; i < collection.Count - 1; i++)
             {
-                if (insert.GreaterThan(collection[i]) && insert.LessThan(collection[i + 1]))
+                if (insert > collection[i] && insert < collection[i + 1])
                 {
                     index = i + 1;
                     break;

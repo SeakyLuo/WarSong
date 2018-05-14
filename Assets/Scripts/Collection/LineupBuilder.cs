@@ -21,7 +21,6 @@ public class LineupBuilder : MonoBehaviour {
     private GameObject[] tacticObjs;
     private List<TacticAttributes> tacticAttributes = new List<TacticAttributes>();    
     private int totalOreCost = 0, totalGoldCost = 0;
-    private Vector3 mousePosition;
 
     private void Awake()
     {
