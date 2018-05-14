@@ -114,7 +114,7 @@ public class UserInfo {
         WWW sendToPhp = new WWW("http://localhost:8888/download_userinfo.php", infoToPhp);
         yield return sendToPhp;
 
-        user = user.JsonToClass(sendToPhp.text);  //sendToPhp.text is the userInfo json file
+        user = JsonToClass(sendToPhp.text);  //sendToPhp.text is the userInfo json file
 
     }
 }
