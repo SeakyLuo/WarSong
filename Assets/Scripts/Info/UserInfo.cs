@@ -76,53 +76,64 @@ public class UserInfo {
             }
         }
         collection.Insert(index, insert);
+        Upload();
     }
     public void RemoveCollection(int index)
     {
         collection.RemoveAt(index);
+        Upload();
     }
     public void RemoveCollection(Collection remove)
     {
         collection.Remove(remove);
+        Upload();
     }
     public void ChangeCollectionCount(int index, int deltaAmount)
     {
         if (--InfoLoader.user.collection[index].count == 0) InfoLoader.user.RemoveCollection(index);
+        Upload();
     }
 
     public void ChangeCoins(int deltaAmount)
     {
         coins += deltaAmount;
-        // upload()
+        Upload();
     }
     public void AddLineup(Lineup lineup)
     {
         lineups.Add(lineup);
+        Upload();
     }
     public void ModifyLineup(Lineup lineup, int index)
     {
         lineups[index] = lineup;
+        Upload();
     }
     public void RemoveLineup(int index)
     {
         lineups.RemoveAt(index);
+        Upload();
     }
     public void SetLastLineupSelected(int index = -1)
     {
         lastLineupSelected = index;
+        Upload();
     }
-    public void SetPreferredBoard(string boardName = "StandardBoard")
+    public void SetPreferredBoard(string boardName = "Standard Board")
     {
         preferredBoard = boardName;
+        Upload();
     }
     public void SetGameID(int GameId)
     {
         gameID = GameId;
+        Upload();
     }
     public void ChangeContracts(string contractName, int deltaAmount)
     {
         if (contracts.ContainsKey(contractName)) contracts[contractName] += deltaAmount;
         else contracts.Add(contractName, deltaAmount);
+        Upload();
     }
     public void Win()
     {
@@ -146,22 +157,34 @@ public class UserInfo {
     {
         return JsonUtility.FromJson<UserInfo>(json);
     }
-    public IEnumerator Upload(UserInfo user)
+    public IEnumerator Upload()
     {
         //user.username = "Connor";
-        string userJson = ClassToJson(user); //convert class to json string
+        string userJson = ClassToJson(this); //convert class to json string
 
         WWWForm infoToPhp = new WWWForm(); //create WWWform to send to php script
-        infoToPhp.AddField("userName", user.username);
+        infoToPhp.AddField("userName", username);
         infoToPhp.AddField("userJson", userJson);
 
         WWW sendToPhp = new WWW("http://localhost:8888/update_userinfo.php", infoToPhp);
         yield return sendToPhp;
     }
-    public void DownloadLatestJson(UserInfo user)
+    public void Download()
+    {
+        Download(this);
+    }
+    private IEnumerator Download(UserInfo user)
     {
         //will test after upload is correct
-        
+        string findUsername = user.username;
+
+        WWWForm infoToPhp = new WWWForm();
+        infoToPhp.AddField("userName", findUsername);
+
+        WWW sendToPhp = new WWW("http://localhost:8888/download_userinfo.php", infoToPhp);
+        yield return sendToPhp;
+
+        user = JsonToClass(sendToPhp.text);  //sendToPhp.text is the userInfo json file
     }
 }
 

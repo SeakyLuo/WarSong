@@ -53,6 +53,7 @@ public class AccountCreation : MonoBehaviour {
 
     public IEnumerator Register()
     {
+        Debug.Log(111);
         // create an account in the server
         WWWForm infoToPhp = new WWWForm();
         infoToPhp.AddField("email", email.text);
@@ -61,7 +62,7 @@ public class AccountCreation : MonoBehaviour {
 
         WWW sendToPhp = new WWW("http://localhost:8888/action_reg.php", infoToPhp);
         yield return sendToPhp;
-        Debug.Log(sendToPhp.error);
+
         if(sendToPhp.error.Contains("Cannot connect"))
         {
             networkError.SetActive(true);
