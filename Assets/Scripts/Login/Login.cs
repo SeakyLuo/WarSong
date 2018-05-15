@@ -20,8 +20,8 @@ public class Login : MonoBehaviour
         string email = PlayerPrefs.GetString("email"),
                 password = PlayerPrefs.GetString("password");
         if (email != "" && password != "")
-            login(email, password);
-            //StartCoroutine(RequestLogin(email, password, false));
+            //login(email, password);
+            StartCoroutine(RequestLogin(email, password, false));
 	}
 
     private void Update()
@@ -40,8 +40,8 @@ public class Login : MonoBehaviour
             return;
         }
         emptyPassword.SetActive(false);
-        login(inputEmail.text, inputPassword.text);
-        //StartCoroutine(RequestLogin(inputEmail.text, inputPassword.text));
+        //login(inputEmail.text, inputPassword.text);
+        StartCoroutine(RequestLogin(inputEmail.text, inputPassword.text));
     }
 
     public IEnumerator RequestLogin(string email, string password, bool showError = true)  //connect with server, and VERIFY credentials
