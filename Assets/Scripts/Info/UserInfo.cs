@@ -159,12 +159,9 @@ public class UserInfo {
     }
     public IEnumerator Upload()
     {
-        //user.username = "Connor";
-        string userJson = ClassToJson(this); //convert class to json string
-
         WWWForm infoToPhp = new WWWForm(); //create WWWform to send to php script
-        infoToPhp.AddField("userName", username);
-        infoToPhp.AddField("userJson", userJson);
+        infoToPhp.AddField("email", PlayerPrefs.GetString("email"));
+        infoToPhp.AddField("userJson", ClassToJson(this));
 
         WWW sendToPhp = new WWW("http://localhost:8888/update_userinfo.php", infoToPhp);
         yield return sendToPhp;
@@ -175,11 +172,8 @@ public class UserInfo {
     }
     private IEnumerator Download(UserInfo user)
     {
-        //will test after upload is correct
-        string findUsername = user.username;
-
         WWWForm infoToPhp = new WWWForm();
-        infoToPhp.AddField("userName", findUsername);
+        infoToPhp.AddField("email", PlayerPrefs.GetString("email"));
 
         WWW sendToPhp = new WWW("http://localhost:8888/download_userinfo.php", infoToPhp);
         yield return sendToPhp;

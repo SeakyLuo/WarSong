@@ -53,7 +53,6 @@ public class AccountCreation : MonoBehaviour {
 
     public IEnumerator Register()
     {
-        Debug.Log(111);
         // create an account in the server
         WWWForm infoToPhp = new WWWForm();
         infoToPhp.AddField("email", email.text);
