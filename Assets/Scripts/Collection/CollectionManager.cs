@@ -8,8 +8,9 @@ public class CollectionManager : MonoBehaviour {
     public Dictionary<string, int> pageLimits = new Dictionary<string, int>();
     public KeyValuePair<string, int> currentPage, notFound = new KeyValuePair<string, int>("", 0);
     public Vector3 raise = new Vector3(0, 0, 10);
-    public GameObject clearSearch, searchPanel, selectedBoardPanel, createLineupPanel;
-    public Text TitleText, pageText;
+    public GameObject clearSearch, searchPanel, selectedBoardPanel, createLineupPanel, noCollectionPanel;
+    public Button createLineupButton;
+    public Text TitleText, pageText, createLineupButtonText;
     public InputField searchByInput;
     
     private List<Collection> displayCollections, searchedCollections;
@@ -40,16 +41,24 @@ public class CollectionManager : MonoBehaviour {
             cards[i] = slot.Find("Card").gameObject;
             counters[i] = slot.Find("Count/CountText").GetComponent<Text>();
         }
+        bool noCollection = InfoLoader.user.collection.Count == 0;
         for (int i = 0; i < Database.types.Count; i++)
         {
             tabs[i] = GameObject.Find("Tabs/" + Database.types[i]);
-            tabs[i].SetActive(true);
+            tabs[i].SetActive(!noCollection);
         }
-        LoadUserCollections();
-        foreach (Collection collection in displayCollections)
-            originalDict[collection.type].Add(collection);
-        SetPageLimits();
-        SetCurrentPage("General", 1);
+        noCollectionPanel.SetActive(noCollection);
+        createLineupButton.interactable = !noCollection;
+        if (noCollection) createLineupButtonText.text = "No Allies";
+        else
+        {
+            createLineupButtonText.text = "Create Lineup";
+            LoadUserCollections();
+            foreach (Collection collection in displayCollections)
+                originalDict[collection.type].Add(collection);
+            SetPageLimits();
+            SetCurrentPage(FirstPage());
+        }
     }
 
     public void AddCollection(Collection collection)
@@ -121,8 +130,8 @@ public class CollectionManager : MonoBehaviour {
             count = item.Value.Count;
             if (count > 0)
             {
-                if (count % cardsPerPage == 0) count = (int)Mathf.Floor(count / cardsPerPage);
-                else count = (int)Mathf.Floor(count / cardsPerPage) + 1;
+                count = (int)Mathf.Floor(count / cardsPerPage);
+                if (count % cardsPerPage != 0) count++;
             }
             pageLimits[item.Key] = count;            
         }

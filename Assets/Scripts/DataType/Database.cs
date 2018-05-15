@@ -30,8 +30,9 @@ public class Database {
         FindAttributes("Standard Piece");
         FindAttributes("Piece");
         FindAttributes("Tactic");
+        FindAttributes("Board");
         FindAttributes("Trap");
-        FindAttributes("Contract");;
+        FindAttributes("Contract");
     }
 
     private void FindAttributes(string type)

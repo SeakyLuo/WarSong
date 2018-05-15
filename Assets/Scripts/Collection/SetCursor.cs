@@ -7,7 +7,7 @@ public class SetCursor : MonoBehaviour
     public static bool cursorSwitched = false;
 
     public CollectionManager collectionManager;
-    public GameObject selectBoardPanel, createLineupPanel;
+    public GameObject selectBoardPanel, createLineupPanel, noCollectionPanel;
     public BoardManager boardManager;
     public RectTransform board;
 	public Texture2D leftCursor, rightCursor, dragCursor;
@@ -26,6 +26,7 @@ public class SetCursor : MonoBehaviour
 
 	private void Update()
 	{
+        if (noCollectionPanel.activeSelf) return;
         if (selectBoardPanel.activeSelf)
         {
             if (boardManager.currentBoard > 0 && InLeft())

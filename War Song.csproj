@@ -290,6 +290,7 @@
     <Compile Include="Assets\Resources\Piece\Fat Soldier\FatSoldier.cs" />
     <Compile Include="Assets\Resources\Piece\Link Soldier\LinkSoldier.cs" />
     <Compile Include="Assets\Resources\Piece\Monster Hunter\MonsterHunter.cs" />
+    <Compile Include="Assets\Resources\Piece\Space Witch\SpaceWitch.cs" />
     <Compile Include="Assets\Resources\Piece\Turret\Turret.cs" />
     <Compile Include="Assets\Resources\Tactic\Betrayal\Betrayal.cs" />
     <Compile Include="Assets\Resources\Tactic\Buy 1 Get 1 Free\Buy1Get1Free.cs" />
