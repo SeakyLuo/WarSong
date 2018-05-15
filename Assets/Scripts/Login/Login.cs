@@ -49,12 +49,12 @@ public class Login : MonoBehaviour
         WWWForm infoToPhp = new WWWForm();
         infoToPhp.AddField("email", email);
         infoToPhp.AddField("password", password);
-        gameObject.SetActive(false);
-        StartCoroutine(ChangeConnectingDots());
+        //gameObject.SetActive(false);
+        //StartCoroutine(ChangeConnectingDots());
 
         WWW sendToPhp = new WWW("http://localhost:8888/action_login.php", infoToPhp);
         yield return sendToPhp;
-        StopAllCoroutines();
+        //StopAllCoroutines();
 
         if (string.IsNullOrEmpty(sendToPhp.error)) //if no error connecting to server
         {
@@ -77,7 +77,7 @@ public class Login : MonoBehaviour
         {
             if(showError) networkError.SetActive(true);
         }
-        gameObject.SetActive(true);
+       // gameObject.SetActive(true);
     }
 
     private void login(string email, string password)

@@ -945,11 +945,11 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1184856570}
+      objectReference: {fileID: 1139610276}
     - target: {fileID: 114971652685837182, guid: 224398847d91f674a9723230c70851a1,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 114971652685837182, guid: 224398847d91f674a9723230c70851a1,
         type: 2}
