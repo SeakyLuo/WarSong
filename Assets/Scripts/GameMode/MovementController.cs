@@ -117,6 +117,7 @@ public class MovementController : MonoBehaviour
         onEnterGame.AskTrigger(pieceInfo.piece, trigger, "AfterMove");
         if (boardAttributes.InEnemyRegion(to.x, to.y)) onEnterGame.AskTrigger(pieceInfo.piece, trigger, "InEnemyRegion");
         else if (boardAttributes.InEnemyPalace(to.x, to.y)) onEnterGame.AskTrigger(pieceInfo.piece, trigger, "InEnemyPalace");
+        else if (boardAttributes.InEnemyCastle(to.x, to.y)) onEnterGame.AskTrigger(pieceInfo.piece, trigger, "InEnemyCastle");
         else if (boardAttributes.AtEnemyBottom(to.x,to.y)) onEnterGame.AskTrigger(pieceInfo.piece, trigger, "AtEnemyBottom");
     }
 

@@ -194,7 +194,7 @@ public class CheatAccount:UserInfo
             new Collection("Tame an Elephant"),new Collection("Purchase a Horse"), new Collection("King's Guardian","Advisor", 3),new Collection("Protect the King", 8),
             new Collection("Monster Hunter","Chariot",4),new Collection("Treasure Horse","Horse",100), new Collection("Space Witch", "General", 2, 20),
             new Collection("Greeeeeat Elephant", "Elephant", 3, 5), new Collection("Zhuge Liang", "General"), new Collection("Secret Plan", 3),new Collection("Place a Flag",20),
-            new Collection("No Way", 100), new Collection("Qin Shihuang", "General"), new Collection("Xiao He", "General"),new Collection("Turret","Cannon"),
+            new Collection("No Way", 100), new Collection("King of the Dead", "General"), new Collection("The Ore King", "General"),new Collection("Turret","Cannon"),
             new Collection("Link Soldier","Soldier",11), new Collection("Buy 1 Get 1 Free",15), new Collection("Build a Cannon"),new Collection("Betrayal", 5),
             new Collection("Build a Chariot"),new Collection("Winner Trophy",5),new Collection("Horse Rider","Horse",4),new Collection("Disarm", 11),new Collection("Minesweeper",20)
         };

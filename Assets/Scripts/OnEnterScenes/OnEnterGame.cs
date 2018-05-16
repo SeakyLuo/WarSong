@@ -393,6 +393,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     {
         if (triggerMessage == "BloodThirsty") trigger.BloodThirsty();
         else if (triggerMessage == "AfterMove") trigger.AfterMove();
+        else if (triggerMessage == "InEnemyCastle") trigger.InEnemyCastle();
         else if (triggerMessage == "InEnemyRegion") trigger.InEnemyRegion();
         else if (triggerMessage == "InEnemyPalace") trigger.InEnemyPalace();
         else if (triggerMessage == "AtEnemyBottom") trigger.AtEnemyBottom();
