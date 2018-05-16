@@ -17,7 +17,7 @@ MonoBehaviour:
   afterMove: 0
   inEnemyRegion: 0
   inEnemyPalace: 0
-  inEnemyCastle: 0
+  inEnemyCastle: 1
   atEnemyBottom: 0
   cantBeDestroyedBy: []
   silenced: 0

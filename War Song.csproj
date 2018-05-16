@@ -289,6 +289,7 @@
     <Compile Include="Assets\Resources\Piece\Cripple\Cripple.cs" />
     <Compile Include="Assets\Resources\Piece\Fat Soldier\FatSoldier.cs" />
     <Compile Include="Assets\Resources\Piece\King of the Dead\KingOfTheDead.cs" />
+    <Compile Include="Assets\Resources\Piece\Link Bomber\LinkBomber.cs" />
     <Compile Include="Assets\Resources\Piece\Link Soldier\LinkSoldier.cs" />
     <Compile Include="Assets\Resources\Piece\Monster Hunter\MonsterHunter.cs" />
     <Compile Include="Assets\Resources\Piece\Purse Cutter\PurseCutter.cs" />

@@ -11,10 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9d8e2c441c4cc4d8fd06a06d6c0997, type: 3}
   m_Name: Attributes
   m_EditorClassIdentifier: 
-  Name: Zhuge Liang
+  Name: Wisest Elder
   type: General
   description: Get a random used tactic.
   oreCost: 4
   health: 5
-  image: {fileID: 21300000, guid: 73d875c40b4cb8046b177a6814f3a8f5, type: 3}
-  trigger: {fileID: 0}
+  image: {fileID: 21300000, guid: 0fdd1a515f6ae8b4e990bb9c0574a518, type: 3}
+  trigger: {fileID: 11400000, guid: 1375477c20b5c624499d8f043f5b8f5f, type: 2}
