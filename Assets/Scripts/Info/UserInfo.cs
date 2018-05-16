@@ -25,7 +25,7 @@ public class UserInfo {
         collection = new List<Collection>();
         lineups = new List<Lineup>();
         contracts = new Dictionary<string, int>(){
-            { "Standard Contract", 0},
+            { "Standard Contract", 1},
             { "Artillery Seller", 0},
             { "Human Resource", 0},
             { "Animal Smuggler", 0},
@@ -63,15 +63,16 @@ public class UserInfo {
         {
             for (int i = 0; i < collection.Count - 1; i++)
             {
+                if (insert.Equals(collection[i]))
+                {
+                    collection[i].count += insert.count;
+                    Upload();
+                    return;
+                }
                 if (insert > collection[i] && insert < collection[i + 1])
                 {
                     index = i + 1;
                     break;
-                }
-                else if (insert.Equals(collection[i]))
-                {
-                    collection[i].count += insert.count;
-                    return;
                 }
             }
         }

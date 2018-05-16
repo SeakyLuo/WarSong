@@ -16,8 +16,8 @@ public class SetCursor : MonoBehaviour
     private float lowerBound, upperBound, newLowerBound;
 
 	private void Start(){
-		lRight = 150;
-		rLeft = 1280;
+		lRight = 100;
+		rLeft = 1340;
 		rRight = GetComponent<RectTransform> ().rect.width;
         lowerBound = transform.position.y + GetComponent<RectTransform>().rect.y;
         upperBound = transform.position.y - GetComponent<RectTransform>().rect.y;

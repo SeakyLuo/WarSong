@@ -40,6 +40,7 @@ public class LineupBuilder : MonoBehaviour {
     private void OnDisable()
     {
         collectionManager.SetCardsPerPage(8);
+
         collectionManager.ShowCurrentPage();
     }
 
