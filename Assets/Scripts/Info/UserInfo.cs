@@ -82,7 +82,8 @@ public class UserInfo {
     public void RemoveCollection(int index)
     {
         collection.RemoveAt(index);
-        Upload();
+        var u = Upload();
+        while (u.MoveNext()) { };
     }
     public void RemoveCollection(Collection remove)
     {
@@ -158,18 +159,24 @@ public class UserInfo {
     {
         return JsonUtility.FromJson<UserInfo>(json);
     }
-    public IEnumerator Upload()
+    public void Upload()
+    {
+        var u = Upload(this);
+        while (u.MoveNext()) { }
+    }
+    private IEnumerator Upload(UserInfo user)
     {
         WWWForm infoToPhp = new WWWForm(); //create WWWform to send to php script
         infoToPhp.AddField("email", PlayerPrefs.GetString("email"));
-        infoToPhp.AddField("userJson", ClassToJson(this));
+        infoToPhp.AddField("userJson", ClassToJson(user));
 
         WWW sendToPhp = new WWW("http://localhost:8888/update_userinfo.php", infoToPhp);
         yield return sendToPhp;
     }
     public void Download()
     {
-        Download(this);
+        var d = Download(this);
+        while(d.MoveNext()) { }
     }
     private IEnumerator Download(UserInfo user)
     {
