@@ -82,8 +82,7 @@ public class UserInfo {
     public void RemoveCollection(int index)
     {
         collection.RemoveAt(index);
-        var u = Upload();
-        while (u.MoveNext()) { };
+        Upload();
     }
     public void RemoveCollection(Collection remove)
     {
@@ -95,7 +94,6 @@ public class UserInfo {
         if (--InfoLoader.user.collection[index].count == 0) InfoLoader.user.RemoveCollection(index);
         Upload();
     }
-
     public void ChangeCoins(int deltaAmount)
     {
         coins += deltaAmount;
@@ -185,6 +183,7 @@ public class UserInfo {
 
         WWW sendToPhp = new WWW("http://localhost:8888/download_userinfo.php", infoToPhp);
         yield return sendToPhp;
+        
 
         user = JsonToClass(sendToPhp.text);  //sendToPhp.text is the userInfo json file
     }
