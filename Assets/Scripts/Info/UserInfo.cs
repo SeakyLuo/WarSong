@@ -139,14 +139,17 @@ public class UserInfo {
     {
         total.Win();
         winsToday++;
+        Upload();
     }
     public void Lose()
     {
         total.Lose();
+        Upload();
     }
     public void Draw()
     {
-        InfoLoader.user.total.Draw();
+        total.Draw();
+        Upload();
     }
 
     public static string ClassToJson(UserInfo user)
