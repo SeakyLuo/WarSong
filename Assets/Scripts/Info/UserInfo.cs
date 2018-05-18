@@ -99,22 +99,22 @@ public class UserInfo {
     public void AddLineup(Lineup lineup)
     {
         lineups.Add(lineup);
-        Upload();
+        //Upload();
     }
     public void ModifyLineup(Lineup lineup, int index)
     {
         lineups[index] = lineup;
-        Upload();
+        //Upload();
     }
     public void RemoveLineup(int index)
     {
         lineups.RemoveAt(index);
-        Upload();
+        //Upload();
     }
     public void SetLastLineupSelected(int index = -1)
     {
         lastLineupSelected = index;
-        Upload();
+        //Upload();
     }
     public void SetPreferredBoard(string boardName = "Standard Board")
     {
