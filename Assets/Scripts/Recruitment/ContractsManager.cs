@@ -96,10 +96,7 @@ public class ContractsManager : MonoBehaviour, IBeginDragHandler, IDragHandler, 
             }
             else
             {
-                if (warned)
-                {
-                    Use10Contracts();
-                }
+                if (warned) Use10Contracts();
                 else
                 {
                     use10Contracts.SetActive(true);
@@ -167,8 +164,9 @@ public class ContractsManager : MonoBehaviour, IBeginDragHandler, IDragHandler, 
                 cardInfo.SetAttributes(attributes);
                 cardInfo.SetHealth(collection.health);
             }
-            Login.user.AddCollection(collection);
+            Login.user.AddCollection(collection, false);
         }
+        Login.user.Upload();
         contractCount = 0;
     }
 

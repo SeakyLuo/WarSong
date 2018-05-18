@@ -182,6 +182,12 @@ public class GameInfo
         Upload();
     }
 
+    public void ChangeOre(int deltaAmount)
+    {
+        ores[Login.playerID] += deltaAmount;
+        Upload();
+    }
+
     public void Clear()
     {
         board.Clear();
@@ -204,6 +210,7 @@ public class GameInfo
     }
     public void Upload()
     {
+        return;
         WWWForm infoToPhp = new WWWForm(); //create WWWform to send to php script
         infoToPhp.AddField("email", PlayerPrefs.GetString("email"));
         infoToPhp.AddField("userJson", ClassToJson(this));

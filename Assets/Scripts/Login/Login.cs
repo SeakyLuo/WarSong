@@ -20,7 +20,7 @@ public class Login : MonoBehaviour
     void Start () {
         if (!called)
         {
-            Database database = new Database();
+            new Database();
             called = true;
         }
         // If already has an account saved

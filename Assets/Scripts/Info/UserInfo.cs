@@ -51,7 +51,7 @@ public class UserInfo {
         return -1;
     }
 
-    public void AddCollection(Collection insert)
+    public void AddCollection(Collection insert, bool upload = true)
     {
         int index = 0;
         if (collection.Count == 0 || insert < collection[0]) index = 0;
@@ -74,7 +74,7 @@ public class UserInfo {
             }
         }
         collection.Insert(index, insert);
-        Upload();
+        if(upload) Upload();
     }
     public void RemoveCollection(int index)
     {
@@ -227,7 +227,7 @@ public class CheatAccount:UserInfo
                 new Dictionary<Vector2Int, Collection>()
                 {
                     {new Vector2Int(4,0), new Collection("Space Witch", "General",1 , 9) },
-                    {new Vector2Int(3,0), new Collection("King's Guard","Advisor", 1, 4) },{new Vector2Int(5,0), new Collection("King's Guardian","Advisor") },
+                    {new Vector2Int(3,0), new Collection("King's Guard","Advisor", 1, 4) },{new Vector2Int(5,0), new Collection("King's Guard","Advisor") },
                     {new Vector2Int(2,0), new Collection("Greeeeeat Elephant", "Elephant") },{new Vector2Int(6,0), new Collection("Greeeeeat Elephant", "Elephant")},
                     {new Vector2Int(1,0), new Collection("Horse Rider","Horse") },{new Vector2Int(7,0), new Collection("Horse Rider","Horse") },
                     {new Vector2Int(0,0), new Collection("Monster Hunter","Chariot") },{new Vector2Int(8,0), new Collection("Monster Hunter","Chariot") },
@@ -274,6 +274,7 @@ public class CheatAccount:UserInfo
             { "Animal Smuggler", 5},
             { "Wise Elder", 1}
         };
+        contractCount = new List<int> { 1111, 111, 11, 5, 1 };
         coins = 99999;
         rank = 9999;
         lastLineupSelected = 1;

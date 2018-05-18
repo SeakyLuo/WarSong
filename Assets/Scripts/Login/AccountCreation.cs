@@ -53,7 +53,7 @@ public class AccountCreation : MonoBehaviour {
         infoToPhp.AddField("email", email.text);
         infoToPhp.AddField("password", password.text);
         infoToPhp.AddField("userName", playerName.text);
-        infoToPhp.AddField("userJson", UserInfo.ClassToJson(new UserInfo(playerName.text, GeneratePlayerID())));
+        infoToPhp.AddField("userJson", UserInfo.ClassToJson(new UserInfo(playerName.text, GeneratePlayerID()))); //new CheatAccount();
 
         WWW sendToPhp = new WWW("http://47.151.234.225/action_reg.php", infoToPhp);
         while (!sendToPhp.isDone) { }

@@ -72,7 +72,7 @@ public class CollectionManager : MonoBehaviour {
         if (!found)
         {
             collection.count = 1;
-            if(!collection.name.StartsWith("Standard ")) Login.user.AddCollection(collection);
+            if(!collection.IsStandard()) Login.user.AddCollection(collection);
             collectionDict[collection.type].Add(collection);
             SetPageLimits();
         }
@@ -82,21 +82,24 @@ public class CollectionManager : MonoBehaviour {
     public bool RemoveCollection(Collection collection)
     {
         Collection found = new Collection();
-        foreach(Collection c in collectionDict[collection.type])
-            if(c.name == collection.name && c.health == collection.health)
-            {                
-                found = c;
-                found.count--;
+        List<Collection> collectionList = collectionDict[collection.type];
+        for (int i = 0; i < collectionList.Count; i++)
+        {
+            if (collectionList[i].name == collection.name && collectionList[i].health == collection.health)
+            {
+                found = collectionList[i];
+                if (found.count == 1)
+                {
+                    Login.user.collection.Remove(found);
+                    displayCollections.Remove(found);
+                    collectionDict[found.type].Remove(found);
+                    SetPageLimits();
+                }
+                else --found.count;
                 break;
             }
-        if (found.IsEmpty()) return false;
-        if (found.count == 0)
-        {
-            Login.user.collection.Remove(found);
-            displayCollections.Remove(found);
-            collectionDict[found.type].Remove(found);
-            SetPageLimits();
         }
+        if (found.IsEmpty()) return false;
         ShowNoCollection(Login.user.collection.Count == 0);
         return true;
     }

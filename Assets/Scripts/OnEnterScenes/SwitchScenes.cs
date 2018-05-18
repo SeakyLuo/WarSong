@@ -17,16 +17,12 @@ public class SwitchScenes : MonoBehaviour, IPointerClickHandler
     {
         parentCanvas = GetComponent<Canvas>();
         SetPlayerInfo();
-        if (Login.user.missions.Count != 0)
-        {
-            missionToday.SetActive(true);
-        }
+        missionToday.SetActive(Login.user.missions.Count != 0);
     }
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Escape))
-            settingsPanel.SetActive(true);
+        settingsPanel.SetActive(Input.GetKeyUp(KeyCode.Escape));
     }
 
     public void EnterCollection()
