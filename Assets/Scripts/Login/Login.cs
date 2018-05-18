@@ -18,7 +18,7 @@ public class Login : MonoBehaviour
     void Start () {
         // If already has an account saved
         string email = PlayerPrefs.GetString("email"),
-               password = PlayerPrefs.GetString("password");
+                password = PlayerPrefs.GetString("password");
         if (email != "" && password != "")
             //login(email, password);
             StartCoroutine(RequestLogin(email, password, false));

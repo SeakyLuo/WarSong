@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-//[UnityEngine.CreateAssetMenu(fileName = "Trigger", menuName = "TacticTrigger")]
+//[CreateAssetMenu(fileName = "Trigger", menuName = "TacticTrigger")]
 public class TacticTrigger : ScriptableObject
 {
     public bool needsTarget = true;

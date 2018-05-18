@@ -12,6 +12,7 @@ public class Turret: Trigger {
 
     public override List<Vector2Int> ValidTargets()
     {
+        if (silenced) return new List<Vector2Int>();
         return MovementController.CannonTarget(piece.location.x, piece.location.y);
     }
 

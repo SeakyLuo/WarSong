@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
 public class GameInfo
 {
     public static Dictionary<Vector2Int, List<Piece>> castles = new Dictionary<Vector2Int, List<Piece>>();
@@ -201,35 +200,4 @@ public class GameInfo
     {
         return JsonUtility.FromJson<GameInfo>(json);
     }
-    public void Upload()
-    {
-        var u = Upload(this);
-        while (u.MoveNext()) { }
-    }
-    private IEnumerator Upload(GameInfo gameInfo)
-    {
-        WWWForm infoToPhp = new WWWForm(); //create WWWform to send to php script
-        infoToPhp.AddField("email", PlayerPrefs.GetString("email"));
-        infoToPhp.AddField("userJson", ClassToJson(gameInfo));
-
-        WWW sendToPhp = new WWW("http://localhost:8888/update_userinfo.php", infoToPhp);
-        yield return sendToPhp;
-    }
-    public void Download()
-    {
-        var d = Download(this);
-        while (d.MoveNext()) { }
-    }
-    private IEnumerator Download(GameInfo gameInfo)
-    {
-        WWWForm infoToPhp = new WWWForm();
-        infoToPhp.AddField("email", PlayerPrefs.GetString("email"));
-
-        WWW sendToPhp = new WWW("http://localhost:8888/download_userinfo.php", infoToPhp);
-        yield return sendToPhp;
-
-        while (!sendToPhp.isDone) { }
-        gameInfo = JsonToClass(sendToPhp.text);  //sendToPhp.text is the userInfo json file
-    }
-
 }

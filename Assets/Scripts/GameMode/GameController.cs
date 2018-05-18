@@ -124,7 +124,7 @@ public class GameController : MonoBehaviour {
             piece.isAlly = isAlly;
             GameInfo.activePieces[GameInfo.TheOtherPlayer()].Add(piece);
         }
-        OnEnterGame.gameInfo.Upload();
+        // upload
     }
 
     public static void AddPiece(Collection collection, Vector2Int castle, bool isAlly)
@@ -156,7 +156,7 @@ public class GameController : MonoBehaviour {
         GameInfo.board[location] = after;
         if (before.isAlly) GameInfo.activePieces[InfoLoader.playerID][GameInfo.activePieces[InfoLoader.playerID].IndexOf(before)] = after;
         else GameInfo.activePieces[GameInfo.TheOtherPlayer()][GameInfo.activePieces[GameInfo.TheOtherPlayer()].IndexOf(before)] = after;
-        OnEnterGame.gameInfo.Upload();
+        // upload
     }
 
     public static void ChangePieceOreCost(Vector2Int location, int deltaAmount)
@@ -167,7 +167,7 @@ public class GameController : MonoBehaviour {
         GameInfo.board[location] = after;
         if (before.isAlly) GameInfo.activePieces[InfoLoader.playerID][GameInfo.activePieces[InfoLoader.playerID].IndexOf(before)] = after;
         else GameInfo.activePieces[GameInfo.TheOtherPlayer()][GameInfo.activePieces[GameInfo.TheOtherPlayer()].IndexOf(before)] = after;
-        OnEnterGame.gameInfo.Upload();
+        // upload
     }
 
     public static void ChangeTacticOreCost(string tacticName, int deltaAmount)
@@ -177,7 +177,7 @@ public class GameController : MonoBehaviour {
         tactic.oreCost += deltaAmount;
         GameInfo.unusedTactics[InfoLoader.playerID][index] = tactic;
         onEnterGame.ChangeTacticOreCost(index, deltaAmount);
-        OnEnterGame.gameInfo.Upload();
+        // upload
     }
 
     public static void Eliminate(Piece piece)
@@ -185,7 +185,7 @@ public class GameController : MonoBehaviour {
         Destroy(boardSetup.pieces[piece.location]);
         boardSetup.pieces.Remove(piece.location);
         GameInfo.RemovePiece(piece);
-        OnEnterGame.gameInfo.Upload();
+        // upload
     }
 
     public static void Eliminate(Vector2Int location)
@@ -193,7 +193,7 @@ public class GameController : MonoBehaviour {
         Destroy(boardSetup.pieces[location]);
         boardSetup.pieces.Remove(location);
         GameInfo.RemovePiece(GameInfo.board[location]);
-        OnEnterGame.gameInfo.Upload();
+        // upload
     }
 
     public static void FreezePiece(Vector2Int location, int round)
@@ -213,13 +213,13 @@ public class GameController : MonoBehaviour {
         GameObject freezeImage = Instantiate(onEnterGame.freezeImage, boardCanvas);
         freezeImage.transform.position = new Vector3(location.x * MovementController.scale, location.y * MovementController.scale, -0.5f);
         freezeImages.Add(location, freezeImage);
-        OnEnterGame.gameInfo.Upload();
+        // upload
     }
 
     public static void PlaceTrap(Vector2Int location, string trapName, int creator)
     {
         GameInfo.traps.Add(location, new KeyValuePair<string, int>(trapName, creator));
-        OnEnterGame.gameInfo.Upload();
+        // upload
     }
 
     public static void PlaceFlag(Vector2Int location, bool isAlly)
@@ -237,7 +237,7 @@ public class GameController : MonoBehaviour {
         }
         flag.transform.position = new Vector3(location.x * MovementController.scale, location.y * MovementController.scale, -0.5f);
         flags.Add(location, flag);
-        OnEnterGame.gameInfo.Upload();
+        // upload
     }
 
     public static void RemoveFlag(Vector2Int location)
@@ -245,13 +245,13 @@ public class GameController : MonoBehaviour {
         Destroy(flags[location]);
         flags.Remove(location);
         GameInfo.flags.Remove(location);
-        OnEnterGame.gameInfo.Upload();
+        // upload
     }
 
     public static void RemoveTrap(Vector2Int location)
     {
         GameInfo.traps.Remove(location);
-        OnEnterGame.gameInfo.Upload();
+        // upload
     }
 
     public static void DecodeGameEvent(GameEvent gameEvent)

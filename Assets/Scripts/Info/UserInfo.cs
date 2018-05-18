@@ -94,6 +94,7 @@ public class UserInfo {
         if (--InfoLoader.user.collection[index].count == 0) InfoLoader.user.RemoveCollection(index);
         Upload();
     }
+
     public void ChangeCoins(int deltaAmount)
     {
         coins += deltaAmount;
@@ -139,17 +140,14 @@ public class UserInfo {
     {
         total.Win();
         winsToday++;
-        Upload();
     }
     public void Lose()
     {
         total.Lose();
-        Upload();
     }
     public void Draw()
     {
-        total.Draw();
-        Upload();
+        InfoLoader.user.total.Draw();
     }
 
     public static string ClassToJson(UserInfo user)
@@ -160,24 +158,18 @@ public class UserInfo {
     {
         return JsonUtility.FromJson<UserInfo>(json);
     }
-    public void Upload()
-    {
-        var u = Upload(this);
-        while (u.MoveNext()) { }
-    }
-    private IEnumerator Upload(UserInfo user)
+    public IEnumerator Upload()
     {
         WWWForm infoToPhp = new WWWForm(); //create WWWform to send to php script
         infoToPhp.AddField("email", PlayerPrefs.GetString("email"));
-        infoToPhp.AddField("userJson", ClassToJson(user));
+        infoToPhp.AddField("userJson", ClassToJson(this));
 
         WWW sendToPhp = new WWW("http://localhost:8888/update_userinfo.php", infoToPhp);
         yield return sendToPhp;
     }
     public void Download()
     {
-        var d = Download(this);
-        while(d.MoveNext()) { }
+        Download(this);
     }
     private IEnumerator Download(UserInfo user)
     {
@@ -186,8 +178,7 @@ public class UserInfo {
 
         WWW sendToPhp = new WWW("http://localhost:8888/download_userinfo.php", infoToPhp);
         yield return sendToPhp;
-        
-        while(!sendToPhp.isDone) { }
+
         user = JsonToClass(sendToPhp.text);  //sendToPhp.text is the userInfo json file
     }
 }
@@ -200,10 +191,10 @@ public class CheatAccount:UserInfo
         playerID = 12345789;
         Collection[] cheat = {  new Collection("Space Witch", "General"), new Collection("Fat Soldier", "Soldier",4),new Collection("Cripple","Cannon",3),new Collection("Dark Bargain", 5),
             new Collection("Soldier Recruitment",5), new Collection("Seek for Advisors"), new Collection("Greeeeeat Elephant","Elephant",3),new Collection("Place a Trap", 5),
-            new Collection("Tame an Elephant"),new Collection("Purchase a Horse"), new Collection("King's Guard","Advisor", 3),new Collection("Protect the King", 8),
+            new Collection("Tame an Elephant"),new Collection("Purchase a Horse"), new Collection("King's Guardian","Advisor", 3),new Collection("Protect the King", 8),
             new Collection("Monster Hunter","Chariot",4),new Collection("Treasure Horse","Horse",100), new Collection("Space Witch", "General", 2, 20),
-            new Collection("Greeeeeat Elephant", "Elephant", 3, 5), new Collection("Wisest Elder", "General"), new Collection("Secret Plan", 3),new Collection("Place a Flag",20),
-            new Collection("No Way", 100), new Collection("King of the Dead", "General"), new Collection("The Ore King", "General"),new Collection("Turret","Cannon"),
+            new Collection("Greeeeeat Elephant", "Elephant", 3, 5), new Collection("Zhuge Liang", "General"), new Collection("Secret Plan", 3),new Collection("Place a Flag",20),
+            new Collection("No Way", 100), new Collection("Qin Shihuang", "General"), new Collection("Xiao He", "General"),new Collection("Turret","Cannon"),
             new Collection("Link Soldier","Soldier",11), new Collection("Buy 1 Get 1 Free",15), new Collection("Build a Cannon"),new Collection("Betrayal", 5),
             new Collection("Build a Chariot"),new Collection("Winner Trophy",5),new Collection("Horse Rider","Horse",4),new Collection("Disarm", 11),new Collection("Minesweeper",20)
         };
@@ -235,7 +226,7 @@ public class CheatAccount:UserInfo
                 new Dictionary<Vector2Int, Collection>()
                 {
                     {new Vector2Int(4,0), new Collection("Space Witch", "General",1 , 9) },
-                    {new Vector2Int(3,0), new Collection("King's Guard","Advisor", 1, 4) },{new Vector2Int(5,0), new Collection("King's Guardian","Advisor") },
+                    {new Vector2Int(3,0), new Collection("King's Guardian","Advisor", 1, 4) },{new Vector2Int(5,0), new Collection("King's Guardian","Advisor") },
                     {new Vector2Int(2,0), new Collection("Greeeeeat Elephant", "Elephant") },{new Vector2Int(6,0), new Collection("Greeeeeat Elephant", "Elephant")},
                     {new Vector2Int(1,0), new Collection("Horse Rider","Horse") },{new Vector2Int(7,0), new Collection("Horse Rider","Horse") },
                     {new Vector2Int(0,0), new Collection("Monster Hunter","Chariot") },{new Vector2Int(8,0), new Collection("Monster Hunter","Chariot") },

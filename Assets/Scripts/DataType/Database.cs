@@ -80,8 +80,6 @@ public class Database {
         }
     }
 
-    public static string RandomTrap() { return trapList[Random.Range(0, trapList.Count)]; }
-
     public static BoardAttributes FindBoardAttributes(string boardName) { return boards[boardName]; }
     public static PieceAttributes FindPieceAttributes(string pieceName)
     {

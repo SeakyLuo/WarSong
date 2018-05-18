@@ -9,8 +9,8 @@ using System;
 public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 {
     public static int current_tactic = -1;
-    public static GameInfo gameInfo;
 
+    public GameInfo gameInfo;
     public GameObject gameStartImage, victoryImage, defeatImage, drawImage, settingsPanel, yourTurnImage, notEnoughCoinsImage, notEnoughOresImage, fullTacticBag, freezeText, winReward;
     public GameObject pathDot, targetDot, oldLocation, explosion, askTriggerPanel;
     public GameObject history, pieceInfoCard , trapInfoCard, showInfoCard, playerFlag, enemyFlag, freezeImage;
@@ -393,7 +393,6 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     {
         if (triggerMessage == "BloodThirsty") trigger.BloodThirsty();
         else if (triggerMessage == "AfterMove") trigger.AfterMove();
-        else if (triggerMessage == "InEnemyCastle") trigger.InEnemyCastle();
         else if (triggerMessage == "InEnemyRegion") trigger.InEnemyRegion();
         else if (triggerMessage == "InEnemyPalace") trigger.InEnemyPalace();
         else if (triggerMessage == "AtEnemyBottom") trigger.AtEnemyBottom();
