@@ -2,6 +2,6 @@
 
 	public override void AtEnemyBottom ()
 	{
-		GameController.PlaceTrap (piece.location, Database.RandomTrap (), InfoLoader.playerID);
+		GameController.PlaceTrap (piece.location, Database.RandomTrap (), Login.playerID);
 	}
 }

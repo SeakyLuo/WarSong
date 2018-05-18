@@ -61,7 +61,7 @@ public class LineupBuilder : MonoBehaviour {
     {
         Vector2Int location = LineupBoardGestureHandler.FindLoc(loc);
         string cardType,
-               locName = InfoLoader.Vec2ToString(location);
+               locName = Database.Vec2ToString(location);
         if (boardInfo.locationType.TryGetValue(locName, out cardType) && cardType == cardInfo.GetCardType())
             PieceAdder(cardInfo, location, location.x, location.y);
     }

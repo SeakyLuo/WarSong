@@ -5,9 +5,11 @@ using UnityEngine.EventSystems;
 
 public class SwitchScenes : MonoBehaviour, IPointerClickHandler
 {
+    public static string switchSceneCaller = "Main";
+
     public GameObject playerInfoPanel, settingsPanel, optionsPanel, missionToday;
     public Text winText, loseText, drawText, percentageText;
-    public Text rank, title;
+    public Text rank, title, nameText, playerIDText;
 
     private Canvas parentCanvas;
 
@@ -15,7 +17,7 @@ public class SwitchScenes : MonoBehaviour, IPointerClickHandler
     {
         parentCanvas = GetComponent<Canvas>();
         SetPlayerInfo();
-        if (InfoLoader.user.missions.Count != 0)
+        if (Login.user.missions.Count != 0)
         {
             missionToday.SetActive(true);
         }
@@ -44,12 +46,14 @@ public class SwitchScenes : MonoBehaviour, IPointerClickHandler
 
     private void SetPlayerInfo()
     {
-        winText.text = InfoLoader.user.total.win.ToString();
-        loseText.text = InfoLoader.user.total.lose.ToString();
-        drawText.text = InfoLoader.user.total.draw.ToString();
-        percentageText.text = InfoLoader.user.total.percentage.ToString();
-        rank.text = InfoLoader.user.rank.ToString();
-        title.text = Range.FindTitle(InfoLoader.user.rank);
+        winText.text = Login.user.total.win.ToString();
+        loseText.text = Login.user.total.lose.ToString();
+        drawText.text = Login.user.total.draw.ToString();
+        percentageText.text = Login.user.total.percentage.ToString();
+        rank.text = Login.user.rank.ToString();
+        title.text = Range.FindTitle(Login.user.rank);
+        nameText.text = Login.user.username;
+        playerIDText.text = Login.user.playerID.ToString();
     }
 
     public void ShowPlayerInfo()

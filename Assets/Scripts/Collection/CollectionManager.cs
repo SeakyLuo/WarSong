@@ -51,10 +51,10 @@ public class CollectionManager : MonoBehaviour {
 
         LoadUserCollections();
         SetPageLimits();
-        ShowNoCollection(InfoLoader.user.collection.Count == 0);
+        ShowNoCollection(Login.user.collection.Count == 0);
         foreach (Collection collection in displayCollections)
             originalDict[collection.type].Add(collection);
-        if (InfoLoader.user.collection.Count != 0) SetCurrentPage(FirstPage());
+        if (Login.user.collection.Count != 0) SetCurrentPage(FirstPage());
     }
 
     public void AddCollection(Collection collection)
@@ -72,7 +72,7 @@ public class CollectionManager : MonoBehaviour {
         if (!found)
         {
             collection.count = 1;
-            if(!collection.name.StartsWith("Standard ")) InfoLoader.user.AddCollection(collection);
+            if(!collection.name.StartsWith("Standard ")) Login.user.AddCollection(collection);
             collectionDict[collection.type].Add(collection);
             SetPageLimits();
         }
@@ -92,12 +92,12 @@ public class CollectionManager : MonoBehaviour {
         if (found.IsEmpty()) return false;
         if (found.count == 0)
         {
-            InfoLoader.user.collection.Remove(found);
+            Login.user.collection.Remove(found);
             displayCollections.Remove(found);
             collectionDict[found.type].Remove(found);
             SetPageLimits();
         }
-        ShowNoCollection(InfoLoader.user.collection.Count == 0);
+        ShowNoCollection(Login.user.collection.Count == 0);
         return true;
     }
 
@@ -105,12 +105,12 @@ public class CollectionManager : MonoBehaviour {
     {
         LoadUserCollections();
         SetPageLimits();
-        ShowNoCollection(InfoLoader.user.collection.Count == 0);
+        ShowNoCollection(Login.user.collection.Count == 0);
     }
 
     private void LoadUserCollections()
     {
-        displayCollections = InfoLoader.user.collection;
+        displayCollections = Login.user.collection;
         LoadCollections();
     }
     private void LoadCollections()
@@ -335,7 +335,7 @@ public class CollectionManager : MonoBehaviour {
     }
     public void Search(string word = "", int gold = -1, int ore = -1, int health = -1)
     {
-        searchedCollections = InfoLoader.user.collection;
+        searchedCollections = Login.user.collection;
         if (word == "" && gold == -1 && ore == -1 && health == -1)
         {
             word = searchByKeyword;

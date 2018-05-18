@@ -11,8 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 625e364d2410d3844baa7c1cd6db806f, type: 3}
   m_Name: Trigger
   m_EditorClassIdentifier: 
-  activatable: 0
+  effectiveRound: 1
   limitedUse: -1
+  activatable: 1
   bloodThirsty: 0
   afterMove: 0
   inEnemyRegion: 0

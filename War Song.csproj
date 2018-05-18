@@ -354,7 +354,6 @@
     <Compile Include="Assets\Scripts\Info\CardInfo.cs" />
     <Compile Include="Assets\Scripts\Info\ContractInfo.cs" />
     <Compile Include="Assets\Scripts\Info\GameInfo.cs" />
-    <Compile Include="Assets\Scripts\Info\InfoLoader.cs" />
     <Compile Include="Assets\Scripts\Info\PieceInfo.cs" />
     <Compile Include="Assets\Scripts\Info\PlayerContract.cs" />
     <Compile Include="Assets\Scripts\Info\TacticInfo.cs" />

@@ -11,13 +11,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 665e6dcdf5f054e4996e993e3ffaf506, type: 3}
   m_Name: Trigger
   m_EditorClassIdentifier: 
-  activatable: 0
+  effectiveRound: 1
   limitedUse: -1
+  activatable: 0
   bloodThirsty: 0
   afterMove: 0
   inEnemyRegion: 0
   inEnemyPalace: 0
-  inEnemyCastle: 0
+  inEnemyCastle: 1
   atEnemyBottom: 0
   cantBeDestroyedBy: []
   silenced: 0

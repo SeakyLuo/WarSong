@@ -12,7 +12,7 @@ public class HorseRider : Trigger {
 	public override List<Vector2Int> ValidTargets ()
 	{
 		List<Vector2Int> targets = new List<Vector2Int> ();
-		foreach (Piece piece in GameInfo.activePieces[InfoLoader.playerID])
+		foreach (Piece piece in OnEnterGame.gameInfo.activePieces[Login.playerID])
             if (piece.GetPieceType() == "Soldier")
                 targets.Add(piece.location);
         return targets;

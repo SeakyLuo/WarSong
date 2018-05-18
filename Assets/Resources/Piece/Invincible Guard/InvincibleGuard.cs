@@ -2,6 +2,6 @@
 
 	public override void BloodThirsty ()
 	{
-		GameInfo.actions [InfoLoader.playerID]++;
+        OnEnterGame.gameInfo.actions [Login.playerID]++;
 	}
 }

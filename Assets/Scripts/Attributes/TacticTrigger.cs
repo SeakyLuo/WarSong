@@ -19,7 +19,7 @@ public class TacticTrigger : ScriptableObject
 
     public bool Activatable()
     {
-        if (needsTarget) return GameInfo.round >= afterRound && ValidTargets().Count != 0;
-        return GameInfo.round >= afterRound;
+        if (needsTarget) return OnEnterGame.gameInfo.round >= afterRound && ValidTargets().Count != 0;
+        return OnEnterGame.gameInfo.round >= afterRound;
     }
 }
