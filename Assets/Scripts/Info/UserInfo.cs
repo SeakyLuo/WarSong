@@ -139,14 +139,17 @@ public class UserInfo {
     {
         total.Win();
         winsToday++;
+        Upload();
     }
     public void Lose()
     {
         total.Lose();
+        Upload();
     }
     public void Draw()
     {
-        InfoLoader.user.total.Draw();
+        total.Draw();
+        Upload();
     }
 
     public static string ClassToJson(UserInfo user)
@@ -186,13 +189,13 @@ public class UserInfo {
         WWW sendToPhp = new WWW("http://47.151.234.225/download_userinfo.php", infoToPhp);
         yield return sendToPhp;
 
-        while(sendToPhp.isDone == false){
-            continue;
-        }
+         //sendToPhp.text is the userInfo json file
 
+        
+        while(!sendToPhp.isDone) { }
+        user = JsonToClass(sendToPhp.text); 
+        Debug.Log(user.coins);//sendToPhp.text is the userInfo json file
 
-        user = JsonToClass(sendToPhp.text); //sendToPhp.text is the userInfo json file
-        Debug.Log(user.coins);
     }
 }
 
@@ -204,9 +207,9 @@ public class CheatAccount:UserInfo
         playerID = 12345789;
         Collection[] cheat = {  new Collection("Space Witch", "General"), new Collection("Fat Soldier", "Soldier",4),new Collection("Cripple","Cannon",3),new Collection("Dark Bargain", 5),
             new Collection("Soldier Recruitment",5), new Collection("Seek for Advisors"), new Collection("Greeeeeat Elephant","Elephant",3),new Collection("Place a Trap", 5),
-            new Collection("Tame an Elephant"),new Collection("Purchase a Horse"), new Collection("King's Guardian","Advisor", 3),new Collection("Protect the King", 8),
+            new Collection("Tame an Elephant"),new Collection("Purchase a Horse"), new Collection("King's Guard","Advisor", 3),new Collection("Protect the King", 8),
             new Collection("Monster Hunter","Chariot",4),new Collection("Treasure Horse","Horse",100), new Collection("Space Witch", "General", 2, 20),
-            new Collection("Greeeeeat Elephant", "Elephant", 3, 5), new Collection("Zhuge Liang", "General"), new Collection("Secret Plan", 3),new Collection("Place a Flag",20),
+            new Collection("Greeeeeat Elephant", "Elephant", 3, 5), new Collection("Wisest Elder", "General"), new Collection("Secret Plan", 3),new Collection("Place a Flag",20),
             new Collection("No Way", 100), new Collection("King of the Dead", "General"), new Collection("The Ore King", "General"),new Collection("Turret","Cannon"),
             new Collection("Link Soldier","Soldier",11), new Collection("Buy 1 Get 1 Free",15), new Collection("Build a Cannon"),new Collection("Betrayal", 5),
             new Collection("Build a Chariot"),new Collection("Winner Trophy",5),new Collection("Horse Rider","Horse",4),new Collection("Disarm", 11),new Collection("Minesweeper",20)
@@ -239,7 +242,7 @@ public class CheatAccount:UserInfo
                 new Dictionary<Vector2Int, Collection>()
                 {
                     {new Vector2Int(4,0), new Collection("Space Witch", "General",1 , 9) },
-                    {new Vector2Int(3,0), new Collection("King's Guardian","Advisor", 1, 4) },{new Vector2Int(5,0), new Collection("King's Guardian","Advisor") },
+                    {new Vector2Int(3,0), new Collection("King's Guard","Advisor", 1, 4) },{new Vector2Int(5,0), new Collection("King's Guardian","Advisor") },
                     {new Vector2Int(2,0), new Collection("Greeeeeat Elephant", "Elephant") },{new Vector2Int(6,0), new Collection("Greeeeeat Elephant", "Elephant")},
                     {new Vector2Int(1,0), new Collection("Horse Rider","Horse") },{new Vector2Int(7,0), new Collection("Horse Rider","Horse") },
                     {new Vector2Int(0,0), new Collection("Monster Hunter","Chariot") },{new Vector2Int(8,0), new Collection("Monster Hunter","Chariot") },

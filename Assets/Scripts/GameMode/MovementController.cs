@@ -119,6 +119,8 @@ public class MovementController : MonoBehaviour
         else if (boardAttributes.InEnemyPalace(to.x, to.y)) onEnterGame.AskTrigger(pieceInfo.piece, trigger, "InEnemyPalace");
         else if (boardAttributes.InEnemyCastle(to.x, to.y)) onEnterGame.AskTrigger(pieceInfo.piece, trigger, "InEnemyCastle");
         else if (boardAttributes.AtEnemyBottom(to.x,to.y)) onEnterGame.AskTrigger(pieceInfo.piece, trigger, "AtEnemyBottom");
+
+        OnEnterGame.gameInfo.Upload();
     }
 
     public static void Move(Piece piece, Vector2Int from, Vector2Int to)
