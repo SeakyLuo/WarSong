@@ -187,7 +187,7 @@ public class UserInfo {
         yield return sendToPhp;
 
         while(sendToPhp.isDone == false){
-            yield return null;
+            continue;
         }
 
 
