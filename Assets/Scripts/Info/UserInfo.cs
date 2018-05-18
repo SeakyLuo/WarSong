@@ -168,7 +168,8 @@ public class UserInfo {
         infoToPhp.AddField("email", PlayerPrefs.GetString("email"));
         infoToPhp.AddField("userJson", ClassToJson(user));
 
-        WWW sendToPhp = new WWW("http://localhost:8888/update_userinfo.php", infoToPhp);
+        //WWW sendToPhp = new WWW("http://localhost:8888/update_userinfo.php", infoToPhp);
+        WWW sendToPhp = new WWW("http://47.151.234.225/update_userinfo.php", infoToPhp);
         yield return sendToPhp;
     }
     public void Download()
@@ -181,11 +182,17 @@ public class UserInfo {
         WWWForm infoToPhp = new WWWForm();
         infoToPhp.AddField("email", PlayerPrefs.GetString("email"));
 
-        WWW sendToPhp = new WWW("http://localhost:8888/download_userinfo.php", infoToPhp);
+        //WWW sendToPhp = new WWW("http://localhost:8888/download_userinfo.php", infoToPhp);
+        WWW sendToPhp = new WWW("http://47.151.234.225/download_userinfo.php", infoToPhp);
         yield return sendToPhp;
-        
 
-        user = JsonToClass(sendToPhp.text);  //sendToPhp.text is the userInfo json file
+        while(sendToPhp.isDone == false){
+            yield return null;
+        }
+
+
+        user = JsonToClass(sendToPhp.text); //sendToPhp.text is the userInfo json file
+        Debug.Log(user.coins);
     }
 }
 

@@ -60,7 +60,9 @@ public class AccountCreation : MonoBehaviour {
         infoToPhp.AddField("userName", playerName.text);
         infoToPhp.AddField("userJson", UserInfo.ClassToJson(new UserInfo()));
 
-        WWW sendToPhp = new WWW("http://localhost:8888/action_reg.php", infoToPhp);
+
+        //WWW sendToPhp = new WWW("http://localhost:8888/action_reg.php", infoToPhp);
+        WWW sendToPhp = new WWW("http://47.151.234.225/action_reg.php", infoToPhp);
         yield return sendToPhp;
 
         if(sendToPhp.error.Contains("Cannot connect"))

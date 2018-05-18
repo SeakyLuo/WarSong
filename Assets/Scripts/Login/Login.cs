@@ -52,7 +52,8 @@ public class Login : MonoBehaviour
         //gameObject.SetActive(false);
         //StartCoroutine(ChangeConnectingDots());
 
-        WWW sendToPhp = new WWW("http://localhost:8888/action_login.php", infoToPhp);
+        //WWW sendToPhp = new WWW("http://localhost:8888/action_login.php", infoToPhp);
+        WWW sendToPhp = new WWW("http://47.151.234.225/action_login.php", infoToPhp);
         yield return sendToPhp;
         //StopAllCoroutines();
 
