@@ -30,6 +30,15 @@ public class Collection
 
     public Collection() { }
 
+    public Collection(CardInfo cardInfo)
+    {
+        name = cardInfo.GetCardName();
+        type = cardInfo.GetCardType();
+        count = 1;
+        oreCost = cardInfo.GetOreCost();
+        health = cardInfo.GetHealth();
+    }
+
     public Collection(PieceAttributes attributes, int Count = 1, int Health = 0)
     {
         name = attributes.Name;
@@ -53,6 +62,7 @@ public class Collection
     public Collection(Tactic tactic, int Count = 1)
     {
         name = tactic.tacticName;
+        type = "Tactic";
         count = Count;
         oreCost = tactic.oreCost;
         health = tactic.goldCost;

@@ -326,7 +326,6 @@
     <Compile Include="Assets\Resources\Tactic\Seek for Advisors\SeekForAdvisors.cs" />
     <Compile Include="Assets\Resources\Tactic\Soldier Recruitment\SoldierRecruitment.cs" />
     <Compile Include="Assets\Resources\Tactic\Tame an Elephant\TameAnElephant.cs" />
-    <Compile Include="Assets\Resources\Tactic\Winner Trophy\WinnerTrophy.cs" />
     <Compile Include="Assets\Resources\Trap\Freeze Trap\FreezeTrap.cs" />
     <Compile Include="Assets\Resources\Trap\Frighten Bomb\FrightenBomb.cs" />
     <Compile Include="Assets\Resources\Trap\Horrible Landmine\HorribleLandmine.cs" />

@@ -8,12 +8,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5352c91ac57074b44bf4025f818fda8a, type: 3}
+  m_Script: {fileID: 11500000, guid: 98bcd16c4c1c9044b992cdf1a8287cc1, type: 3}
   m_Name: Trigger
   m_EditorClassIdentifier: 
   needsTarget: 0
   afterRound: 0
-  lastRound: 1
-  effectiveStarts: 0
-  oreCost: 0
-  goldCost: 3
+  effectLasts: 1
+  effectiveRound: 0
+  selections: 1
+  tactic:
+    tacticName: 
+    oreCost: 0
+    goldCost: 0
+    original: 0
+    ownerID: 0
