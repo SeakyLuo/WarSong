@@ -53,27 +53,7 @@ public class UserInfo {
 
     public void AddCollection(Collection insert, bool upload = true)
     {
-        int index = 0;
-        if (collection.Count == 0 || insert < collection[0]) index = 0;
-        else if (insert > collection[collection.Count - 1]) index = collection.Count;
-        else
-        {
-            for (int i = 0; i < collection.Count - 1; i++)
-            {
-                if (insert.Equals(collection[i]))
-                {
-                    collection[i].count += insert.count;
-                    Upload();
-                    return;
-                }
-                if (insert > collection[i] && insert < collection[i + 1])
-                {
-                    index = i + 1;
-                    break;
-                }
-            }
-        }
-        collection.Insert(index, insert);
+        Collection.InsertCollection(collection, insert);
         if(upload) Upload();
     }
     public void RemoveCollection(int index)

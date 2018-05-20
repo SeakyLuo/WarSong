@@ -102,6 +102,27 @@ public class Collection
         return new Collection("Standard " + type, type);
     }
 
+
+    public static void InsertCollection(List<Collection> collectionList, Collection insert)
+    {
+        int index = 0;
+        if (collectionList.Count == 0 || insert < collectionList[0]) index = 0;
+        else if (collectionList[collectionList.Count - 1] < insert) index = collectionList.Count;
+        else
+            for (int i = 0; i < collectionList.Count - 1; i++)
+                if (insert.Equals(collectionList[i]))
+                {
+                    collectionList[i].count += insert.count;
+                    return;
+                }
+                else if (collectionList[i] < insert && insert < collectionList[i + 1])
+                {
+                    index = i + 1;
+                    break;
+                }
+        collectionList.Insert(index, insert);
+    }
+
     public bool IsEmpty()
     {
         return name == "" && type == "" && count == 1 && health == 0;
