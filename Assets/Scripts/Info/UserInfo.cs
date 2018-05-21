@@ -19,7 +19,7 @@ public class UserInfo {
     public int winsToday = 0;
     public Stats total = new Stats();
     public Dictionary<string, Stats> boardResults = new Dictionary<string, Stats>();
-    public List<string> missions = new List<string>();
+    public List<Mission> missions = new List<Mission>();
     public string preferredBoard = "Standard Board";
     public string lastModeSelected = "";
     public int gameID;
@@ -116,7 +116,7 @@ public class UserInfo {
     }
     public void ChangeMission(int number)
     {
-        missions[number] = Database.RandomMission();
+        missions[number] = new Mission(Database.RandomMission());
         //missionSwitched = true;
         //Upload();
     }

@@ -331,7 +331,7 @@
     <Compile Include="Assets\Resources\Trap\Horrible Landmine\HorribleLandmine.cs" />
     <Compile Include="Assets\Scripts\Attributes\BoardAttributes.cs" />
     <Compile Include="Assets\Scripts\Attributes\ContractAttributes.cs" />
-    <Compile Include="Assets\Scripts\Attributes\Mission.cs" />
+    <Compile Include="Assets\Scripts\Attributes\MissionAttributes.cs" />
     <Compile Include="Assets\Scripts\Attributes\PieceAttributes.cs" />
     <Compile Include="Assets\Scripts\Attributes\TacticAttributes.cs" />
     <Compile Include="Assets\Scripts\Attributes\TacticTrigger.cs" />
