@@ -19,13 +19,15 @@ public class Trigger: ScriptableObject {
     [HideInInspector] public Piece piece;
     public delegate List<Vector2Int> ValidLocations(int x, int y, bool link = false);
     public ValidLocations validLocations;
+    public delegate void AssignRevenge();
+    public AssignRevenge revenge;
 
     protected bool link = false;
 
     public virtual void StartOfGame() { }
     public virtual void Activate() { }  // Override this if NO targets required
     public virtual void Activate(Vector2Int location) { } // Override this if target Piece required
-    public virtual void Revenge() { } // triggered when eliminated
+    public virtual void Revenge() { if (revenge != null) revenge(); } // triggered when eliminated
     public virtual void BloodThirsty() { } // triggered when kills someone
     public virtual List<Vector2Int> ValidLocs(bool link = false)
     {

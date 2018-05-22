@@ -251,6 +251,11 @@ public class GameInfo
         Upload();
     }
 
+    public bool Destroyable(Vector2Int location, string destroyer)
+    {
+        return !triggers[location].cantBeDestroyedBy.Contains(destroyer);  
+    }
+
     public void Clear()
     {
         board.Clear();

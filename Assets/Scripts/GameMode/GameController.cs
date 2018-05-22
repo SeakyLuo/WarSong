@@ -200,15 +200,17 @@ public class GameController : MonoBehaviour {
         OnEnterGame.gameInfo.Upload();
     }
 
-    public static void Eliminate(Piece piece)
+    public static void Eliminate(Piece piece, bool revenge = true)
     {
+        if(revenge) OnEnterGame.gameInfo.triggers[piece.location].Revenge();
         Destroy(boardSetup.pieces[piece.location]);
         boardSetup.pieces.Remove(piece.location);
         OnEnterGame.gameInfo.RemovePiece(piece);
     }
 
-    public static void Eliminate(Vector2Int location)
+    public static void Eliminate(Vector2Int location, bool revenge = true)
     {
+        if (revenge) OnEnterGame.gameInfo.triggers[location].Revenge();
         Destroy(boardSetup.pieces[location]);
         boardSetup.pieces.Remove(location);
         OnEnterGame.gameInfo.RemovePiece(OnEnterGame.gameInfo.board[location]);
