@@ -6,23 +6,25 @@ public class GameEvent {
 
     public Vector2Int eventLocation = Piece.noLocation;
     public Vector2Int targetLocation = Piece.noLocation;
-    public string eventTrigger = ""; // Who triggers this event
+    public string eventTrigger = ""; // Who (Piece or tactic) triggers this event
     public bool move = false;
     public bool trap = false;
     public bool piece = false; // Piece ability
     public bool tactic = false;
+    public int playerID;
 
     public GameEvent() { }
 
-    public GameEvent(Vector2Int from, Vector2Int to)
+    public GameEvent(Vector2Int from, Vector2Int to, int PlayerID)
     {
         /// Move
         move = true;
         eventLocation = from;
         targetLocation = to;
+        playerID = PlayerID;
     }
 
-    public GameEvent(string eventName, string EventTrigger, Vector2Int EventLocation, Vector2Int TargetLocation)
+    public GameEvent(string eventName, string EventTrigger, Vector2Int EventLocation, Vector2Int TargetLocation, int PlayerID)
     {
         if (eventName == "Tactic") tactic = true;
         else if (eventName == "Piece") piece = true;
@@ -30,6 +32,7 @@ public class GameEvent {
         eventTrigger = EventTrigger;
         eventLocation = EventLocation;
         targetLocation = TargetLocation;
+        playerID = PlayerID;
     }
 
     public void ReceiveEvent(string eventName, GameEvent gameEvent)
@@ -41,6 +44,7 @@ public class GameEvent {
         eventTrigger = gameEvent.eventTrigger;
         eventLocation = gameEvent.eventLocation;
         targetLocation = gameEvent.targetLocation;
+        playerID = gameEvent.playerID;
     }
 
     public static string ClassToJson(GameEvent gameEvent)

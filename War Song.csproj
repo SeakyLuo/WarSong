@@ -358,6 +358,7 @@
     <Compile Include="Assets\Scripts\GestureHandler\CollectionGestureHandler.cs" />
     <Compile Include="Assets\Scripts\GestureHandler\GameTacticGesture.cs" />
     <Compile Include="Assets\Scripts\GestureHandler\LineupBoardGestureHandler.cs" />
+    <Compile Include="Assets\Scripts\GestureHandler\MouseOverHistory.cs" />
     <Compile Include="Assets\Scripts\GestureHandler\MouseOverLineup.cs" />
     <Compile Include="Assets\Scripts\GestureHandler\MouseOverPiece.cs" />
     <Compile Include="Assets\Scripts\GestureHandler\MouseOverTactic.cs" />

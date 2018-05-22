@@ -46,6 +46,10 @@ public class Trigger: ScriptableObject {
     public virtual void InEnemyCastle() { }
     public virtual void AtEnemyBottom() { }
     public virtual void EndOfGame() { }
+    public virtual bool Activatable()
+    {
+        return limitedUse != 0 && (activatable || Link()); // fuck silence
+    }
 
     public bool ReceiveMesseage(string message)
     {
@@ -58,9 +62,4 @@ public class Trigger: ScriptableObject {
         return false;
     }
     public bool Link() { link = MovementController.IsLink(piece, ValidLocs(true)); return link; }
-    public bool Activatable()
-    {
-        return limitedUse != 0 && (activatable || Link()); // fuck silence
-    }
-
 }

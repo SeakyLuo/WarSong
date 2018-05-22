@@ -70,7 +70,7 @@ public class ActivateAbility : MonoBehaviour {
         {
             // if not targets, trigger directly
             if (!GameController.ChangeOre(-pieceInfo.trigger.piece.oreCost)) return;
-            GameEvent gameEvent = new GameEvent("Piece", pieceInfo.piece.GetName(), Piece.noLocation, Piece.noLocation);
+            GameEvent gameEvent = new GameEvent("Piece", pieceInfo.piece.GetName(), Piece.noLocation, Piece.noLocation, Login.playerID);
             pieceInfo.trigger.Activate();
             onEnterGame.AddToHistory(gameEvent);
             MovementController.PutDownPiece();

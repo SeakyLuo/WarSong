@@ -16,8 +16,7 @@ public class TacticTrigger : ScriptableObject
     public virtual void Activate(Vector2Int location) { } // Override this if needsTarget // Trap usually Override this
     public virtual List<Vector2Int> ValidTargets() { return new List<Vector2Int>(); } // Offers the locations of targets
     public virtual void Last() { } // 
-
-    public bool Activatable()
+    public virtual bool Activatable()
     {
         if (needsTarget) return OnEnterGame.gameInfo.round >= afterRound && ValidTargets().Count != 0;
         return OnEnterGame.gameInfo.round >= afterRound;
