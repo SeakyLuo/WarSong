@@ -10,7 +10,7 @@ public class MouseOverHistory : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public Sprite allyBackground;
     public Sprite enemyBackground;
     public Image cardImage;
-    public GameObject eventCard, targetCard;
+    public GameObject historyPanel, eventCard, targetCard;
     public GameEvent gameEvent;
 
     public void SetAttributes(GameEvent game_event)
@@ -34,13 +34,13 @@ public class MouseOverHistory : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        eventCard.SetActive(true);
+        historyPanel.SetActive(true);
         if (gameEvent.eventPlayerID != -1) targetCard.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        eventCard.SetActive(false);
+        historyPanel.SetActive(false);
         if (gameEvent.eventPlayerID != -1) targetCard.SetActive(false);
     }
 }

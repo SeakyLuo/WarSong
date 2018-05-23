@@ -202,7 +202,15 @@ public class GameController : MonoBehaviour {
 
     public static void Eliminate(Piece piece, bool revenge = true)
     {
-        if(revenge) OnEnterGame.gameInfo.triggers[piece.location].Revenge();
+        GameEvent gameEvent;
+        if (revenge)
+        {
+            OnEnterGame.gameInfo.triggers[piece.location].Revenge();
+            gameEvent = new GameEvent(piece);
+            onEnterGame.AddToHistory(gameEvent);
+        }
+        gameEvent = new GameEvent(piece, "Kill");
+        onEnterGame.AddToHistory(gameEvent);
         Destroy(boardSetup.pieces[piece.location]);
         boardSetup.pieces.Remove(piece.location);
         OnEnterGame.gameInfo.RemovePiece(piece);
@@ -210,7 +218,12 @@ public class GameController : MonoBehaviour {
 
     public static void Eliminate(Vector2Int location, bool revenge = true)
     {
-        if (revenge) OnEnterGame.gameInfo.triggers[location].Revenge();
+        if (revenge)
+        {
+            OnEnterGame.gameInfo.triggers[location].Revenge();
+            GameEvent gameEvent = new GameEvent(OnEnterGame.gameInfo.board[location]);
+            onEnterGame.AddToHistory(gameEvent);
+        }
         Destroy(boardSetup.pieces[location]);
         boardSetup.pieces.Remove(location);
         OnEnterGame.gameInfo.RemovePiece(OnEnterGame.gameInfo.board[location]);
@@ -219,6 +232,7 @@ public class GameController : MonoBehaviour {
 
     public static void FreezePiece(Vector2Int location, int round)
     {
+        GameEvent gameEvent = new GameEvent(OnEnterGame.gameInfo.board[location], "freeze");
         OnEnterGame.gameInfo.FreezePiece(location, round);
         boardSetup.pieces[location].GetComponent<PieceInfo>().piece.freeze = round;
 

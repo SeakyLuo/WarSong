@@ -10,17 +10,31 @@ public class GameEvent {
     public string targetTriggerName = ""; // Target name
     public int eventPlayerID = -1;
     public int targetPlayerID = -1;
-    public string result = "";
+    public string result = ""; // Piece, Tactic, Trap, Freeze, Move, Kill
 
     public GameEvent() { }
 
     public GameEvent(Vector2Int from, Vector2Int to, int playerID)
     {
         /// Move
-        result = "move";
+        result = "Move";
         eventLocation = from;
         targetLocation = to;
         eventPlayerID = playerID;
+    }
+
+    public GameEvent(Piece piece, string Result = "Ability")
+    {
+        result = Result;
+        eventTriggerName = piece.GetName();
+        eventPlayerID = piece.ownerID;
+    }
+
+    public GameEvent(Tactic tactic)
+    {
+        result = "Tactic";
+        eventTriggerName = tactic.tacticName;
+        eventPlayerID = tactic.ownerID;
     }
 
     public GameEvent(string Result, string TriggerName, int playerID)
@@ -39,6 +53,17 @@ public class GameEvent {
         targetLocation = TargetLocation;
         eventPlayerID = EventPlayerID;
         targetPlayerID = TargetPlayerID;
+    }
+
+    public GameEvent(Piece eventPiece, Piece targetPiece)
+    {
+        result = "Piece";
+        eventTriggerName = eventPiece.GetName();
+        targetTriggerName = targetPiece.GetName();
+        eventLocation = eventPiece.location;
+        targetLocation = targetPiece.location;
+        eventPlayerID = eventPiece.ownerID;
+        targetPlayerID = targetPiece.ownerID;
     }
 
     public void ReceiveEvent(GameEvent gameEvent)
