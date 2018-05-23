@@ -268,19 +268,11 @@ public class GameController : MonoBehaviour {
 
     public static void DecodeGameEvent(GameEvent gameEvent)
     {
-        if (gameEvent.move)
+        if (gameEvent.result == "move")
         {
-
+            MovementController.Move(OnEnterGame.gameInfo.board[gameEvent.eventLocation], gameEvent.eventLocation, gameEvent.targetLocation);
         }
-        else if (gameEvent.trap)
-        {
-
-        }
-        else if (gameEvent.piece)
-        {
-
-        }
-        else if (gameEvent.tactic)
+        else
         {
 
         }

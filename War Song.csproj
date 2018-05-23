@@ -292,6 +292,7 @@
     <Compile Include="Assets\Resources\Piece\Cripple\Cripple.cs" />
     <Compile Include="Assets\Resources\Piece\Dreadful Horse\DreadfulHorse.cs" />
     <Compile Include="Assets\Resources\Piece\Fat Soldier\FatSoldier.cs" />
+    <Compile Include="Assets\Resources\Piece\Greeeeeat Elephant\GreeeeeatElephant.cs" />
     <Compile Include="Assets\Resources\Piece\Helpful Mage\HelpfulMage.cs" />
     <Compile Include="Assets\Resources\Piece\Horse Rider\HorseRider.cs" />
     <Compile Include="Assets\Resources\Piece\Invincible Guard\InvincibleGuard.cs" />

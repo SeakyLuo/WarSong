@@ -10,31 +10,37 @@ public class MouseOverHistory : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public Sprite allyBackground;
     public Sprite enemyBackground;
     public Image cardImage;
-    public GameObject historyCard;
+    public GameObject eventCard, targetCard;
     public GameEvent gameEvent;
-
-    private PieceAttributes pieceAttributes;
-    private TacticAttributes tacticAttributes;
-    private TrapAttributes trapAttributes;
 
     public void SetAttributes(GameEvent game_event)
     {
         gameEvent = game_event;
-        if (gameEvent.playerID == Login.playerID) background.sprite = allyBackground;
+        if (gameEvent.eventPlayerID == Login.playerID) background.sprite = allyBackground;
         else background.sprite = enemyBackground;
-        if (gameEvent.piece)
-        {
-            PieceAttributes pieceAttributes = Database.FindPieceAttributes(gameEvent.eventTrigger);
-        }
+        SetCard(eventCard, gameEvent.eventTriggerName, gameEvent.eventPlayerID);
+        if(gameEvent.eventPlayerID != -1) SetCard(targetCard, gameEvent.targetTriggerName, gameEvent.targetPlayerID);
+    }
+
+    public void SetCard(GameObject card, string triggerName, int triggerPlayerID)
+    {
+        if (Database.pieceList.Contains(gameEvent.targetTriggerName))
+            card.GetComponent<CardInfo>().SetAttributes(Database.FindPieceAttributes(triggerName), triggerPlayerID);
+        else if (Database.tacticList.Contains(gameEvent.targetTriggerName))
+            card.GetComponent<CardInfo>().SetAttributes(Database.FindPieceAttributes(triggerName), triggerPlayerID);
+        else if(Database.trapList.Contains(gameEvent.targetTriggerName))
+            card.GetComponent<TrapInfo>().SetAttributes(Database.FindTrapAttributes(triggerName), triggerPlayerID);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        historyCard.SetActive(true);
+        eventCard.SetActive(true);
+        if (gameEvent.eventPlayerID != -1) targetCard.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        historyCard.SetActive(false);
+        eventCard.SetActive(false);
+        if (gameEvent.eventPlayerID != -1) targetCard.SetActive(false);
     }
 }

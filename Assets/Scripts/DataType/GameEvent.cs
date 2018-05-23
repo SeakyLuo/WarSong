@@ -6,45 +6,50 @@ public class GameEvent {
 
     public Vector2Int eventLocation = Piece.noLocation;
     public Vector2Int targetLocation = Piece.noLocation;
-    public string eventTrigger = ""; // Who (Piece or tactic) triggers this event
-    public bool move = false;
-    public bool trap = false;
-    public bool piece = false; // Piece ability
-    public bool tactic = false;
-    public int playerID;
+	public string eventTriggerName = ""; // Who (Piece or tactic) triggers this event
+    public string targetTriggerName = ""; // Target name
+    public int eventPlayerID = -1;
+    public int targetPlayerID = -1;
+    public string result = "";
 
     public GameEvent() { }
 
-    public GameEvent(Vector2Int from, Vector2Int to, int PlayerID)
+    public GameEvent(Vector2Int from, Vector2Int to, int playerID)
     {
         /// Move
-        move = true;
+        result = "move";
         eventLocation = from;
         targetLocation = to;
-        playerID = PlayerID;
+        eventPlayerID = playerID;
     }
 
-    public GameEvent(string eventName, string EventTrigger, Vector2Int EventLocation, Vector2Int TargetLocation, int PlayerID)
+    public GameEvent(string Result, string TriggerName, int playerID)
     {
-        if (eventName == "Tactic") tactic = true;
-        else if (eventName == "Piece") piece = true;
-        else if (eventName == "Trap") trap = true;
-        eventTrigger = EventTrigger;
+        result = Result;
+        eventTriggerName = TriggerName;
+        eventPlayerID = playerID;
+    }
+
+    public GameEvent(string Result, string EventTriggerName, string TargetTriggerName, Vector2Int EventLocation, Vector2Int TargetLocation, int EventPlayerID, int TargetPlayerID)
+    {
+        result = Result;
+        eventTriggerName = EventTriggerName;
+        targetTriggerName = TargetTriggerName;
         eventLocation = EventLocation;
         targetLocation = TargetLocation;
-        playerID = PlayerID;
+        eventPlayerID = EventPlayerID;
+        targetPlayerID = TargetPlayerID;
     }
 
-    public void ReceiveEvent(string eventName, GameEvent gameEvent)
+    public void ReceiveEvent(GameEvent gameEvent)
     {
-        if (eventName == "Move") move = true;
-        else if (eventName == "Tactic") tactic = true;
-        else if (eventName == "Piece") piece = true;
-        else if (eventName == "Trap") trap = true;
-        eventTrigger = gameEvent.eventTrigger;
+        result = gameEvent.result;
+        eventTriggerName = gameEvent.eventTriggerName;
+        targetTriggerName = gameEvent.targetTriggerName;
         eventLocation = gameEvent.eventLocation;
         targetLocation = gameEvent.targetLocation;
-        playerID = gameEvent.playerID;
+        eventPlayerID = gameEvent.eventPlayerID;
+        targetPlayerID = gameEvent.targetPlayerID;
     }
 
     public static string ClassToJson(GameEvent gameEvent)
@@ -55,34 +60,22 @@ public class GameEvent {
     {
         return JsonUtility.FromJson<GameEvent>(json);
     }
-    public void Upload()
-    {
-        var u = Upload(this);
-        while (u.MoveNext()) { }
-    }
-    private IEnumerator Upload(GameEvent gameEvent)
+    public void Upload(GameEvent gameEvent)
     {
         WWWForm infoToPhp = new WWWForm(); //create WWWform to send to php script
         infoToPhp.AddField("email", PlayerPrefs.GetString("email"));
         infoToPhp.AddField("userJson", ClassToJson(gameEvent));
 
         WWW sendToPhp = new WWW("http://localhost:8888/update_userinfo.php", infoToPhp);
-        yield return sendToPhp;
+        while (!sendToPhp.isDone) { }
     }
-    public void Download()
-    {
-        var d = Download(this);
-        while (d.MoveNext()) { }
-    }
-    private IEnumerator Download(GameEvent gameEvent)
+    public static GameEvent Download(GameEvent gameEvent)
     {
         WWWForm infoToPhp = new WWWForm();
         infoToPhp.AddField("email", PlayerPrefs.GetString("email"));
-
         WWW sendToPhp = new WWW("http://localhost:8888/download_userinfo.php", infoToPhp);
-        yield return sendToPhp;
 
         while (!sendToPhp.isDone) { }
-        gameEvent = JsonToClass(sendToPhp.text);  //sendToPhp.text is the userInfo json file
+        return JsonToClass(sendToPhp.text);  //sendToPhp.text is the userInfo json file
     }
 }

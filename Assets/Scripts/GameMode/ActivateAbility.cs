@@ -36,7 +36,8 @@ public class ActivateAbility : MonoBehaviour {
 
     public static void Activate(Vector2Int location)
     {
-        GameEvent gameEvent = new GameEvent();
+        Piece target = OnEnterGame.gameInfo.board[location];
+        GameEvent gameEvent = new GameEvent("", pieceInfo.piece.GetName(), target.GetName(), pieceInfo.piece.location, target.location, Login.playerID, target.ownerID);
         if (tacticCaller != -1)
         {
             // use tactic
@@ -70,9 +71,7 @@ public class ActivateAbility : MonoBehaviour {
         {
             // if not targets, trigger directly
             if (!GameController.ChangeOre(-pieceInfo.trigger.piece.oreCost)) return;
-            GameEvent gameEvent = new GameEvent("Piece", pieceInfo.piece.GetName(), Piece.noLocation, Piece.noLocation, Login.playerID);
             pieceInfo.trigger.Activate();
-            onEnterGame.AddToHistory(gameEvent);
             MovementController.PutDownPiece();
             OnEnterGame.gameInfo.Act("ability", Login.playerID);
             if (!OnEnterGame.gameInfo.Actable(Login.playerID)) onEnterGame.NextTurn();

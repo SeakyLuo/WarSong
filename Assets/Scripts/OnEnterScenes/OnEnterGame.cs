@@ -9,7 +9,7 @@ using System;
 public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 {
     public static int current_tactic = -1;
-    public static int history_limit = 9;
+    public static int history_limit = 10;
     public static GameInfo gameInfo;
 
     public GameObject gameStartImage, victoryImage, defeatImage, drawImage, settingsPanel, yourTurnImage, notEnoughCoinsImage, notEnoughOresImage, fullTacticBag, freezeText, winReward;
