@@ -29,7 +29,7 @@ public class MouseOverHistory : MonoBehaviour, IPointerEnterHandler, IPointerExi
         else if (Database.tacticList.Contains(gameEvent.targetTriggerName))
             card.GetComponent<CardInfo>().SetAttributes(Database.FindPieceAttributes(triggerName), triggerPlayerID);
         else if(Database.trapList.Contains(gameEvent.targetTriggerName))
-            card.GetComponent<TrapInfo>().SetAttributes(Database.FindTrapAttributes(triggerName), triggerPlayerID);
+            card.GetComponent<CardInfo>().SetAttributes(Database.FindTrapAttributes(triggerName), triggerPlayerID);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

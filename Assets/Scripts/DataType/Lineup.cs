@@ -29,7 +29,7 @@ public class Lineup
         SetInfo(cardLoc, Tactics, BoardName, LineupName, General);
     }
 
-    public void SetInfo(Dictionary<Vector2Int, Collection> cardLoc, List<Tactic> Tactics, string BoardName = "Standard Board", string LineupName = "Custom Lineup", string General = "Standard General")
+    private void SetInfo(Dictionary<Vector2Int, Collection> cardLoc, List<Tactic> Tactics, string BoardName = "Standard Board", string LineupName = "Custom Lineup", string General = "Standard General")
     {
         cardLocations = cardLoc;
         tactics = Tactics;
@@ -55,6 +55,7 @@ public class Lineup
     }
 }
 
+[System.Serializable]
 public class EnemyLineup: Lineup
 {
     public EnemyLineup()

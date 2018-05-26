@@ -263,6 +263,9 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Assets/UnityPackages/JsonNet/Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Advertisements">
       <HintPath>C:/Users/Seaky/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
@@ -352,6 +355,7 @@
     <Compile Include="Assets\Scripts\DataType\Range.cs" />
     <Compile Include="Assets\Scripts\DataType\Stats.cs" />
     <Compile Include="Assets\Scripts\DataType\Tactic.cs" />
+    <Compile Include="Assets\Scripts\DataType\Vec2Converter.cs" />
     <Compile Include="Assets\Scripts\GameMode\ActivateAbility.cs" />
     <Compile Include="Assets\Scripts\GameMode\BoardSetup.cs" />
     <Compile Include="Assets\Scripts\GameMode\GameController.cs" />
@@ -371,7 +375,6 @@
     <Compile Include="Assets\Scripts\Info\PieceInfo.cs" />
     <Compile Include="Assets\Scripts\Info\PlayerContract.cs" />
     <Compile Include="Assets\Scripts\Info\TacticInfo.cs" />
-    <Compile Include="Assets\Scripts\Info\TrapInfo.cs" />
     <Compile Include="Assets\Scripts\Info\UserInfo.cs" />
     <Compile Include="Assets\Scripts\LAN\Client.cs" />
     <Compile Include="Assets\Scripts\LAN\GameManager.cs" />
@@ -391,6 +394,7 @@
     <Compile Include="Assets\Scripts\Recruitment\ActivateCoinStore.cs" />
     <Compile Include="Assets\Scripts\Recruitment\ActivateContractStore.cs" />
     <Compile Include="Assets\Scripts\Recruitment\ContractsManager.cs" />
+    <Compile Include="Assets\UnityPackages\JsonNetSample\JsonNetSample.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Directories.txt" />

@@ -54,13 +54,17 @@ public class LineupBuilder : MonoBehaviour {
         PieceAdder(cardInfo, loc, loc.x, loc.y);
     }
 
-    public void AddPiece(CardInfo cardInfo, Vector3 loc)
+    public bool AddPiece(CardInfo cardInfo, Vector3 loc)
     {
         Vector2Int location = LineupBoardGestureHandler.FindLoc(loc);
         string cardType,
                locName = Database.Vec2ToString(location);
         if (boardInfo.locationType.TryGetValue(locName, out cardType) && cardType == cardInfo.GetCardType())
+        {
             PieceAdder(cardInfo, location, location.x, location.y);
+            return true;
+        }
+        return false;
     }
 
     private void PieceAdder(CardInfo cardInfo, Vector2Int loc, int locx, int locy)
@@ -72,26 +76,25 @@ public class LineupBuilder : MonoBehaviour {
         lineup.cardLocations[loc] = newCollection;
         lineupBoard.Find(locName).Find("CardImage").GetComponent<Image>().sprite = cardInfo.image.sprite;
         collectionManager.AddCollection(boardInfo.cardLocations[loc]);
-        //collectionManager.RemoveCollection(new Collection(cardInfo.piece, 1, cardInfo.GetHealth()));
         collectionManager.ShowCurrentPage();
         boardInfo.SetCard(newCollection, loc);        
     }
 
-    public void AddTactic(CardInfo cardInfo)
+    public bool AddTactic(CardInfo cardInfo)
     {
         if (current_tactics == tacticsLimit)
         {
             StartCoroutine(FullReminder());
-            return;
+            return false;
         }
         else if (FindTactic(cardInfo.GetCardName()) != -1)
         {
             StartCoroutine(SameTacticReminder());
-            return;
+            return false;
         }
         TacticAdder(cardInfo.tactic);
-        //collectionManager.RemoveCollection(new Collection(cardInfo.GetCardName()));
         collectionManager.ShowCurrentPage();
+        return true;
     }
 
     private void AddTactic(Tactic tactic)
@@ -193,7 +196,6 @@ public class LineupBuilder : MonoBehaviour {
     private void ResumeCollections()
     {
         collectionManager.RemoveStandardCards();
-        collectionManager.SetCardsPerPage(8);
         gameObject.SetActive(false);
         selectBoardPanel.GetComponent<BoardManager>().DestroyBoard();
     }

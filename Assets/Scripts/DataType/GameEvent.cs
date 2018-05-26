@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class GameEvent {
 
     public Vector2Int eventLocation = Piece.noLocation;
@@ -53,6 +54,15 @@ public class GameEvent {
         targetLocation = TargetLocation;
         eventPlayerID = EventPlayerID;
         targetPlayerID = TargetPlayerID;
+    }
+
+    public GameEvent(string trapName, int trapOwnerID, Piece piece)
+    {
+        result = "Trap";
+        eventTriggerName = trapName;
+        targetTriggerName = piece.GetName();
+        eventPlayerID = trapOwnerID;
+        targetPlayerID = piece.ownerID;
     }
 
     public GameEvent(Piece eventPiece, Piece targetPiece)

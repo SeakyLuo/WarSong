@@ -232,10 +232,11 @@ public class GameController : MonoBehaviour {
 
     public static void FreezePiece(Vector2Int location, int round)
     {
-        GameEvent gameEvent = new GameEvent(OnEnterGame.gameInfo.board[location], "freeze");
         OnEnterGame.gameInfo.FreezePiece(location, round);
         boardSetup.pieces[location].GetComponent<PieceInfo>().piece.freeze = round;
 
+        GameEvent gameEvent = new GameEvent(OnEnterGame.gameInfo.board[location], "freeze");
+        onEnterGame.AddToHistory(gameEvent);
         // Add freeze image
         GameObject freezeImage = Instantiate(onEnterGame.freezeImage, boardCanvas);
         freezeImage.transform.position = new Vector3(location.x * MovementController.scale, location.y * MovementController.scale, -0.5f);

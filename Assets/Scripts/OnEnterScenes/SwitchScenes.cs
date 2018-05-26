@@ -22,6 +22,8 @@ public class SwitchScenes : MonoBehaviour, IPointerClickHandler
         parentCanvas = GetComponent<Canvas>();
         SetPlayerInfo();
         missionToday.SetActive(Login.user.missions.Count != 0);
+        missionList = new List<GameObject>();
+        newMissionButtonList = new List<GameObject>();
         for (int i = 0; i < 5; i++)
         {
             Transform mission = missions.Find("Mission" + i.ToString());

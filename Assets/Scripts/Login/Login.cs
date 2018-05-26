@@ -89,7 +89,6 @@ public class Login : MonoBehaviour
                 if (emptyPassword.activeSelf) emptyPassword.SetActive(false);
                 if (wrongPassword.activeSelf) wrongPassword.SetActive(false);
                 user = UserInfo.Download();
-                user.SetData();
                 playerID = user.playerID;
                 SceneManager.LoadScene("Main");
             }

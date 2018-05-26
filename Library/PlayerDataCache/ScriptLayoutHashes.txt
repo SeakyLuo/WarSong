@@ -158,7 +158,7 @@ f92c2052d277a113243f48521ad2dbde Assembly-CSharp.dll:.Login
 c35be4f69d0d6952b5adfa996c23096c Assembly-CSharp.dll:.Archbishop
 c35be4f69d0d6952b5adfa996c23096c Assembly-CSharp.dll:.Revenger
 6fd8c01a91a2eeddbfc619dfa413604a Assembly-CSharp.dll:.FreezeTrap
-29b07b5a19385ace2d007a889a09d895 Assembly-CSharp.dll:.MouseOverHistory
+06e57a633e1a6bdd29aba2a5487960f4 Assembly-CSharp.dll:.MouseOverHistory
 e82425f0ad1ff7f6060f17c6874130f4 Assembly-CSharp.dll:.BoardManager
 30afbc26297fc1a5477af1db678b44b7 Assembly-CSharp.dll:.GameTacticGesture
 e68a747465b139f08d86c50d37c20a2e Assembly-CSharp.dll:.ShowCoins

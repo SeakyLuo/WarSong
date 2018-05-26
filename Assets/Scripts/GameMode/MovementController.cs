@@ -126,8 +126,9 @@ public class MovementController : MonoBehaviour
     public static void Move(Piece piece, Vector2Int from, Vector2Int to)
     {
         /// Called by trigger
-        GameEvent gameEvent = new GameEvent(from, to, piece.ownerID);
         Move(boardSetup.pieces[piece.location], from, to);
+        GameEvent gameEvent = new GameEvent(from, to, piece.ownerID);
+        onEnterGame.AddToHistory(gameEvent);
     }
 
     public static void MoveTo(Vector2Int location)

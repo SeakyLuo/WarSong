@@ -14,7 +14,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 
     public GameObject gameStartImage, victoryImage, defeatImage, drawImage, settingsPanel, yourTurnImage, notEnoughCoinsImage, notEnoughOresImage, fullTacticBag, freezeText, winReward;
     public GameObject pathDot, targetDot, oldLocation, explosion, askTriggerPanel;
-    public GameObject pieceInfoCard , trapInfoCard, showInfoCard, playerFlag, enemyFlag, freezeImage;
+    public GameObject pieceInfoCard, showInfoCard, playerFlag, enemyFlag, freezeImage;
     public Transform tacticBag, history;
     public Button endTurnButton;
     public Text roundCount, timer, modeName;
@@ -75,6 +75,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             tacticObjs[i].GetComponent<TacticInfo>().SetAttributes(Database.FindTacticAttributes(lineup.tactics[i].tacticName));
             tacticTriggers.Add(tacticObjs[i].GetComponent<TacticInfo>().trigger);
         }
+        historySlots = new List<GameObject>();
         for (int i = 0; i < history_limit; i++) historySlots.Add(history.Find("Slot" + i.ToString()).gameObject);
         foreach(var item in gameInfo.triggers)
         {
@@ -165,6 +166,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 
     public void GameOver()
     {
+        StopAllCoroutines();
         Login.user.SetGameID(-1);
         pieceInfoCard.SetActive(false);
         gameInfo.time = gameInfo.maxTime;
@@ -314,27 +316,25 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 
     public void TriggerTrap(Vector2Int location)
     {
-        if (gameInfo.traps.ContainsKey(location))
-        {
-            GameEvent gameEvent = new GameEvent();
-            explosion.transform.position = new Vector3(location.x * MovementController.scale, location.y * MovementController.scale, -3);
-            explosion.transform.SetParent(boardSetup.boardCanvas);
-            TrapAttributes trap = Database.FindTrapAttributes(gameInfo.traps[location].Key);
-            trapInfoCard.GetComponent<TrapInfo>().SetAttributes(trap, gameInfo.traps[location].Value);
-            trap.trigger.Activate(location);
-            gameInfo.traps.Remove(location);
-            // upload
-            AddToHistory(gameEvent);
-            StartCoroutine(ShowTrapInfo());
-        }
+        if (!gameInfo.traps.ContainsKey(location)) return;
+        explosion.transform.position = new Vector3(location.x * MovementController.scale, location.y * MovementController.scale, -3);
+        explosion.transform.SetParent(boardSetup.boardCanvas);
+        TrapAttributes trap = Database.FindTrapAttributes(gameInfo.traps[location].Key);
+        GameEvent gameEvent = new GameEvent(trap.Name, gameInfo.traps[location].Value, gameInfo.board[location]);
+        showInfoCard.GetComponent<CardInfo>().SetAttributes(trap, gameInfo.traps[location].Value);
+        trap.trigger.Activate(location);
+        gameInfo.traps.Remove(location);
+        // upload
+        AddToHistory(gameEvent);
+        StartCoroutine(ShowTrapInfo());
     }
 
     private IEnumerator ShowTrapInfo(float time = 2f)
     {
-        trapInfoCard.SetActive(true);
+        showInfoCard.SetActive(true);
         explosion.SetActive(true);
         yield return new WaitForSeconds(time);
-        trapInfoCard.SetActive(false);
+        showInfoCard.SetActive(false);
         explosion.SetActive(false);
     }
 

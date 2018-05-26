@@ -49,9 +49,21 @@ public class CollectionGestureHandler : MonoBehaviour, IPointerClickHandler, IBe
         dragBegins = false;
         CardInfo cardInfo = infoCard.GetComponent<CardInfo>();
         if (TacticGestureHandler.InTacticRegion(Input.mousePosition) && cardInfo.GetCardType() == "Tactic")
-            lineupBuilder.AddTactic(cardInfo);
+        {
+            if (!lineupBuilder.AddTactic(cardInfo))
+            {
+                collectionManager.AddCollection(new Collection(cardInfo));
+                collectionManager.ShowCurrentPage();
+            }
+        }
         else if (LineupBoardGestureHandler.InBoardRegion(Input.mousePosition) && cardInfo.GetCardType() != "Tactic")
-            lineupBuilder.AddPiece(cardInfo, Input.mousePosition);
+        {
+            if (!lineupBuilder.AddPiece(cardInfo, Input.mousePosition))
+            {
+                collectionManager.AddCollection(new Collection(cardInfo));
+                collectionManager.ShowCurrentPage();
+            }
+        }
         else
         {
             collectionManager.AddCollection(remove);
@@ -68,9 +80,11 @@ public class CollectionGestureHandler : MonoBehaviour, IPointerClickHandler, IBe
         CardInfo cardInfo = selectedObject.transform.parent.Find("Card").GetComponent<CardInfo>();
         if (cardInfo.GetCardType() == "Tactic")
         {
-            lineupBuilder.AddTactic(cardInfo);
-            collectionManager.RemoveCollection(new Collection(cardInfo));
-            collectionManager.ShowCurrentPage();
+            if (lineupBuilder.AddTactic(cardInfo))
+            {
+                collectionManager.RemoveCollection(new Collection(cardInfo));
+                collectionManager.ShowCurrentPage();
+            }
         }   
         else
         {

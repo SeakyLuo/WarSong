@@ -101,7 +101,7 @@ public class OnEnterPlayerMatching : MonoBehaviour
         Lineup lineup = Login.user.lineups[Login.user.lastLineupSelected];
 
         //WWWForm infoToPhp = new WWWForm();
-        // Match by these
+        // Match by mode, boardName, (rank [less important])
         //infoToPhp.AddField("mode", Login.user.lastModeSelected);
         //infoToPhp.AddField("boardName", Login.user.lineups[Login.user.lastLineupSelected].boardName);
         // Return Enemy username, rank and lineup
