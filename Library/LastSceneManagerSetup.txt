@@ -1,4 +1,4 @@
 sceneSetups:
-- path: C:/Users/Seaky/Desktop/Json.Net.Unity3D-master/src/UnityPackage/Assets/JsonNetSample.unity
+- path: Assets/_Scenes/Login.unity
   isLoaded: 1
   isActive: 1

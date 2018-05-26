@@ -100,9 +100,9 @@ public class UserInfo {
         preferredBoard = boardName;
         Upload();
     }
-    public void SetGameID(int GameId)
+    public void SetGameID(int GameID)
     {
-        gameID = GameId;
+        gameID = GameID;
         Upload();
     }
     public void ChangeContracts(string contractName, int deltaAmount)

@@ -28,8 +28,7 @@ public class SwitchScenes : MonoBehaviour, IPointerClickHandler
         {
             Transform mission = missions.Find("Mission" + i.ToString());
             missionList.Add(mission.Find("Mission").gameObject);
-            missionList[i].SetActive(i < Login.user.missions.Count);
-            newMissionButtonList.Add(mission.Find("NewMission").gameObject);
+            newMissionButtonList.Add(mission.Find("ChangeMission").gameObject);
             newMissionButtonList[i].SetActive(!Login.user.missionSwitched);
         }
     }
@@ -65,7 +64,7 @@ public class SwitchScenes : MonoBehaviour, IPointerClickHandler
         title.text = Range.FindTitle(Login.user.rank);
         nameText.text = Login.user.username;
         playerIDText.text = Login.user.playerID.ToString();
-        // SetMissions;
+        SetMissions();
     }
 
     public void ShowPlayerInfo()
@@ -76,7 +75,12 @@ public class SwitchScenes : MonoBehaviour, IPointerClickHandler
 
     private void SetMissions()
     {
-
+        int missions = Login.user.missions.Count;
+        for (int i = 0; i < 5; i++)
+        {
+            missionList[i].SetActive(i < missions);
+            if (i < missions) missionList[i].GetComponent<MissionInfo>().SetAttributes(Login.user.missions[i]);
+        }
     }
 
     public void ChangeMission(int number)
