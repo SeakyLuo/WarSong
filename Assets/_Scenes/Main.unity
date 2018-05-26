@@ -924,7 +924,7 @@ Prefab:
         type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 6911dba8785ef69478dfdef42ec37a56,
+      objectReference: {fileID: 21300000, guid: bd10b0e6b3efc44478927c0d9c2eb667,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f1e1bbe29a95d7449764bea63a25151, type: 2}
@@ -2630,7 +2630,7 @@ Prefab:
         type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 6911dba8785ef69478dfdef42ec37a56,
+      objectReference: {fileID: 21300000, guid: bd10b0e6b3efc44478927c0d9c2eb667,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f1e1bbe29a95d7449764bea63a25151, type: 2}
@@ -3188,7 +3188,7 @@ Prefab:
         type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 6911dba8785ef69478dfdef42ec37a56,
+      objectReference: {fileID: 21300000, guid: bd10b0e6b3efc44478927c0d9c2eb667,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f1e1bbe29a95d7449764bea63a25151, type: 2}
@@ -4181,7 +4181,7 @@ Prefab:
         type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 6911dba8785ef69478dfdef42ec37a56,
+      objectReference: {fileID: 21300000, guid: bd10b0e6b3efc44478927c0d9c2eb667,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f1e1bbe29a95d7449764bea63a25151, type: 2}
@@ -4197,7 +4197,7 @@ GameObject:
   - component: {fileID: 1493441396}
   - component: {fileID: 1493441395}
   m_Layer: 5
-  m_Name: MyMissions
+  m_Name: DailyMissions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

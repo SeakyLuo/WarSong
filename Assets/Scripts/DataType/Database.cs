@@ -26,7 +26,7 @@ public class Database {
     public static List<string> missionList = new List<string>();
     public static Dictionary<string, List<string>> directories = new Dictionary<string, List<string>>{
         {"Standard Piece", new List<string>() }, {"Piece", new List<string>() }, {"Tactic", new List<string>() },
-        {"Board", new List<string>() }, {"Trap", new List<string>() }, {"Contract", new List<string>() }
+        {"Board", new List<string>() }, {"Trap", new List<string>() }, {"Contract", new List<string>() }, { "Mission", new List<string>() }
     };
 
     private static List<string> loadType = new List<string> { "Standard Piece", "Piece", "Tactic", "Board", "Trap", "Contract", "Mission" };

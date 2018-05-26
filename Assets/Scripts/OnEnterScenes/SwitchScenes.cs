@@ -20,7 +20,6 @@ public class SwitchScenes : MonoBehaviour, IPointerClickHandler
     private void Start()
     {
         parentCanvas = GetComponent<Canvas>();
-        SetPlayerInfo();
         missionToday.SetActive(Login.user.missions.Count != 0);
         missionList = new List<GameObject>();
         newMissionButtonList = new List<GameObject>();
@@ -29,7 +28,6 @@ public class SwitchScenes : MonoBehaviour, IPointerClickHandler
             Transform mission = missions.Find("Mission" + i.ToString());
             missionList.Add(mission.Find("Mission").gameObject);
             newMissionButtonList.Add(mission.Find("ChangeMission").gameObject);
-            newMissionButtonList[i].SetActive(!Login.user.missionSwitched);
         }
     }
 
@@ -79,6 +77,7 @@ public class SwitchScenes : MonoBehaviour, IPointerClickHandler
         for (int i = 0; i < 5; i++)
         {
             missionList[i].SetActive(i < missions);
+            newMissionButtonList[i].SetActive(i < missions &&  !Login.user.missionSwitched);
             if (i < missions) missionList[i].GetComponent<MissionInfo>().SetAttributes(Login.user.missions[i]);
         }
     }

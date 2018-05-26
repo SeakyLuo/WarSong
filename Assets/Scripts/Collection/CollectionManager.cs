@@ -11,7 +11,7 @@ public class CollectionManager : MonoBehaviour {
     public GameObject clearSearch, searchPanel, selectedBoardPanel, createLineupPanel, noCollectionPanel;
     public Transform tabsObj;
     public Button createLineupButton;
-    public Text TitleText, pageText, createLineupButtonText;
+    public Text TitleText, createLineupButtonText;
     public InputField searchByInput;
 
     private static GameObject[] tabs;
@@ -229,7 +229,6 @@ public class CollectionManager : MonoBehaviour {
             counters[i].text = "";
             counters[i].transform.parent.gameObject.SetActive(false);
         }
-        pageText.text = "";
 
         // Calculate Page Number
         string type = currentPage.Key;
@@ -239,7 +238,6 @@ public class CollectionManager : MonoBehaviour {
             if (cardType != type) pageNumber += pageLimits[cardType];
             else break;
         }
-        pageText.text = "Page " + pageNumber.ToString();
 
         if (currentPage.Equals(notFound) || collectionDict[type].Count == 0)
         {
@@ -248,7 +246,7 @@ public class CollectionManager : MonoBehaviour {
         }
 
         int page = currentPage.Value - 1;
-        TitleText.text = type;
+        TitleText.text = type + string.Format(" ({0}/{1})", pageNumber, pageLimits[type]);
 
         GameObject card;
         Collection collection;
