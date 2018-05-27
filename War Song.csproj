@@ -351,11 +351,11 @@
     <Compile Include="Assets\Scripts\DataType\Database.cs" />
     <Compile Include="Assets\Scripts\DataType\GameEvent.cs" />
     <Compile Include="Assets\Scripts\DataType\Lineup.cs" />
+    <Compile Include="Assets\Scripts\DataType\Location.cs" />
     <Compile Include="Assets\Scripts\DataType\Piece.cs" />
     <Compile Include="Assets\Scripts\DataType\Range.cs" />
     <Compile Include="Assets\Scripts\DataType\Stats.cs" />
     <Compile Include="Assets\Scripts\DataType\Tactic.cs" />
-    <Compile Include="Assets\Scripts\DataType\Vec2Converter.cs" />
     <Compile Include="Assets\Scripts\GameMode\ActivateAbility.cs" />
     <Compile Include="Assets\Scripts\GameMode\BoardSetup.cs" />
     <Compile Include="Assets\Scripts\GameMode\GameController.cs" />

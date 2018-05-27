@@ -65,7 +65,7 @@ public class BoardInfo : MonoBehaviour
 
     public void SetStandardCard(string type, Vector2Int location)
     {
-        SetCard(Collection.standardCollectionDict[type], location);
+        SetCard(Collection.StandardCollection(type), location);
     }
 
     public void SetCard(Collection collection, Vector2Int location)

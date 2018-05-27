@@ -9,9 +9,8 @@ public class MouseOverHistory : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public Image background;
     public Sprite allyBackground;
     public Sprite enemyBackground;
-    public Image cardImage;
     public GameObject historyPanel, eventCard, targetCard;
-    public GameEvent gameEvent;
+    [HideInInspector] public GameEvent gameEvent;
 
     public void SetAttributes(GameEvent game_event)
     {

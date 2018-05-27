@@ -153,7 +153,7 @@ public class Database {
     public static TacticAttributes LoadTacticAttributes(string name) { return Resources.Load<TacticAttributes>("Tactic/" + name + "/Attributes"); }
     public static TrapAttributes LoadTrapAttributes(string name) { return Resources.Load<TrapAttributes>("Trap/" + name + "/Attributes"); }
     public static ContractAttributes LoadContractAttributes(string name) { return Resources.Load<ContractAttributes>("Contract/" + name + "/Attributes"); }
-    public static MissionAttributes LoadMissionAttributes(string name) { return Resources.Load<MissionAttributes>("Mission/" + name); }
+    public static MissionAttributes LoadMissionAttributes(string name) { return Resources.Load<MissionAttributes>("Mission/" + name + "/Attributes"); }
     public static Trigger LoadPieceTrigger(string name)
     {
         if (name.StartsWith("Standard ")) return Resources.Load<Trigger>("Standard Piece/" + name + "/Trigger");

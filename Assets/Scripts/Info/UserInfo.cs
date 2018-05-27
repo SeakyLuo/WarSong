@@ -54,22 +54,22 @@ public class UserInfo {
     public void AddCollection(Collection insert, bool upload = true)
     {
         Collection.InsertCollection(collection, insert);
-        if(upload) Upload();
+        if (upload) Upload();
     }
-    public void RemoveCollection(int index)
+    public void RemoveCollection(int index, bool upload = true)
     {
         collection.RemoveAt(index);
-        Upload();
+        if (upload) Upload();
     }
-    public void RemoveCollection(Collection remove)
+    public void RemoveCollection(Collection remove, bool upload = true)
     {
         collection.Remove(remove);
-        Upload();
+        if (upload) Upload();
     }
-    public void ChangeCollectionCount(int index, int deltaAmount)
+    public void ChangeCollectionCount(int index, int deltaAmount, bool upload = true)
     {
         if (--collection[index].count == 0) RemoveCollection(index);
-        Upload();
+        if (upload) Upload();
     }
     public void ChangeCoins(int deltaAmount)
     {
@@ -79,22 +79,22 @@ public class UserInfo {
     public void AddLineup(Lineup lineup)
     {
         lineups.Add(lineup);
-        //Upload();
+        Upload();
     }
     public void ModifyLineup(Lineup lineup, int index)
     {
         lineups[index] = lineup;
-        //Upload();
+        Upload();
     }
     public void RemoveLineup(int index)
     {
         lineups.RemoveAt(index);
-        //Upload();
+        Upload();
     }
     public void SetLastLineupSelected(int index = -1)
     {
         lastLineupSelected = index;
-        //  Upload();
+        Upload();
     }
     public void SetPreferredBoard(string boardName = "Standard Board")
     {
@@ -106,11 +106,11 @@ public class UserInfo {
         gameID = GameID;
         Upload();
     }
-    public void ChangeContracts(string contractName, int deltaAmount)
+    public void ChangeContracts(string contractName, int deltaAmount, bool upload = true)
     {
         if (contracts.ContainsKey(contractName)) contracts[contractName] += deltaAmount;
         else contracts.Add(contractName, deltaAmount);
-        Upload();
+        if(upload) Upload();
     }
     public void ChangeMission(int number)
     {
@@ -137,11 +137,17 @@ public class UserInfo {
 
     public static string ClassToJson(UserInfo user)
     {
-        return JsonConvert.SerializeObject(user, Formatting.Indented, new Vec2Converter());
+        JsonSerializerSettings settings = new JsonSerializerSettings();
+        settings.Formatting = Formatting.Indented;
+        settings.ContractResolver = new DictionaryAsArrayResolver();
+        return JsonConvert.SerializeObject(user, settings);
     }
     public static UserInfo JsonToClass(string json)
     {
-        return JsonConvert.DeserializeObject<UserInfo>(json, new Vec2Converter());
+        JsonSerializerSettings settings = new JsonSerializerSettings();
+        settings.Formatting = Formatting.Indented;
+        settings.ContractResolver = new DictionaryAsArrayResolver();
+        return JsonConvert.DeserializeObject<UserInfo>(json, settings);
     }
     public void Upload()
     {

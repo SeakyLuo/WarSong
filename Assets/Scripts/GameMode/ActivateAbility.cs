@@ -36,7 +36,6 @@ public class ActivateAbility : MonoBehaviour {
 
     public static void Activate(Vector2Int location)
     {
-        Piece target = OnEnterGame.gameInfo.board[location];
         if (tacticCaller != -1)
         {
             // use tactic

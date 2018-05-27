@@ -7,6 +7,8 @@ public class Tactic {
     public bool original = true;
     public int ownerID;
 
+    public Tactic() { }
+
     public Tactic(TacticAttributes tacticAttributes, int owner = 0, bool Original = true)
     {
         tacticName = tacticAttributes.Name;

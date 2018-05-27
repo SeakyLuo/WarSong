@@ -102,7 +102,7 @@ public class LineupBoardGestureHandler : MonoBehaviour, IPointerClickHandler, IB
                 string cardType = newCard.GetCardType();
                 collectionManager.AddCollection(new Collection(newCard.piece));
                 boardInfo.SetStandardCard(cardType, Database.StringToVec2(parent.name));
-                collectionManager.RemoveCollection(Collection.standardCollectionDict[cardType]);
+                collectionManager.RemoveCollection(Collection.StandardCollection(cardType));
                 collectionManager.ShowCurrentPage();
                 cardImage.sprite = Database.standardAttributes["Standard " + cardType].image;
             }

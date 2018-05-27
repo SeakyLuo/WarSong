@@ -18515,7 +18515,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1617907982638410, guid: f8f777b2e4dad66418c2b9605225ecff, type: 2}
       propertyPath: m_Name
-      value: Card2
+      value: Card26
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f8f777b2e4dad66418c2b9605225ecff, type: 2}

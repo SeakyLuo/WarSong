@@ -4,8 +4,8 @@ using Newtonsoft.Json;
 [System.Serializable]
 public class GameEvent {
 
-    public Vector2Int eventLocation = Piece.noLocation;
-    public Vector2Int targetLocation = Piece.noLocation;
+    public Vector2Int eventLocation = new Vector2Int(-1, -1);
+    public Vector2Int targetLocation = new Vector2Int(-1, -1);
 	public string eventTriggerName = ""; // Who (Piece or tactic) triggers this event
     public string targetTriggerName = ""; // Target name
     public int eventPlayerID = -1;

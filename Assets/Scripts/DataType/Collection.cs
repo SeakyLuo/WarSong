@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 [System.Serializable]
 public class Collection
@@ -17,16 +16,6 @@ public class Collection
     public static Collection Chariot = StandardCollection("Chariot");
     public static Collection Cannon = StandardCollection("Cannon");
     public static Collection Soldier = StandardCollection("Soldier");
-    public static Dictionary<string, Collection> standardCollectionDict = new Dictionary<string, Collection>
-    {
-        {"General", General },
-        {"Advisor", Advisor },
-        {"Elephant", Elephant },
-        {"Horse", Horse },
-        {"Chariot", Chariot },
-        {"Cannon", Cannon },
-        {"Soldier", Soldier }
-    };
 
     public Collection() { }
 
@@ -101,7 +90,6 @@ public class Collection
     {
         return new Collection("Standard " + type, type);
     }
-
 
     public static void InsertCollection(List<Collection> collectionList, Collection insert)
     {

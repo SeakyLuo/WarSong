@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [System.Serializable]
-[CreateAssetMenu(fileName = "Mission", menuName = "Mission")]
+[CreateAssetMenu(fileName = "Attributes", menuName = "Mission")]
 public class MissionAttributes : ScriptableObject {
 
     public string Name;

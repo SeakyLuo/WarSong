@@ -3,8 +3,6 @@
 [System.Serializable]
 public class Piece
 {
-    public static Vector2Int noLocation = new Vector2Int(-1, -1);
-
     public Vector2Int location;
     public int oreCost = 0;
     public int health = 0;
@@ -32,7 +30,7 @@ public class Piece
     public Piece(string type, Vector2Int loc, bool IsAlly, int owner, bool Original)
     {
         /// Standard Piece
-        collection = Collection.standardCollectionDict[type];
+        collection = Collection.StandardCollection(type);
         castle = loc;
         location = loc;
         ownerID = owner;

@@ -67,7 +67,7 @@ public class CollectionManager : MonoBehaviour {
                 return;
             }
         collection.count = 1;
-        if (!collection.IsStandard()) Login.user.AddCollection(collection);
+        if (!collection.IsStandard()) Login.user.AddCollection(collection, false);
         Collection.InsertCollection(collectionDict[collection.type], collection);
         SetPageLimits();
     }
@@ -83,7 +83,7 @@ public class CollectionManager : MonoBehaviour {
                 found = collectionList[i];
                 if (found.count == 1)
                 {
-                    Login.user.RemoveCollection(found);
+                    Login.user.RemoveCollection(found, false);
                     displayCollections.Remove(found);
                     collectionDict[found.type].Remove(found);
                     SetPageLimits();
@@ -232,12 +232,6 @@ public class CollectionManager : MonoBehaviour {
 
         // Calculate Page Number
         string type = currentPage.Key;
-        pageNumber = currentPage.Value;
-        foreach (string cardType in types)
-        {
-            if (cardType != type) pageNumber += pageLimits[cardType];
-            else break;
-        }
 
         if (currentPage.Equals(notFound) || collectionDict[type].Count == 0)
         {
@@ -246,7 +240,7 @@ public class CollectionManager : MonoBehaviour {
         }
 
         int page = currentPage.Value - 1;
-        TitleText.text = type + string.Format(" ({0}/{1})", pageNumber, pageLimits[type]);
+        TitleText.text = type + string.Format(" ({0}/{1})", currentPage.Value, pageLimits[type]);
 
         GameObject card;
         Collection collection;
