@@ -37,25 +37,20 @@ public class ActivateAbility : MonoBehaviour {
     public static void Activate(Vector2Int location)
     {
         Piece target = OnEnterGame.gameInfo.board[location];
-        GameEvent gameEvent;
         if (tacticCaller != -1)
         {
             // use tactic
             if (!GameController.ChangeOre(-tacticTrigger.tactic.oreCost) || !GameController.ChangeCoin(-tacticTrigger.tactic.goldCost)) return;
-            gameEvent = new GameEvent(tacticTrigger.tactic);
-            tacticTrigger.Activate(location);
-            GameController.RemoveTactic(tacticTrigger.tactic);
+            GameController.RemoveTactic(tacticTrigger.tactic, true);
             tacticCaller = -1;
         }
         else
         {
             // activate ability
             if (!GameController.ChangeOre(-pieceInfo.trigger.piece.oreCost)) return;
-            gameEvent = new GameEvent(pieceInfo.piece, target);
             pieceInfo.trigger.Activate(location);
             MovementController.PutDownPiece();
         }
-        onEnterGame.AddToHistory(gameEvent);
         DeactivateButton();
     }
 

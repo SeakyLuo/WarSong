@@ -10,7 +10,7 @@ SceneListEnd?
 6fd8c01a91a2eeddbfc619dfa413604a Assembly-CSharp.dll:.Disarm
 0dbb03457432fbb78ca2acb77ffe4d85 Assembly-CSharp.dll:.Client
 c35be4f69d0d6952b5adfa996c23096c Assembly-CSharp.dll:.TheOreKing
-5c571667c448760ffe2fd213425c6b7d Assembly-CSharp.dll:.CollectionManager
+69825051f9deced45e682bd16dac7e23 Assembly-CSharp.dll:.CollectionManager
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 dbc29a6f2739d277c10da432d73adb6d UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
 8144169769d51429c4aedc8b0f92d47b UnityEngine.Timeline.dll:UnityEngine.Timeline.AnimationPlayableAsset
@@ -134,6 +134,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 6fd8c01a91a2eeddbfc619dfa413604a Assembly-CSharp.dll:.SoldierRecruitment
 35379c033f3675974efe13c2e09b9733 Assembly-CSharp.dll:.PieceInfo
 6fd8c01a91a2eeddbfc619dfa413604a Assembly-CSharp.dll:.NoWay
+a3935e1bfef719d85f777a2b0b7124cc Assembly-CSharp.dll:.MissionInfo
 322cb40e1e282f28af980cbef7922a90 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
 15ab66292b5ddadec7f6c46a19b96136 Assembly-CSharp.dll:.TacticGestureHandler
@@ -239,4 +240,3 @@ c35be4f69d0d6952b5adfa996c23096c Assembly-CSharp.dll:.TreasureHorse
 c35be4f69d0d6952b5adfa996c23096c Assembly-CSharp.dll:.Turret
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MovementController
 c35be4f69d0d6952b5adfa996c23096c Assembly-CSharp.dll:.KingOfTheDead
-a3935e1bfef719d85f777a2b0b7124cc Assembly-CSharp.dll:.MissionInfo

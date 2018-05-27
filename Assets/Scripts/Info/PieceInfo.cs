@@ -21,15 +21,30 @@ public class PieceInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         card = PieceInfoCard.transform.Find("Canvas/Card").gameObject;
     }
 
-    public void Setup(Collection collection, Vector2Int loc, int ownerID, bool original)
+    public void Setup(Piece piece, bool original)
     {
-        pieceAttributes = Database.FindPieceAttributes(collection.name);
-        piece = new Piece(collection, loc, pieceAttributes.oreCost, ownerID, original);
-        if (pieceAttributes.trigger != null) trigger = Instantiate(pieceAttributes.trigger);
-        if (trigger != null) trigger.piece = piece; // remove the if when all completed
+        pieceAttributes = Database.FindPieceAttributes(piece.GetName());
+        trigger = Instantiate(pieceAttributes.trigger);
+        SetPiece(piece);
         GetComponentInChildren<Image>().sprite = pieceAttributes.image;
         if (piece.IsAlly()) GetComponent<Renderer>().material = red;
         else GetComponent<Renderer>().material = black;
+    }
+
+    public void Setup(Collection collection, Vector2Int loc, int ownerID, bool original)
+    {
+        pieceAttributes = Database.FindPieceAttributes(collection.name);
+        trigger = Instantiate(pieceAttributes.trigger);
+        SetPiece(new Piece(collection, loc, pieceAttributes.oreCost, ownerID, original));
+        GetComponentInChildren<Image>().sprite = pieceAttributes.image;
+        if (piece.IsAlly()) GetComponent<Renderer>().material = red;
+        else GetComponent<Renderer>().material = black;
+    }
+
+    public void SetPiece(Piece setup)
+    {
+        piece = setup;
+        trigger.piece = setup;
     }
 
     public List<Vector2Int> ValidLoc()

@@ -269,11 +269,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             Trigger trigger = pair.Value.GetComponent<PieceInfo>().trigger;
             if (trigger != null)
             {
-                if (piece.freeze > 0 && --piece.freeze == 0)
-                {
-                    Destroy(GameController.freezeImages[pair.Key]);
-                    GameController.freezeImages.Remove(pair.Key);
-                }
+                if (piece.freeze > 0 && --piece.freeze == 0) Defreeze(pair.Key);
                 trigger.EndOfTurn();
             }
         }
@@ -387,6 +383,12 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     {
         for (int i = 0; i < tacticTriggers.Count; i++)
             tacticButtons[i].interactable = interactable && tacticTriggers[i].Activatable();
+    }
+
+    public void Defreeze(Vector2Int location)
+    {
+        Destroy(GameController.freezeImages[location]);
+        GameController.freezeImages.Remove(location);
     }
 
     public void ChangeTacticOreCost(int index, int deltaAmount)

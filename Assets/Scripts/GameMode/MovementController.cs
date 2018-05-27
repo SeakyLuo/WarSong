@@ -114,11 +114,16 @@ public class MovementController : MonoBehaviour
         if (OnEnterGame.gameInfo.traps.ContainsKey(to)) onEnterGame.TriggerTrap(to);
         // need to add game events
         Trigger trigger = target.GetComponent<PieceInfo>().trigger;
-        onEnterGame.AskTrigger(pieceInfo.piece, trigger, "AfterMove");
-        if (boardAttributes.InEnemyRegion(to.x, to.y)) onEnterGame.AskTrigger(pieceInfo.piece, trigger, "InEnemyRegion");
-        else if (boardAttributes.InEnemyPalace(to.x, to.y)) onEnterGame.AskTrigger(pieceInfo.piece, trigger, "InEnemyPalace");
-        else if (boardAttributes.InEnemyCastle(to.x, to.y)) onEnterGame.AskTrigger(pieceInfo.piece, trigger, "InEnemyCastle");
-        else if (boardAttributes.AtEnemyBottom(to.x,to.y)) onEnterGame.AskTrigger(pieceInfo.piece, trigger, "AtEnemyBottom");
+        trigger.AfterMove();
+        if (boardAttributes.InEnemyRegion(to.x, to.y)) trigger.InEnemyRegion();
+        else if (boardAttributes.InEnemyPalace(to.x, to.y)) trigger.InEnemyRegion();
+        else if (boardAttributes.InEnemyCastle(to.x, to.y)) trigger.InEnemyCastle();
+        else if (boardAttributes.AtEnemyBottom(to.x, to.y)) trigger.AtEnemyBottom();
+        //onEnterGame.AskTrigger(pieceInfo.piece, trigger, "AfterMove");
+        //if (boardAttributes.InEnemyRegion(to.x, to.y)) onEnterGame.AskTrigger(pieceInfo.piece, trigger, "InEnemyRegion");
+        //else if (boardAttributes.InEnemyPalace(to.x, to.y)) onEnterGame.AskTrigger(pieceInfo.piece, trigger, "InEnemyPalace");
+        //else if (boardAttributes.InEnemyCastle(to.x, to.y)) onEnterGame.AskTrigger(pieceInfo.piece, trigger, "InEnemyCastle");
+        //else if (boardAttributes.AtEnemyBottom(to.x,to.y)) onEnterGame.AskTrigger(pieceInfo.piece, trigger, "AtEnemyBottom");
 
         OnEnterGame.gameInfo.Upload();
     }

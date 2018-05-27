@@ -6,7 +6,7 @@ public class PlaceAFlag : TacticTrigger
 {
     public override void Activate(Vector2Int location)
     {
-        GameController.PlaceFlag(location, true);
+        GameController.PlaceFlag(location, Login.playerID);
     }
 
     public override List<Vector2Int> ValidTargets()

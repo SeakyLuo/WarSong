@@ -114,9 +114,7 @@ public class Database {
     private static void ReadDirectories()
     {
         TextAsset textAsset = Resources.Load<TextAsset>("Directories");
-        string text = textAsset.text;
-        var list = text.Split('\n');
-        foreach(string path in list)
+        foreach(string path in textAsset.text.Split('\n'))
         {
             if (path == "") continue;
             int index = path.IndexOf('/');
@@ -126,6 +124,14 @@ public class Database {
 
     public static string RandomTrap() { return trapList[Random.Range(0, trapList.Count)]; }
     public static string RandomMission() { return missionList[Random.Range(0, missionList.Count)]; }
+
+    public static string FindType(string name)
+    {
+        foreach (string type in loadType)
+            if (directories[type].Contains(name))
+                return type;
+        return "";
+    }
 
     public static BoardAttributes FindBoardAttributes(string name) { return boards[name]; }
     public static PieceAttributes FindPieceAttributes(string name)
@@ -148,6 +154,16 @@ public class Database {
     public static TrapAttributes LoadTrapAttributes(string name) { return Resources.Load<TrapAttributes>("Trap/" + name + "/Attributes"); }
     public static ContractAttributes LoadContractAttributes(string name) { return Resources.Load<ContractAttributes>("Contract/" + name + "/Attributes"); }
     public static MissionAttributes LoadMissionAttributes(string name) { return Resources.Load<MissionAttributes>("Mission/" + name); }
+    public static Trigger LoadPieceTrigger(string name)
+    {
+        if (name.StartsWith("Standard ")) return Resources.Load<Trigger>("Standard Piece/" + name + "/Trigger");
+        return Resources.Load<Trigger>("Piece/" + name + "/Trigger");
+    }
+    public static TacticTrigger LoadTacticTrigger(string name)
+    {
+        if (FindType(name) == "Tactic") return Resources.Load<TacticTrigger>("Tactic/" + name + "/Trigger");
+        return Resources.Load<TacticTrigger>("Trap/" + name + "/Trigger");
+    }
 
     public static string Vec2ToString(Vector2Int vec) { return vec.x.ToString() + vec.y.ToString(); }
     public static Vector2Int StringToVec2(string loc) { return new Vector2Int((int)System.Char.GetNumericValue(loc[0]), (int)System.Char.GetNumericValue(loc[1])); }

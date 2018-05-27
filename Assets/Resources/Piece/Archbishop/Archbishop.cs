@@ -5,7 +5,7 @@ public class Archbishop : Trigger {
 
     public override void Activate(Vector2Int location)
     {
-        GameController.Eliminate(location);
+        GameController.Eliminate(location, piece);
     }
 
     public override List<Vector2Int> ValidTargets()

@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 public class UserInfo {
 
     public static int maxWinPerDay = 10;
+    public static int maxMissions = 5;
 
     public string username;
     public int playerID;

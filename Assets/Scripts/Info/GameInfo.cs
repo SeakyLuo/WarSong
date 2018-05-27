@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Newtonsoft.Json;
 
 [System.Serializable]
 public class GameInfo
@@ -123,6 +124,14 @@ public class GameInfo
         }
         castles[piece.location].Remove(piece);
         if(upload) Upload();
+    }
+
+    public void TransformPiece(Vector2Int from, Trigger into)
+    {
+        Piece piece = board[from];
+        board[from] = into.piece;
+        triggers[from] = into;
+        activePieces[piece.ownerID][activePieces[piece.ownerID].IndexOf(piece)] = into.piece;
     }
 
     public void FreezePiece(Vector2Int location, int round)
@@ -270,11 +279,11 @@ public class GameInfo
 
     public static string ClassToJson(GameInfo gameInfo)
     {
-        return JsonUtility.ToJson(gameInfo);
+        return JsonConvert.SerializeObject(gameInfo);
     }
     public static GameInfo JsonToClass(string json)
     {
-        return JsonUtility.FromJson<GameInfo>(json);
+        return JsonConvert.DeserializeObject<GameInfo>(json);
     }
     public void Upload()
     {

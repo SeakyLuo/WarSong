@@ -4,6 +4,7 @@
 public class Piece
 {
     public static Vector2Int noLocation = new Vector2Int(-1, -1);
+
     public Vector2Int location;
     public int oreCost = 0;
     public int health = 0;
@@ -47,6 +48,15 @@ public class Piece
         health = setupCollection.health;
         ownerID = owner;
         original = Original;
+    }
+
+    public void Transform(Collection newCollection)
+    {
+        collection = newCollection;
+        oreCost = newCollection.oreCost;
+        health = newCollection.health;
+        freeze = 0;
+        original = false;
     }
 
     public string GetName() { return collection.name; }

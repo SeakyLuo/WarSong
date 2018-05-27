@@ -5,9 +5,10 @@ public class Disarm : TacticTrigger
 {
     public override void Activate(Vector2Int location)
     {
-        Piece piece = OnEnterGame.gameInfo.board[location];
-        GameController.AddPiece(Collection.StandardCollection(piece.GetPieceType()), piece.GetCastle(), piece.ownerID);
-        GameController.Eliminate(location, false);
+        Piece from = OnEnterGame.gameInfo.board[location];
+        Piece into = new Piece(from);
+        into.Transform(Collection.StandardCollection(from.GetPieceType()));
+        GameController.TransformPiece(from, into);
     }
 
     public override List<Vector2Int> ValidTargets()

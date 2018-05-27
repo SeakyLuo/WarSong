@@ -31,8 +31,8 @@ public class GameTacticGesture : MonoBehaviour, IPointerEnterHandler, IPointerEx
             if (!trigger.needsTarget && Time.time - prevClick < doubleClickInterval)
             {
                 if (!GameController.ChangeOre(-trigger.tactic.oreCost) || !GameController.ChangeCoin(-trigger.tactic.goldCost)) return;
-                trigger.Activate();
-                GameController.RemoveTactic(trigger.tactic);
+                trigger.Activate();                
+                GameController.RemoveTactic(trigger.tactic, true);
             }
             else
             {

@@ -33,4 +33,10 @@ public class BoardSetup : MonoBehaviour {
         pieces.Add(castle, pieceObj);
         OnEnterGame.gameInfo.AddPiece(pieceObj.GetComponent<PieceInfo>().trigger, reactivate);
     }
+
+    public void TransformPiece(Vector2Int location, Piece piece)
+    {
+        pieces[location].GetComponent<PieceInfo>().Setup(piece, false);
+        OnEnterGame.gameInfo.TransformPiece(location, pieces[location].GetComponent<PieceInfo>().trigger);
+    }
 }
