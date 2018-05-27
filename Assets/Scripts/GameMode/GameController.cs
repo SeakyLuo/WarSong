@@ -9,10 +9,10 @@ public class GameController : MonoBehaviour {
     public static OnEnterGame onEnterGame;
     public static BoardSetup boardSetup;
     public static Transform boardCanvas;
-    public static Dictionary<string, List<Vector2Int>> castles;
+    public static Dictionary<string, List<Location>> castles;
     public static PieceInfo pieceInfo;
-    public static Dictionary<Vector2Int, GameObject> flags;
-    public static Dictionary<Vector2Int, GameObject> freezeImages;
+    public static Dictionary<Location, GameObject> flags;
+    public static Dictionary<Location, GameObject> freezeImages;
 
     [HideInInspector] public GameObject settingsPanel;
 
@@ -22,7 +22,7 @@ public class GameController : MonoBehaviour {
         boardSetup = onEnterGame.boardSetup;
         boardCanvas = onEnterGame.board.transform.Find("Canvas");
         settingsPanel = onEnterGame.settingsPanel;
-        castles = new Dictionary<string, List<Vector2Int>>()
+        castles = new Dictionary<string, List<Location>>()
         {
             {"Advisor", boardSetup.boardAttributes.AdvisorCastle() },
             {"Elephant", boardSetup.boardAttributes.ElephantCastle()  },
@@ -31,8 +31,8 @@ public class GameController : MonoBehaviour {
             {"Cannon", boardSetup.boardAttributes.CannonCastle()  },
             {"Soldier", boardSetup.boardAttributes.SoldierCastle()  },
         };
-        flags = new Dictionary<Vector2Int, GameObject>();
-        freezeImages = new Dictionary<Vector2Int, GameObject>();
+        flags = new Dictionary<Location, GameObject>();
+        freezeImages = new Dictionary<Location, GameObject>();
     }
 
     private void Update()
@@ -76,9 +76,9 @@ public class GameController : MonoBehaviour {
                 }
                 else if (MovementController.selected != null && !ActivateAbility.activated)
                 {
-                    Vector2Int location;
-                    if (hitObj.name == "Piece") location = Database.StringToVec2(hitObj.transform.parent.name);
-                    else location = Database.StringToVec2(hitObj.name);
+                    Location location;
+                    if (hitObj.name == "Piece") location = new Location(hitObj.transform.parent.name);
+                    else location = new Location(hitObj.name);
                     if (MovementController.validLocs.Contains(location))
                     {
                         OnEnterGame.gameInfo.Act("move", Login.playerID);
@@ -88,9 +88,9 @@ public class GameController : MonoBehaviour {
                 }
                 else if (ActivateAbility.activated)
                 {
-                    Vector2Int location;
-                    if (hitObj.name == "Piece") location = Database.StringToVec2(hitObj.transform.parent.name);
-                    else location = Database.StringToVec2(hitObj.name);
+                    Location location;
+                    if (hitObj.name == "Piece") location = new Location(hitObj.transform.parent.name);
+                    else location = new Location(hitObj.name);
                     if (ActivateAbility.targetLocs.Contains(location))
                     {
                         OnEnterGame.gameInfo.Act(ActivateAbility.actor, Login.playerID);
@@ -114,7 +114,7 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    public static void ChangeSide(Vector2Int location, int ownerID)
+    public static void ChangeSide(Location location, int ownerID)
     {
         boardSetup.pieces[location].GetComponent<PieceInfo>().piece.ownerID = ownerID;
         Piece piece = OnEnterGame.gameInfo.board[location];
@@ -135,13 +135,13 @@ public class GameController : MonoBehaviour {
         OnEnterGame.gameInfo.Upload();
     }
 
-    public static void AddPiece(Collection collection, Vector2Int castle, int ownerID)
+    public static void AddPiece(Collection collection, Location castle, int ownerID)
     {
         boardSetup.AddPiece(collection, castle, ownerID, false);
         Passive(OnEnterGame.gameInfo.board[castle], ownerID);
     }
 
-    public static void ResurrectPiece(Collection collection, Vector2Int castle, int ownerID)
+    public static void ResurrectPiece(Collection collection, Location castle, int ownerID)
     {
         boardSetup.AddPiece(collection, castle, ownerID, true, true);
         Passive(OnEnterGame.gameInfo.board[castle], ownerID);
@@ -161,7 +161,7 @@ public class GameController : MonoBehaviour {
         onEnterGame.AddToHistory(gameEvent);
     }
 
-    public static void ChangePieceHealth(Vector2Int location, int deltaAmount, GameEvent gameEvent = null)
+    public static void ChangePieceHealth(Location location, int deltaAmount, GameEvent gameEvent = null)
     {
         Piece before = OnEnterGame.gameInfo.board[location];
         Piece after = new Piece(before);
@@ -176,7 +176,7 @@ public class GameController : MonoBehaviour {
         if (gameEvent == null) gameEvent = new GameEvent("PieceHealth", before, after, deltaAmount);
         onEnterGame.AddToHistory(gameEvent);
     }
-    public static void ChangePieceOreCost(Vector2Int location, int deltaAmount, GameEvent gameEvent = null)
+    public static void ChangePieceOreCost(Location location, int deltaAmount, GameEvent gameEvent = null)
     {
         Piece before = OnEnterGame.gameInfo.board[location];
         Piece after = new Piece(before);
@@ -230,7 +230,7 @@ public class GameController : MonoBehaviour {
         onEnterGame.AddToHistory(gameEvent);
     }
 
-    public static void Eliminate(Vector2Int location, Piece triggeredByPiece = null, bool revenge = true, GameEvent gameEvent = null)
+    public static void Eliminate(Location location, Piece triggeredByPiece = null, bool revenge = true, GameEvent gameEvent = null)
     {
         if (revenge)
         {
@@ -258,7 +258,7 @@ public class GameController : MonoBehaviour {
         onEnterGame.AddToHistory(gameEvent);
     }
 
-    public static void FreezePiece(Vector2Int location, int round, GameEvent gameEvent = null)
+    public static void FreezePiece(Location location, int round, GameEvent gameEvent = null)
     {
         OnEnterGame.gameInfo.FreezePiece(location, round);
         boardSetup.pieces[location].GetComponent<PieceInfo>().piece.freeze = round;
@@ -272,13 +272,13 @@ public class GameController : MonoBehaviour {
         onEnterGame.AddToHistory(gameEvent);
     }
 
-    public static void PlaceTrap(Vector2Int location, string trapName, int creator)
+    public static void PlaceTrap(Location location, string trapName, int creator)
     {
         OnEnterGame.gameInfo.traps.Add(location, new KeyValuePair<string, int>(trapName, creator));
         OnEnterGame.gameInfo.Upload();
     }
 
-    public static void PlaceFlag(Vector2Int location, int ownerID, GameEvent gameEvent = null)
+    public static void PlaceFlag(Location location, int ownerID, GameEvent gameEvent = null)
     {
         GameObject flag;
         if (ownerID == Login.playerID) flag = Instantiate(onEnterGame.playerFlag, boardCanvas);
@@ -292,7 +292,7 @@ public class GameController : MonoBehaviour {
         onEnterGame.AddToHistory(gameEvent);
     }
 
-    public static void RemoveFlag(Vector2Int location, GameEvent gameEvent = null)
+    public static void RemoveFlag(Location location, GameEvent gameEvent = null)
     {
         Destroy(flags[location]);
         flags.Remove(location);
@@ -303,7 +303,7 @@ public class GameController : MonoBehaviour {
         onEnterGame.AddToHistory(gameEvent);
     }
 
-    public static void RemoveTrap(Vector2Int location)
+    public static void RemoveTrap(Location location)
     {
         OnEnterGame.gameInfo.traps.Remove(location);
         OnEnterGame.gameInfo.Upload();
@@ -363,7 +363,7 @@ public class GameController : MonoBehaviour {
         onEnterGame.SetCoinText();
         return true;
     }
-    public static List<Vector2Int> FindCastles(string type) { return castles[type]; }
+    public static List<Location> FindCastles(string type) { return castles[type]; }
 
     public static void DecodeGameEvent(GameEvent gameEvent)
     {

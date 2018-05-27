@@ -3,7 +3,7 @@
 [System.Serializable]
 public class Piece
 {
-    public Vector2Int location;
+    public Location location;
     public int oreCost = 0;
     public int health = 0;
     public int freeze = 0;
@@ -12,7 +12,7 @@ public class Piece
     public bool original;
     public Collection collection;
 
-    private Vector2Int castle;
+    private Location castle;
 
     public Piece(Piece piece)
     {
@@ -27,7 +27,7 @@ public class Piece
         original = piece.original;
     }
 
-    public Piece(string type, Vector2Int loc, bool IsAlly, int owner, bool Original)
+    public Piece(string type, Location loc, bool IsAlly, int owner, bool Original)
     {
         /// Standard Piece
         collection = Collection.StandardCollection(type);
@@ -37,7 +37,7 @@ public class Piece
         original = Original;
     }
 
-    public Piece(Collection setupCollection, Vector2Int loc, int OreCost, int owner, bool Original)
+    public Piece(Collection setupCollection, Location loc, int OreCost, int owner, bool Original)
     {
         collection = setupCollection;
         castle = loc;
@@ -61,6 +61,6 @@ public class Piece
     public string GetPieceType() { return collection.type; }
     public bool IsStandard() { return collection.name.StartsWith("Standard "); }
     public bool IsAlly() { return ownerID == Login.playerID; }
-    public Vector2Int GetCastle() { return castle; }
+    public Location GetCastle() { return castle; }
     public bool IsMinion() { return collection.type != "General"; }
 }

@@ -8,7 +8,7 @@ public class ActivateAbility : MonoBehaviour {
     public static OnEnterGame onEnterGame;
     public static bool activated = false;
     public static int tacticCaller = -1;
-    public static List<Vector2Int> targetLocs = new List<Vector2Int>();
+    public static List<Location> targetLocs = new List<Location>();
     public static PieceInfo pieceInfo;
     public static Button button;
     public static string actor;
@@ -34,7 +34,7 @@ public class ActivateAbility : MonoBehaviour {
         board = onEnterGame.board.transform.parent;
     }
 
-    public static void Activate(Vector2Int location)
+    public static void Activate(Location location)
     {
         if (tacticCaller != -1)
         {
@@ -79,10 +79,10 @@ public class ActivateAbility : MonoBehaviour {
     {
         activated = true;
         MovementController.HidePathDots();
-        foreach (Vector2Int loc in targetLocs)
+        foreach (Location loc in targetLocs)
         {
             GameObject copy = Instantiate(targetDot, board);
-            copy.name = Database.Vec2ToString(loc);
+            copy.name = loc.ToString();
             copy.transform.position = new Vector3(loc.x * MovementController.scale, loc.y * MovementController.scale, -2.5f);
             targetDots.Add(copy);
         }
@@ -94,7 +94,7 @@ public class ActivateAbility : MonoBehaviour {
         targetDots.Clear();
     }
 
-    public static void ShowTacticTarget(List<Vector2Int> validTargets, int caller, TacticTrigger trigger)
+    public static void ShowTacticTarget(List<Location> validTargets, int caller, TacticTrigger trigger)
     {
         actor = "tactic";
         targetLocs = validTargets;

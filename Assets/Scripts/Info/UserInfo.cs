@@ -138,14 +138,12 @@ public class UserInfo {
     public static string ClassToJson(UserInfo user)
     {
         JsonSerializerSettings settings = new JsonSerializerSettings();
-        settings.Formatting = Formatting.Indented;
         settings.ContractResolver = new DictionaryAsArrayResolver();
         return JsonConvert.SerializeObject(user, settings);
     }
     public static UserInfo JsonToClass(string json)
     {
         JsonSerializerSettings settings = new JsonSerializerSettings();
-        settings.Formatting = Formatting.Indented;
         settings.ContractResolver = new DictionaryAsArrayResolver();
         return JsonConvert.DeserializeObject<UserInfo>(json, settings);
     }

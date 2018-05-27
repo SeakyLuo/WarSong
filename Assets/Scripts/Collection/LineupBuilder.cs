@@ -49,16 +49,16 @@ public class LineupBuilder : MonoBehaviour {
         boardInfo = lineupBoard.GetComponent<BoardInfo>();
     }
 
-    public void AddPiece(CardInfo cardInfo, Vector2Int loc)
+    public void AddPiece(CardInfo cardInfo, Location loc)
     {
         PieceAdder(cardInfo, loc, loc.x, loc.y);
     }
 
     public bool AddPiece(CardInfo cardInfo, Vector3 loc)
     {
-        Vector2Int location = LineupBoardGestureHandler.FindLoc(loc);
+        Location location = LineupBoardGestureHandler.FindLoc(loc);
         string cardType,
-               locName = Database.Vec2ToString(location);
+               locName = location.ToString();
         if (boardInfo.locationType.TryGetValue(locName, out cardType) && cardType == cardInfo.GetCardType())
         {
             PieceAdder(cardInfo, location, location.x, location.y);
@@ -67,7 +67,7 @@ public class LineupBuilder : MonoBehaviour {
         return false;
     }
 
-    private void PieceAdder(CardInfo cardInfo, Vector2Int loc, int locx, int locy)
+    private void PieceAdder(CardInfo cardInfo, Location loc, int locx, int locy)
     {
         string locName = locx.ToString() + locy.ToString();
         if (lineupBoard == null) lineupBoard = board.transform.Find("LineupBoard(Clone)");
@@ -225,7 +225,7 @@ public class LineupBuilder : MonoBehaviour {
         if (returnCards)
         {
             // return cards
-            foreach (KeyValuePair<Vector2Int, Collection> pair in lineup.cardLocations)
+            foreach (KeyValuePair<Location, Collection> pair in lineup.cardLocations)
                 collectionManager.AddCollection(pair.Value);
             foreach (Tactic tactic in new List<Tactic>(lineup.tactics))
             {
@@ -276,7 +276,7 @@ public class LineupBuilder : MonoBehaviour {
                     AddTactic(tactic);
                 // can add virtual card like hearthstore
             }
-            foreach (KeyValuePair<Vector2Int, Collection> pair in newLineup.cardLocations)
+            foreach (KeyValuePair<Location, Collection> pair in newLineup.cardLocations)
             {
                 Collection collection = pair.Value;
                 if (!collectionManager.RemoveCollection(collection) || 

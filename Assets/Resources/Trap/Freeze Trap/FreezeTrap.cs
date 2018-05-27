@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FreezeTrap : TacticTrigger
 {
-    public override void Activate(Vector2Int Vector2Int)
+    public override void Activate(Location Location)
     {
-        GameController.FreezePiece(Vector2Int, 3);
+        GameController.FreezePiece(Location, 3);
     }
 }

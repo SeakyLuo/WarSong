@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlaceAFlag : TacticTrigger
 {
-    public override void Activate(Vector2Int location)
+    public override void Activate(Location location)
     {
         GameController.PlaceFlag(location, Login.playerID);
     }
 
-    public override List<Vector2Int> ValidTargets()
+    public override List<Location> ValidTargets()
     {
         return MovementController.Unoccupied();
     }

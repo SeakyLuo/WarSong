@@ -4,8 +4,8 @@ using Newtonsoft.Json;
 [System.Serializable]
 public class GameEvent {
 
-    public Vector2Int eventLocation = new Vector2Int(-1, -1);
-    public Vector2Int targetLocation = new Vector2Int(-1, -1);
+    public Location eventLocation = new Location(-1, -1);
+    public Location targetLocation = new Location(-1, -1);
 	public string eventTriggerName = ""; // Who (Piece or tactic) triggers this event
     public string targetTriggerName = ""; // Target name
     public int eventPlayerID = -1;
@@ -15,7 +15,7 @@ public class GameEvent {
 
     public GameEvent() { }
 
-    public GameEvent(Vector2Int from, Vector2Int to, int playerID)
+    public GameEvent(Location from, Location to, int playerID)
     {
         /// Move
         result = "Move";
@@ -65,7 +65,7 @@ public class GameEvent {
         eventPlayerID = playerID;
     }
 
-    public GameEvent(Vector2Int EventLocation, int EventPlayerID)
+    public GameEvent(Location EventLocation, int EventPlayerID)
     {
         /// Flag
         result = "Flag";
@@ -73,7 +73,7 @@ public class GameEvent {
         eventPlayerID = EventPlayerID;
     }
 
-    public GameEvent(Vector2Int EventLocation)
+    public GameEvent(Location EventLocation)
     {
         /// RemoveFlag
         result = "RemoveFlag";

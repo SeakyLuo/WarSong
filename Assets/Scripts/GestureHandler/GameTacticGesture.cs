@@ -12,7 +12,7 @@ public class GameTacticGesture : MonoBehaviour, IPointerEnterHandler, IPointerEx
     private float prevClick = 0;
     private float doubleClickInterval = 1;
 
-    private static List<Vector2Int> targets = new List<Vector2Int>();
+    private static List<Location> targets = new List<Location>();
 
     private void Start()
     {

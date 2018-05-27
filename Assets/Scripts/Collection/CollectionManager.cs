@@ -20,8 +20,7 @@ public class CollectionManager : MonoBehaviour {
     private List<Collection> displayCollections, searchedCollections;
     private Dictionary<string, List<Collection>> collectionDict = new Dictionary<string, List<Collection>>();
     private Dictionary<string, List<Collection>> originalDict = new Dictionary<string, List<Collection>>();
-    private int pageNumber = 1, 
-                searchByGoldValue = -1, 
+    private int searchByGoldValue = -1, 
                 searchByOreValue = -1, 
                 searchByHealthValue = -1;
     private string searchByKeyword = "";

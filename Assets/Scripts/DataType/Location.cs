@@ -4,6 +4,7 @@ using System.Collections;
 using System.Linq;
 using Newtonsoft.Json.Serialization;
 
+[Serializable]
 public class Location
 {
     public int x;
@@ -31,18 +32,23 @@ public class Location
     }
     public readonly static Location zero = new Location(0, 0);
     public readonly static Location NoLocation = new Location(-1, -1);
+    public bool Between(Location a, Location b, string compare = "XY")
+    {
+        /// Compare can only be "XY" or "X" or "Y". a and b are exclusive.
+        if (compare == "XY") return a < this && this < b;
+        if (compare == "X") return y == a.y && y == b.y && a.x < x && x < b.x;
+        if (compare == "Y") return x == a.x && x == b.x && a.y < y && y < b.y;
+        else return false;
+    }
     public override string ToString()
     {
         return string.Format("({0}, {1})", x, y);
     }
-    public string Vec2ToString() { return x.ToString() + y.ToString(); }
 
     public override bool Equals(object obj)
     {
         var location = obj as Location;
-        return location != null &&
-               x == location.x &&
-               y == location.y;
+        return this == location;
     }
 
     public override int GetHashCode()
@@ -77,7 +83,22 @@ public class Location
     {
         return !(a == b);
     }
-
+    public static bool operator <(Location a, Location b)
+    {
+        return a.x < b.x && a.y < b.y;
+    }
+    public static bool operator >(Location a, Location b)
+    {
+        return a.x > b.x && a.y > b.y;
+    }
+    public static bool operator <=(Location a, Location b)
+    {
+        return a.x <= b.x && a.y <= b.y;
+    }
+    public static bool operator >=(Location a, Location b)
+    {
+        return a.x >= b.x && a.y >= b.y;
+    }
 }
 
 public class DictionaryAsArrayResolver : DefaultContractResolver

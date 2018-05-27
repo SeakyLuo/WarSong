@@ -2,8 +2,8 @@
 
 public class FrightenBomb : TacticTrigger {
 
-    public override void Activate(Vector2Int Vector2Int)
+    public override void Activate(Location Location)
     {
-        GameController.ChangePieceHealth(Vector2Int, -1);
+        GameController.ChangePieceHealth(Location, -1);
     }
 }

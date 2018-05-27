@@ -164,7 +164,4 @@ public class Database {
         if (FindType(name) == "Tactic") return Resources.Load<TacticTrigger>("Tactic/" + name + "/Trigger");
         return Resources.Load<TacticTrigger>("Trap/" + name + "/Trigger");
     }
-
-    public static string Vec2ToString(Vector2Int vec) { return vec.x.ToString() + vec.y.ToString(); }
-    public static Vector2Int StringToVec2(string loc) { return new Vector2Int((int)System.Char.GetNumericValue(loc[0]), (int)System.Char.GetNumericValue(loc[1])); }
 }

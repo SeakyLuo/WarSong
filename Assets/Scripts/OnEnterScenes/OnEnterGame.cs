@@ -172,13 +172,13 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         gameInfo.time = gameInfo.maxTime;
         gameInfo.gameOver = true;
         if (settingsPanel.activeSelf) settingsPanel.SetActive(false);
-        foreach(KeyValuePair<Vector2Int,GameObject> pair in boardSetup.pieces)
+        foreach(KeyValuePair<Location,GameObject> pair in boardSetup.pieces)
         {
             Trigger trigger = pair.Value.GetComponent<PieceInfo>().trigger;
             if (trigger != null) trigger.EndOfGame();
         }
         // CalculateNewRank(); // should be done by server
-        foreach (KeyValuePair<Vector2Int, Collection> pair in new Dictionary<Vector2Int, Collection>(lineup.cardLocations))
+        foreach (KeyValuePair<Location, Collection> pair in new Dictionary<Location, Collection>(lineup.cardLocations))
         {
             bool alive = false;
             foreach(Piece piece in gameInfo.activePieces[Login.playerID])
@@ -246,7 +246,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         }
         //StartCoroutine(ShowYourTurn());
         gameInfo.ResetActions(Login.playerID);
-        foreach (KeyValuePair<Vector2Int, GameObject> pair in boardSetup.pieces)
+        foreach (KeyValuePair<Location, GameObject> pair in boardSetup.pieces)
         {
             Trigger trigger = pair.Value.GetComponent<PieceInfo>().trigger;
             if (trigger != null) trigger.StartOfTurn();
@@ -263,7 +263,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     public void NextTurn()
     {
         endTurnText.text = "Enemy Turn";
-        foreach (KeyValuePair<Vector2Int, GameObject> pair in boardSetup.pieces)
+        foreach (KeyValuePair<Location, GameObject> pair in boardSetup.pieces)
         {
             Piece piece = pair.Value.GetComponent<PieceInfo>().piece;
             Trigger trigger = pair.Value.GetComponent<PieceInfo>().trigger;
@@ -310,7 +310,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         current_tactic = -1;
     }
 
-    public void TriggerTrap(Vector2Int location)
+    public void TriggerTrap(Location location)
     {
         if (!gameInfo.traps.ContainsKey(location)) return;
         explosion.transform.position = new Vector3(location.x * MovementController.scale, location.y * MovementController.scale, -3);
@@ -385,7 +385,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             tacticButtons[i].interactable = interactable && tacticTriggers[i].Activatable();
     }
 
-    public void Defreeze(Vector2Int location)
+    public void Defreeze(Location location)
     {
         Destroy(GameController.freezeImages[location]);
         GameController.freezeImages.Remove(location);
