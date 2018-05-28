@@ -150,7 +150,7 @@ public class OnEnterPlayerMatching : MonoBehaviour
     public void CancelMatching()
     {
         cancel = true;
-        // cancel network matching
+        // Cancel network matching
         matchingPanel.SetActive(false);
         StopAllCoroutines();
     }
