@@ -86,12 +86,12 @@ public class AccountCreation : MonoBehaviour {
 
     public int GeneratePlayerID()
     {
+        //WWWForm infoToPhp = new WWWForm();
+        //infoToPhp.AddField("playerID", "playerID");
+        //WWW sendToPhp = new WWW("http://47.151.234.225/action_reg.php", infoToPhp);
+        //while (!sendToPhp.isDone) { }
+        //return int.Parse(sendToPhp.text) + 10000000;
         return 10000000;
-        WWWForm infoToPhp = new WWWForm();
-        infoToPhp.AddField("playerID", "playerID");
-        WWW sendToPhp = new WWW("http://47.151.234.225/action_reg.php", infoToPhp);
-        while (!sendToPhp.isDone) { }
-        return int.Parse(sendToPhp.text) + 10000000;        
     }
 
     public void Agree()
