@@ -7,6 +7,7 @@ public class AutoCreate : MonoBehaviour {
     public GameObject copy;
     public int row;
     public int column;
+    public GameObject gridPanel;
     public GameObject grid;
     public GameObject piece;
 
@@ -22,9 +23,11 @@ public class AutoCreate : MonoBehaviour {
         //    }
         //}
         //BoardGenerator(Database.FindBoardAttributes("Standard Board"));
+        LineupBoardGenerator(Database.FindBoardAttributes("Standard Board"));
+
     }
 
-    public void LineupBoard(BoardAttributes board)
+    public void LineupBoardGenerator(BoardAttributes board)
     {
         string address = "Board/" + board.Name + "/Images/";
         for (int x = 0; x <= board.allyField; x++)
@@ -32,7 +35,7 @@ public class AutoCreate : MonoBehaviour {
             for (int y = 0; y < board.boardWidth; y++)
             {
                 Location location = new Location(y, x);
-                GameObject obj = Instantiate(grid, transform);
+                GameObject obj = Instantiate(gridPanel, transform);
                 string image = address;
                 if (location == new Location(board.palaceLeft, board.palaceDown))
                     image += "pdl";
@@ -54,6 +57,7 @@ public class AutoCreate : MonoBehaviour {
                     image += "castle";
                 else
                     image += "grid";
+                if (board.AllyCastles().Contains(location)) obj.AddComponent<MouseOverPiece>();
                 obj.GetComponent<Image>().sprite = Resources.Load<Sprite>(image);
                 obj.name = location.ToString();
             }

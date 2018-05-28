@@ -1790,6 +1790,10 @@ Prefab:
       propertyPath: targetCard
       value: 
       objectReference: {fileID: 1872220139}
+    - target: {fileID: 1015907296107734, guid: c6b05ac7a2461a94b8d4429b1f78ac5e, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c6b05ac7a2461a94b8d4429b1f78ac5e, type: 2}
   m_IsPrefabParent: 0
@@ -2169,6 +2173,10 @@ Prefab:
       propertyPath: targetCard
       value: 
       objectReference: {fileID: 1872220139}
+    - target: {fileID: 1015907296107734, guid: c6b05ac7a2461a94b8d4429b1f78ac5e, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c6b05ac7a2461a94b8d4429b1f78ac5e, type: 2}
   m_IsPrefabParent: 0
@@ -3460,6 +3468,10 @@ Prefab:
       propertyPath: targetCard
       value: 
       objectReference: {fileID: 1872220139}
+    - target: {fileID: 1015907296107734, guid: c6b05ac7a2461a94b8d4429b1f78ac5e, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c6b05ac7a2461a94b8d4429b1f78ac5e, type: 2}
   m_IsPrefabParent: 0
@@ -7794,10 +7806,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 1015907296107734, guid: c6b05ac7a2461a94b8d4429b1f78ac5e, type: 2}
-      propertyPath: m_Name
-      value: Slot0
-      objectReference: {fileID: 0}
     - target: {fileID: 114793929232577532, guid: c6b05ac7a2461a94b8d4429b1f78ac5e,
         type: 2}
       propertyPath: historyPanel
@@ -7813,6 +7821,14 @@ Prefab:
       propertyPath: targetCard
       value: 
       objectReference: {fileID: 1872220139}
+    - target: {fileID: 1015907296107734, guid: c6b05ac7a2461a94b8d4429b1f78ac5e, type: 2}
+      propertyPath: m_Name
+      value: Slot0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1015907296107734, guid: c6b05ac7a2461a94b8d4429b1f78ac5e, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c6b05ac7a2461a94b8d4429b1f78ac5e, type: 2}
   m_IsPrefabParent: 0
@@ -10963,6 +10979,10 @@ Prefab:
       propertyPath: targetCard
       value: 
       objectReference: {fileID: 1872220139}
+    - target: {fileID: 1015907296107734, guid: c6b05ac7a2461a94b8d4429b1f78ac5e, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c6b05ac7a2461a94b8d4429b1f78ac5e, type: 2}
   m_IsPrefabParent: 0
@@ -11651,6 +11671,10 @@ Prefab:
       propertyPath: targetCard
       value: 
       objectReference: {fileID: 1872220139}
+    - target: {fileID: 1015907296107734, guid: c6b05ac7a2461a94b8d4429b1f78ac5e, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c6b05ac7a2461a94b8d4429b1f78ac5e, type: 2}
   m_IsPrefabParent: 0
@@ -12342,6 +12366,10 @@ Prefab:
       propertyPath: targetCard
       value: 
       objectReference: {fileID: 1872220139}
+    - target: {fileID: 1015907296107734, guid: c6b05ac7a2461a94b8d4429b1f78ac5e, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c6b05ac7a2461a94b8d4429b1f78ac5e, type: 2}
   m_IsPrefabParent: 0
@@ -20952,7 +20980,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1921322837}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 75322719}
@@ -21495,6 +21523,10 @@ Prefab:
       propertyPath: targetCard
       value: 
       objectReference: {fileID: 1872220139}
+    - target: {fileID: 1015907296107734, guid: c6b05ac7a2461a94b8d4429b1f78ac5e, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c6b05ac7a2461a94b8d4429b1f78ac5e, type: 2}
   m_IsPrefabParent: 0
@@ -21703,6 +21735,10 @@ Prefab:
       propertyPath: targetCard
       value: 
       objectReference: {fileID: 1872220139}
+    - target: {fileID: 1015907296107734, guid: c6b05ac7a2461a94b8d4429b1f78ac5e, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c6b05ac7a2461a94b8d4429b1f78ac5e, type: 2}
   m_IsPrefabParent: 0

@@ -106,6 +106,7 @@ public class CardInfo : MonoBehaviour {
         costImage.SetActive(false);
         healthImage.SetActive(false);
         coinImage.SetActive(false);
+        image.sprite = attributes.image;
         type = "Trap";
         typeText.text = type;
         SetOwner(ownerID);

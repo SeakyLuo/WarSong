@@ -333,6 +333,11 @@
     <Compile Include="Assets\Resources\Trap\Freeze Trap\FreezeTrap.cs" />
     <Compile Include="Assets\Resources\Trap\Frighten Bomb\FrightenBomb.cs" />
     <Compile Include="Assets\Resources\Trap\Horrible Landmine\HorribleLandmine.cs" />
+    <Compile Include="Assets\Scripts\_Scenes\OnEnterCollections.cs" />
+    <Compile Include="Assets\Scripts\_Scenes\OnEnterGame.cs" />
+    <Compile Include="Assets\Scripts\_Scenes\OnEnterPlayerMatching.cs" />
+    <Compile Include="Assets\Scripts\_Scenes\OnEnterRecruitment.cs" />
+    <Compile Include="Assets\Scripts\_Scenes\SwitchScenes.cs" />
     <Compile Include="Assets\Scripts\Attributes\BoardAttributes.cs" />
     <Compile Include="Assets\Scripts\Attributes\ContractAttributes.cs" />
     <Compile Include="Assets\Scripts\Attributes\MissionAttributes.cs" />
@@ -387,11 +392,6 @@
     <Compile Include="Assets\Scripts\Main\Settings.cs" />
     <Compile Include="Assets\Scripts\Main\ShowCoins.cs" />
     <Compile Include="Assets\Scripts\Main\UpdateTime.cs" />
-    <Compile Include="Assets\Scripts\OnEnterScenes\OnEnterCollections.cs" />
-    <Compile Include="Assets\Scripts\OnEnterScenes\OnEnterGame.cs" />
-    <Compile Include="Assets\Scripts\OnEnterScenes\OnEnterPlayerMatching.cs" />
-    <Compile Include="Assets\Scripts\OnEnterScenes\OnEnterRecruitment.cs" />
-    <Compile Include="Assets\Scripts\OnEnterScenes\SwitchScenes.cs" />
     <Compile Include="Assets\Scripts\Recruitment\ActivateCoinStore.cs" />
     <Compile Include="Assets\Scripts\Recruitment\ActivateContractStore.cs" />
     <Compile Include="Assets\Scripts\Recruitment\ContractsManager.cs" />

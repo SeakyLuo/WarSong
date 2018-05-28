@@ -81,10 +81,10 @@ public class UserInfo {
         lineups.Add(lineup);
         Upload();
     }
-    public void ModifyLineup(Lineup lineup, int index)
+    public void ModifyLineup(Lineup lineup, int index, bool upload = true)
     {
         lineups[index] = lineup;
-        Upload();
+        if (upload) Upload();
     }
     public void RemoveLineup(int index)
     {

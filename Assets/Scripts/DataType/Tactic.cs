@@ -32,8 +32,9 @@ public class Tactic {
     public Tactic(Collection collection, int owner = 0, bool Original = true)
     {
         tacticName = collection.name;
-        oreCost = collection.oreCost;
-        goldCost = collection.health;
+        TacticAttributes attributes = Database.FindTacticAttributes(tacticName);
+        oreCost = attributes.oreCost;
+        goldCost = attributes.goldCost;
         ownerID = owner;
         original = Original;
     }

@@ -40,6 +40,7 @@ public class ActivateAbility : MonoBehaviour {
         {
             // use tactic
             if (!GameController.ChangeOre(-tacticTrigger.tactic.oreCost) || !GameController.ChangeCoin(-tacticTrigger.tactic.goldCost)) return;
+            tacticTrigger.Activate(location);
             GameController.RemoveTactic(tacticTrigger.tactic, true);
             tacticCaller = -1;
         }

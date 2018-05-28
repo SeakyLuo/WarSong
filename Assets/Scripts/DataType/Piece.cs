@@ -51,7 +51,7 @@ public class Piece
     public void Transform(Collection newCollection)
     {
         collection = newCollection;
-        oreCost = newCollection.oreCost;
+        oreCost = Database.FindPieceAttributes(collection.name).oreCost;
         health = newCollection.health;
         freeze = 0;
         original = false;

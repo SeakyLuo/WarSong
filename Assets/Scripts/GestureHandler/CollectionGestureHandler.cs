@@ -89,34 +89,31 @@ public class CollectionGestureHandler : MonoBehaviour, IPointerClickHandler, IBe
         else
         {
             string cardName = cardInfo.GetCardName();
-            bool findStandard = false;
+            Location location = Location.NoLocation;
             foreach (Location loc in boardInfo.typeLocations[cardInfo.GetCardType()])
             {
                 Collection oldCollection = boardInfo.cardLocations[loc];
                 if ((cardInfo.IsStandard() && !oldCollection.name.StartsWith("Standard ")) ||
                     (!cardInfo.IsStandard() && oldCollection.name.StartsWith("Standard ")))
                 {
-                    findStandard = true;
-                    lineupBuilder.AddPiece(cardInfo, loc);
-                    collectionManager.RemoveCollection(new Collection(cardInfo));
-                    collectionManager.ShowCurrentPage();
+                    location = loc;
                     break;
                 }
             }
-            if (!findStandard)
+            if (location == Location.NoLocation)
                 foreach (Location loc in boardInfo.typeLocations[cardInfo.GetCardType()])
                 {
                     Collection oldCollection = boardInfo.cardLocations[loc];
                     if (cardName != oldCollection.name || cardInfo.GetHealth() != oldCollection.health)
                     {
-                        lineupBuilder.AddPiece(cardInfo, loc);
-                        collectionManager.RemoveCollection(new Collection(cardInfo));
-                        collectionManager.ShowCurrentPage();
+                        location = loc;
                         break;
                     }
                 }
-        }            
-
+            lineupBuilder.AddPiece(cardInfo, location);
+            collectionManager.RemoveCollection(boardInfo.cardLocations[location]);
+            collectionManager.ShowCurrentPage();
+        }
     }
 
     public void SetBoardInfo(BoardInfo info) { boardInfo = info; }

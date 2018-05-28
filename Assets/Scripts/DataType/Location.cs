@@ -40,17 +40,20 @@ public class Location
         if (compare == "Y") return x == a.x && x == b.x && a.y < y && y < b.y;
         else return false;
     }
+    public static bool CorrectFormat(string str)
+    {
+        return str[0] == '(' && str.EndsWith(")") && str.Contains(", ");
+    }
+
     public override string ToString()
     {
         return string.Format("({0}, {1})", x, y);
     }
-
     public override bool Equals(object obj)
     {
         var location = obj as Location;
         return this == location;
     }
-
     public override int GetHashCode()
     {
         var hashCode = 1502939027;
@@ -58,7 +61,6 @@ public class Location
         hashCode = hashCode * -1521134295 + y.GetHashCode();
         return hashCode;
     }
-
     public static Location operator +(Location a, Location b)
     {
         return new Location(a.x + b.x, a.y + b.y);

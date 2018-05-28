@@ -34,6 +34,7 @@ public class PieceInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public void Setup(Collection collection, Location loc, int ownerID, bool original)
     {
         pieceAttributes = Database.FindPieceAttributes(collection.name);
+        if (pieceAttributes.trigger == null) Debug.Log(pieceAttributes.Name);
         trigger = Instantiate(pieceAttributes.trigger);
         SetPiece(new Piece(collection, loc, pieceAttributes.oreCost, ownerID, original));
         GetComponentInChildren<Image>().sprite = pieceAttributes.image;

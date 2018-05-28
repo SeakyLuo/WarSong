@@ -74,24 +74,23 @@ public class GameController : MonoBehaviour {
                     MovementController.validLocs = pieceInfo.ValidLoc();
                     MovementController.DrawPathDots();
                 }
-                else if (MovementController.selected != null && !ActivateAbility.activated)
+                else
                 {
+                    if (hitObj.name == "UIPanel") return;
                     Location location;
                     if (hitObj.name == "Piece") location = new Location(hitObj.transform.parent.name);
-                    else location = new Location(hitObj.name);
-                    if (MovementController.validLocs.Contains(location))
+                    else
+                    {
+                        if (!Location.CorrectFormat(hitObj.name)) return;
+                        location = new Location(hitObj.name);
+                    }
+                    if (MovementController.selected != null && !ActivateAbility.activated)
                     {
                         OnEnterGame.gameInfo.Act("move", Login.playerID);
                         MovementController.MoveTo(location);
                         if (!OnEnterGame.gameInfo.Actable(Login.playerID)) onEnterGame.NextTurn();
                     }
-                }
-                else if (ActivateAbility.activated)
-                {
-                    Location location;
-                    if (hitObj.name == "Piece") location = new Location(hitObj.transform.parent.name);
-                    else location = new Location(hitObj.name);
-                    if (ActivateAbility.targetLocs.Contains(location))
+                    else if (ActivateAbility.activated)
                     {
                         OnEnterGame.gameInfo.Act(ActivateAbility.actor, Login.playerID);
                         ActivateAbility.Activate(location);
@@ -153,12 +152,10 @@ public class GameController : MonoBehaviour {
         Passive(tactic, Login.playerID);
     }
 
-    public static void RemoveTactic(Tactic tactic, bool useTactic = false, GameEvent gameEvent = null)
+    public static void RemoveTactic(Tactic tactic, bool useTactic = false)
     {
         onEnterGame.RemoveTactic(tactic);
-        if (useTactic) gameEvent = new GameEvent(tactic);
-        else if (gameEvent == null) gameEvent = new GameEvent("Discard", tactic);
-        onEnterGame.AddToHistory(gameEvent);
+        if(!useTactic) onEnterGame.AddToHistory(new GameEvent("Discard", tactic));
     }
 
     public static void ChangePieceHealth(Location location, int deltaAmount, GameEvent gameEvent = null)
@@ -288,7 +285,7 @@ public class GameController : MonoBehaviour {
         flags.Add(location, flag);
         OnEnterGame.gameInfo.Upload();
 
-        if (gameEvent == null) gameEvent = new GameEvent(gameEvent.eventLocation, gameEvent.eventPlayerID);
+        if (gameEvent == null) gameEvent = new GameEvent(location, ownerID);
         onEnterGame.AddToHistory(gameEvent);
     }
 
@@ -299,7 +296,7 @@ public class GameController : MonoBehaviour {
         OnEnterGame.gameInfo.flags.Remove(location);
         OnEnterGame.gameInfo.Upload();
 
-        if (gameEvent == null) gameEvent = new GameEvent(gameEvent.eventLocation);
+        if (gameEvent == null) gameEvent = new GameEvent(location);
         onEnterGame.AddToHistory(gameEvent);
     }
 
@@ -329,16 +326,17 @@ public class GameController : MonoBehaviour {
 
     public static void ResumePiece(Piece piece)
     {
-        piece.oreCost = piece.collection.oreCost;
+        PieceAttributes attributes = Database.FindPieceAttributes(piece.GetName());
+        piece.oreCost = attributes.oreCost;
         piece.health = piece.collection.health;
         piece.freeze = 0;
     }
 
     public static void ResumeTactic(Tactic tactic)
     {
-        TacticAttributes tacticAttributes = Database.FindTacticAttributes(tactic.tacticName);
-        tactic.oreCost = tacticAttributes.oreCost;
-        tactic.goldCost = tacticAttributes.goldCost;
+        TacticAttributes attributes = Database.FindTacticAttributes(tactic.tacticName);
+        tactic.oreCost = attributes.oreCost;
+        tactic.goldCost = attributes.goldCost;
     }
 
     public static bool ChangeOre(int deltaAmount)
@@ -400,7 +398,7 @@ public class GameController : MonoBehaviour {
                 ChangeTacticOreCost(gameEvent.targetTriggerName, gameEvent.amount, gameEvent);
                 break;
             case "Discard":
-                RemoveTactic(new Tactic(Database.FindTacticAttributes(gameEvent.targetTriggerName)), false, gameEvent);
+                RemoveTactic(new Tactic(Database.FindTacticAttributes(gameEvent.targetTriggerName)), false);
                 break;
         }
     }

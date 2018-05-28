@@ -51,7 +51,7 @@ public class LineupBuilder : MonoBehaviour {
 
     public void AddPiece(CardInfo cardInfo, Location loc)
     {
-        PieceAdder(cardInfo, loc, loc.x, loc.y);
+        PieceAdder(cardInfo, loc);
     }
 
     public bool AddPiece(CardInfo cardInfo, Vector3 loc)
@@ -61,20 +61,19 @@ public class LineupBuilder : MonoBehaviour {
                locName = location.ToString();
         if (boardInfo.locationType.TryGetValue(locName, out cardType) && cardType == cardInfo.GetCardType())
         {
-            PieceAdder(cardInfo, location, location.x, location.y);
+            PieceAdder(cardInfo, location);
             return true;
         }
         return false;
     }
 
-    private void PieceAdder(CardInfo cardInfo, Location loc, int locx, int locy)
+    private void PieceAdder(CardInfo cardInfo, Location loc)
     {
-        string locName = locx.ToString() + locy.ToString();
         if (lineupBoard == null) lineupBoard = board.transform.Find("LineupBoard(Clone)");
         Collection newCollection = new Collection(cardInfo.piece, 1, cardInfo.GetHealth());
         if (newCollection.type == "General") lineup.general = newCollection.name;
         lineup.cardLocations[loc] = newCollection;
-        lineupBoard.Find(locName).Find("CardImage").GetComponent<Image>().sprite = cardInfo.image.sprite;
+        lineupBoard.Find(loc.ToString()).Find("CardImage").GetComponent<Image>().sprite = cardInfo.image.sprite;
         collectionManager.AddCollection(boardInfo.cardLocations[loc]);
         collectionManager.ShowCurrentPage();
         boardInfo.SetCard(newCollection, loc);        
@@ -167,17 +166,17 @@ public class LineupBuilder : MonoBehaviour {
         return -1;
     }
 
-    private IEnumerator SameTacticReminder()
+    private IEnumerator SameTacticReminder(float time = 1.5f)
     {
         sameTacticReminder.SetActive(true);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(time);
         sameTacticReminder.SetActive(false);
     }
 
-    private IEnumerator FullReminder()
+    private IEnumerator FullReminder(float time = 1.5f)
     {
         fullReminder.SetActive(true);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(time);
         fullReminder.SetActive(false);
     }
 
@@ -195,7 +194,7 @@ public class LineupBuilder : MonoBehaviour {
 
     private void ResumeCollections()
     {
-        collectionManager.RemoveStandardCards();
+        collectionManager.ShowCurrentPage();
         gameObject.SetActive(false);
         selectBoardPanel.GetComponent<BoardManager>().DestroyBoard();
     }
@@ -232,7 +231,6 @@ public class LineupBuilder : MonoBehaviour {
                 RemoveTactic(tactic);
                 collectionManager.AddCollection(new Collection(tactic));
             }
-            collectionManager.RemoveStandardCards();
             collectionManager.ShowCurrentPage();
         }
         lineup = new Lineup();
