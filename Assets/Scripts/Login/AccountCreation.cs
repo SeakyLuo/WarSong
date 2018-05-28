@@ -73,7 +73,6 @@ public class AccountCreation : MonoBehaviour {
             {
                 PlayerPrefs.SetString("email", email.text);
                 PlayerPrefs.SetString("password", password.text);
-
                 login.RequestLogin(email.text, password.text);
                 CancelCreation();
             }
