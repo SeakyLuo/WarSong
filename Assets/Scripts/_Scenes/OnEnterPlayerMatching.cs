@@ -6,6 +6,7 @@ using UnityEngine.Networking.Match;
 using System.Net.Sockets;
 using System.Collections.Generic;
 using System.Collections;
+using Newtonsoft.Json;
 
 public class OnEnterPlayerMatching : MonoBehaviour
 {
@@ -100,31 +101,27 @@ public class OnEnterPlayerMatching : MonoBehaviour
         matchingPanel.SetActive(true);
         StartCoroutine(ShowProgress());
         Login.user.SetLastLineupSelected(lineupSelected);
-        Lineup lineup = Login.user.lineups[Login.user.lastLineupSelected];
+        MatchInfo playerMatchInfo = new MatchInfo(Login.user, Login.user.lineups[Login.user.lastLineupSelected]);
 
-        //WWWForm infoToPhp = new WWWForm();
+        WWWForm infoToPhp = new WWWForm();
         // Match by mode, boardName, (rank [less important])
-        //infoToPhp.AddField("mode", Login.user.lastModeSelected);
-        //infoToPhp.AddField("boardName", Login.user.lineups[Login.user.lastLineupSelected].boardName);
-        // Return Enemy username, rank and lineup
-        //infoToPhp.AddField("playerName", Login.user.username);
-        //infoToPhp.AddField("rank", Login.user.rank);
-        //infoToPhp.AddField("lineup", JsonUtility.ToJson(lineup));
-
-        //infoToPhp.AddField("playerID", Login.playerID);
-
-        //WWW sendToPhp = new WWW("http://47.151.234.225/match.php", infoToPhp);
-
-        //while (!sendToPhp.isDone)
-        //{
-        //    if (cancel)
-        //    {
-        //        cancel = false;
-        //        return;
-        //    }
-        //}
-        //CancelInteractable(false);
-        //OnEnterGame.gameInfo = GameInfo.JsonToClass(sendToPhp.text);
+        infoToPhp.AddField("mode", Login.user.lastModeSelected);
+        infoToPhp.AddField("boardName", Login.user.lineups[Login.user.lastLineupSelected].boardName);
+        infoToPhp.AddField("matchInfo", playerMatchInfo.ToJson());
+        WWW sendToPhp = new WWW("http://47.151.234.225/returnUserMatchInfo.php", infoToPhp);
+        while (!sendToPhp.isDone)
+        {
+            if (cancel)
+            {
+                cancel = false;
+                return;
+            }
+        }
+        CancelInteractable(false);
+        // Return Enemy MatchInfo
+        MatchInfo enemyMatchInfo = MatchInfo.ToClass(sendToPhp.text);
+        OnEnterGame.gameInfo = new GameInfo(Login.user.lastModeSelected, playerMatchInfo, enemyMatchInfo);
+        Login.user.SetGameID(OnEnterGame.gameInfo.gameID);
         StopAllCoroutines();
 
         matchingPanel.SetActive(false);

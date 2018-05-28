@@ -42,7 +42,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     void Start () {
         lineup = Login.user.lineups[Login.user.lastLineupSelected];
         // Set GameInfo
-        gameInfo = new GameInfo(lineup, Login.playerID, new EnemyLineup(), 99999999); // should be downloading a GameInfo
+        gameInfo = new GameInfo(Login.user.lastModeSelected, lineup, Login.playerID, new EnemyLineup(), 99999999); // should be downloading a GameInfo
         //gameInfo.JsonToClass();
         Login.user.SetGameID(gameInfo.gameID);
         board = Instantiate(Resources.Load<GameObject>("Board/" + lineup.boardName + "/Board"));

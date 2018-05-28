@@ -357,6 +357,7 @@
     <Compile Include="Assets\Scripts\DataType\GameEvent.cs" />
     <Compile Include="Assets\Scripts\DataType\Lineup.cs" />
     <Compile Include="Assets\Scripts\DataType\Location.cs" />
+    <Compile Include="Assets\Scripts\DataType\MatchInfo.cs" />
     <Compile Include="Assets\Scripts\DataType\Piece.cs" />
     <Compile Include="Assets\Scripts\DataType\Range.cs" />
     <Compile Include="Assets\Scripts\DataType\Stats.cs" />

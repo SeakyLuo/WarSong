@@ -28,48 +28,51 @@ public class GameInfo
     public int round = 1;
     public int time = 90;
     public int maxTime = 90;
+    public string mode;
     public int gameID;
     public bool gameStarts = false;
     public bool gameOver = false;
     public int victory = -1; // -1 if draw, otherwise playerID
 
-    public GameInfo(Lineup playerLineup, int playerID, Lineup enemyLineup, int enemyID)
+    public GameInfo(string Mode, MatchInfo player, MatchInfo enemy)
     {
-        SetOrder(playerID, enemyID);
+        mode = Mode;
+        SetOrder(player.playerID, enemy.playerID);
         lineups = new Dictionary<int, Lineup>()
         {
-            { playerID, playerLineup },
-            { enemyID, enemyLineup }
+            { player.playerID, player.lineup },
+            { enemy.playerID, enemy.lineup }
         };
         ores = new Dictionary<int, int>()
         {
-            { playerID, 30 },
-            { enemyID, 30 }
+            { player.playerID, 30 },
+            { enemy.playerID, 30 }
         };
         ResetActions();
         SetGameID(1);
-        boardName = playerLineup.boardName;
+        boardName = player.lineup.boardName;
         activePieces = new Dictionary<int, List<Piece>>()
         {
-            { playerID, new List<Piece>() },
-            { enemyID, new List<Piece>() },
+            { player.playerID, new List<Piece>() },
+            { enemy.playerID, new List<Piece>() },
         };
         inactivePieces = new Dictionary<int, List<Piece>>()
         {
-            { playerID, new List<Piece>() },
-            { enemyID, new List<Piece>() },
+            { player.playerID, new List<Piece>() },
+            { enemy.playerID, new List<Piece>() },
         };
         unusedTactics = new Dictionary<int, List<Tactic>>()
         {
-            { playerID, playerLineup.tactics },
-            { enemyID, enemyLineup.tactics }
+            { player.playerID, player.lineup.tactics },
+            { enemy.playerID, enemy.lineup.tactics }
         };
         usedTactics = new Dictionary<int, List<Tactic>>()
         {
-            { playerID, new List<Tactic>() },
-            { enemyID, new List<Tactic>() }
+            { player.playerID, new List<Tactic>() },
+            { enemy.playerID, new List<Tactic>() }
         };
         gameStarts = true;
+        gameID = GenerateGameID();
     }
     public int TheOtherPlayer()
     {
@@ -276,7 +279,10 @@ public class GameInfo
         inactivePieces[secondPlayer].Clear();
         round = 1;
     }
-
+    public int GenerateGameID()
+    {
+        return 0;
+    }
     public static string ClassToJson(GameInfo gameInfo)
     {
         return JsonConvert.SerializeObject(gameInfo);
@@ -297,7 +303,7 @@ public class GameInfo
     public static GameInfo Download()
     {
         WWWForm infoToPhp = new WWWForm();
-        infoToPhp.AddField("email", PlayerPrefs.GetString("email"));
+        infoToPhp.AddField("gameID", Login.user.gameID);
 
         WWW sendToPhp = new WWW("http://localhost:8888/download_gameinfo.php", infoToPhp);
 
