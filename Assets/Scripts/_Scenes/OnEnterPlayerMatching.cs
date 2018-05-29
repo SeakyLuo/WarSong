@@ -122,8 +122,8 @@ public class OnEnterPlayerMatching : MonoBehaviour
         MatchInfo enemyMatchInfo = MatchInfo.ToClass(sendToPhp.text);
         OnEnterGame.gameInfo = new GameInfo(Login.user.lastModeSelected, playerMatchInfo, enemyMatchInfo);
         Login.user.SetGameID(OnEnterGame.gameInfo.gameID);
-        StopAllCoroutines();
 
+        StopAllCoroutines();
         matchingPanel.SetActive(false);
         LaunchWar();
     }

@@ -41,10 +41,6 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     // Use this for initialization
     void Start () {
         lineup = Login.user.lineups[Login.user.lastLineupSelected];
-        // Set GameInfo
-        gameInfo = new GameInfo(Login.user.lastModeSelected, lineup, Login.playerID, new EnemyLineup(), 99999999); // should be downloading a GameInfo
-        //gameInfo.JsonToClass();
-        Login.user.SetGameID(gameInfo.gameID);
         board = Instantiate(Resources.Load<GameObject>("Board/" + lineup.boardName + "/Board"));
         board.transform.SetSiblingIndex(1);
         boardSetup = board.GetComponent<BoardSetup>();

@@ -72,7 +72,7 @@ public class GameInfo
             { enemy.playerID, new List<Tactic>() }
         };
         gameStarts = true;
-        gameID = GenerateGameID();
+        gameID = firstPlayer;
     }
     public int TheOtherPlayer()
     {
@@ -278,10 +278,6 @@ public class GameInfo
         inactivePieces[firstPlayer].Clear();
         inactivePieces[secondPlayer].Clear();
         round = 1;
-    }
-    public int GenerateGameID()
-    {
-        return 0;
     }
     public static string ClassToJson(GameInfo gameInfo)
     {
