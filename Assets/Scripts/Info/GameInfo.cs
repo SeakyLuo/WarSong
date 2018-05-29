@@ -22,6 +22,7 @@ public class GameInfo
     public int currentTurn; //player ID
     public int firstPlayer; //player ID
     public int secondPlayer;
+    public Dictionary<int, MatchInfo> matchInfo;
     public Dictionary<int, Lineup> lineups;
     public Dictionary<int, int> ores;
     public Dictionary<int, Dictionary<string ,int>> actions;
@@ -37,13 +38,18 @@ public class GameInfo
     public GameInfo(string Mode, MatchInfo player, MatchInfo enemy)
     {
         mode = Mode;
+        matchInfo = new Dictionary<int, MatchInfo>
+        {
+            { player.playerID, player },
+            { enemy.playerID, enemy }
+        };
         SetOrder(player.playerID, enemy.playerID);
-        lineups = new Dictionary<int, Lineup>()
+        lineups = new Dictionary<int, Lineup>
         {
             { player.playerID, player.lineup },
             { enemy.playerID, enemy.lineup }
         };
-        ores = new Dictionary<int, int>()
+        ores = new Dictionary<int, int>
         {
             { player.playerID, 30 },
             { enemy.playerID, 30 }
@@ -51,22 +57,22 @@ public class GameInfo
         ResetActions();
         SetGameID(1);
         boardName = player.lineup.boardName;
-        activePieces = new Dictionary<int, List<Piece>>()
+        activePieces = new Dictionary<int, List<Piece>>
         {
             { player.playerID, new List<Piece>() },
             { enemy.playerID, new List<Piece>() },
         };
-        inactivePieces = new Dictionary<int, List<Piece>>()
+        inactivePieces = new Dictionary<int, List<Piece>>
         {
             { player.playerID, new List<Piece>() },
             { enemy.playerID, new List<Piece>() },
         };
-        unusedTactics = new Dictionary<int, List<Tactic>>()
+        unusedTactics = new Dictionary<int, List<Tactic>>
         {
             { player.playerID, player.lineup.tactics },
             { enemy.playerID, enemy.lineup.tactics }
         };
-        usedTactics = new Dictionary<int, List<Tactic>>()
+        usedTactics = new Dictionary<int, List<Tactic>>
         {
             { player.playerID, new List<Tactic>() },
             { enemy.playerID, new List<Tactic>() }
@@ -86,7 +92,7 @@ public class GameInfo
         else currentTurn = firstPlayer;
         round++;
         time = maxTime;
-        ResetActions();
+        ResetActions(currentTurn);
     }
 
     public void AddPiece(Trigger trigger, bool reactivate = false, bool upload = true)
@@ -207,6 +213,7 @@ public class GameInfo
             firstPlayer = player2;
             secondPlayer = player1;
         }
+        currentTurn = firstPlayer;
         Upload();
     }
 
