@@ -6,7 +6,6 @@ using UnityEngine.Networking.Match;
 using System.Net.Sockets;
 using System.Collections.Generic;
 using System.Collections;
-using Newtonsoft.Json;
 
 public class OnEnterPlayerMatching : MonoBehaviour
 {
@@ -15,6 +14,7 @@ public class OnEnterPlayerMatching : MonoBehaviour
     public GameObject launchWarText, settingsPanel, matchingPanel, cancelMatchingText;
     public Transform lineups;
     public Slider slider;
+    public Image randomCardImage;
 
     private static List<string> tips = new List<string> { "Hello", "Have fun"};
 
@@ -159,10 +159,15 @@ public class OnEnterPlayerMatching : MonoBehaviour
         float increment = 0.02f;
         while (true)
         {
+            if (slider.value == 1) flip = true;
+            else if (slider.value == 0)
+            {
+                flip = false;
+                randomCardImage.sprite = Database.RandomImage();
+            }
             if (flip) slider.value -= increment;
             else slider.value += increment;
-            if (slider.value == 1) flip = true;
-            else if (slider.value == 0) flip = false;
+            randomCardImage.fillAmount = slider.value;
             yield return new WaitForSeconds(increment);
         }
     }
