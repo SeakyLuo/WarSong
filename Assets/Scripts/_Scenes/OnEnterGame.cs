@@ -207,7 +207,13 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             }
         }
         Login.user.ModifyLineup(lineup, Login.user.lastLineupSelected);
-        //gameInfo.Upload();
+        Login.user.SetGameID(-1);
+
+        WWWForm infoToPhp = new WWWForm();
+        infoToPhp.AddField("gameID", gameInfo.gameID);
+        infoToPhp.AddField("GameEvent", "GameOver");
+        WWW sendToPhp = new WWW("http://47.151.234.225/uploadToGameInfo.php", infoToPhp);
+        while (!sendToPhp.isDone) { }
     }
 
     public void Concede()
@@ -276,7 +282,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         infoToPhp.AddField("gameID", gameInfo.gameID);
         infoToPhp.AddField("playerID", gameInfo.currentTurn);
         infoToPhp.AddField("GameEvent", GameEvent.ClassToJson(new GameEvent()));
-        WWW sendToPhp = new WWW("http://localhost:8888/gameevent.php", infoToPhp);
+        WWW sendToPhp = new WWW("http://47.151.234.225/uploadToGameInfo.php", infoToPhp);
         while (!sendToPhp.isDone) { }
         gameInfo.NextTurn();
 
@@ -303,7 +309,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             WWWForm infoToPhp = new WWWForm(); //create WWWform to send to php script
             infoToPhp.AddField("gameID", gameInfo.gameID);
             infoToPhp.AddField("playerID", gameInfo.TheOtherPlayer());
-            WWW sendToPhp = new WWW("http://localhost:8888/gameevent.php", infoToPhp);
+            WWW sendToPhp = new WWW("http://47.151.234.225/uploadToGameInfo.php", infoToPhp);
             // what if multiple GameEvents
             while (!sendToPhp.isDone) { }
             GameEvent gameEvent = GameEvent.JsonToClass(sendToPhp.text);

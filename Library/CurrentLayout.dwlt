@@ -108,7 +108,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 492}
   m_MaxSize: {x: 18008, y: 14042}
   vertical: 0
-  controlID: 9
+  controlID: 153
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 492}
   m_MaxSize: {x: 18008, y: 14042}
   vertical: 0
-  controlID: 10
+  controlID: 154
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -232,7 +232,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 492}
   m_MaxSize: {x: 10004, y: 14042}
   vertical: 1
-  controlID: 81
+  controlID: 132
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -442,14 +442,14 @@ MonoBehaviour:
     height: 672
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 0
-  lastFramingTime: 3059.9498084176357
+  lastFramingTime: 187.93390911363852
   m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1011.1094, y: 574.043, z: 25.842167}
+    m_Target: {x: 960, y: 730, z: 0}
     speed: 2
-    m_Value: {x: 1011.1094, y: 574.043, z: 25.842167}
+    m_Value: {x: 960, y: 730, z: 0}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -477,9 +477,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 1048.5065
+    m_Target: 1136.055
     speed: 2
-    m_Value: 1048.5065
+    m_Value: 1136.055
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -520,9 +520,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 52290000
+    m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: fc82ffff2494fffffab4ffffe6c8ffff9efbffff0000000088460000124b00003a4d0000624e0000b84f0000f6550000
+    m_ExpandedIDs: 0832ffff263cfffffc57ffff206dfffff4f7ffff9efbffff00000000b8360000e03600003e370000a6370000ee4b0000544c0000bc4c0000524d0000704d0000b84d0000204e00003a500000e0510000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -611,18 +611,18 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/_Scenes
+    - Assets/Scripts/Attributes
   m_ViewMode: 1
   m_StartGridSize: 60
   m_LastFolders:
-  - Assets/_Scenes
+  - Assets/Scripts/Attributes
   m_LastFoldersGridSize: 60
   m_LastProjectPath: D:\UnityProjects\War Song
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 4c2c0000
-    m_LastClickedID: 11340
+    scrollPos: {x: 0, y: 279}
+    m_SelectedIDs: 302a0000
+    m_LastClickedID: 10800
     m_ExpandedIDs: 000000008428000088280000c22a0000362b0000fa2b00004c2c00001c2d00008c3600008e36000090360000923600009436000096360000983600009a3600009c3600009e360000a0360000a236000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0

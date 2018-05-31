@@ -43,7 +43,6 @@ public class GameInfo
             { player.playerID, player },
             { enemy.playerID, enemy }
         };
-        SetOrder(player.playerID, enemy.playerID);
         lineups = new Dictionary<int, Lineup>
         {
             { player.playerID, player.lineup },
@@ -55,7 +54,6 @@ public class GameInfo
             { enemy.playerID, 30 }
         };
         ResetActions();
-        SetGameID(1);
         boardName = player.lineup.boardName;
         activePieces = new Dictionary<int, List<Piece>>
         {
@@ -201,19 +199,16 @@ public class GameInfo
         return -1;
     }
 
-    public void SetOrder(int player1, int player2)
+    public void SetOrder(int playerID)
     {
-        if (Random.Range(1, 2) % 2 == 1)
+        firstPlayer = playerID;
+        foreach(var item in matchInfo)
         {
-            firstPlayer = player1;
-            secondPlayer = player2;
+            if (item.Key == playerID) continue;
+            secondPlayer = item.Key;
+            break;
         }
-        else
-        {
-            firstPlayer = player2;
-            secondPlayer = player1;
-        }
-        currentTurn = firstPlayer;
+        Login.user.SetGameID(firstPlayer);
         Upload();
     }
 
@@ -243,14 +238,6 @@ public class GameInfo
     public void Act(string action, int playerID, int deltaAmount = -1)
     {
         actions[playerID][action] += deltaAmount;
-    }
-
-    public void SetGameID(int value)
-    {
-        gameID = value;
-        //firstPlayer.gameID = gameID
-        //secondPlayer.gameID = gameID
-        Upload();
     }
 
     public void Move(Location from, Location to)

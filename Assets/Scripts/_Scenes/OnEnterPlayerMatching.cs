@@ -95,7 +95,6 @@ public class OnEnterPlayerMatching : MonoBehaviour
 
     public void Match()
     {
-        // Upload Lineup Info to the server and match according to the board.
         ChangeTips();
         CancelInteractable(true);
         matchingPanel.SetActive(true);
@@ -107,22 +106,32 @@ public class OnEnterPlayerMatching : MonoBehaviour
         // Match by mode, boardName, (rank [less important])
         infoToPhp.AddField("mode", Login.user.lastModeSelected);
         infoToPhp.AddField("boardName", Login.user.lineups[Login.user.lastLineupSelected].boardName);
+        infoToPhp.AddField("playerID", Login.playerID);
         infoToPhp.AddField("matchInfo", playerMatchInfo.ToJson());
-        WWW sendToPhp = new WWW("http://47.151.234.225/returnUserMatchInfo.php", infoToPhp);
-        while (!sendToPhp.isDone)
+        WWW sendToPhp;
+        while (true)
         {
-            if (cancel)
+            sendToPhp = new WWW("http://47.151.234.225/returnUserMatchInfo.php", infoToPhp);
+            while (!sendToPhp.isDone)
             {
-                cancel = false;
-                return;
+                if (cancel)
+                {
+                    cancel = false;
+                    return;
+                }
             }
+            if (sendToPhp.text != "") break;
         }
         CancelInteractable(false);
         // Return Enemy MatchInfo
         MatchInfo enemyMatchInfo = MatchInfo.ToClass(sendToPhp.text);
         OnEnterGame.gameInfo = new GameInfo(Login.user.lastModeSelected, playerMatchInfo, enemyMatchInfo);
-        Login.user.SetGameID(OnEnterGame.gameInfo.gameID);
 
+        WWWForm order = new WWWForm();
+        order.AddField("playerID", Login.playerID);
+        WWW getOrder = new WWW("http://47.151.234.225/returnUserMatchInfo.php", infoToPhp);
+        while (!sendToPhp.isDone) { }
+        OnEnterGame.gameInfo.SetOrder(int.Parse(getOrder.text));
         StopAllCoroutines();
         matchingPanel.SetActive(false);
         LaunchWar();
