@@ -129,7 +129,7 @@ public class OnEnterPlayerMatching : MonoBehaviour
 
         WWWForm order = new WWWForm();
         order.AddField("playerID", Login.playerID);
-        WWW getOrder = new WWW("http://47.151.234.225/returnUserMatchInfo.php", infoToPhp);
+        WWW getOrder = new WWW("http://47.151.234.225/returnMatchOrder.php", infoToPhp);
         while (!sendToPhp.isDone) { }
         OnEnterGame.gameInfo.SetOrder(int.Parse(getOrder.text));
         StopAllCoroutines();

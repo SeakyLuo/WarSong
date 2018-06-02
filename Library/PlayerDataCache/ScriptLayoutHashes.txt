@@ -195,7 +195,7 @@ f15c6d5231f997178da6ec0af62333a0 Assembly-CSharp.dll:.SetCursor
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
 96d0fbde9fd209878a0a291f82c9bcdd UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
 64eb32cc721b1cc68a91ed57461e188c UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.RemoteTestResultSender
-d81c7447d36e0c5473fe31a951b83455 Assembly-CSharp.dll:.OnEnterPlayerMatching
+b29b4c6361949b166952ade4fc1adec7 Assembly-CSharp.dll:.OnEnterPlayerMatching
 e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 850825dfbf83ead8ee3517ef3c319b0e Assembly-CSharp.dll:.MonsterHunter
 6fd8c01a91a2eeddbfc619dfa413604a Assembly-CSharp.dll:.TameAnElephant
@@ -227,7 +227,7 @@ b9e034b9bb8f5f1f1458871b16fa24ea Assembly-CSharp.dll:.MouseOverLineup
 850825dfbf83ead8ee3517ef3c319b0e Assembly-CSharp.dll:.PurseCutter
 6fd8c01a91a2eeddbfc619dfa413604a Assembly-CSharp.dll:.DarkBargain
 6fd8c01a91a2eeddbfc619dfa413604a Assembly-CSharp.dll:.HorribleLandmine
-bc2fe0d9094f334f8ee0e736d1f8fa78 Assembly-CSharp.dll:.OnEnterGame
+683cc3d5345989aec2c5bda1ba00f07b Assembly-CSharp.dll:.OnEnterGame
 0d50533b5be9717fc17e770faa884fb4 Assembly-CSharp.dll:.UpdateTime
 850825dfbf83ead8ee3517ef3c319b0e Assembly-CSharp.dll:.CrazyBomber
 21bbb803368ce38c1eb27cb79204635e Assembly-CSharp.dll:.CardInfo
