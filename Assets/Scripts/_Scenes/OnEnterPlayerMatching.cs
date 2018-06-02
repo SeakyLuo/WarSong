@@ -22,6 +22,8 @@ public class OnEnterPlayerMatching : MonoBehaviour
     private bool cancel = false;
     private int lineupSelected = -1;
     private bool matchStart = false;
+    private WWWForm infoToPhp;
+    private MatchInfo playerMatchInfo;
 
     private void Start()
     {
@@ -67,13 +69,7 @@ public class OnEnterPlayerMatching : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Escape))
             settingsPanel.SetActive(true);
         if (!matchStart || cancel) return;
-
-        MatchInfo playerMatchInfo = new MatchInfo(Login.user, Login.user.lineups[Login.user.lastLineupSelected]);
-        WWWForm infoToPhp = new WWWForm();
-        infoToPhp.AddField("mode", Login.user.lastModeSelected);
-        infoToPhp.AddField("boardName", Login.user.lineups[Login.user.lastLineupSelected].boardName);
-        infoToPhp.AddField("playerID", Login.playerID);
-        infoToPhp.AddField("matchInfo", playerMatchInfo.ToJson());
+        
         WWW sendToPhp = new WWW("http://47.151.234.225/returnUserMatchInfo.php", infoToPhp);
         while (!sendToPhp.isDone) { }
         if (sendToPhp.text != "")
@@ -104,7 +100,15 @@ public class OnEnterPlayerMatching : MonoBehaviour
         matchingPanel.SetActive(true);
         StartCoroutine(ShowProgress());
         Login.user.SetLastLineupSelected(lineupSelected);
+        playerMatchInfo = new MatchInfo(Login.user, Login.user.lineups[Login.user.lastLineupSelected]);
         matchStart = true;
+        infoToPhp = new WWWForm();
+        infoToPhp.AddField("mode", Login.user.lastModeSelected);
+        infoToPhp.AddField("boardName", Login.user.lineups[Login.user.lastLineupSelected].boardName);
+        infoToPhp.AddField("playerID", Login.playerID);
+        infoToPhp.AddField("matchInfo", playerMatchInfo.ToJson());
+        WWW sendToPhp = new WWW("http://47.151.234.225/uploadMatchUsers.php", infoToPhp);
+        while (!sendToPhp.isDone) { }
     }
 
     public void CancelMatching()
