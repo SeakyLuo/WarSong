@@ -22,6 +22,7 @@ public class OnEnterPlayerMatching : MonoBehaviour
     private List<GameObject> xs;
     private bool cancel = false;
     private int lineupSelected = -1;
+    private bool matchFound = false;
 
     private void Start()
     {
@@ -108,8 +109,13 @@ public class OnEnterPlayerMatching : MonoBehaviour
         infoToPhp.AddField("boardName", Login.user.lineups[Login.user.lastLineupSelected].boardName);
         infoToPhp.AddField("playerID", Login.playerID);
         infoToPhp.AddField("matchInfo", playerMatchInfo.ToJson());
-        WWW sendToPhp;
-        while (true)
+        WWW sendToPhp = null;
+        //StartCoroutine(FindMatch(sendToPhp, infoToPhp));
+        //while (!matchFound) { }
+        //cancel = false;
+        //matchFound = false;
+        int counter = 10000;
+        while (counter >= 0)
         {
             sendToPhp = new WWW("http://47.151.234.225/returnUserMatchInfo.php", infoToPhp);
             while (!sendToPhp.isDone)
@@ -120,10 +126,13 @@ public class OnEnterPlayerMatching : MonoBehaviour
                     return;
                 }
             }
-            if (sendToPhp.text != "") break;
+            Debug.Log(counter--);
+            if (sendToPhp.text != "")
+                break;
         }
         CancelInteractable(false);
         // Return Enemy MatchInfo
+        Debug.Log(sendToPhp.text);
         MatchInfo enemyMatchInfo = MatchInfo.ToClass(sendToPhp.text);
         OnEnterGame.gameInfo = new GameInfo(Login.user.lastModeSelected, playerMatchInfo, enemyMatchInfo);
 
@@ -135,6 +144,28 @@ public class OnEnterPlayerMatching : MonoBehaviour
         StopAllCoroutines();
         matchingPanel.SetActive(false);
         LaunchWar();
+    }
+
+    private IEnumerator FindMatch(WWW sendToPhp, WWWForm infoToPhp)
+    {
+        while (!matchFound)
+        {
+            if (cancel)
+            {
+                cancel = false;
+                matchFound = true;
+                break;
+            }
+            sendToPhp = new WWW("http://47.151.234.225/returnUserMatchInfo.php", infoToPhp);
+            while (!sendToPhp.isDone) { }
+            Debug.Log(sendToPhp.text);
+            if (sendToPhp.text != "")
+            {
+                matchFound = true;
+                break;
+            }
+            yield return new WaitForSeconds(1);
+        }
     }
 
     //public void Connect()
