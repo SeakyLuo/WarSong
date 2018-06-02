@@ -77,7 +77,6 @@ public class OnEnterPlayerMatching : MonoBehaviour
             matchStart = false;
             CancelInteractable(false);
             // Return Enemy MatchInfo
-            Debug.Log(sendToPhp.text);
             MatchInfo enemyMatchInfo = MatchInfo.ToClass(sendToPhp.text);
             OnEnterGame.gameInfo = new GameInfo(Login.user.lastModeSelected, playerMatchInfo, enemyMatchInfo);
 
