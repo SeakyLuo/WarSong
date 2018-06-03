@@ -33,6 +33,8 @@ public class GameController : MonoBehaviour {
         };
         flags = new Dictionary<Location, GameObject>();
         freezeImages = new Dictionary<Location, GameObject>();
+        if (OnEnterGame.gameInfo.currentTurn == Login.playerID) onEnterGame.YourTurn();
+        else onEnterGame.EnemyTurn();
     }
 
     private void Update()
@@ -48,18 +50,9 @@ public class GameController : MonoBehaviour {
             onEnterGame.askTriggerPanel.activeSelf) return;
         if (OnEnterGame.gameInfo.currentTurn != Login.playerID)
         {
-            WWWForm infoToPhp = new WWWForm();
-            infoToPhp.AddField("gameID", OnEnterGame.gameInfo.gameID);
-            infoToPhp.AddField("playerID", OnEnterGame.gameInfo.TheOtherPlayer());
-            WWW sendToPhp = new WWW("http://47.151.234.225/deleteGameInfo.php", infoToPhp);
-            while (!sendToPhp.isDone) { }
-            if (sendToPhp.text != "")
-            {
-                GameEvent gameEvent = GameEvent.JsonToClass(sendToPhp.text);
-                if (gameEvent.result == "EndTurn") onEnterGame.NextTurn();
-                else DecodeGameEvent(gameEvent);
-                return;
-            }
+            GameEvent gameEvent = GameEvent.Download();
+            if (gameEvent != null) DecodeGameEvent(gameEvent);
+            return;
         }
         if (Input.GetMouseButtonUp(0))
         {
@@ -382,6 +375,9 @@ public class GameController : MonoBehaviour {
         gameEvent.FlipLocation(); // because location is different from different views
         switch (gameEvent.result)
         {
+            case "EndTurn":
+                onEnterGame.NextTurn();
+                break;
             case "Move":
                 MovementController.Move(OnEnterGame.gameInfo.board[gameEvent.eventLocation], gameEvent.eventLocation, gameEvent.targetLocation);
                 break;

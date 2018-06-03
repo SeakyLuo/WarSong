@@ -91,8 +91,6 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         //}
         StartCoroutine(GameStartAnimation());
         StartCoroutine(Timer());
-        if (gameInfo.currentTurn == Login.playerID) YourTurn();
-        else EnemyTurn();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -253,7 +251,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         }
         SetTacticInteractable();
     }
-    private IEnumerator ShowYourTurn(float time = 1.5f)
+    private IEnumerator ShowYourTurn(float time = 2f)
     {
         yourTurnImage.SetActive(true);
         yield return new WaitForSeconds(time);

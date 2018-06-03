@@ -146,4 +146,14 @@ public class GameEvent {
         WWW sendToPhp = new WWW("http://47.151.234.225/uploadToGameInfo.php", infoToPhp);
         while (!sendToPhp.isDone) { }
     }
+    public static GameEvent Download()
+    {
+        WWWForm infoToPhp = new WWWForm();
+        infoToPhp.AddField("gameID", OnEnterGame.gameInfo.gameID);
+        infoToPhp.AddField("playerID", OnEnterGame.gameInfo.TheOtherPlayer());
+        WWW sendToPhp = new WWW("http://47.151.234.225/deleteGameInfo.php", infoToPhp);
+        while (!sendToPhp.isDone) { }
+        if (sendToPhp.text == "") return null;
+        return JsonToClass(sendToPhp.text);  //sendToPhp.text is the userInfo json file
+    }
 }
