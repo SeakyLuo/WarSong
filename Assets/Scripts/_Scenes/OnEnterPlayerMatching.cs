@@ -69,7 +69,6 @@ public class OnEnterPlayerMatching : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Escape))
             settingsPanel.SetActive(true);
         if (!matchStart || cancel) return;
-        
         WWW sendToPhp = new WWW("http://47.151.234.225/returnUserMatchInfo.php", infoToPhp);
         while (!sendToPhp.isDone) { }
         if (sendToPhp.text != "" && !sendToPhp.text.Contains("Warning"))
@@ -77,15 +76,13 @@ public class OnEnterPlayerMatching : MonoBehaviour
             matchStart = false;
             CancelInteractable(false);
             // Return Enemy MatchInfo
-            Debug.Log(sendToPhp.text);
             MatchInfo enemyMatchInfo = MatchInfo.ToClass(sendToPhp.text);
-            OnEnterGame.gameInfo = new GameInfo(Login.user.lastModeSelected, playerMatchInfo, enemyMatchInfo);
-
             WWWForm order = new WWWForm();
             order.AddField("playerID", Login.playerID);
-            WWW getOrder = new WWW("http://47.151.234.225/returnMatchOrder.php", infoToPhp);
-            while (!sendToPhp.isDone) { }
-            OnEnterGame.gameInfo.SetOrder(int.Parse(getOrder.text));
+            WWW getOrder = new WWW("http://47.151.234.225/returnMatchOrder.php", order);
+            while (!getOrder.isDone) { }
+            Debug.Log(getOrder.text);
+            OnEnterGame.gameInfo = new GameInfo(Login.user.lastModeSelected, playerMatchInfo, enemyMatchInfo, int.Parse(getOrder.text));
             StopAllCoroutines();
             matchingPanel.SetActive(false);
             LaunchWar();
@@ -118,7 +115,7 @@ public class OnEnterPlayerMatching : MonoBehaviour
         // Cancel network matching
         WWWForm deleteMatchInfo = new WWWForm();
         deleteMatchInfo.AddField("playerID", Login.playerID);
-        WWW sendToPhp = new WWW("http://47.151.234.225/returnMatchOrder.php", infoToPhp);
+        WWW sendToPhp = new WWW("http://47.151.234.225/deleteMatchUsers.php", infoToPhp);
         while (!sendToPhp.isDone) { }
         matchingPanel.SetActive(false);
         StopAllCoroutines();

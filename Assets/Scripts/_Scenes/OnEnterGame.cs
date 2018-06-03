@@ -299,23 +299,6 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         SetTacticInteractable(false);
         endTurnButton.interactable = false;
         endTurnText.text = "Enemy Turn";
-        
-        while (true)
-        {
-            WWWForm infoToPhp = new WWWForm(); //create WWWform to send to php script
-            infoToPhp.AddField("gameID", gameInfo.gameID);
-            infoToPhp.AddField("playerID", gameInfo.TheOtherPlayer());
-            WWW sendToPhp = new WWW("http://47.151.234.225/uploadToGameInfo.php", infoToPhp);
-            // what if multiple GameEvents
-            while (!sendToPhp.isDone) { }
-            GameEvent gameEvent = GameEvent.JsonToClass(sendToPhp.text);
-            if(gameEvent.result == "EndTurn")
-            {
-                NextTurn();
-                break;
-            }
-            GameController.DecodeGameEvent(gameEvent);
-        }
     }
 
     public static void CancelTacticHighlight()
