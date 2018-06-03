@@ -81,7 +81,6 @@ public class OnEnterPlayerMatching : MonoBehaviour
             order.AddField("playerID", Login.playerID);
             WWW getOrder = new WWW("http://47.151.234.225/returnMatchOrder.php", order);
             while (!getOrder.isDone) { }
-            Debug.Log(getOrder.text);
             OnEnterGame.gameInfo = new GameInfo(Login.user.lastModeSelected, playerMatchInfo, enemyMatchInfo, int.Parse(getOrder.text));
             StopAllCoroutines();
             matchingPanel.SetActive(false);

@@ -39,7 +39,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     private static string triggerMessage;
 
     // Use this for initialization
-    void Start () {
+    void Awake () {
         lineup = Login.user.lineups[Login.user.lastLineupSelected];
         board = Instantiate(Resources.Load<GameObject>("Board/" + lineup.boardName + "/Board"));
         board.transform.SetSiblingIndex(1);

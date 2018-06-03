@@ -209,6 +209,7 @@ public class GameInfo
             break;
         }
         gameID = playerID;
+        currentTurn = playerID;
         Login.user.SetGameID(firstPlayer);
         Upload();
     }

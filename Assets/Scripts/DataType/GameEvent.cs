@@ -141,19 +141,9 @@ public class GameEvent {
     public void Upload(GameEvent gameEvent)
     {
         WWWForm infoToPhp = new WWWForm(); //create WWWform to send to php script
-        infoToPhp.AddField("email", PlayerPrefs.GetString("email"));
-        infoToPhp.AddField("userJson", ClassToJson(gameEvent));
-
-        WWW sendToPhp = new WWW("http://localhost:8888/update_userinfo.php", infoToPhp);
+        infoToPhp.AddField("gameID", OnEnterGame.gameInfo.gameID);
+        infoToPhp.AddField("playerID", OnEnterGame.gameInfo.TheOtherPlayer());
+        WWW sendToPhp = new WWW("http://47.151.234.225/uploadToGameInfo.php", infoToPhp);
         while (!sendToPhp.isDone) { }
-    }
-    public static GameEvent Download(GameEvent gameEvent)
-    {
-        WWWForm infoToPhp = new WWWForm();
-        infoToPhp.AddField("email", PlayerPrefs.GetString("email"));
-        WWW sendToPhp = new WWW("http://localhost:8888/download_userinfo.php", infoToPhp);
-
-        while (!sendToPhp.isDone) { }
-        return JsonToClass(sendToPhp.text);  //sendToPhp.text is the userInfo json file
     }
 }

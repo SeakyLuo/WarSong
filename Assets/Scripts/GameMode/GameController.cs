@@ -48,16 +48,18 @@ public class GameController : MonoBehaviour {
             onEnterGame.askTriggerPanel.activeSelf) return;
         if (OnEnterGame.gameInfo.currentTurn != Login.playerID)
         {
-            WWWForm infoToPhp = new WWWForm(); //create WWWform to send to php script
+            WWWForm infoToPhp = new WWWForm();
             infoToPhp.AddField("gameID", OnEnterGame.gameInfo.gameID);
             infoToPhp.AddField("playerID", OnEnterGame.gameInfo.TheOtherPlayer());
             WWW sendToPhp = new WWW("http://47.151.234.225/deleteGameInfo.php", infoToPhp);
-            // what if multiple GameEvents
             while (!sendToPhp.isDone) { }
-            GameEvent gameEvent = GameEvent.JsonToClass(sendToPhp.text);
-            if (gameEvent.result == "EndTurn") onEnterGame.NextTurn();
-            else DecodeGameEvent(gameEvent);
-            return;
+            if (sendToPhp.text != "")
+            {
+                GameEvent gameEvent = GameEvent.JsonToClass(sendToPhp.text);
+                if (gameEvent.result == "EndTurn") onEnterGame.NextTurn();
+                else DecodeGameEvent(gameEvent);
+                return;
+            }
         }
         if (Input.GetMouseButtonUp(0))
         {

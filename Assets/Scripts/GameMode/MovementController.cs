@@ -21,7 +21,7 @@ public class MovementController : MonoBehaviour
     private static BoardSetup boardSetup;
     private static OnEnterGame onEnterGame;
 
-    private void Start()
+    private void Awake()
     {
         GameObject UIPanel = GameObject.Find("UIPanel");
         boardCanvas = transform.Find("Canvas");
