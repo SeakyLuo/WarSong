@@ -64,7 +64,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         tacticObjs = new List<Transform>();
         tacticButtons = new List<Button>();
         tacticTriggers = new List<TacticTrigger>();
-        for (int i = 0; i < LineupBuilder.tacticsLimit; i++)
+        for (int i = 0; i < Lineup.tacticLimit; i++)
         {
             Transform tacticSlot = tacticBag.Find(String.Format("TacticSlot{0}", i));
             tacticButtons.Add(tacticSlot.GetComponent<Button>());
@@ -200,11 +200,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             if (gameInfo.unusedTactics[Login.playerID].Contains(tactic)) continue;
             int index = Login.user.FindCollection(tactic.tacticName);
             if (Login.user.collection[index].count > 1) Login.user.ChangeCollectionCount(index, -1, false);
-            else
-            {
-                lineup.tactics.Remove(tactic);
-                lineup.complete = false;
-            }
+            else lineup.tactics.Remove(tactic);
         }
         Login.user.ModifyLineup(lineup, Login.user.lastLineupSelected);
         Login.user.SetGameID(-1);
@@ -355,7 +351,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
     public void AddTactic(Tactic tactic)
     {
         int count = gameInfo.unusedTactics[Login.playerID].Count;
-        if (count == LineupBuilder.tacticsLimit) StartCoroutine(ShowFullTacticBag());
+        if (count == Lineup.tacticLimit) StartCoroutine(ShowFullTacticBag());
         else
         {
             gameInfo.AddTactic(tactic);

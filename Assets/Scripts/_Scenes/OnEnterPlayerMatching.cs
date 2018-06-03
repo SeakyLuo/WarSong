@@ -38,9 +38,9 @@ public class OnEnterPlayerMatching : MonoBehaviour
             if (i < lineupsCount)
             {
                 lineupObjects[i].GetComponentInChildren<Text>().text = Login.user.lineups[i].lineupName;
-                lineupObjects[i].transform.Find("ImagePanel/Image").GetComponent<Image>().sprite = Database.FindPieceAttributes(Login.user.lineups[i].general).image;
-                lineupObjects[i].GetComponent<Button>().interactable = Login.user.lineups[i].complete;
-                xs[i].SetActive(!Login.user.lineups[i].complete);
+                lineupObjects[i].transform.Find("ImagePanel/Image").GetComponent<Image>().sprite = Database.FindPieceAttributes(Login.user.lineups[i].GetGeneral()).image;
+                lineupObjects[i].GetComponent<Button>().interactable = Login.user.lineups[i].IsComplete();
+                xs[i].SetActive(!Login.user.lineups[i].IsComplete());
             }
             else lineupObjects[i].SetActive(false);
         }
@@ -72,11 +72,12 @@ public class OnEnterPlayerMatching : MonoBehaviour
         
         WWW sendToPhp = new WWW("http://47.151.234.225/returnUserMatchInfo.php", infoToPhp);
         while (!sendToPhp.isDone) { }
-        if (sendToPhp.text != "")
+        if (sendToPhp.text != "" && !sendToPhp.text.Contains("Warning"))
         {
             matchStart = false;
             CancelInteractable(false);
             // Return Enemy MatchInfo
+            Debug.Log(sendToPhp.text);
             MatchInfo enemyMatchInfo = MatchInfo.ToClass(sendToPhp.text);
             OnEnterGame.gameInfo = new GameInfo(Login.user.lastModeSelected, playerMatchInfo, enemyMatchInfo);
 
@@ -115,6 +116,10 @@ public class OnEnterPlayerMatching : MonoBehaviour
         cancel = true;
         matchStart = false;
         // Cancel network matching
+        WWWForm deleteMatchInfo = new WWWForm();
+        deleteMatchInfo.AddField("playerID", Login.playerID);
+        WWW sendToPhp = new WWW("http://47.151.234.225/returnMatchOrder.php", infoToPhp);
+        while (!sendToPhp.isDone) { }
         matchingPanel.SetActive(false);
         StopAllCoroutines();
     }

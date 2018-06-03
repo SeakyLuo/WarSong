@@ -112,7 +112,6 @@ public class DictionaryAsArrayResolver : DefaultContractResolver
         {
             return base.CreateArrayContract(objectType);
         }
-
         return base.CreateContract(objectType);
     }
 }
