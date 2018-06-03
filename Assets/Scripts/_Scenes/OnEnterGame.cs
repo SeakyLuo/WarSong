@@ -45,7 +45,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         board.transform.SetSiblingIndex(1);
         boardSetup = board.GetComponent<BoardSetup>();
         boardSetup.Setup(lineup, Login.playerID);  // Set up Player Lineup
-        boardSetup.Setup(gameInfo.lineups[gameInfo.TheOtherPlayer()], 99999999);  // Set up Enemy Lineup
+        boardSetup.Setup(gameInfo.lineups[gameInfo.TheOtherPlayer()], gameInfo.TheOtherPlayer());  // Set up Enemy Lineup
         GameEvent.SetBoard(boardSetup.boardAttributes);
 
         modeName.text = gameInfo.mode;
