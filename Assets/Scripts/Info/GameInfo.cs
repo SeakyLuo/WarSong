@@ -129,7 +129,7 @@ public class GameInfo
             activePieces[TheOtherPlayer()].Remove(piece);
             inactivePieces[TheOtherPlayer()].Add(piece);
         }
-        castles[piece.location].Remove(piece);
+        castles[piece.GetCastle()].Remove(piece);
         if(upload) Upload();
     }
 
