@@ -376,7 +376,7 @@ public class GameController : MonoBehaviour {
         switch (gameEvent.result)
         {
             case "EndTurn":
-                onEnterGame.NextTurn();
+                onEnterGame.YourTurn();
                 break;
             case "Move":
                 MovementController.Move(OnEnterGame.gameInfo.board[gameEvent.eventLocation], gameEvent.eventLocation, gameEvent.targetLocation);

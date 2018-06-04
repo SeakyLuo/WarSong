@@ -138,11 +138,12 @@ public class GameEvent {
     {
         return JsonConvert.DeserializeObject<GameEvent>(json);
     }
-    public void Upload(GameEvent gameEvent)
+    public void Upload()
     {
         WWWForm infoToPhp = new WWWForm(); //create WWWform to send to php script
         infoToPhp.AddField("gameID", OnEnterGame.gameInfo.gameID);
         infoToPhp.AddField("playerID", OnEnterGame.gameInfo.TheOtherPlayer());
+        infoToPhp.AddField("GameEvent", ClassToJson(this));
         WWW sendToPhp = new WWW("http://47.151.234.225/uploadToGameInfo.php", infoToPhp);
         while (!sendToPhp.isDone) { }
     }
@@ -153,6 +154,7 @@ public class GameEvent {
         infoToPhp.AddField("playerID", OnEnterGame.gameInfo.TheOtherPlayer());
         WWW sendToPhp = new WWW("http://47.151.234.225/deleteGameInfo.php", infoToPhp);
         while (!sendToPhp.isDone) { }
+        Debug.Log(sendToPhp.text);
         if (sendToPhp.text == "") return null;
         return JsonToClass(sendToPhp.text);  //sendToPhp.text is the userInfo json file
     }

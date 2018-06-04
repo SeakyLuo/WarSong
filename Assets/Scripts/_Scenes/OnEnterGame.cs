@@ -272,12 +272,8 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         }
 
         // Send EndTurn GameEvent
-        WWWForm infoToPhp = new WWWForm();
-        infoToPhp.AddField("gameID", gameInfo.gameID);
-        infoToPhp.AddField("playerID", gameInfo.currentTurn);
-        infoToPhp.AddField("GameEvent", GameEvent.ClassToJson(new GameEvent()));
-        WWW sendToPhp = new WWW("http://47.151.234.225/uploadToGameInfo.php", infoToPhp);
-        while (!sendToPhp.isDone) { }
+        GameEvent gameEvent = new GameEvent();
+        gameEvent.Upload();
         gameInfo.NextTurn();
 
         roundCount.text = gameInfo.round.ToString();
