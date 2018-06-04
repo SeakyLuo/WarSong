@@ -16,6 +16,8 @@ public class GameEvent {
     private static int width;
     private static int height;
 
+    public GameEvent() { Debug.Log("Fuck"); }
+
     public GameEvent(string Result = "EndTurn")
     {
         result = Result;
@@ -121,8 +123,8 @@ public class GameEvent {
     }
     public void FlipLocation()
     {
-        if (eventLocation != Location.NoLocation) eventLocation = new Location(width - eventLocation.x, height - eventLocation.y);
-        if (targetLocation != Location.NoLocation) targetLocation = new Location(width - targetLocation.x, height - targetLocation.y);
+        if (!eventLocation.IsNull()) eventLocation = new Location(width - eventLocation.x, height - eventLocation.y);
+        if (!targetLocation.IsNull()) targetLocation = new Location(width - targetLocation.x, height - targetLocation.y);
     }
 
     public static void SetBoard(BoardAttributes boardAttributes)
@@ -136,6 +138,9 @@ public class GameEvent {
     }
     public static GameEvent JsonToClass(string json)
     {
+        Debug.Log(json);
+        GameEvent gameEvent = JsonConvert.DeserializeObject<GameEvent>(json);
+        Debug.Log(ClassToJson(gameEvent));
         return JsonConvert.DeserializeObject<GameEvent>(json);
     }
     public void Upload()
@@ -154,8 +159,7 @@ public class GameEvent {
         infoToPhp.AddField("playerID", OnEnterGame.gameInfo.TheOtherPlayer());
         WWW sendToPhp = new WWW("http://47.151.234.225/deleteGameInfo.php", infoToPhp);
         while (!sendToPhp.isDone) { }
-        Debug.Log(sendToPhp.text);
-        if (sendToPhp.text == "") return null;
+        if (sendToPhp.text == "" || sendToPhp.text.Contains("Warning")) return null;
         return JsonToClass(sendToPhp.text);  //sendToPhp.text is the userInfo json file
     }
 }

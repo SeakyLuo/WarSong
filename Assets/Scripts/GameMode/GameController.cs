@@ -383,7 +383,6 @@ public class GameController : MonoBehaviour {
                 onEnterGame.GameOver();
                 break;
             case "Move":
-                Debug.Log(gameEvent.eventLocation);
                 MovementController.Move(OnEnterGame.gameInfo.board[gameEvent.eventLocation], gameEvent.eventLocation, gameEvent.targetLocation);
                 break;
             case "Kill":
