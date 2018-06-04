@@ -40,11 +40,13 @@ public class Database {
     {
         if (standardAttributes.Count != 0) return;
         FindAttributes();
+        //WriteFile(pieces.Count.ToString());
+        //WriteFile(directories.ToString(), "dir");
     }
 
     private void FindAttributes()
     {
-        WriteDirectories();
+        //WriteDirectories();
         ReadDirectories();
         foreach (string type in loadType)
         {

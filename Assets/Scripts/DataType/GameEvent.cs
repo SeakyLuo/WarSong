@@ -18,9 +18,10 @@ public class GameEvent {
 
     public GameEvent() { }
 
-    public GameEvent(string Result = "EndTurn")
+    public GameEvent(string Result)
     {
         result = Result;
+        eventPlayerID = Login.playerID;
     }
 
     public GameEvent(Location from, Location to, int playerID)
@@ -146,6 +147,7 @@ public class GameEvent {
         infoToPhp.AddField("gameID", OnEnterGame.gameInfo.gameID);
         infoToPhp.AddField("playerID", OnEnterGame.gameInfo.TheOtherPlayer());
         infoToPhp.AddField("GameEvent", ClassToJson(this));
+        Debug.Log(result);
         WWW sendToPhp = new WWW("http://47.151.234.225/uploadToGameInfo.php", infoToPhp);
         while (!sendToPhp.isDone) { }
     }
@@ -157,6 +159,7 @@ public class GameEvent {
         WWW sendToPhp = new WWW("http://47.151.234.225/deleteGameInfo.php", infoToPhp);
         while (!sendToPhp.isDone) { }
         if (sendToPhp.text == "" || sendToPhp.text.Contains("Warning")) return null;
+        Debug.Log(sendToPhp.text);
         return JsonToClass(sendToPhp.text);  //sendToPhp.text is the userInfo json file
     }
 }

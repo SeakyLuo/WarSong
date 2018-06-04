@@ -255,7 +255,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         yourTurnImage.SetActive(false);
     }
 
-    public void NextTurn()
+    public void NextTurn(bool upload = true)
     {
         foreach (KeyValuePair<Location, GameObject> pair in boardSetup.pieces)
         {
@@ -269,7 +269,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         }
 
         // Send EndTurn GameEvent
-        new GameEvent().Upload();
+        if(upload) new GameEvent("EndTurn").Upload();
         gameInfo.NextTurn();
 
         roundCount.text = gameInfo.round.ToString();

@@ -100,10 +100,10 @@ public class MovementController : MonoBehaviour
         PutDownPiece();
     }
 
-    private static void Move(GameObject target, Location from, Location to)
+    private static void Move(GameObject target, Location from, Location to, bool upload = true)
     {
         /// Set Location Data
-        new GameEvent(from, to, Login.playerID).Upload();
+        if(upload) new GameEvent(from, to, Login.playerID).Upload();
         OnEnterGame.gameInfo.Move(from, to);
         target.GetComponent<PieceInfo>().piece.location = to;
         target.transform.parent = boardCanvas.Find(to.ToString());
@@ -127,11 +127,11 @@ public class MovementController : MonoBehaviour
         //else if (boardAttributes.AtEnemyBottom(to.x,to.y)) onEnterGame.AskTrigger(pieceInfo.piece, trigger, "AtEnemyBottom");
     }
 
-    public static void Move(Piece piece, Location from, Location to)
+    public static void Move(Piece piece, Location from, Location to, bool upload = true)
     {
         /// Called by trigger
-        Move(boardSetup.pieces[piece.location], from, to);
-        onEnterGame.AddToHistory(new GameEvent(from, to, piece.ownerID));
+        Move(boardSetup.pieces[piece.location], from, to, upload);
+        //onEnterGame.AddToHistory(new GameEvent(from, to, piece.ownerID));
     }
 
     public static void MoveTo(Location location)
