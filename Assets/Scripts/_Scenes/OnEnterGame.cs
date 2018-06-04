@@ -137,6 +137,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         victoryImage.SetActive(true);
         Login.user.Win();
         GameOver();
+        new GameEvent("GameOver").Upload();
     }
     public void Defeat()
     {
@@ -144,6 +145,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         defeatImage.SetActive(true);
         Login.user.Lose();
         GameOver();
+        new GameEvent("GameOver").Upload();
     }
     public void Draw()
     {
@@ -157,6 +159,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             drawImage.SetActive(true);
             Login.user.Draw();
             GameOver();
+            new GameEvent("GameOver").Upload();
         }
     }
 
@@ -202,12 +205,6 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         }
         Login.user.ModifyLineup(lineup, Login.user.lastLineupSelected);
         Login.user.SetGameID(-1);
-
-        WWWForm infoToPhp = new WWWForm();
-        infoToPhp.AddField("gameID", gameInfo.gameID);
-        infoToPhp.AddField("GameEvent", "GameOver");
-        WWW sendToPhp = new WWW("http://47.151.234.225/uploadToGameInfo.php", infoToPhp);
-        while (!sendToPhp.isDone) { }
     }
 
     public void Concede()
@@ -272,8 +269,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         }
 
         // Send EndTurn GameEvent
-        GameEvent gameEvent = new GameEvent();
-        gameEvent.Upload();
+        new GameEvent().Upload();
         gameInfo.NextTurn();
 
         roundCount.text = gameInfo.round.ToString();

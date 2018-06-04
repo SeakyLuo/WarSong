@@ -377,8 +377,13 @@ public class GameController : MonoBehaviour {
         {
             case "EndTurn":
                 onEnterGame.YourTurn();
+                OnEnterGame.gameInfo.NextTurn();
+                break;
+            case "GameOver":
+                onEnterGame.GameOver();
                 break;
             case "Move":
+                Debug.Log(gameEvent.eventLocation);
                 MovementController.Move(OnEnterGame.gameInfo.board[gameEvent.eventLocation], gameEvent.eventLocation, gameEvent.targetLocation);
                 break;
             case "Kill":

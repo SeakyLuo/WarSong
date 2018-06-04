@@ -13,12 +13,12 @@ public class GameEvent {
     public string result = ""; // Piece, Tactic, Trap, Freeze, Move, Kill, Flag
     public int amount = 0;
 
-    private static int height;
     private static int width;
+    private static int height;
 
-    public GameEvent()
+    public GameEvent(string Result = "EndTurn")
     {
-        result = "EndTurn";
+        result = Result;
     }
 
     public GameEvent(Location from, Location to, int playerID)
@@ -127,8 +127,8 @@ public class GameEvent {
 
     public static void SetBoard(BoardAttributes boardAttributes)
     {
-        height = boardAttributes.boardHeight - 1;
         width = boardAttributes.boardWidth - 1;
+        height = boardAttributes.boardHeight - 1;
     }
     public static string ClassToJson(GameEvent gameEvent)
     {

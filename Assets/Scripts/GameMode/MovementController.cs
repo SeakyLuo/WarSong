@@ -103,6 +103,7 @@ public class MovementController : MonoBehaviour
     private static void Move(GameObject target, Location from, Location to)
     {
         /// Set Location Data
+        new GameEvent(from, to, Login.playerID).Upload();
         OnEnterGame.gameInfo.Move(from, to);
         target.GetComponent<PieceInfo>().piece.location = to;
         target.transform.parent = boardCanvas.Find(to.ToString());
@@ -124,16 +125,13 @@ public class MovementController : MonoBehaviour
         //else if (boardAttributes.InEnemyPalace(to.x, to.y)) onEnterGame.AskTrigger(pieceInfo.piece, trigger, "InEnemyPalace");
         //else if (boardAttributes.InEnemyCastle(to.x, to.y)) onEnterGame.AskTrigger(pieceInfo.piece, trigger, "InEnemyCastle");
         //else if (boardAttributes.AtEnemyBottom(to.x,to.y)) onEnterGame.AskTrigger(pieceInfo.piece, trigger, "AtEnemyBottom");
-
-        OnEnterGame.gameInfo.Upload();
     }
 
     public static void Move(Piece piece, Location from, Location to)
     {
         /// Called by trigger
         Move(boardSetup.pieces[piece.location], from, to);
-        GameEvent gameEvent = new GameEvent(from, to, piece.ownerID);
-        onEnterGame.AddToHistory(gameEvent);
+        onEnterGame.AddToHistory(new GameEvent(from, to, piece.ownerID));
     }
 
     public static void MoveTo(Location location)

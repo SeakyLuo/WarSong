@@ -30,8 +30,8 @@ public class Location
         x = int.Parse(parts[0]);
         y = int.Parse(parts[1]);
     }
-    public readonly static Location zero = new Location(0, 0);
-    public readonly static Location NoLocation = new Location(-1, -1);
+    public static Location zero = new Location(0, 0);
+    public static Location NoLocation = new Location(-1, -1);
     public bool Between(Location a, Location b, string compare = "XY")
     {
         /// Compare can only be "XY" or "X" or "Y". a and b are exclusive.
@@ -83,7 +83,8 @@ public class Location
     }
     public static bool operator !=(Location a, Location b)
     {
-        return !(a == b);
+        UnityEngine.Debug.Log(a + " " + b);
+        return a.x != b.x || a.y != b.y;
     }
     public static bool operator <(Location a, Location b)
     {
