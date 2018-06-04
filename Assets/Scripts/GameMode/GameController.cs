@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour {
     [HideInInspector] public GameObject settingsPanel;
 
     // Use this for initialization
-    void Start () {
+    void Awake () {
         onEnterGame = GameObject.Find("UIPanel").GetComponent<OnEnterGame>();
         boardSetup = onEnterGame.boardSetup;
         boardCanvas = onEnterGame.board.transform.Find("Canvas");

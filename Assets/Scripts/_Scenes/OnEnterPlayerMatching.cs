@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.Networking;
-using UnityEngine.Networking.Match;
 using System.Collections.Generic;
 using System.Collections;
 
