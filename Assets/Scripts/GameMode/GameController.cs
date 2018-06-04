@@ -391,8 +391,7 @@ public class GameController : MonoBehaviour {
         switch (gameEvent.result)
         {
             case "EndTurn":
-                //OnEnterGame.gameInfo.NextTurn();
-                if(gameEvent.eventPlayerID != Login.playerID) onEnterGame.NextTurn(false);
+                onEnterGame.NextTurn(false);
                 break;
             case "Victory":
                 onEnterGame.Defeat(false);
@@ -407,7 +406,7 @@ public class GameController : MonoBehaviour {
                 MovementController.Move(OnEnterGame.gameInfo.board[gameEvent.eventLocation], gameEvent.eventLocation, gameEvent.targetLocation, false);
                 break;
             case "Kill":
-                Eliminate(OnEnterGame.gameInfo.board[gameEvent.targetLocation]);
+                Eliminate(OnEnterGame.gameInfo.board[gameEvent.eventLocation]);
                 break;
             case "Freeze":
                 FreezePiece(gameEvent.targetLocation, gameEvent.amount);

@@ -21,7 +21,6 @@ public class GameEvent {
     public GameEvent(string Result)
     {
         result = Result;
-        eventPlayerID = Login.playerID;
     }
 
     public GameEvent(Location from, Location to, int playerID)
@@ -38,6 +37,7 @@ public class GameEvent {
         /// Activate Ability that doesn't require targets.
         result = Result;
         eventTriggerName = piece.GetName();
+        eventLocation = piece.location;
         eventPlayerID = piece.ownerID;
     }
 
