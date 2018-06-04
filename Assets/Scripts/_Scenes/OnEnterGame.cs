@@ -131,23 +131,23 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void Victory()
+    public void Victory(bool upload = true)
     {
         gameInfo.victory = Login.playerID;
         victoryImage.SetActive(true);
         Login.user.Win();
         GameOver();
-        new GameEvent("GameOver").Upload();
+        if(upload) new GameEvent("GameOver").Upload();
     }
-    public void Defeat()
+    public void Defeat(bool upload = true)
     {
         gameInfo.victory = gameInfo.TheOtherPlayer();
         defeatImage.SetActive(true);
         Login.user.Lose();
         GameOver();
-        new GameEvent("GameOver").Upload();
+        if (upload) new GameEvent("GameOver").Upload();
     }
-    public void Draw()
+    public void Draw(bool upload = true)
     {
         bool playerTrophy = gameInfo.FindUsedTactic("Winner's Trophy", Login.playerID) != -1,
              enemyTrophy = gameInfo.FindUsedTactic("Winner's Trophy", gameInfo.TheOtherPlayer()) != -1;
@@ -159,7 +159,7 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
             drawImage.SetActive(true);
             Login.user.Draw();
             GameOver();
-            new GameEvent("GameOver").Upload();
+            if (upload) new GameEvent("GameOver").Upload();
         }
     }
 

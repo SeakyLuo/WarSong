@@ -4523,6 +4523,35 @@ Prefab:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 53613887}
+    - target: {fileID: 1879161264321306, guid: 6b4b8898f9da8484fb41693e8722fc8c, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1189826239162320, guid: 6b4b8898f9da8484fb41693e8722fc8c, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114628245493589544, guid: 6b4b8898f9da8484fb41693e8722fc8c,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3b64283eb5e0bfd4cb62ad33bb65b8f2,
+        type: 3}
+    - target: {fileID: 114628245493589544, guid: 6b4b8898f9da8484fb41693e8722fc8c,
+        type: 2}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224326211540277186, guid: 6b4b8898f9da8484fb41693e8722fc8c,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 1400
+      objectReference: {fileID: 0}
+    - target: {fileID: 224326211540277186, guid: 6b4b8898f9da8484fb41693e8722fc8c,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 1000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b4b8898f9da8484fb41693e8722fc8c, type: 2}
   m_IsPrefabParent: 0

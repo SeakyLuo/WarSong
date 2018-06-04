@@ -4,8 +4,8 @@ using Newtonsoft.Json;
 [System.Serializable]
 public class GameEvent {
 
-    public Location eventLocation = Location.NoLocation;
-    public Location targetLocation = Location.NoLocation;
+    public Location eventLocation = new Location();
+    public Location targetLocation = new Location();
 	public string eventTriggerName = ""; // Who (Piece or tactic) triggers this event
     public string targetTriggerName = ""; // Target name
     public int eventPlayerID = -1;
@@ -16,7 +16,7 @@ public class GameEvent {
     private static int width;
     private static int height;
 
-    public GameEvent() { Debug.Log("Fuck"); }
+    public GameEvent() { }
 
     public GameEvent(string Result = "EndTurn")
     {
@@ -138,9 +138,6 @@ public class GameEvent {
     }
     public static GameEvent JsonToClass(string json)
     {
-        Debug.Log(json);
-        GameEvent gameEvent = JsonConvert.DeserializeObject<GameEvent>(json);
-        Debug.Log(ClassToJson(gameEvent));
         return JsonConvert.DeserializeObject<GameEvent>(json);
     }
     public void Upload()

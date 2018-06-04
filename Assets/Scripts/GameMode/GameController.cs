@@ -379,8 +379,14 @@ public class GameController : MonoBehaviour {
                 onEnterGame.YourTurn();
                 OnEnterGame.gameInfo.NextTurn();
                 break;
-            case "GameOver":
-                onEnterGame.GameOver();
+            case "Victory":
+                onEnterGame.Defeat(false);
+                break;
+            case "Defeat":
+                onEnterGame.Draw(false);
+                break;
+            case "Draw":
+                onEnterGame.Victory(false);
                 break;
             case "Move":
                 MovementController.Move(OnEnterGame.gameInfo.board[gameEvent.eventLocation], gameEvent.eventLocation, gameEvent.targetLocation);
