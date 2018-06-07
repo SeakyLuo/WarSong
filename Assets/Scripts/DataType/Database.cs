@@ -40,8 +40,6 @@ public class Database {
     {
         if (standardAttributes.Count != 0) return;
         FindAttributes();
-        //WriteFile(pieces.Count.ToString());
-        //WriteFile(directories.ToString(), "dir");
     }
 
     private void FindAttributes()
@@ -129,7 +127,6 @@ public class Database {
         string type = randomType[Random.Range(0, randomType.Count)];
         List<string> directory = directories[type];
         string name = directory[Random.Range(0, directory.Count)];
-        Debug.Log(name);
         Sprite image = null;
         if (type.EndsWith("Piece")) image = FindPieceAttributes(name).image;
         else if (type == "Tactic") image = FindTacticAttributes(name).image;

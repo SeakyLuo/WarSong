@@ -74,19 +74,12 @@ public class GameEvent {
         eventPlayerID = playerID;
     }
 
-    public GameEvent(Location EventLocation, int EventPlayerID)
+    public GameEvent(string Result, Location EventLocation, int EventPlayerID)
     {
-        /// Flag
-        result = "Flag";
+        /// Flag or RemoveFlag
+        result = Result;
         eventLocation = EventLocation;
         eventPlayerID = EventPlayerID;
-    }
-
-    public GameEvent(Location EventLocation)
-    {
-        /// RemoveFlag
-        result = "RemoveFlag";
-        eventLocation = EventLocation;
     }
 
     public GameEvent(string trapName, int trapOwnerID, Piece piece)
@@ -145,7 +138,7 @@ public class GameEvent {
     {
         WWWForm infoToPhp = new WWWForm(); //create WWWform to send to php script
         infoToPhp.AddField("gameID", OnEnterGame.gameInfo.gameID);
-        infoToPhp.AddField("playerID", OnEnterGame.gameInfo.TheOtherPlayer());
+        infoToPhp.AddField("playerID", Login.playerID);
         infoToPhp.AddField("GameEvent", ClassToJson(this));
         Debug.Log(result);
         WWW sendToPhp = new WWW("http://47.151.234.225/uploadToGameInfo.php", infoToPhp);

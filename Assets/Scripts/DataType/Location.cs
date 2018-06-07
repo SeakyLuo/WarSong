@@ -7,8 +7,6 @@ using Newtonsoft.Json.Serialization;
 [Serializable]
 public class Location
 {
-    public static Location zero = new Location(0, 0);
-    public static Location NoLocation = new Location(-1, -1);
     public int x = -1;
     public int y = -1;
     public Location() { }

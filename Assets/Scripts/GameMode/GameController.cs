@@ -51,6 +51,7 @@ public class GameController : MonoBehaviour {
         if (OnEnterGame.gameInfo.currentTurn != Login.playerID)
         {
             GameEvent gameEvent = GameEvent.Download();
+            Debug.Log(GameEvent.ClassToJson(gameEvent));
             if (gameEvent != null) DecodeGameEvent(gameEvent);
             return;
         }
@@ -228,20 +229,17 @@ public class GameController : MonoBehaviour {
 
     public static void Eliminate(Piece piece, bool revenge = true, GameEvent gameEvent = null)
     {
-        if (revenge)
+        if (revenge && OnEnterGame.gameInfo.triggers[piece.location].revenge)
         {
             OnEnterGame.gameInfo.triggers[piece.location].Revenge();
             onEnterGame.AddToHistory(new GameEvent(piece));
         }
-        gameEvent = new GameEvent(piece, "Kill");
+        if (gameEvent == null) gameEvent = new GameEvent(piece, "Kill");
+        gameEvent.Upload();
         onEnterGame.AddToHistory(gameEvent);
         Destroy(boardSetup.pieces[piece.location]);
         boardSetup.pieces.Remove(piece.location);
         OnEnterGame.gameInfo.RemovePiece(piece);
-
-        if (gameEvent == null) gameEvent = new GameEvent(gameEvent.eventLocation, gameEvent.eventPlayerID);
-        gameEvent.Upload();
-        onEnterGame.AddToHistory(gameEvent);
     }
 
     public static void Eliminate(Location location, Piece triggeredByPiece = null, bool revenge = true, GameEvent gameEvent = null)
@@ -305,7 +303,7 @@ public class GameController : MonoBehaviour {
         flags.Add(location, flag);
         OnEnterGame.gameInfo.Upload();
 
-        if (gameEvent == null) gameEvent = new GameEvent(location, ownerID);
+        if (gameEvent == null) gameEvent = new GameEvent("Flag", location, ownerID);
         gameEvent.Upload();
         onEnterGame.AddToHistory(gameEvent);
     }
@@ -317,7 +315,7 @@ public class GameController : MonoBehaviour {
         OnEnterGame.gameInfo.flags.Remove(location);
         OnEnterGame.gameInfo.Upload();
 
-        if (gameEvent == null) gameEvent = new GameEvent(location);
+        if (gameEvent == null) gameEvent = new GameEvent("RemoveFlag", location, Login.playerID);
         gameEvent.Upload();
         onEnterGame.AddToHistory(gameEvent);
     }
