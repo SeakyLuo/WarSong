@@ -51,7 +51,6 @@ public class GameController : MonoBehaviour {
         if (OnEnterGame.gameInfo.currentTurn != Login.playerID)
         {
             GameEvent gameEvent = GameEvent.Download();
-            Debug.Log(GameEvent.ClassToJson(gameEvent));
             if (gameEvent != null) DecodeGameEvent(gameEvent);
             return;
         }

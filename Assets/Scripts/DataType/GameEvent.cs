@@ -148,11 +148,11 @@ public class GameEvent {
     {
         WWWForm infoToPhp = new WWWForm();
         infoToPhp.AddField("gameID", OnEnterGame.gameInfo.gameID);
-        infoToPhp.AddField("playerID", OnEnterGame.gameInfo.TheOtherPlayer());
+        infoToPhp.AddField("playerID", Login.playerID);
         WWW sendToPhp = new WWW("http://47.151.234.225/deleteGameInfo.php", infoToPhp);
         while (!sendToPhp.isDone) { }
-        if (sendToPhp.text == "" || sendToPhp.text.Contains("Warning")) return null;
         Debug.Log(sendToPhp.text);
+        if (sendToPhp.text == "" || sendToPhp.text.Contains("Warning")) return null;
         return JsonToClass(sendToPhp.text);  //sendToPhp.text is the userInfo json file
     }
 }
