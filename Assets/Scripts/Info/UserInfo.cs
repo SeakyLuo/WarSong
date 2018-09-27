@@ -19,21 +19,31 @@ public class UserInfo {
     public int winsToday = 0;
     public Stats total = new Stats();
     public Dictionary<string, Stats> boardResults = new Dictionary<string, Stats>();
-    public List<Mission> missions;
+    public List<Mission> missions = new List<Mission>();
     public string preferredBoard = "Standard Board";
     public string lastModeSelected = "";
     public int gameID;
     public bool missionSwitched = false;
 
-    public UserInfo(string playerName, int playerId)
+    public void Init(string playerName, int playerId)
     {
+        // A common constructor
         username = playerName;
         playerID = playerId;
         foreach (string contract in Database.contractList)
             contracts.Add(contract, 0);
         foreach (string board in Database.boardList)
             boardResults.Add(board, new Stats());
-        missions = new List<Mission>();
+    }
+
+    public UserInfo()
+    {
+        Init("Test", 99999999);
+    }
+
+    public UserInfo(string playerName, int playerId)
+    {
+        Init(playerName, playerID);
     }
 
     public int FindCollection(string name)
@@ -150,6 +160,7 @@ public class UserInfo {
     }
     public void Upload()
     {
+        return; // Database Down Error
         WWWForm infoToPhp = new WWWForm(); //create WWWform to send to php script
         infoToPhp.AddField("email", PlayerPrefs.GetString("email"));
         infoToPhp.AddField("userJson", ClassToJson(this));

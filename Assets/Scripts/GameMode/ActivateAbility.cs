@@ -70,8 +70,9 @@ public class ActivateAbility : MonoBehaviour {
             if (!GameController.ChangeOre(-pieceInfo.trigger.piece.oreCost)) return;
             pieceInfo.trigger.Activate();
             MovementController.PutDownPiece();
-            OnEnterGame.gameInfo.Act("ability", Login.playerID);
-            if (!OnEnterGame.gameInfo.Actable(Login.playerID)) onEnterGame.NextTurn();
+            // Database Down Error
+            //OnEnterGame.gameInfo.Act("ability", Login.playerID);
+            //if (!OnEnterGame.gameInfo.Actable(Login.playerID)) onEnterGame.NextTurn();
         }
         else DrawTargets();
     }

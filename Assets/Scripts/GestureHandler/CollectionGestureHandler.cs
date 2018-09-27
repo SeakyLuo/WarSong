@@ -110,9 +110,12 @@ public class CollectionGestureHandler : MonoBehaviour, IPointerClickHandler, IBe
                         break;
                     }
                 }
-            lineupBuilder.AddPiece(cardInfo, location);
-            collectionManager.RemoveCollection(boardInfo.cardLocations[location]);
-            collectionManager.ShowCurrentPage();
+            if (!location.IsNull())
+            {
+                lineupBuilder.AddPiece(cardInfo, location);
+                collectionManager.RemoveCollection(boardInfo.cardLocations[location]);
+                collectionManager.ShowCurrentPage();
+            }
         }
     }
 

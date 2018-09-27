@@ -257,6 +257,8 @@ public class OnEnterGame : MonoBehaviour, IPointerClickHandler
 
     public void NextTurn(bool upload = true)
     {
+        // Database Down Error
+        return;
         foreach (KeyValuePair<Location, GameObject> pair in boardSetup.pieces)
         {
             Piece piece = pair.Value.GetComponent<PieceInfo>().piece;

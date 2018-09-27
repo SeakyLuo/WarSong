@@ -26,11 +26,15 @@ public class Login : MonoBehaviour
     void Start ()
     {
         rect = settingsPanel.transform.Find("MainSettings").GetComponent<RectTransform>().rect;
+        // Database Down Error
+        user = new UserInfo();
+        playerID = user.playerID;
+        SceneManager.LoadScene("Main");
         // If already has an account saved
-        string email = PlayerPrefs.GetString("email"),
-               password = PlayerPrefs.GetString("password");
-        if (email != "" && password != "")
-            RequestLogin(email, password, false);
+        //string email = PlayerPrefs.GetString("email"),
+        //       password = PlayerPrefs.GetString("password");
+        //if (email != "" && password != "")
+        //    RequestLogin(email, password, false);
 	}
 
     private void Update()

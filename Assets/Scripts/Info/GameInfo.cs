@@ -239,6 +239,8 @@ public class GameInfo
 
     public void Act(string action, int playerID, int deltaAmount = -1)
     {
+        // Database Down Error
+        return;
         actions[playerID][action] += deltaAmount;
     }
 

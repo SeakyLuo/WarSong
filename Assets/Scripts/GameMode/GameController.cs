@@ -48,12 +48,13 @@ public class GameController : MonoBehaviour {
         if (OnEnterGame.gameInfo.gameOver ||
             !OnEnterGame.gameInfo.gameStarts ||
             onEnterGame.askTriggerPanel.activeSelf) return;
-        if (OnEnterGame.gameInfo.currentTurn != Login.playerID)
-        {
-            GameEvent gameEvent = GameEvent.Download();
-            if (gameEvent != null) DecodeGameEvent(gameEvent);
-            return;
-        }
+        // Database Down Error
+        //if (OnEnterGame.gameInfo.currentTurn != Login.playerID)
+        //{
+        //    GameEvent gameEvent = GameEvent.Download();
+        //    if (gameEvent != null) DecodeGameEvent(gameEvent);
+        //    return;
+        //}
         if (Input.GetMouseButtonUp(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -95,13 +96,15 @@ public class GameController : MonoBehaviour {
                     {
                         OnEnterGame.gameInfo.Act("move", Login.playerID);
                         MovementController.MoveTo(location);
-                        if (!OnEnterGame.gameInfo.Actable(Login.playerID)) onEnterGame.NextTurn();
+                        // Database Down Error
+                        //if (!OnEnterGame.gameInfo.Actable(Login.playerID)) onEnterGame.NextTurn();
                     }
                     else if (ActivateAbility.activated)
                     {
                         OnEnterGame.gameInfo.Act(ActivateAbility.actor, Login.playerID);
                         ActivateAbility.Activate(location);
-                        if (!OnEnterGame.gameInfo.Actable(Login.playerID)) onEnterGame.NextTurn();
+                        // Database Down Error
+                        //if (!OnEnterGame.gameInfo.Actable(Login.playerID)) onEnterGame.NextTurn();
                     }
                 }
             }

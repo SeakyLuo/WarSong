@@ -136,6 +136,8 @@ public class GameEvent {
     }
     public void Upload()
     {
+        // Database Down Error
+        return;
         WWWForm infoToPhp = new WWWForm(); //create WWWform to send to php script
         infoToPhp.AddField("gameID", OnEnterGame.gameInfo.gameID);
         infoToPhp.AddField("playerID", Login.playerID);

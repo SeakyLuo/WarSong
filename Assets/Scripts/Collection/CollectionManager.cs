@@ -90,7 +90,11 @@ public class CollectionManager : MonoBehaviour {
                         else if (index != 0) PreviousPage();
                     }
                 }
-                else Login.user.ChangeCollectionCount(i, -1, false);
+                else
+                {
+                    collectionList[i].count--;
+                    Login.user.ChangeCollectionCount(i, -1, false);
+                }
                 return true;
             }
         return false;
