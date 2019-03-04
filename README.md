@@ -1,6 +1,6 @@
 # WarSong
 
-Basic game rules (piece movement) please see the link below. 
+Basic game rules (piece movement) please see the link below.
 
 https://en.wikipedia.org/wiki/Xiangqi
 
@@ -26,3 +26,4 @@ Note:
 6. However, since our game is complicated, some functions of our game are not implemented fully. The GuideBook is actually a image and after a match is found, you are actually unable to interact with your opponent.
 7. Source code: Assets/Scripts/
 8. Our database is down. You can't save your progress after you exit the game. You can't find a match either, but you can still press "Launch War" to see the game interface.
+9. See Folder ScreenShots for Game Interface.
