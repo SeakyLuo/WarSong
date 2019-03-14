@@ -11,10 +11,10 @@ public class Range {
         { new Range(0,300), "Novice" }, {  new Range(5000,100000), "Mars"}
     };
 
-    public Range(int Lower, int Upper)
+    public Range(int lower, int upper)
     {
-        lower = Lower;
-        upper = Upper;
+        this.lower = lower;
+        this.upper = upper;
     }
 
     public bool InRange(int number)

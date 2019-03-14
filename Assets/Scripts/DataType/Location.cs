@@ -10,10 +10,10 @@ public class Location
     public int x = -1;
     public int y = -1;
     public Location() { }
-    public Location(int X, int Y)
+    public Location(int x, int y)
     {
-        x = X;
-        y = Y;
+        this.x = x;
+        this.y = y;
     }
     public Location(Location location)
     {

@@ -1,5 +1,4 @@
-﻿using System.IO;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 [ExecuteInEditMode]
@@ -24,7 +23,6 @@ public class AutoCreate : MonoBehaviour {
         //}
         //BoardGenerator(Database.FindBoardAttributes("Standard Board"));
         LineupBoardGenerator(Database.FindBoardAttributes("Standard Board"));
-
     }
 
     public void LineupBoardGenerator(BoardAttributes board)

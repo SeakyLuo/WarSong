@@ -3,6 +3,12 @@ using UnityEngine;
 
 //[UnityEngine.CreateAssetMenu(fileName = "Trigger", menuName = "PieceTrigger")]
 public class Trigger: ScriptableObject {
+    public static string BLOOD_THIRSTY = "BloodThirsty", 
+                        AFTER_MOVE = "AfterMove", 
+                        IN_ENEMY_REGION = "InEnemyRegion", 
+                        IN_ENEMY_PALACE = "InEnemyPalace", 
+                        IN_ENEMY_CASTLE = "InEnemyCastle", 
+                        AT_ENEMY_BOTTOM = "AtEnemyBottom";
 
     public int effectiveRound = 1;
     public int limitedUse = -1; // -1 if unlimited
@@ -56,12 +62,12 @@ public class Trigger: ScriptableObject {
 
     public bool ReceiveMesseage(string message)
     {
-        if (message == "BloodThirsty") return bloodThirsty;
-        if (message == "AfterMove") return afterMove;
-        if (message == "InEnemyRegion") return inEnemyRegion;
-        if (message == "InEnemyPalace") return inEnemyPalace;
-        if (message == "InEnemyCastle") return inEnemyCastle;
-        if (message == "AtEnemyBottom") return atEnemyBottom;
+        if (message == BLOOD_THIRSTY) return bloodThirsty;
+        if (message == AFTER_MOVE) return afterMove;
+        if (message == IN_ENEMY_REGION) return inEnemyRegion;
+        if (message == IN_ENEMY_PALACE) return inEnemyPalace;
+        if (message == IN_ENEMY_CASTLE) return inEnemyCastle;
+        if (message == AT_ENEMY_BOTTOM) return atEnemyBottom;
         return false;
     }
     public bool Link() { link = MovementController.IsLink(piece, ValidLocs(true)); return link; }

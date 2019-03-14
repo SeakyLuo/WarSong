@@ -18,9 +18,9 @@ public class GameEvent {
 
     public GameEvent() { }
 
-    public GameEvent(string Result)
+    public GameEvent(string result)
     {
-        result = Result;
+        this.result = result;
     }
 
     public GameEvent(Location from, Location to, int playerID)

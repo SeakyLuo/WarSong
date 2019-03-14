@@ -27,25 +27,25 @@ public class Piece
         original = piece.original;
     }
 
-    public Piece(string type, Location loc, bool IsAlly, int owner, bool Original)
+    public Piece(string type, Location loc, bool IsAlly, int owner, bool original)
     {
         /// Standard Piece
         collection = Collection.StandardCollection(type);
         castle = loc;
         location = loc;
         ownerID = owner;
-        original = Original;
+        this.original = original;
     }
 
-    public Piece(Collection setupCollection, Location loc, int OreCost, int owner, bool Original)
+    public Piece(Collection setupCollection, Location loc, int oreCost, int owner, bool original)
     {
         collection = setupCollection;
         castle = loc;
         location = loc;
-        oreCost = OreCost;
+        this.oreCost = oreCost;
         health = setupCollection.health;
         ownerID = owner;
-        original = Original;
+        this.original = original;
     }
 
     public void Transform(Collection newCollection)

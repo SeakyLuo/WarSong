@@ -9,34 +9,34 @@ public class Tactic {
 
     public Tactic() { }
 
-    public Tactic(TacticAttributes tacticAttributes, int owner = 0, bool Original = true)
+    public Tactic(TacticAttributes tacticAttributes, int owner = 0, bool original = true)
     {
         tacticName = tacticAttributes.Name;
         oreCost = tacticAttributes.oreCost;
         goldCost = tacticAttributes.goldCost;
         if (owner == 0) ownerID = Login.playerID;
         else ownerID = owner;
-        original = true;
+        this.original = original;
     }
 
-    public Tactic(string name, int OreCost, int GoldCost, int owner = 0, bool Original = true)
+    public Tactic(string name, int oreCost, int goldCost, int owner = 0, bool original = true)
     {
         tacticName = name;
-        oreCost = OreCost;
-        goldCost = GoldCost;
+        this.oreCost = oreCost;
+        this.goldCost = goldCost;
         if (owner == 0) ownerID = Login.playerID;
         else ownerID = owner;
-        original = Original;
+        this.original = original;
     }
 
-    public Tactic(Collection collection, int owner = 0, bool Original = true)
+    public Tactic(Collection collection, int owner = 0, bool original = true)
     {
         tacticName = collection.name;
         TacticAttributes attributes = Database.FindTacticAttributes(tacticName);
         oreCost = attributes.oreCost;
         goldCost = attributes.goldCost;
         ownerID = owner;
-        original = Original;
+        this.original = original;
     }
 
     public bool IsAlly() { return ownerID == Login.playerID; }

@@ -17,12 +17,12 @@ public class MatchInfo {
         lineup = matchInfo.lineup;
     }
 
-    public MatchInfo(UserInfo player, Lineup PlayerLineup)
+    public MatchInfo(UserInfo player, Lineup playerLineup)
     {
         playerID = player.playerID;
         playerName = player.username;
         rank = player.rank;
-        lineup = PlayerLineup;
+        lineup = playerLineup;
     }
 
     public string ToJson()
