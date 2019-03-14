@@ -91,8 +91,10 @@ public class OnEnterPlayerMatching : MonoBehaviour
         // Database Down Error
         Login.user.SetLastLineupSelected(lineupSelected);
         playerMatchInfo = new MatchInfo(Login.user, Login.user.lineups[Login.user.lastLineupSelected]);
-        MatchInfo enemyMatchInfo = new MatchInfo(Login.user, Login.user.lineups[Login.user.lastLineupSelected]);
-        enemyMatchInfo.playerID = 99999998;
+        MatchInfo enemyMatchInfo = new MatchInfo(Login.user, Login.user.lineups[Login.user.lastLineupSelected])
+        {
+            playerID = 99999998
+        };
         OnEnterGame.gameInfo = new GameInfo(Login.user.lastModeSelected, playerMatchInfo, enemyMatchInfo, Login.user.playerID);
         LaunchWar();
         return;
